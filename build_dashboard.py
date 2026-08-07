@@ -66,6 +66,14 @@ def col_index(head, *keywords):
             if kw in h: return i
     return None
 
+def find_col(head, includes, excludes=()):
+    """공백 제거 후 includes 중 하나라도 포함하고 excludes 는 전부 미포함인 첫 열."""
+    for i,h in enumerate(head):
+        hs=(h or "").replace(" ","")
+        if any(k in hs for k in includes) and not any(x in hs for x in excludes):
+            return i
+    return None
+
 # ───────────────────────── 수집 ─────────────────────────
 def fetch_standings(page):
     """다음스포츠 순위 페이지 → 팀별 g,w,d,l,pct,gb,rs,ra,(f,st 있으면)"""
@@ -87,8 +95,10 @@ def fetch_standings(page):
             "l":  col_index(head,"패"),
             "pct":col_index(head,"승률"),
             "gb": col_index(head,"게임","차"),
-            "rs": col_index(head,"득점","R","타점"),
-            "ra": col_index(head,"실점","자책"),
+            # 득점(R): '득점'만 매칭하고 '득점권'·'타점(RBI)'·'실점'은 제외 → RBI 열 오독 방지
+            "rs": find_col(head, ["득점"], ["권","타점","실"]),
+            # 실점(총실점 R): '실점' 매칭, '자책(ER)'은 제외
+            "ra": find_col(head, ["실점"], ["자책"]),
             "f":  col_index(head,"최근"),
             "st": col_index(head,"연속"),
         }
@@ -185,56 +195,62 @@ def fetch_recent_streak_h2h(page):
 
 DOW = ["월","화","수","목","금","토","일"]
 
+def parse_game_text(tx, dd):
+    """경기 한 건의 텍스트를 (date, opp, ha) 로 파싱. 확신 없으면 None.
+    엄격 규칙: 두산 + 정확히 한 상대팀만 등장(다경기 블록 배제), 날짜 확보 가능."""
+    if "두산" not in tx: return None
+    present = [tm for tm in TEAMS if tm in tx]
+    if len(present) != 2: return None            # 두산 + 상대 1팀만 허용
+    opp = next(tm for tm in present if tm != "두산")
+    # 날짜: data-date(YYYYMMDD) 우선, 없으면 텍스트의 M/D
+    y=mo=da=None
+    if dd and re.match(r"\d{8}$", dd):
+        y,mo,da = int(dd[:4]),int(dd[4:6]),int(dd[6:8])
+    else:
+        m = re.search(r"(\d{1,2})[.\-/](\d{1,2})", tx)
+        if not m: return None
+        mo,da = int(m.group(1)),int(m.group(2)); y=TODAY.year
+    try: dt=datetime.date(y,mo,da)
+    except: return None
+    # 홈/원정: 매치업 표기에서 두산이 상대보다 먼저 나오면 홈(다음스포츠 '홈 원정' 순서), 아니면 원정
+    i_du, i_op = tx.find("두산"), tx.find(opp)
+    ha = "홈" if i_du < i_op else "원정"
+    return dt, opp, ha
+
 def fetch_schedule(page):
-    """다음스포츠 월간 일정 → 두산 향후 9경기(dt/op/ha/v).
-    구조 변경에 관대하도록 '경기 행 텍스트'를 긁어 팀명·홈원정을 파싱한다.
-    실패 시 빈 배열을 반환(대시보드 일정 섹션이 비어도 나머지는 정상)."""
+    """다음스포츠 일정 → 두산 향후 9경기(dt/op/ha/v). 날짜별 1경기로 dedup.
+    확신 없는 항목은 버리고, 전부 실패하면 빈 배열(일정 섹션만 비고 나머지 정상)."""
     games=[]
     try:
         ymd = TODAY.strftime("%Y%m%d")
         page.goto(f"https://sports.daum.net/schedule/kbo?date={ymd}",
                   wait_until="networkidle", timeout=60000)
         page.wait_for_timeout(2500)
-        # 두산이 포함된 경기 블록의 텍스트 + 날짜 헤더를 함께 수집
+        # 되도록 '작은' 경기 요소만: 텍스트 길이 짧은 것 우선. data-date 동반 수집.
         items = page.evaluate("""() => {
           const out=[];
-          const rows=document.querySelectorAll('tr, li, .item, .game_item, [class*=game]');
-          rows.forEach(r=>{
+          const els=document.querySelectorAll('a, li, tr, [class*=game], [class*=match]');
+          els.forEach(r=>{
             const tx=(r.innerText||'').replace(/\\s+/g,' ').trim();
-            if(tx.includes('두산') && (tx.match(/\\d{1,2}[.\\-/]\\d{1,2}/) || r.closest('[data-date]'))) {
-              const dd = r.closest('[data-date]')?.getAttribute('data-date') || '';
+            if(tx && tx.length<=60 && tx.includes('두산')){
+              const dd=r.closest('[data-date]')?.getAttribute('data-date')||'';
               out.push(dd+'||'+tx);
             }
           });
           return out;
         }""")
-        seen=set()
+        by_date={}
         for it in items:
             dd, tx = it.split("||",1)
-            # 상대팀 = 두산 아닌 팀명
-            opp=None
-            for tm in TEAMS:
-                if tm!="두산" and tm in tx: opp=tm; break
-            if not opp: continue
-            # 홈/원정: '두산 vs 상대' → 두산 홈, '상대 vs 두산' → 원정 (표기 다양성 대비 구장으로 보정)
-            ha = "홈" if re.search(r"두산.*(vs|:|\bX\b|－|-).*"+re.escape(opp), tx) else "원정"
-            # 날짜 파싱
-            m = re.search(r"(\d{1,2})[.\-/](\d{1,2})", tx) or (re.search(r"(\d{4})(\d{2})(\d{2})", dd) if dd else None)
-            if dd and re.match(r"\d{8}$", dd):
-                y,mo,da=int(dd[:4]),int(dd[4:6]),int(dd[6:8])
-            elif m and m.lastindex==2:
-                mo,da=int(m.group(1)),int(m.group(2)); y=TODAY.year
-            else:
-                continue
-            try: dt=datetime.date(y,mo,da)
-            except: continue
+            parsed = parse_game_text(tx, dd)
+            if not parsed: continue
+            dt, opp, ha = parsed
             if dt < TODAY: continue
-            key=(dt,opp)
-            if key in seen: continue
-            seen.add(key)
+            if dt in by_date: continue           # 날짜별 1경기(두산은 하루 1경기)
             v = STADIUM["두산"] if ha=="홈" else STADIUM.get(opp,"")
-            games.append((dt, {"dt":f"{dt.month}/{dt.day} {DOW[dt.weekday()]}","op":opp,"ha":ha,"v":v}))
-        games=[g for _,g in sorted(games, key=lambda x:x[0])][:9]
+            by_date[dt] = {"dt":f"{dt.month}/{dt.day} {DOW[dt.weekday()]}","op":opp,"ha":ha,"v":v}
+        games=[by_date[d] for d in sorted(by_date)][:9]
+        if DEBUG: print(f"[debug] 일정 {len(games)}건:", games)
     except Exception as e:
         print(f"[warn] 일정 수집 실패(일정 섹션 비움): {e}")
         games=[]
