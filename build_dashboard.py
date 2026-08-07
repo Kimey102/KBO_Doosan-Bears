@@ -226,7 +226,7 @@ def parse_game_text(tx, dd):
     except: return None
     # 홈/원정: 매치업 표기에서 두산이 상대보다 먼저 나오면 홈(다음스포츠 '홈 원정' 순서), 아니면 원정
     i_du, i_op = tx.find("두산"), tx.find(opp)
-    ha = "홈" if i_du < i_op else "원정"
+    ha = "원정" if i_du < i_op else "홈"
     return dt, opp, ha
 
 def fetch_schedule(page):
