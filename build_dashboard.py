@@ -52,6 +52,23 @@ def norm_team(s):
         if k and k in s: return v
     return None
 
+def goto_stable(page, url, tries=3):
+    """페이지 이동 후 표에 팀명이 실제로 렌더될 때까지 대기(JS 렌더 타이밍 대응). 재시도 포함."""
+    for attempt in range(tries):
+        try:
+            page.goto(url, wait_until="domcontentloaded", timeout=60000)
+            page.wait_for_function("""() => {
+              const txt=document.body.innerText||'';
+              const teams=['KT','삼성','LG','두산','KIA','한화','NC','롯데','SSG','키움'];
+              return teams.filter(t=>txt.includes(t)).length>=8;
+            }""", timeout=20000)
+            page.wait_for_timeout(1500)
+            return True
+        except Exception as e:
+            print(f"[warn] goto 재시도 {attempt+1}/{tries} ({url}): {e}")
+            page.wait_for_timeout(2500)
+    return False
+
 def read_tables(page):
     """페이지의 모든 <table> 를 [header列, rows(각 행 = 셀 텍스트 리스트)] 로 반환."""
     return page.eval_on_selector_all("table", """(tables)=>tables.map(t=>{
@@ -77,8 +94,7 @@ def find_col(head, includes, excludes=()):
 # ───────────────────────── 수집 ─────────────────────────
 def fetch_standings(page):
     """다음스포츠 순위 페이지 → 팀별 g,w,d,l,pct,gb,rs,ra,(f,st 있으면)"""
-    page.goto("https://sports.daum.net/record/kbo/team", wait_until="networkidle", timeout=60000)
-    page.wait_for_timeout(2500)
+    goto_stable(page, "https://sports.daum.net/record/kbo/team")
     tables = read_tables(page)
     if DEBUG:
         for i,t in enumerate(tables):
@@ -142,9 +158,7 @@ def fetch_recent_streak_h2h(page):
     recent = {}
     h2h = {}
     try:
-        page.goto("https://www.koreabaseball.com/record/teamrank/teamrankdaily.aspx",
-                  wait_until="networkidle", timeout=60000)
-        page.wait_for_timeout(2000)
+        goto_stable(page, "https://www.koreabaseball.com/record/teamrank/teamrankdaily.aspx")
         tables = read_tables(page)
         for t in tables:
             head, rows = t["head"], t["rows"]
@@ -166,9 +180,7 @@ def fetch_recent_streak_h2h(page):
         print(f"[warn] KBO 최근10/연속 수집 실패: {e}")
     # 상대전적 매트릭스(두산 행)
     try:
-        page.goto("https://www.koreabaseball.com/record/teamrank/teamrank.aspx",
-                  wait_until="networkidle", timeout=60000)
-        page.wait_for_timeout(2000)
+        goto_stable(page, "https://www.koreabaseball.com/record/teamrank/teamrank.aspx")
         tables = read_tables(page)
         for t in tables:
             head, rows = t["head"], t["rows"]
@@ -223,9 +235,7 @@ def fetch_schedule(page):
     games=[]
     try:
         ymd = TODAY.strftime("%Y%m%d")
-        page.goto(f"https://sports.daum.net/schedule/kbo?date={ymd}",
-                  wait_until="networkidle", timeout=60000)
-        page.wait_for_timeout(2500)
+        goto_stable(page, f"https://sports.daum.net/schedule/kbo?date={ymd}")
         # 되도록 '작은' 경기 요소만: 텍스트 길이 짧은 것 우선. data-date 동반 수집.
         items = page.evaluate("""() => {
           const out=[];
@@ -294,7 +304,14 @@ def build():
         page = browser.new_page(locale="ko-KR", user_agent=(
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
             "(KHTML, like Gecko) Chrome/126.0 Safari/537.36"))
-        stand = fetch_standings(page)
+        # 순위는 10팀 다 읽힐 때까지 최대 3회 재시도(JS 렌더 간헐 실패 대응)
+        stand = {}
+        for attempt in range(3):
+            stand = fetch_standings(page)
+            ok = [tm for tm in TEAMS if stand.get(tm,{}).get("w") is not None and stand.get(tm,{}).get("l") is not None]
+            if len(ok) >= 10: break
+            print(f"[warn] 순위 {len(ok)}/10팀만 수집 — 재시도 {attempt+1}/3")
+            page.wait_for_timeout(3000)
         recent, h2h = fetch_recent_streak_h2h(page)
         sched = fetch_schedule(page)
         browser.close()
@@ -302,7 +319,7 @@ def build():
     # 순위 검증: 10팀 승/패 필수
     ok = [tm for tm in TEAMS if stand.get(tm,{}).get("w") is not None and stand.get(tm,{}).get("l") is not None]
     if len(ok) < 10:
-        print(f"[error] 순위 수집 불완전: {ok} → 대시보드 갱신 중단(기존 유지).")
+        print(f"[error] 순위 수집 불완전({len(ok)}/10): {ok} → 대시보드 갱신 중단(기존 유지).")
         sys.exit(1)
 
     # recent(최근10·연속) 병합
