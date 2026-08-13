@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs 한화 · 8.13 잠실 — 류현진 vs 최민석 승률분석</title>
+<style>
+  :root{--navy:#131a3a;--doosan:#131230;--red:#c8102e;--ink:#1c2233;--sub:#5b6478;--line:#e6e9f0;--bg:#f6f7fb;--good:#0f9d58;--warn:#e8a11c;--bad:#d33;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:'Apple SD Gothic Neo','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.65;}
+  .wrap{max-width:860px;margin:0 auto;padding:28px 20px 60px;}
+  header{background:linear-gradient(135deg,#131230 0%,#28214f 100%);color:#fff;border-radius:16px;padding:26px 28px;margin-bottom:22px;}
+  header .tag{display:inline-block;font-size:12px;letter-spacing:.05em;background:rgba(255,255,255,.14);padding:4px 10px;border-radius:20px;margin-bottom:10px;}
+  header h1{margin:2px 0 6px;font-size:24px;}
+  header .sub{color:#c4c9e6;font-size:14px;}
+  .verdict{display:flex;gap:14px;flex-wrap:wrap;margin-top:18px;}
+  .vcard{background:rgba(255,255,255,.09);border-radius:12px;padding:12px 16px;flex:1;min-width:150px;}
+  .vcard .n{font-size:26px;font-weight:800;}
+  .vcard .l{font-size:12px;color:#c4c9e6;}
+  section{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:18px;}
+  h2{font-size:18px;margin:0 0 4px;color:var(--navy);border-left:4px solid var(--red);padding-left:10px;}
+  h2 .memo{font-size:12px;color:var(--sub);font-weight:400;margin-left:6px;}
+  h3{font-size:15px;color:var(--ink);margin:18px 0 6px;}
+  p{margin:8px 0;}
+  table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13.5px;}
+  th,td{border:1px solid var(--line);padding:7px 9px;text-align:center;}
+  th{background:#f0f2f8;color:var(--navy);font-weight:700;}
+  td.l,th.l{text-align:left;}
+  .hi{background:#fff5f6;font-weight:700;}
+  .good{color:var(--good);font-weight:700;}.warn{color:var(--warn);font-weight:700;}.bad{color:var(--bad);font-weight:700;}
+  .pill{display:inline-block;font-size:11.5px;padding:2px 8px;border-radius:12px;background:#eef;color:#334;margin:1px;}
+  .note{font-size:12.5px;color:var(--sub);}
+  ol,ul{margin:8px 0 8px 2px;padding-left:20px;}
+  li{margin:5px 0;}
+  .flow{background:#faf9ff;border:1px dashed #cdc7e6;border-radius:10px;padding:12px 16px;font-size:13.5px;}
+  .footer{font-size:12px;color:var(--sub);text-align:center;margin-top:24px;}
+  .k{font-weight:700;color:var(--navy);}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="tag">⚾ 두산 경기 승률 분석 · 데이터기반</span>
+  <h1>두산 vs 한화 · 8/13(목) 잠실 · 두산 홈</h1>
+  <div class="sub">3연전 3차전(현재 1승1패) · <b>최민석</b>(두산·우완) vs <b>류현진</b>(한화·좌완) · 19:00 · 승리 시 위닝시리즈</div>
+  <div class="verdict">
+    <div class="vcard"><div class="n">54~56%</div><div class="l">두산 승률(중앙값) · 판정: 접전~두산 소폭 우세</div></div>
+    <div class="vcard"><div class="n">4.3 : 4.1</div><div class="l">기대득점 두산 : 한화</div></div>
+    <div class="vcard"><div class="n">45~60%</div><div class="l">시나리오 범위(최민석 제구가 최대 변수)</div></div>
+  </div>
+</header>
+
+<section>
+  <h2>0. 어제(8/12) 무엇이 문제였나 <span class="memo">노션 사후분석 기반 · 한화 4:3 두산(연장 10회)</span></h2>
+  <p>스코어 교차검증: 한화 000 012 000 1 = 4(8H 1E) / 두산 000 000 201 0 = 3(8H). <b>작전 미스가 아니라 타선이 화이트(7IP 2R 7K <span class="bad">0BB</span>)에 눌린 경기</b>였습니다. 0-3으로 끌려가다 9회 박지훈 3루타로 3-3 동점을 만들었지만 연장 10회 허인서에게 밀렸습니다.</p>
+  <h3>확정 타순과 결과 — 상위·클린업 동반 침묵</h3>
+  <table>
+    <tr><th>타순</th><th class="l">선수(좌우·wRC+)</th><th>결과</th><th class="l">메모</th></tr>
+    <tr class="hi"><td>1</td><td class="l">김대한 RF(우·128)</td><td class="bad">0-5</td><td class="l">2K, 리드오프 밥상 실종</td></tr>
+    <tr><td>2</td><td class="l">안재석 3B(좌·95)</td><td>—</td><td class="l">데이터상 가벼운 2번, 테이블세팅 실패</td></tr>
+    <tr class="hi"><td>3</td><td class="l">박준순 2B(우·159)</td><td class="bad">0-4</td><td class="l">화요일 3점포 주인공이 무안타</td></tr>
+    <tr class="hi"><td>4</td><td class="l">양의지 C(우·109)</td><td class="bad">0-4</td><td class="l">4번 클러치 실종</td></tr>
+    <tr><td>5</td><td class="l">김민석 LF(좌·129)</td><td class="good">3-4</td><td class="l">거의 유일한 생산</td></tr>
+    <tr><td>6</td><td class="l">박지훈 1B(우·85)</td><td class="good">2-4</td><td class="l">9회 동점 3루타(핫핸드 또 적중)</td></tr>
+    <tr><td>7~9</td><td class="l">세베리노(DH·90)·박찬호(SS·103)·정수빈(CF·좌·99)</td><td>—</td><td class="l">하위타선 무득점</td></tr>
+  </table>
+  <p><b>상위 1·3·4번(김대한·박준순·양의지)이 합계 <span class="bad">0-for-13</span>.</b> 8안타를 쳤지만 김민석·박지훈에게 몰린 전형적 <b>산발성</b>이었고, 득점권에서도 9회 2사 3루 김인태 대타 삼진·10회 오명진 대타 삼진으로 반격이 끊겼습니다. 대타 3건은 모두 과정상 정당했고 결과가 불운(🟡)이었습니다.</p>
+  <p class="note"><b>감독 판단 4분면(§7):</b> 재검토 1순위는 <b>6회 박치국(추격조) 투입 → 2실점(1-0→3-0)</b> — 1점차 살얼음(고레버리지)에 추격조 투입은 근거 약함+결과 실패(🔵/❌). 나머지(7~8회 봉쇄·9회 조수행 대주자·10회 이영하)는 과정상 정당. 벤자민은 5IP 1자책 <b>5BB</b> 7K = 제구난조형(볼넷으로 투구수 폭증→조기 강판).</p>
+  <p class="note">한 줄 교훈: <b>어제 진 이유는 라인업 구성이 아니라 ①강한 선발에 산발성 재발 ②클린업 클러치 실종</b>. 이 두 가지가 오늘 그대로 승부처입니다.</p>
+</section>
+
+<section>
+  <h2>1. 오늘의 반전 포인트 <span class="memo">"류현진 초에이스 vs 최민석 부진"은 통념일 뿐</span></h2>
+  <p>스탯티즈 최근 등판을 보면 <b>두 선발 모두 슬럼프 + 완전히 같은 13~14일 롱레스트 복귀</b>입니다. 선발 격차가 명성만큼 크지 않습니다.</p>
+  <table>
+    <tr><th class="l">지표</th><th>최민석(두산·우완·19세)</th><th>류현진(한화·좌완·38세)</th></tr>
+    <tr><td class="l">시즌 rRA9 / FIP</td><td class="hi">3.53 / 3.72</td><td class="hi">3.82 / <b>3.28</b></td></tr>
+    <tr><td class="l">ERA / WHIP</td><td>2.64 / 1.30</td><td>3.41 / 1.16</td></tr>
+    <tr><td class="l">K/9 · BB/9</td><td>8.3 · <span class="bad">4.0</span></td><td>7.3 · <span class="good">1.2</span></td></tr>
+    <tr><td class="l">피홈런/9</td><td class="good">0.34</td><td class="good">0.54</td></tr>
+    <tr><td class="l">최근 3선발</td><td class="bad">6IP0R→2.2IP10R→4.1IP3R(5BB)</td><td class="bad">5.1IP4R→2IP4R→5.1IP4R</td></tr>
+    <tr><td class="l">최근5 rRA9</td><td class="bad">≈5.04</td><td class="bad">≈5.0</td></tr>
+    <tr><td class="l">마지막 등판 / 휴식</td><td>7/30 / <b>14일</b></td><td>7/31 / <b>13일</b></td></tr>
+    <tr><td class="l">실점력(폼·회귀)</td><td class="hi">≈4.2</td><td class="hi">≈4.3</td></tr>
+  </table>
+  <p>류현진도 <b>최근 3경기 연속 4실점</b>(7/25 LG전 2이닝 4실점·2피홈런 포함) 슬럼프이고, 최민석과 마찬가지로 폭염 취소로 오래 쉬고 복귀합니다. 정밀 제구(BB/9 1.2)의 정상급 좌완인 것은 맞지만 <b>지금 폼은 얻어맞고 있고</b>, 두 선발 모두 급성 부진 플래그가 걸려 최근폼 가중을 0.45로 올렸습니다. 결과적으로 폼 기준 실점력은 <b>최민석 4.2 ≈ 류현진 4.3</b>으로 사실상 대등합니다.</p>
+</section>
+
+<section>
+  <h2>2. 팀 전력 · 불펜 가용성 <span class="memo">한화의 최대 약점 = 리그 꼴찌 불펜</span></h2>
+  <table>
+    <tr><th class="l">부문(WAA·순위)</th><th>두산</th><th>한화</th></tr>
+    <tr><td class="l">타격</td><td>−0.61 (7위)</td><td class="hi">+3.26 (4위)</td></tr>
+    <tr><td class="l">선발</td><td class="hi">+5.10 (3위)</td><td>+4.19 (4위)</td></tr>
+    <tr><td class="l">구원</td><td class="hi good">+1.01 (2위)</td><td class="bad">−3.52 (8위)</td></tr>
+    <tr><td class="l">수비</td><td>−0.34 (6위)</td><td>−0.64 (7위)</td></tr>
+    <tr><td class="l">주루</td><td class="hi">+0.40 (2위)</td><td>+0.29 (5위)</td></tr>
+  </table>
+  <p><b>한화 불펜은 리그 8위(꼴찌급).</b> 필승조 전원 rRA9 5점대 — 이민우(마무리 5.04)·박상원(셋업 5.23)·강재민(5.37). 어제 두산이 9회 박상원에게 2점을 뽑아 동점을 만든 것이 이 약점의 증거입니다. <b>류현진만 넘기면 승부처는 두산 쪽</b>입니다.</p>
+  <p class="note"><b>불펜 피로(어제 연장 여파):</b> 두산 — 김정우 <b>8/11·8/12 백투백</b>(오늘 봉인 권장), 이영하 8/12 등판(1일), <b>김택연은 8/12 휴식→오늘 우선 카드</b>. 유닛 실점력 3.9에 소폭 피로계수(×1.05)만 적용. 한화 — 어제 화이트가 7이닝을 먹어 박상원·이민우 2명만 사용, 상대적으로 <b>신선하나 여전히 약함</b>.</p>
+</section>
+
+<section>
+  <h2>3. 승률 산출 <span class="memo">지침 v4.3 · 피타고리안 1.83 · 리그 R/G 5.07</span></h2>
+  <div class="flow">
+    <p style="margin:4px 0">• <span class="k">두산 투수 실점력</span> = 0.62×최민석4.2 + 0.38×불펜4.1(피로) = <b>4.17</b> → effRA 4.22</p>
+    <p style="margin:4px 0">• <span class="k">한화 투수 실점력</span> = 0.62×류현진4.3 + 0.38×불펜5.7 = <b>4.84</b> → effRA 4.94</p>
+    <p style="margin:4px 0">• <span class="k">한화 기대득점</span> = 1.06(공격지수) × 4.22 × 0.92(잠실 원정 PF) = <b>4.11</b></p>
+    <p style="margin:4px 0">• <span class="k">두산 기대득점</span> = 0.93(공격지수·산발할인) × 4.94 × 1.0 × 0.93(류현진 제구 대비 추가보정) = <b>4.27</b></p>
+    <p style="margin:4px 0">• 피타고리안(1.83): 두산 .517 → <span class="k">홈보정 ×1.174 → 두산 55.7%</span></p>
+  </div>
+  <h3>시나리오 민감도 — 승패는 결국 최민석 제구와 두산 클린업</h3>
+  <table>
+    <tr><th class="l">시나리오</th><th>두산RS</th><th>한화RS</th><th>두산 승률(홈)</th></tr>
+    <tr class="hi"><td class="l">중앙(기본)</td><td>4.3</td><td>4.1</td><td class="good">55.7%</td></tr>
+    <tr><td class="l">최민석 리셋 호투(제구 잡힘)</td><td>4.3</td><td>3.7</td><td class="good">60.4%</td></tr>
+    <tr><td class="l">최민석 볼넷 참사(붕괴 재발)</td><td>4.3</td><td>5.2</td><td class="bad">45.0%</td></tr>
+    <tr><td class="l">두산 타선 또 산발(클린업 침묵)</td><td>3.7</td><td>4.1</td><td class="warn">49.2%</td></tr>
+  </table>
+  <p class="note">범위 <b>45~60%</b>. 두산이 클린업 반등과 최민석 제구 둘 중 하나만 잡아도 우세, 둘 다 잡으면 60%, 둘 다 놓치면 열세로 떨어집니다.</p>
+</section>
+
+<section>
+  <h2>3-1. 확정 라인업 <span class="memo">우타 6명 — 좌완 류현진 플래툰 극대화(전략과 정합)</span></h2>
+  <table>
+    <tr><th>타순</th><th class="l">선수(포지션·좌우)</th><th>wRC+</th><th class="l">메모</th></tr>
+    <tr class="hi"><td>1</td><td class="l">김대한 RF(우)</td><td>128</td><td class="l">리드오프</td></tr>
+    <tr><td>2</td><td class="l">박지훈 1B(우)</td><td>85</td><td class="l">핫핸드(어제 2-4)로 2번 승격</td></tr>
+    <tr class="hi"><td>3</td><td class="l">박준순 DH(우)</td><td>159</td><td class="l">어제 0-4 → 오늘 좌완 플래툰 이점</td></tr>
+    <tr class="hi"><td>4</td><td class="l">양의지 C(우)</td><td>109</td><td class="l">어제 0-4 → 클린업 반등 관건</td></tr>
+    <tr><td>5</td><td class="l">김민석 LF(좌)</td><td>129</td><td class="l">어제 3-4 핫</td></tr>
+    <tr><td>6</td><td class="l">안재석 3B(좌)</td><td>95</td><td class="l"></td></tr>
+    <tr><td>7</td><td class="l">박찬호 SS(우)</td><td>103</td><td class="l"></td></tr>
+    <tr><td>8</td><td class="l">조수행 CF(좌)</td><td>~72</td><td class="l">주루·수비(주루압박 자산)</td></tr>
+    <tr><td>9</td><td class="l">강승호 2B(우)</td><td>91</td><td class="l"></td></tr>
+  </table>
+  <p><b>우타 6명(김대한·박지훈·박준순·양의지·박찬호·강승호)</b>으로 좌완 류현진을 상대하는 플래툰 라인업 — 전략 ②와 정확히 맞습니다. 어제 0-for-13으로 침묵한 클린업 박준순·양의지가 오늘은 우타 플래툰 이점을 받습니다. <b>세베리노 말소·류승민 등록</b>으로 8·9번(조수행·강승호)이 다소 소프트해졌지만, 조수행 8번은 주루·수비 자산이라 주루 압박(전략 ⑤)에 부합하고 정수빈(좌타)은 벤치입니다. <b>라인업 반영 공격지수 ≈0.98 → 승률 소폭 상향(≈56~58%), 판정은 접전~두산 소폭 우세로 유지.</b></p>
+</section>
+
+<section>
+  <h2>3-2. 한화 확정 라인업 <span class="memo">우완 최민석 상대 — 좌타 상단 플래툰</span></h2>
+  <table>
+    <tr><th>타순</th><th class="l">선수(포지션·좌우)</th><th>wRC+</th><th class="l">메모</th></tr>
+    <tr><td>1</td><td class="l">최인호 CF(좌)</td><td>~90</td><td class="l">추정(보드 미수집)</td></tr>
+    <tr class="hi"><td>2</td><td class="l">페라자 RF(양)</td><td>147</td><td class="l">팀 최고, 최근5 슬럼프(.125)</td></tr>
+    <tr><td>3</td><td class="l">문현빈 LF(좌)</td><td>121</td><td class="l">어제 선제 홈런</td></tr>
+    <tr class="hi"><td>4</td><td class="l">강백호 DH(좌)</td><td>146</td><td class="l">팀 최고 OPS, 참을성+장타</td></tr>
+    <tr><td>5</td><td class="l">노시환 3B(우)</td><td>121</td><td class="l">최근10 .308·4HR 핫</td></tr>
+    <tr><td>6</td><td class="l">채은성 1B(우)</td><td>85</td><td class="l">소프트</td></tr>
+    <tr><td>7</td><td class="l">허인서 C(우)</td><td>122</td><td class="l">어제 끝내기 결승타</td></tr>
+    <tr><td>8</td><td class="l">이도윤 2B(좌)</td><td>78</td><td class="l">소프트</td></tr>
+    <tr><td>9</td><td class="l">심우준 SS(우)</td><td>84</td><td class="l">소프트, 발(도루 20)</td></tr>
+  </table>
+  <p>우완 최민석 상대로 <b>1~4번이 좌타·스위치(최인호·페라자·문현빈·강백호)</b>로 플래툰 유리하게 짜였습니다. 최민석의 최대 약점이 볼넷(BB/9 4.0)이라, <b>강백호·페라자 같은 참을성+장타 좌타에게 볼넷을 얹으면 대량실점으로 직결</b>됩니다 — 전략 ③(볼넷 억제)이 이 라인업에선 더 결정적입니다. 반대로 하위 6~9번(채은성·이도윤·심우준)은 소프트해 최민석이 잡아낼 구간입니다. 반영 시 한화 공격지수 ≈1.08, <b>종합 승률 ≈56%(접전~두산 소폭 우세) 유지.</b></p>
+</section>
+
+<section>
+  <h2>4. 위닝시리즈 승리 전략</h2>
+  <ol>
+    <li><b>류현진 조기 강판 → 한화 꼴찌 불펜 노출(최우선).</b> 류현진은 볼넷을 잘 안 주므로(BB/9 1.2) 무리한 인내는 어제 화이트전(7IP 0BB 산발)의 반복이 됩니다. 대신 <b>슬럼프 중이라 맞아나가는 지금 폼을 노려 초·중반 치기 좋은 공을 적극 공략</b>해 투구수를 늘리고 5~6이닝에 끌어내리는 것이 목표. 이후 박상원(5.23)·이민우(5.04)를 상대로 어제처럼(9회 2점) 승부.</li>
+    <li><b>클린업 반등이 시리즈 승부처.</b> 어제 박준순·양의지 0-for-8이 패인. 오늘은 좌완 류현진 상대라 <b>우타 클린업(박준순·양의지·김대한)에 플래툰 이점</b>이 붙습니다. 한 방보다 득점권에서 연속안타·진루타로 확실히 뽑아 산발성을 끊어야 합니다. 슬럼프라고 주전을 빼는 것(§3-4)은 금물 — 어제 박지훈(핫핸드) 기용이 옳았듯 타격감 우선.</li>
+    <li><b>최민석 보호 = 볼넷 억제.</b> 최민석의 붕괴는 전부 제구에서 옵니다(BB/9 4.0, 7/24 붕괴·7/30 5BB). 한화 장타 라인(강백호·노시환23HR·페라자)에 볼넷을 얹으면 대량실점 직행. <b>초구 스트라이크 선점으로 볼넷만 줄이면</b> 그의 억홈런(피홈런 0.34/9)·구위(K/9 8.3)로 5~6이닝은 관리 가능. 14일 휴식은 리셋 기회이자 러스트 리스크 — 초반 1~2이닝 제구를 주시하고 흔들리면 빠른 훅.</li>
+    <li><b>불펜 운용:</b> 김정우 백투백이라 오늘 봉인, <b>김택연(휴식)–이영하 축</b>으로 접전을 끌고 갑니다. 리드 잡으면 이 대격차(두산 2위 vs 한화 8위)가 그대로 승리 확률로 전환됩니다.</li>
+    <li><b>주루 압박:</b> 두산 주루 2위 vs 한화 수비 7위 — 추가 진루·도루로 산발성을 보완하고 한화 배터리를 흔듭니다.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>5. 결론</h2>
+  <p><b>오늘은 두산이 살짝 앞선 접전(≈55%)입니다.</b> 5위로 내려앉고 어제 연장패까지 겹쳐 심리적으로 무겁지만, <b>데이터는 루징시리즈 위기가 아니라 위닝시리즈를 두산 쪽으로 기울여 놓았습니다.</b> 근거는 ①류현진도 최근 3경기 4실점씩 슬럼프+13일 롱레스트라 선발 격차가 대등(최민석 4.2 ≈ 류현진 4.3), ②한화 불펜이 리그 꼴찌라 류현진만 넘기면 두산 우위, ③홈. 관건은 어제 무너진 <b>클린업(박준순·양의지) 반등</b>과 <b>최민석 제구</b> 딱 두 가지입니다. 이 중 하나만 풀려도 위닝시리즈 확률이 높고, 이 흐름을 살리면 내일부터의 KIA전도 무겁지 않게 들어갈 수 있습니다.</p>
+  <p class="note"><b>데이터 정직:</b> 두 선발 최근5 rRA9는 10실점·2이닝 강판 등 극단 경기를 포함해 소표본·고분산(급성 부진+롱레스트로 리셋 여부 불확실) · H2H 통산 전원 소표본으로 미반영(서사만) · 한화 RS/G는 대전 홈파크 인플레 감안해 공격지수 하향 · 8/13 양팀 라인업 확정 반영(두산 우타 6명·한화 좌타 상단 플래툰) — 한화 최인호 wRC+만 미수집으로 ~90 추정 · 폭취 리스크는 8/13 서울 기준 낮음(취소·순연 시 예측 무효·재산출).</p>
+</section>
+
+<div class="footer">데이터: 스탯티즈(선수기록·팀 WAA·날짜별 등판) · 노션 「⚾ 두산 경기 승률 분석」 사후기록 | 산출: 지침 v4.3 | 2026-08-13 작성</div>
+</div>
+</body>
+</html>
