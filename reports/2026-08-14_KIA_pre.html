@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>두산 vs KIA · 8.14 광주 — 사전 승률예측</title>
+<title>두산 vs KIA · 8.14 광주 — 사전 승률예측 (라인업 반영)</title>
 <style>
   :root{
     --navy:#131a4a; --navy2:#1c2560; --ink:#0f1424; --ink2:#5b6478;
@@ -15,8 +15,6 @@
   body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
     background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
   .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
-
-  /* Header */
   .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#2a1140 100%);
     color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
   .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;
@@ -29,8 +27,6 @@
   .vs{font-size:15px;opacity:.65;font-weight:600}
   .meta{margin-top:14px;font-size:13.5px;opacity:.92;display:flex;gap:16px;flex-wrap:wrap}
   .meta b{font-weight:700}
-
-  /* Gauge */
   .verdict{background:var(--card);border-radius:20px;padding:24px;margin-top:16px;
     box-shadow:0 2px 14px rgba(20,26,74,.06);text-align:center}
   .vhead{font-size:13px;color:var(--ink2);font-weight:600;letter-spacing:.3px;margin-bottom:14px}
@@ -45,24 +41,30 @@
   .judge{display:inline-block;margin-top:16px;background:#fff6e6;color:var(--warn);
     border:1px solid #f0d9a8;font-weight:800;font-size:15px;padding:7px 18px;border-radius:999px}
   .rng{font-size:12.5px;color:var(--ink2);margin-top:9px}
-
+  .move{font-size:12px;color:var(--ok);margin-top:6px;font-weight:700}
   section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
     box-shadow:0 2px 14px rgba(20,26,74,.05)}
   h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
   h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--navy)}
   .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
-
   table{width:100%;border-collapse:collapse;font-size:13.5px}
   th,td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--line)}
   th{font-size:11.5px;color:var(--ink2);font-weight:700;letter-spacing:.2px}
   td.metric{text-align:left;font-weight:700;color:var(--ink)}
   td.dv{color:var(--doosan);font-weight:800} td.kv{color:var(--kia);font-weight:800}
-  .win{position:relative}
-  .win:after{content:"◀";font-size:8px;margin-left:5px;color:var(--ok);vertical-align:middle}
-  .kwin:after{content:"▶";font-size:8px;margin-left:5px;color:var(--ok)}
   tr:last-child td{border-bottom:none}
-
-  /* starter cards */
+  .lineups{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .lu{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .lu h3{font-size:14px;padding:11px 14px;color:#fff;display:flex;justify-content:space-between;align-items:center}
+  .lu.d h3{background:var(--doosan)} .lu.k h3{background:var(--kia)}
+  .lu h3 small{font-weight:600;opacity:.9;font-size:12px}
+  .lu table{font-size:12.5px}
+  .lu td,.lu th{padding:6px 8px;text-align:left}
+  .lu td.n{text-align:center;color:var(--ink2);width:22px}
+  .lu td.w{text-align:right;font-weight:800;width:52px}
+  .elite{color:var(--kia)} .strong{color:var(--pos)} .weak{color:var(--neg)}
+  .luavg{font-size:12px;color:var(--ink2);padding:9px 14px;background:#f7f8fc;border-top:1px solid var(--line)}
+  .luavg b{font-size:15px;color:var(--ink)}
   .sp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
   .spcard.d{border-top:4px solid var(--doosan)} .spcard.k{border-top:4px solid var(--kia)}
@@ -71,30 +73,27 @@
   .spgrid .lab{color:var(--ink2)} .spgrid .num{font-weight:800;text-align:right}
   .hl-good{color:var(--ok)} .hl-bad{color:var(--neg)}
   .form{margin-top:12px;font-size:12px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:10px}
-
   .factor{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
   .factor:last-child{border-bottom:none}
   .fic{flex:none;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;
     justify-content:center;font-size:15px;font-weight:800;color:#fff}
   .fd{background:var(--doosan)} .fk{background:var(--kia)} .fn{background:var(--ink2)}
   .ft{font-weight:700;font-size:14px} .fx{font-size:13px;color:var(--ink2)}
-
   .strat li{margin:9px 0 9px 4px;font-size:14px;list-style:none;padding-left:22px;position:relative}
   .strat li:before{content:"›";position:absolute;left:4px;top:-1px;color:var(--navy);font-weight:800;font-size:17px}
   .strat b{color:var(--navy)}
-
   footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
   .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12.5px;
     color:#41496a;margin-top:16px}
   .honest b{color:var(--navy)}
-  @media(max-width:640px){.sp{grid-template-columns:1fr}.team{font-size:24px}}
+  @media(max-width:640px){.sp,.lineups{grid-template-columns:1fr}.team{font-size:24px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="hero">
-    <span class="tag">⚾ 사전 승률예측 · 라인업 발표 前</span>
+    <span class="tag">⚾ 사전 승률예측 · 양팀 라인업 반영 (최종)</span>
     <div class="matchup">
       <div class="team" style="color:#c9d2ff">두산 <span class="rec">4위 · 54-4-46 (.540)</span></div>
       <div class="vs">원정 @</div>
@@ -102,38 +101,60 @@
     </div>
     <div class="meta">
       <span>📅 <b>8월 14일(금)</b></span>
-      <span>🏟️ <b>광주-기아 챔피언스필드</b> (두산 원정)</span>
-      <span>🎯 두산 <b>잭로그</b> vs KIA <b>황동하</b></span>
+      <span>🏟️ <b>광주 챔피언스필드</b> (두산 원정)</span>
+      <span>🎯 <b>잭로그</b>(좌) vs <b>황동하</b>(우)</span>
     </div>
   </div>
 
   <div class="verdict">
-    <div class="vhead">예측 승률 — 두산 관점</div>
+    <div class="vhead">예측 승률 — 두산 관점 (라인업 반영 최종)</div>
     <div class="bar">
-      <div class="d" style="width:47%">47%</div>
-      <div class="k" style="width:53%">53%</div>
+      <div class="d" style="width:50%">50%</div>
+      <div class="k" style="width:50%">50%</div>
     </div>
     <div class="barlbl"><span class="dl">두산 승</span><span class="kl">KIA 승</span></div>
-    <div class="judge">판정 · 접전 (근소 열세)</div>
-    <div class="rng">추정 범위 45~48% · 원정·타자구장 불리를 선발·불펜 강점으로 상쇄하는 실질 5:5 승부</div>
+    <div class="judge">판정 · 접전 (완전 5:5)</div>
+    <div class="rng">추정 범위 49~51%</div>
+    <div class="move">▲ 라인업 前 47% → 50%로 상향 · KIA 하위타선(7·9번 자동아웃) 노출 + 두산 라인업 깊이 확인</div>
   </div>
 
   <section>
-    <h2><span class="dot"></span>팀 전력 비교</h2>
-    <p class="sub">2026 시즌 누적 (스탯티즈 실측 · 8/13 기준) · 피타고리안 지수 1.83</p>
-    <table>
-      <thead><tr><th class="metric" style="text-align:left">지표</th><th>두산</th><th>KIA</th><th>우위</th></tr></thead>
-      <tbody>
-        <tr><td class="metric">순위 / 승률</td><td class="dv">4위 · .540</td><td class="kv">5위 · .535</td><td>두산 근소</td></tr>
-        <tr><td class="metric">득점 (RS)</td><td class="dv">485 <small>(7위)</small></td><td class="kv win kwin">555 <small>(3위권)</small></td><td>KIA</td></tr>
-        <tr><td class="metric">실점 (RA)</td><td class="dv win">449 <small>(리그 1위)</small></td><td class="kv">499 <small>(5위)</small></td><td>두산</td></tr>
-        <tr><td class="metric">득실차</td><td class="dv">+36</td><td class="kv kwin">+56</td><td>KIA</td></tr>
-        <tr><td class="metric">피타고리안 승률</td><td class="dv">.535</td><td class="kv kwin">.549</td><td>KIA</td></tr>
-        <tr><td class="metric">팀 색깔</td><td class="dv">지키는 야구<br><small>실점억제 리그 1위</small></td><td class="kv">치는 야구<br><small>강타선·MVP급 코어</small></td><td>—</td></tr>
-      </tbody>
-    </table>
+    <h2><span class="dot"></span>라인업 wRC+ 매핑 (스탯티즈 실측)</h2>
+    <p class="sub">오늘 선발 타순 9명 · wRC+ 100=리그 평균. 잭로그=좌완 / 황동하=우완 기준</p>
+    <div class="lineups">
+      <div class="lu k">
+        <h3><span>KIA (vs 잭로그 좌완)</span><small>평균 ~96</small></h3>
+        <table><tbody>
+          <tr><td class="n">1</td><td>박재현 <small>좌·LF</small></td><td class="w">102.6</td></tr>
+          <tr><td class="n">2</td><td>김선빈 <small>우·DH</small></td><td class="w">99.5</td></tr>
+          <tr><td class="n">3</td><td>김도영 <small>우·3B</small></td><td class="w elite">167.1</td></tr>
+          <tr><td class="n">4</td><td>카스트로 <small>좌·1B</small></td><td class="w elite">152.1</td></tr>
+          <tr><td class="n">5</td><td>나성범 <small>좌·RF</small></td><td class="w elite">148.9</td></tr>
+          <tr><td class="n">6</td><td>김호령 <small>우·CF</small></td><td class="w">90.3</td></tr>
+          <tr><td class="n">7</td><td>윤도현 <small>우·2B</small></td><td class="w weak">4.5</td></tr>
+          <tr><td class="n">8</td><td>김태군 <small>우·C</small></td><td class="w">93.4</td></tr>
+          <tr><td class="n">9</td><td>정현창 <small>좌·SS</small></td><td class="w weak">3.5</td></tr>
+        </tbody></table>
+        <div class="luavg">중심 <b>3~5번 폭발력</b>(167·152·149), 하지만 <b class="weak">7·9번 공동 최약체</b>(소표본). 극단적 상하위 편차.</div>
+      </div>
+      <div class="lu d">
+        <h3><span>두산 (vs 황동하 우완)</span><small>평균 ~109</small></h3>
+        <table><tbody>
+          <tr><td class="n">1</td><td>김대한 <small>RF</small></td><td class="w strong">128</td></tr>
+          <tr><td class="n">2</td><td>안재석 <small>3B</small></td><td class="w">95</td></tr>
+          <tr><td class="n">3</td><td>박준순 <small>2B</small></td><td class="w elite">159</td></tr>
+          <tr><td class="n">4</td><td>양의지 <small>DH</small></td><td class="w strong">109</td></tr>
+          <tr><td class="n">5</td><td>김민석 <small>LF</small></td><td class="w strong">129</td></tr>
+          <tr><td class="n">6</td><td>박지훈 <small>1B</small></td><td class="w">90.3</td></tr>
+          <tr><td class="n">7</td><td>박찬호 <small>SS</small></td><td class="w strong">103</td></tr>
+          <tr><td class="n">8</td><td>정수빈 <small>CF</small></td><td class="w">99</td></tr>
+          <tr><td class="n">9</td><td>윤준호 <small>C</small></td><td class="w">68.2</td></tr>
+        </tbody></table>
+        <div class="luavg"><b class="strong">100+ 타자 5명</b>(박준순 159·김민석 129·김대한 128·양의지 109·박찬호 103). 자동아웃 없이 <b>고른 깊이</b>.</div>
+      </div>
+    </div>
     <div class="honest" style="margin-top:14px">
-      <b>정직 원칙:</b> 두 팀은 승률 .535~.540로 사실상 동급이며, 득실·피타고리안에서는 <b>KIA가 근소 우위</b>. 순위(두산 4위 vs KIA 5위)만 보고 두산을 앞세우는 착시를 배제한다. 홈·구장 요소까지 얹으면 <b>중립 기준 KIA 쪽 근소</b>가 데이터가 말하는 그림.
+      <b>핵심 발견:</b> 시즌 팀 득점은 KIA(555) ≫ 두산(485)이지만, <b>오늘 낸 라인업만 보면 두산이 더 깊다</b>(평균 wRC+ 109 vs 96). KIA는 <b>7·9번(윤도현 4.5·정현창 3.5)이 사실상 자동아웃</b>이라 잭로그가 리셋할 구간이 크다. 다만 이 둘은 소표본(64~66타석)이라 실제 타격은 이보다 나을 수 있어, 회귀 감안 시 <b>양팀 공격력은 오늘 대략 대등</b>하다. KIA의 무기는 평균이 아니라 <b>3~5번의 한 방 천장</b>.
     </div>
   </section>
 
@@ -153,9 +174,9 @@
           <span class="lab">HR/9</span><span class="num hl-good">0.92</span>
         </div>
         <div class="form">
-          <b>유형:</b> 세부지표(FIP 3.91)가 결과보다 우수 — 볼넷 적고 피홈런 관리되는 안정형(2025 FIP 3.26 준수 시즌).<br>
-          <b>최근:</b> 최근 5선발 rRA9 ≈5.4로 기복(7/18 NC 3이닝 6실점). <b>마지막 등판 7/31</b> — 폭염취소로 약 2주 공백(로테 밀림).<br>
-          <b>vs KIA '26:</b> 4/17 7이닝 5실점(패) / 6/27 7.1이닝 1실점(승) — 극과 극.
+          <b>유형:</b> FIP 3.91로 세부지표 우수(볼넷 적음·피홈런 관리). 결과보다 나은 내용.<br>
+          <b>최근:</b> 최근 5선발 rRA9 ≈5.4(기복). 마지막 등판 7/31 → 폭염취소로 2주 공백.<br>
+          <b>vs KIA '26:</b> 4/17 7IP 5R(패) / 6/27 7.1IP 1R(승). 오늘 KIA 좌타 4명(박재현·카스트로·나성범·정현창) 상대 좌완 이점.
         </div>
       </div>
       <div class="spcard k">
@@ -170,45 +191,45 @@
           <span class="lab">HR/9</span><span class="num hl-bad">1.54</span>
         </div>
         <div class="form">
-          <b>유형:</b> 결과(rRA9 4.55)가 세부지표보다 좋음 — <b>피홈런 1.54·볼넷 3.79로 리스크 내포</b>(FIP 5.66). 수비·운의 버팀 의심.<br>
-          <b>최근:</b> 최근 5선발 rRA9 ≈5.4, <b>3~5이닝 단기 등판 잦음</b>(7/26 3이닝 3실점 등) — 이닝소화 저하.<br>
-          <b>vs 두산 '26:</b> 5/14 6이닝 3실점(승) / 6/26 5이닝 2실점(패) — 두산 상대 무난히 버팀.
+          <b>유형:</b> rRA9 4.55는 준수하나 <b>FIP 5.66</b> — 피홈런 1.54·볼넷 3.79로 리스크 큼(운·수비 버팀).<br>
+          <b>최근:</b> 최근 5선발 rRA9 ≈5.4, 3~5이닝 단기등판 잦음.<br>
+          <b>vs 두산 '26:</b> 5/14 6IP 3R(승) / 6/26 5IP 2R(패). 오늘 깊은 두산 타선엔 피홈런 리스크 부담.
         </div>
       </div>
     </div>
     <div class="honest" style="margin-top:14px">
-      <b>선발 요약:</b> 결과 지표(rRA9)는 4.62 vs 4.55로 <b>사실상 동률</b>이지만, 예측력 높은 <b>FIP는 잭로그(3.91)가 황동하(5.66)에 뚜렷한 우위</b> — 볼넷·탈삼진·피홈런 모두 앞선다. <b>선발 예봉은 두산 우세.</b> 단, 두 투수 모두 최근 폼·이닝소화가 떨어져 <b>불펜 조기 가동 가능성</b>이 크다.
+      <b>선발 요약:</b> rRA9(결과)는 동률이나 예측력 높은 <b>FIP는 잭로그(3.91)가 황동하(5.66)에 뚜렷 우위.</b> 볼넷·탈삼진·피홈런 전부 잭로그 앞섬 → <b>선발 예봉 두산 우세.</b> 단 둘 다 최근 이닝소화 저하 → 불펜 조기 승부.
     </div>
   </section>
 
   <section>
     <h2><span class="dot"></span>승부처 변수</h2>
-    <p class="sub">이번 경기 승률을 좌우하는 핵심 요인</p>
-    <div class="factor"><div class="fic fk">K</div><div><div class="ft">광주 원정 + 타자친화 구장</div><div class="fx">두산 원정(홈 어드밴티지 없음)에 챔피언스필드는 타자친화 성향. KIA 강타선·황동하 피홈런 모두에 영향이나, <b>공격력 강한 KIA 쪽에 순효과</b>. 최대 불리 요소.</div></div></div>
-    <div class="factor"><div class="fic fk">K</div><div><div class="ft">KIA 강타선 코어</div><div class="fx">김도영(2026 WAR 6.08 리그 2위·장타율 .622) + 힐리어드(SLG .587) 등 <b>MVP급 파워 코어</b>. 좌완 잭로그 상대 우타 라인업 편성 가능성.</div></div></div>
-    <div class="factor"><div class="fic fd">D</div><div><div class="ft">선발 세부지표 우위</div><div class="fx">잭로그 FIP 3.91 vs 황동하 5.66. 볼넷 최소·피홈런 관리형 좌완이 <b>강타선 상대 예봉 역할</b>. 데이터상 두산의 최대 무기.</div></div></div>
-    <div class="factor"><div class="fic fd">D</div><div><div class="ft">리그 1위 실점억제 + 불펜</div><div class="fx">두산 실점 449는 <b>리그 최소</b>. 접전 후반 리드 지키는 뒷문이 원정·구장 불리를 상쇄하는 핵심.</div></div></div>
-    <div class="factor"><div class="fic fn">?</div><div><div class="ft">양 선발 이닝소화 불안</div><div class="fx">둘 다 최근 3~5이닝 등판·rRA9 5점대. <b>먼저 상대 불펜을 끌어내는 쪽</b>이 유리 — 초반 다득점 싸움.</div></div></div>
+    <p class="sub">라인업 확정 후 재정리</p>
+    <div class="factor"><div class="fic fd">D</div><div><div class="ft">두산 라인업 깊이 (오늘의 반전)</div><div class="fx">100+ 타자 5명으로 자동아웃 없는 구성. 피홈런·볼넷형 황동하 상대 <b>이닝마다 압박</b> 가능. 시즌 팀 득점 인상(485)보다 오늘 화력이 높다.</div></div></div>
+    <div class="factor"><div class="fic fd">D</div><div><div class="ft">KIA 하위타선 공백 + 선발 우위</div><div class="fx">7 윤도현(4.5)·9 정현창(3.5) 자동아웃 구간을 잭로그(FIP 3.91)가 리셋. 6~9번에서 이닝 벌어 <b>QS 가시권</b>.</div></div></div>
+    <div class="factor"><div class="fic fk">K</div><div><div class="ft">3~5번 한 방 천장</div><div class="fx">김도영 167·카스트로 152·나성범 149. 접전에서 <b>스윙 몇 번으로 경기를 끝낼</b> 파괴력. 잭로그(컨택형)가 광주에서 실투 시 장타 위험.</div></div></div>
+    <div class="factor"><div class="fic fk">K</div><div><div class="ft">광주 원정 + 타자친화 구장</div><div class="fx">두산 원정(홈 이점 없음)에 챔피언스필드 타자구장. KIA 상위 파워를 증폭 — 최대 불리 요소로 상존.</div></div></div>
+    <div class="factor"><div class="fic fd">D</div><div><div class="ft">리그 1위 실점억제·불펜</div><div class="fx">두산 실점 449 리그 최소. 접전 후반 리드 지키는 뒷문이 원정·구장 불리를 상쇄.</div></div></div>
   </section>
 
   <section>
     <h2><span class="dot"></span>핵심 전략</h2>
-    <p class="sub">두산이 접전을 승리로 가져가려면</p>
+    <p class="sub">완전 5:5 접전, 승부를 가르는 실행 포인트</p>
     <ul class="strat">
-      <li><b>잭로그, 볼넷·피홈런 제로 관리.</b> 광주에서 실투 한 방이 승부를 가른다. 김도영·힐리어드에겐 신중하게, 하위타선을 확실히 잡아 <b>QS(6이닝+)로 불펜 부담 축소</b>.</li>
-      <li><b>황동하 상대 인내심 타격.</b> 볼넷 3.79·피홈런 1.54 유형 — 성급한 스윙 자제, 카운트 싸움으로 투구수 늘려 <b>5회 전후 KIA 불펜 조기 노출</b> 유도.</li>
-      <li><b>초반 선취점.</b> 두 선발 모두 이닝소화가 짧아 먼저 리드하면 리그 1위 실점억제·불펜으로 <b>지키는 야구</b> 전개가 가능하다.</li>
-      <li><b>원정·타자구장 불리는 상수로 인정.</b> 대량 득점 기대보다 <b>1~2점 접전을 뒷심으로 잡는 시나리오</b>가 현실적 승리 경로.</li>
+      <li><b>잭로그, 3~5번만 관리.</b> 김도영·카스트로·나성범에겐 볼넷 감수하고 신중하게, <b>6~9번(특히 7·9 자동아웃)에서 확실히 잡아</b> 이닝·투구수 아끼며 QS.</li>
+      <li><b>황동하 조기 강판 유도.</b> 피홈런 1.54·볼넷 3.79 + 최근 단기등판. 두산 깊은 타선이 <b>인내심 있게 투구수 늘려 5회 전후 KIA 불펜</b>을 끌어낸다.</li>
+      <li><b>초반 선취점으로 지키는 야구.</b> 먼저 리드하면 리그 1위 실점억제·불펜으로 후반을 잠근다.</li>
+      <li><b>광주·원정은 상수로 인정.</b> 대량 득점보다 <b>접전을 뒷심으로 잡는 시나리오</b>가 현실적 승리 경로.</li>
     </ul>
   </section>
 
   <div class="honest">
-    <b>데이터 정직 표기 ·</b> 모든 선수·팀 지표는 <b>스탯티즈(statiz.co.kr) 실측</b>(2026 시즌 누적, 8/13 기준). 승률은 탤런트(½ 피타고리안 + ½ 실적) 기반 Log5 중립값에 홈·구장·선발·불펜 요인을 조정한 추정치로, 라인업 발표 前 <b>팀 관점 사전 예측</b>이다. 실제 라인업(양 팀 타순 9명) 확정 시 타자별 wRC+ 매핑으로 정밀 갱신 가능. 전날 승패·기세는 확률에 미반영.
+    <b>데이터 정직 표기 ·</b> 모든 지표는 <b>스탯티즈(statiz.co.kr) 실측</b>. KIA 9명·두산 박지훈·윤준호 wRC+는 8/14 당일 실측, 두산 나머지 7명은 8/11 실측 보드값(wRC+는 수일간 안정적). 승률은 탤런트(½피타고리안+½실적) Log5 중립값에 홈·구장·선발·<b>양팀 확정 라인업</b>을 반영한 추정치. 소표본 타자(윤도현·정현창 64~66타석)는 회귀 감안. 전날 승패·기세는 미반영.
   </div>
 
   <footer>
-    데이터 출처: 스탯티즈(팀 순위·득실·선발 rRA9/FIP/WHIP·최근폼·wRC+·WAR) · 경기 구장/일정 메타 확인.<br>
-    두산 vs KIA · 2026.8.14 광주 · 사전 승률예측 리포트.
+    데이터 출처: 스탯티즈(팀 순위·득실·선발 rRA9/FIP/WHIP·라인업 wRC+·좌우) · 경기 구장/일정 메타 확인.<br>
+    두산 vs KIA · 2026.8.14 광주 · 사전 승률예측 리포트 (양팀 라인업 반영 최종본).
   </footer>
 
 </div>
