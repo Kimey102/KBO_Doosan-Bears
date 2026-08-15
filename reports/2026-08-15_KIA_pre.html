@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs KIA · 8.15 광주 — 사전 승률예측 (라인업 반영)</title>
+<style>
+  :root{
+    --navy:#131a4a; --navy2:#1c2560; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --kia:#ea0029;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 60%,#2a1140 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;
+    background:radial-gradient(circle,rgba(234,0,41,.25),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:12px}
+  .matchup{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .team{font-size:30px;font-weight:800;letter-spacing:-.5px}
+  .team .rec{display:block;font-size:12px;font-weight:500;opacity:.8;letter-spacing:0}
+  .vs{font-size:15px;opacity:.65;font-weight:600}
+  .meta{margin-top:14px;font-size:13.5px;opacity:.92;display:flex;gap:16px;flex-wrap:wrap}
+  .meta b{font-weight:700}
+  .verdict{background:var(--card);border-radius:20px;padding:24px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06);text-align:center}
+  .vhead{font-size:13px;color:var(--ink2);font-weight:600;letter-spacing:.3px;margin-bottom:14px}
+  .bar{position:relative;height:44px;border-radius:12px;overflow:hidden;display:flex;
+    box-shadow:inset 0 0 0 1px var(--line)}
+  .bar .d{background:linear-gradient(90deg,var(--navy),#2b357e);display:flex;align-items:center;
+    justify-content:flex-start;padding-left:16px;color:#fff;font-weight:800;font-size:19px}
+  .bar .k{background:linear-gradient(90deg,#ff2d52,var(--kia));display:flex;align-items:center;
+    justify-content:flex-end;padding-right:16px;color:#fff;font-weight:800;font-size:19px}
+  .barlbl{display:flex;justify-content:space-between;margin-top:9px;font-size:13px;font-weight:700}
+  .barlbl .dl{color:var(--doosan)} .barlbl .kl{color:var(--kia)}
+  .judge{display:inline-block;margin-top:16px;background:#fdeaea;color:var(--kia);
+    border:1px solid #f2c4c4;font-weight:800;font-size:15px;padding:7px 18px;border-radius:999px}
+  .rng{font-size:12.5px;color:var(--ink2);margin-top:9px}
+  .move{font-size:12px;color:var(--neg);margin-top:6px;font-weight:700}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--navy)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:11.5px;color:var(--ink2);font-weight:700;letter-spacing:.2px}
+  td.metric{text-align:left;font-weight:700;color:var(--ink)}
+  td.dv{color:var(--doosan);font-weight:800} td.kv{color:var(--kia);font-weight:800}
+  tr:last-child td{border-bottom:none}
+  .lineups{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .lu{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .lu h3{font-size:14px;padding:11px 14px;color:#fff;display:flex;justify-content:space-between;align-items:center}
+  .lu.d h3{background:var(--doosan)} .lu.k h3{background:var(--kia)}
+  .lu h3 small{font-weight:600;opacity:.9;font-size:12px}
+  .lu table{font-size:12.5px}
+  .lu td,.lu th{padding:6px 8px;text-align:left}
+  .lu td.n{text-align:center;color:var(--ink2);width:22px}
+  .lu td.w{text-align:right;font-weight:800;width:52px}
+  .elite{color:var(--kia)} .strong{color:var(--pos)} .weak{color:var(--neg)}
+  .luavg{font-size:12px;color:var(--ink2);padding:9px 14px;background:#f7f8fc;border-top:1px solid var(--line)}
+  .luavg b{font-size:15px;color:var(--ink)}
+  .sp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.k{border-top:4px solid var(--kia)}
+  .spname{font-size:18px;font-weight:800} .sptag{font-size:12px;color:var(--ink2);margin-bottom:12px}
+  .spgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;font-size:13px}
+  .spgrid .lab{color:var(--ink2)} .spgrid .num{font-weight:800;text-align:right}
+  .hl-good{color:var(--ok)} .hl-bad{color:var(--neg)}
+  .form{margin-top:12px;font-size:12px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:10px}
+  .factor{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .factor:last-child{border-bottom:none}
+  .fic{flex:none;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;
+    justify-content:center;font-size:15px;font-weight:800;color:#fff}
+  .fd{background:var(--doosan)} .fk{background:var(--kia)} .fn{background:var(--ink2)}
+  .ft{font-weight:700;font-size:14px} .fx{font-size:13px;color:var(--ink2)}
+  .strat li{margin:9px 0 9px 4px;font-size:14px;list-style:none;padding-left:22px;position:relative}
+  .strat li:before{content:"›";position:absolute;left:4px;top:-1px;color:var(--navy);font-weight:800;font-size:17px}
+  .strat b{color:var(--navy)}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12.5px;
+    color:#41496a;margin-top:16px}
+  .honest b{color:var(--navy)}
+  @media(max-width:640px){.sp,.lineups{grid-template-columns:1fr}.team{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사전 승률예측 · 양팀 라인업 반영 (최종)</span>
+    <div class="matchup">
+      <div class="team" style="color:#c9d2ff">두산 <span class="rec">4위 · 55-4-46 (.545)</span></div>
+      <div class="vs">원정 @</div>
+      <div class="team" style="color:#ff9aa9">KIA <span class="rec">5위 · 54-2-48 (.529)</span></div>
+    </div>
+    <div class="meta">
+      <span>📅 <b>8월 15일(토)</b></span>
+      <span>🏟️ <b>광주 챔피언스필드</b> (두산 원정)</span>
+      <span>🎯 <b>최승용</b>(좌) vs <b>양현종</b>(좌)</span>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="vhead">예측 승률 — 두산 관점 (라인업 반영 최종)</div>
+    <div class="bar">
+      <div class="d" style="width:46%">46%</div>
+      <div class="k" style="width:54%">54%</div>
+    </div>
+    <div class="barlbl"><span class="dl">두산 승</span><span class="kl">KIA 승</span></div>
+    <div class="judge">판정 · 근소 열세 접전</div>
+    <div class="rng">추정 범위 44~48%</div>
+    <div class="move">▼ 어제(8/14) 50% → 오늘 46%로 하향 · KIA 하위타선 자동아웃 소멸(하주석·이호연 투입) + 어제의 두산 선발 우위 소멸</div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>라인업 wRC+ 매핑 (스탯티즈 실측)</h2>
+    <p class="sub">오늘 선발 타순 9명 · wRC+ 100=리그 평균. 최승용·양현종 <b>둘 다 좌완</b> 선발</p>
+    <div class="lineups">
+      <div class="lu k">
+        <h3><span>KIA (vs 최승용 좌완)</span><small>평균 124.0</small></h3>
+        <table><tbody>
+          <tr><td class="n">1</td><td>박재현 <small>좌·LF</small></td><td class="w">99.1</td></tr>
+          <tr><td class="n">2</td><td>김선빈 <small>우·DH</small></td><td class="w">100.7</td></tr>
+          <tr><td class="n">3</td><td>김도영 <small>우·3B</small></td><td class="w elite">164.4</td></tr>
+          <tr><td class="n">4</td><td>카스트로 <small>1B</small></td><td class="w elite">149.7</td></tr>
+          <tr><td class="n">5</td><td>나성범 <small>좌·RF</small></td><td class="w elite">151.2</td></tr>
+          <tr><td class="n">6</td><td>김호령 <small>우·CF</small></td><td class="w">92.6</td></tr>
+          <tr><td class="n">7</td><td>하주석 <small>우·SS</small></td><td class="w elite">165.5*</td></tr>
+          <tr><td class="n">8</td><td>한준수 <small>C</small></td><td class="w strong">131.6</td></tr>
+          <tr><td class="n">9</td><td>이호연 <small>2B</small></td><td class="w">61.0*</td></tr>
+        </tbody></table>
+        <div class="luavg">상위~중심 <b>3~5번 164·150·151</b> + 8번 한준수 132까지. 어제 있던 <b class="weak">7·9번 자동아웃이 사라진</b> 깊은 라인업. <b>*하주석·이호연은 소표본</b>(회귀 시 실질 ~112~116).</div>
+      </div>
+      <div class="lu d">
+        <h3><span>두산 (vs 양현종 좌완)</span><small>평균 104.1</small></h3>
+        <table><tbody>
+          <tr><td class="n">1</td><td>김대한 <small>RF</small></td><td class="w strong">107.8</td></tr>
+          <tr><td class="n">2</td><td>안재석 <small>3B</small></td><td class="w">91.0</td></tr>
+          <tr><td class="n">3</td><td>박준순 <small>2B</small></td><td class="w elite">148.5</td></tr>
+          <tr><td class="n">4</td><td>양의지 <small>C</small></td><td class="w strong">117.4</td></tr>
+          <tr><td class="n">5</td><td>김민석 <small>LF</small></td><td class="w strong">132.4</td></tr>
+          <tr><td class="n">6</td><td>박지훈 <small>1B</small></td><td class="w">96.2</td></tr>
+          <tr><td class="n">7</td><td>박찬호 <small>DH</small></td><td class="w strong">106.1</td></tr>
+          <tr><td class="n">8</td><td>정수빈 <small>CF</small></td><td class="w">96.4</td></tr>
+          <tr><td class="n">9</td><td>이유찬 <small>SS</small></td><td class="w weak">40.9</td></tr>
+        </tbody></table>
+        <div class="luavg"><b class="strong">100+ 타자 5명</b>(박준순 149·김민석 132·양의지 117·김대한 108·박찬호 106). 다만 <b class="weak">9번 이유찬(40.9)</b>이 하위 구멍.</div>
+      </div>
+    </div>
+    <div class="honest" style="margin-top:14px">
+      <b>핵심 발견 (어제와의 반전):</b> 어제는 KIA가 7·9번 자동아웃(윤도현·정현창)으로 라인업이 얕아 두산이 우위였다. <b>오늘은 그 자리에 하주석(7번)·이호연(9번)이 들어와 KIA 하위 구멍이 메워졌다.</b> 명목 라인업 파워는 KIA 124 vs 두산 104로 <b>KIA 우위</b>. 단 하주석(165)·이호연(61)은 표본이 작아 실제값은 이보다 낮을 것이므로, 회귀 감안하면 <b>KIA 실질 ~112~116 vs 두산 104 — KIA가 근소 우위</b>다. 또 좌완 최승용 상대로 KIA가 <b>우타를 대거 배치</b>(김선빈·김도영·김호령·하주석)해 최승용의 좌완 이점이 줄었다.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>선발 맞대결 (좌완 vs 좌완)</h2>
+    <p class="sub">스탯티즈 실측 2026 · rRA9=구장·수비 보정 실점, FIP=수비무관 세부지표(예측력↑)</p>
+    <div class="sp">
+      <div class="spcard d">
+        <div class="spname" style="color:var(--doosan)">최승용 <small style="font-weight:600;color:var(--ink2)">LHP</small></div>
+        <div class="sptag">두산 · 좌투좌타 · 2026 17선발 83.0이닝 (3승8패)</div>
+        <div class="spgrid">
+          <span class="lab">rRA9</span><span class="num hl-bad">5.59</span>
+          <span class="lab">FIP</span><span class="num hl-good">4.98</span>
+          <span class="lab">WHIP</span><span class="num">1.52</span>
+          <span class="lab">K/9</span><span class="num">5.96</span>
+          <span class="lab">BB/9</span><span class="num">3.25</span>
+          <span class="lab">HR/9</span><span class="num hl-good">0.98</span>
+        </div>
+        <div class="form">
+          <b>유형:</b> FIP 4.98로 세부지표는 양현종보다 낫다(직구 구종가치 리그 상위 6%). 피홈런 관리 양호.<br>
+          <b>최근:</b> 최근 5선발 rRA9 ≈6.2로 기복 큼. 7/29 이후 약 2.5주 공백(폭염 로테이션) → <b>8월 첫 등판</b>.<br>
+          <b>vs KIA '26:</b> 4/18 6.2IP 2R·5/12 5IP 1R 호투했으나 <b>6/28 5.1IP 5R 난타</b>. 오늘 우타 즐비한 KIA 상대라 좌완 이점 제한적.
+        </div>
+      </div>
+      <div class="spcard k">
+        <div class="spname" style="color:var(--kia)">양현종 <small style="font-weight:600;color:var(--ink2)">LHP</small></div>
+        <div class="sptag">KIA · 좌투좌타 · 2026 19선발 89.2이닝 (7승6패)</div>
+        <div class="spgrid">
+          <span class="lab">rRA9</span><span class="num hl-good">5.07</span>
+          <span class="lab">FIP</span><span class="num hl-bad">5.73</span>
+          <span class="lab">WHIP</span><span class="num">1.47</span>
+          <span class="lab">K/9</span><span class="num">5.92</span>
+          <span class="lab">BB/9</span><span class="num hl-bad">4.72</span>
+          <span class="lab">HR/9</span><span class="num hl-bad">1.20</span>
+        </div>
+        <div class="form">
+          <b>유형:</b> <b>FIP 5.73</b>(볼넷 4.72·피홈런 1.20)로 내용은 나쁘나, 관록으로 실점(rRA9 5.07)은 눌러온 유형. 구속 리그 하위 7% → 변화구·제구 승부.<br>
+          <b>최근:</b> 7/01~7/25 4경기 매 경기 5이닝 1~3실점 안정 → <b>7/31 NC 1.1IP 8R 대참사</b>. 이후 2주 공백, 8월 첫 등판.<br>
+          <b>vs 두산 '26:</b> 4/19 4.2IP 4R·5/13 5IP 2R·6/12 5IP 2R (대체로 무난).
+        </div>
+      </div>
+    </div>
+    <div class="honest" style="margin-top:14px">
+      <b>선발 요약:</b> <b>FIP는 최승용(4.98)이 낫지만 실점억제 rRA9는 양현종(5.07)이 앞선다</b> — 상쇄 구도. 어제 두산이 누렸던 뚜렷한 선발 우위(잭로그 FIP 3.91)가 오늘은 없다. 둘 다 2주+ 공백 후 첫 등판이라 <b>초반 제구·구위가 최대 변수</b>. 양쪽 다 이닝소화 불안 → 불펜 조기 승부 가능성.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>승부처 변수</h2>
+    <p class="sub">양팀 확정 라인업 기준</p>
+    <div class="factor"><div class="fic fk">K</div><div><div class="ft">KIA 라인업이 어제보다 깊어졌다</div><div class="fx">7 하주석·9 이호연 투입으로 <b>자동아웃 구간 소멸</b>. 3~5번(김도영 164·카스트로 150·나성범 151) + 8번 한준수(132)까지 최승용이 리셋할 구간이 거의 없다.</div></div></div>
+    <div class="factor"><div class="fic fk">K</div><div><div class="ft">최승용 상대 우타 대거 배치</div><div class="fx">김선빈·김도영·김호령·하주석 등 우타 다수 → <b>좌완 최승용의 플래툰 이점 반감</b>. 실투 시 광주 타자구장에서 장타 위험.</div></div></div>
+    <div class="factor"><div class="fic fk">K</div><div><div class="ft">광주 원정 + 타자친화 구장</div><div class="fx">두산 원정(홈 이점 없음)에 챔피언스필드 타자구장. KIA 상위 파워를 증폭하는 상수 불리 요소.</div></div></div>
+    <div class="factor"><div class="fic fd">D</div><div><div class="ft">두산 중심타선 + 리그 최소실점 뒷문</div><div class="fx">박준순 149·김민석 132·양의지 117로 중심은 여전히 강력. 양현종 FIP 5.73(볼넷·피홈런형)을 인내심으로 공략, 접전 후반은 두산 불펜(리그 최소실점)으로 잠근다.</div></div></div>
+    <div class="factor"><div class="fic fn">?</div><div><div class="ft">두 선발의 2주+ 공백</div><div class="fx">최승용·양현종 모두 8월 첫 등판. 감각·구위 저하 리스크가 양쪽 대칭 → 초반 흔들리는 쪽이 경기 흐름을 내준다.</div></div></div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>핵심 전략</h2>
+    <p class="sub">근소 열세 접전, 승부를 가르는 실행 포인트</p>
+    <ul class="strat">
+      <li><b>최승용, 초반 실점 최소화가 관건.</b> 우타 즐비·자동아웃 없는 KIA 상대라 리셋 구간이 없다. <b>3~5번엔 볼넷 감수한 신중 승부</b>, 하위(9번 이호연)에서 확실히 잡아 투구수 관리.</li>
+      <li><b>양현종의 제구·피홈런을 노린다.</b> BB/9 4.72·HR/9 1.20 + 느린 구속. 두산 중심타선(박준순·김민석·양의지)이 <b>인내심 있게 카운트 잡고 실투를 장타로</b> 연결, 5회 전후 KIA 불펜을 끌어낸다.</li>
+      <li><b>선취점 + 지키는 야구.</b> 원정·타자구장 불리를 상쇄하는 현실적 승리 경로는 대량득점이 아니라 <b>먼저 리드해 리그 최소실점 뒷문으로 잠그는 접전</b>.</li>
+      <li><b>공백 후 첫 등판 변수 활용.</b> 양현종이 초반 흔들리면 <b>1~2회 집중타로 조기 승부</b>를 걸어 경기를 앞서 나간다.</li>
+    </ul>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 모든 지표는 <b>스탯티즈(statiz.co.kr) 실측</b>(2026 시즌누적, 8/15 조회). 라인업 wRC+는 양팀 확정 선발 9명 기준. 승률은 탤런트(½피타고리안+½실적) Log5 중립값에 홈·구장·선발·<b>양팀 확정 라인업</b>을 반영한 추정치. <b>KIA 하주석(누적 wRC 8.3)·이호연(1.7)은 소표본</b>이라 wRC+가 과대 표시될 수 있어 회귀 감안(라인업 실질 ~112~116). 전날 승패·기세는 미반영.
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈(팀 순위·선발 rRA9/FIP/WHIP·라인업 wRC+) · 경기 구장/일정·라인업 메타 확인.<br>
+    두산 vs KIA · 2026.8.15 광주 · 사전 승률예측 리포트 (양팀 라인업 반영 최종본).
+  </footer>
+
+</div>
+</body>
+</html>
