@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KIA 6 : 1 두산 · 8.15 광주 — 사후 결과분석</title>
+<style>
+  :root{
+    --navy:#131a4a; --navy2:#1c2560; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --kia:#ea0029;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,#4a0f16 0%,#7a1420 55%,#2a1140 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(255,80,110,.30),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .score{display:flex;align-items:center;justify-content:center;gap:20px;margin:6px 0 4px}
+  .sc-t{text-align:center;flex:1}
+  .sc-t .nm{font-size:19px;font-weight:800;letter-spacing:-.5px}
+  .sc-t .rn{font-size:52px;font-weight:900;line-height:1;margin-top:4px}
+  .sc-t.win .rn{color:#ffb0bd} .sc-t.win .nm{color:#ff9aa9}
+  .sc-t.lose{opacity:.72}
+  .sc-mid{text-align:center;font-size:12px;opacity:.8;line-height:1.5}
+  .sc-mid .final{display:inline-block;background:rgba(255,255,255,.16);border-radius:999px;padding:2px 10px;font-weight:700;margin-bottom:4px}
+  .winbadge{text-align:center;margin-top:8px;font-size:13.5px;font-weight:700;color:#ffb0bd}
+  .verdict{background:var(--card);border-radius:20px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06)}
+  .hit{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;text-align:center}
+  .hit .big{font-size:15px;font-weight:800;color:var(--ok);background:#e8f6ee;border:1px solid #bfe6cd;
+    padding:7px 16px;border-radius:999px}
+  .hit .txt{font-size:13.5px;color:var(--ink2)}
+  .hit b{color:var(--ink)}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--kia)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:11px;color:var(--ink2);font-weight:700}
+  .lscore td,.lscore th{padding:8px 7px}
+  .lscore .tm{text-align:left;font-weight:800;min-width:52px}
+  .lscore .R{font-weight:900;font-size:15px;background:#f7f8fc}
+  .lscore .dd{color:var(--doosan)} .lscore .kwin{color:var(--kia)}
+  .sp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.k{border-top:4px solid var(--kia)}
+  .spname{font-size:17px;font-weight:800}
+  .spres{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:6px}
+  .spres.w{background:#e8f6ee;color:var(--ok)} .spres.l{background:#fdeaea;color:var(--neg)}
+  .sptag{font-size:12px;color:var(--ink2);margin:3px 0 12px}
+  .spline{font-size:13.5px;font-weight:700}
+  .spnote{font-size:12px;color:var(--ink2);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+  .stars li{margin:9px 0;font-size:13.5px;list-style:none;padding-left:24px;position:relative}
+  .stars li:before{content:"★";position:absolute;left:2px;top:0;color:var(--warn);font-size:13px}
+  .stars b{color:var(--navy)}
+  .match{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .match:last-child{border-bottom:none}
+  .mchk{flex:none;width:26px;height:26px;border-radius:50%;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+  .mchk.ok{background:var(--ok)} .mchk.no{background:var(--neg)} .mchk.half{background:var(--warn)}
+  .mp{font-size:12.5px;color:var(--ink2)} .mp b{color:var(--ink)}
+  .mp .pred{color:var(--navy);font-weight:700}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12.5px;color:#41496a;margin-top:16px}
+  .honest b{color:var(--navy)}
+  @media(max-width:640px){.sp{grid-template-columns:1fr}.sc-t .rn{font-size:42px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사후 결과분석 · 경기종료</span>
+    <div class="score">
+      <div class="sc-t lose"><div class="nm">두산 베어스</div><div class="rn">1</div></div>
+      <div class="sc-mid"><span class="final">경기 종료</span><br>8.15(토)<br>광주 챔피언스필드</div>
+      <div class="sc-t win"><div class="nm">KIA 타이거즈</div><div class="rn">6</div></div>
+    </div>
+    <div class="winbadge">🐯 KIA 홈 완승 · 승 양현종(통산 194승) / 패 최승용 · KIA, 전날 패배 설욕</div>
+  </div>
+
+  <div class="verdict">
+    <div class="hit">
+      <span class="big">✔ 예측 방향 적중</span>
+      <span class="txt">사전 예측 <b>두산 46%·근소 열세</b> → 실제 <b>KIA 6:1 승</b>. 열세 방향은 맞혔으나, 접전 예상보다 <b>점수차는 컸다.</b></span>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>이닝별 스코어</h2>
+    <p class="sub">두산은 1회 선취 후 침묵 · KIA는 매 이닝 야금야금 추가</p>
+    <table class="lscore">
+      <thead><tr><th class="tm">팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th class="R">R</th></tr></thead>
+      <tbody>
+        <tr><td class="tm dd">두산</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td class="R">1</td></tr>
+        <tr><td class="tm kwin">KIA</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>x</td><td class="R">6</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:12px;margin-bottom:0">1회 두산이 박준순 적시타로 선취했으나 곧바로 카스트로 적시타로 동점, 2회 박재현 2루타로 역전당한 뒤 <b>단 한 번도 리드를 되찾지 못했다.</b></p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>선발 리뷰</h2>
+    <p class="sub">사전에 짚은 두 축 — 최승용의 초반 리스크와 양현종의 관록형 실점억제 — 이 그대로 발현</p>
+    <div class="sp">
+      <div class="spcard d">
+        <div><span class="spname">최승용</span><span class="spres l">패전</span></div>
+        <div class="sptag">두산 · 좌완</div>
+        <div class="spline">3.2이닝 · <b class="neg">4실점</b>으로 강판</div>
+        <div class="spnote">사전 경고한 <b>"우타 즐비한 KIA 상대 리셋 구간 없음 + 초반 실점 리스크"</b>가 그대로 현실화. 4회를 넘기지 못하고 무너지며 조기 강판, 두산 불펜을 일찍 소모시켰다.</div>
+      </div>
+      <div class="spcard k">
+        <div><span class="spname">양현종</span><span class="spres w">승리</span></div>
+        <div class="sptag">KIA · 좌완 · 통산 194승</div>
+        <div class="spline">6이닝 · <b>1자책 · QS</b></div>
+        <div class="spnote">사전 지적대로 <b>"FIP(5.73)는 나쁘지만 관록으로 실점을 눌러온 유형(rRA9 5.07)"</b>이 정확히 실현. 두산이 노렸던 제구·피홈런 공략은 통하지 않았고 QS로 두산 타선을 침묵시켰다.</div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:12px;margin-bottom:0">KIA 불펜도 전상현(7)·조상우(8)·이의리(9, 최고 158km 무실점)로 뒷문을 완벽히 잠갔다.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>오늘의 주역 (KIA)</h2>
+    <p class="sub">사전에 짚은 'KIA 라인업 강화 + 3~5번 한 방 천장'이 그대로 발현</p>
+    <ul class="stars">
+      <li><b>박재현 (1번·좌익)</b> — <b>2타점.</b> 2회 역전 2루타 + 7회 쐐기 적시타. 사전 wRC+ 99의 1번 타자가 경기를 좌우.</li>
+      <li><b>김도영 (3번·3루)</b> — <b>시즌 35호 솔로 홈런</b>(4회, 비거리 120m). 사전에 짚은 "3~5번 한 방 천장" 그대로.</li>
+      <li><b>카스트로 (4번·1루)</b> — 1회 즉시 동점 적시타로 두산의 선취점을 지웠다.</li>
+      <li>두산: <b>박준순</b> 1회 선취 적시타가 유일한 득점. 어제 폭발했던 하위타선(박찬호·정수빈)이 오늘은 침묵.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>예측 vs 결과 — 과정 평가</h2>
+    <p class="sub">결과론이 아니라, 사전에 세운 기댓값이 어떻게 맞고 틀렸나</p>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">예측:</span> KIA 라인업이 어제보다 강해짐(자동아웃 소멸, 3~5번 폭발력) → <b>실제: 6득점, 김도영 35호포·박재현 2타점.</b></div></div>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">예측:</span> 최승용, 우타 즐비한 KIA 상대 초반 실점이 관건 → <b>실제: 3.2이닝 4실점 조기강판.</b> 짚은 리스크가 현실화.</div></div>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">예측:</span> 양현종은 FIP는 나쁘나 관록으로 실점 억제하는 유형(rRA9 우위) → <b>실제: 6이닝 1자책 QS.</b> 실점억제형 정확히 적중.</div></div>
+    <div class="match"><div class="mchk no">✘</div><div class="mp"><span class="pred">예측:</span> 두산 중심타선이 양현종 제구/피홈런을 공략해 조기승부 → <b>실제: 1득점 침묵.</b> 두산의 승리 경로는 불발.</div></div>
+    <div class="match"><div class="mchk half">△</div><div class="mp"><span class="pred">예측:</span> 두산 46%(접전) → <b>실제: 6:1 완패.</b> 열세 방향은 맞았으나 접전 예상보다 점수차가 컸다.</div></div>
+    <div class="honest" style="margin-top:14px">
+      <b>총평:</b> 승부 방향(두산 열세)은 맞혔다. 특히 <b>최승용의 초반 리스크와 양현종의 실점억제형 성격</b>이라는 사전 분석의 두 축이 그대로 실현됐다. 다만 46% "접전"으로 본 것에 비해 실제는 완패였는데, 이는 <b>최승용이 예측 리스크대로 조기에 무너지면서</b> 접전이 성립할 초반 흐름 자체가 사라졌기 때문이다. '해줘 야구'가 아니라 데이터가 경고한 리스크가 그대로 터진 경기 — 결과는 아쉽지만 <b>사전 판단 자체는 방향이 옳았다.</b>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>순위 여파</h2>
+    <p class="sub">시리즈 1승 1패, 4위 두산·5위 KIA 간격 축소</p>
+    <p style="font-size:13.5px;color:var(--ink);margin:0">이 경기로 KIA(55승 2무 48패)가 4위 두산을 <b>0.5경기 차</b>까지 추격했다. 8/14 두산 완승 → 8/15 KIA 완승으로 <b>주말 시리즈는 1승 1패</b>. 남은 경기에서 4위 자리를 두고 직접 경쟁이 이어진다.</p>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 이닝별 득점·선발 기록은 경기 종료 시점 언론 보도 기반(박스스코어 세부 안타수 등 일부는 미표기). 사전 예측(두산 46%·근소 열세)은 스탯티즈 실측 지표 + 양팀 확정 라인업 wRC+ 기반. 결과 완패이나 사전 판정이 '접전(열세)'이었음을 그대로 남긴다 — 결과론 배격, 과정(사전 기댓값) 기준 평가 원칙 유지.
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈(선발 지표·라인업 wRC+) · 경기 결과(이데일리·뉴스핌 상보, 이닝별 득점·투수 기록).<br>
+    두산 vs KIA · 2026.8.15 광주 · 사후 결과분석 리포트.
+  </footer>
+
+</div>
+</body>
+</html>
