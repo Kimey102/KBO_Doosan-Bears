@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 4 : 5 NC · 8.20 창원 — 사후 오답노트</title>
+<style>
+  :root{
+    --navy:#131a4a; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --nc:#1d5fbf;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,#3a1020 0%,#5a1526 45%,#2a0d18 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(255,90,110,.28),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .score{display:flex;align-items:center;justify-content:center;gap:20px;margin:6px 0 4px}
+  .sc-t{text-align:center;flex:1}
+  .sc-t .nm{font-size:19px;font-weight:800;letter-spacing:-.5px}
+  .sc-t .rn{font-size:52px;font-weight:900;line-height:1;margin-top:4px}
+  .sc-t.lose{opacity:.72} .sc-t.win .rn{color:#ffd3d9} .sc-t.win .nm{color:#ffbcc6}
+  .sc-mid{text-align:center;font-size:12px;opacity:.85;line-height:1.5}
+  .sc-mid .final{display:inline-block;background:rgba(255,255,255,.16);border-radius:999px;padding:2px 10px;font-weight:700;margin-bottom:4px}
+  .lbadge{text-align:center;margin-top:8px;font-size:13.5px;font-weight:700;color:#ffbcc6}
+  .verdict{background:var(--card);border-radius:20px;padding:20px 22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06)}
+  .hit{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;text-align:center}
+  .hit .big{font-size:14.5px;font-weight:800;color:var(--neg);background:#fdeaea;border:1px solid #f3bcbc;
+    padding:7px 16px;border-radius:999px}
+  .hit .txt{font-size:13.5px;color:var(--ink2)} .hit b{color:var(--ink)}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--neg)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:11px;color:var(--ink2);font-weight:700}
+  .lscore .tm{text-align:left;font-weight:800;min-width:52px}
+  .lscore .R{font-weight:900;font-size:15px;background:#f7f8fc}
+  .lscore .dl{color:var(--doosan)} .lscore .nc{color:var(--nc)}
+  .lscore .hl{background:#fdeaea;color:var(--neg);font-weight:800}
+  .culprit{border-left:4px solid var(--neg);background:#fdf3f3;border-radius:0 12px 12px 0;padding:14px 16px;margin-top:12px}
+  .culprit .ct{font-weight:800;font-size:14.5px;color:var(--neg);margin-bottom:4px}
+  .culprit .cx{font-size:13px;color:#5b3a3a}
+  .culprit .cx b{color:var(--ink)}
+  .rank{font-size:11px;font-weight:800;color:#fff;background:var(--neg);border-radius:6px;padding:2px 8px;margin-right:6px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .col h4{font-size:13px;font-weight:800;padding:8px 12px;border-radius:8px;margin-bottom:8px}
+  .col.good h4{background:#e8f6ee;color:var(--ok)} .col.bad h4{background:#fdeaea;color:var(--neg)}
+  .plr{font-size:13px;padding:7px 4px;border-bottom:1px solid var(--line)}
+  .plr:last-child{border-bottom:none} .plr b{color:var(--ink)}
+  .plr .st{color:var(--ink2);font-size:12px}
+  .match{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .match:last-child{border-bottom:none}
+  .mchk{flex:none;width:26px;height:26px;border-radius:50%;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+  .mchk.ok{background:var(--ok)} .mchk.no{background:var(--neg)} .mchk.half{background:var(--warn)}
+  .mp{font-size:12.5px;color:var(--ink2)} .mp b{color:var(--ink)} .mp .pred{color:var(--navy);font-weight:700}
+  .todo li{margin:9px 0 9px 4px;font-size:13.5px;list-style:none;padding-left:24px;position:relative}
+  .todo li:before{content:"✔";position:absolute;left:2px;top:0;color:var(--ok);font-weight:800}
+  .todo b{color:var(--navy)}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12.5px;color:#41496a;margin-top:16px}
+  .honest b{color:var(--navy)}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}.sc-t .rn{font-size:42px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사후 오답노트 · 경기종료 · 사전예측 두산 53% (빗나감)</span>
+    <div class="score">
+      <div class="sc-t lose"><div class="nm">두산 베어스</div><div class="rn">4</div></div>
+      <div class="sc-mid"><span class="final">경기 종료</span><br>8.20(목)<br>창원 NC파크</div>
+      <div class="sc-t win"><div class="nm">NC 다이노스</div><div class="rn">5</div></div>
+    </div>
+    <div class="lbadge">😤 9회말 끝내기 패 · 패 김택연 / 승 전사민 · 결승타 권희동(9회 2사 만루 좌전 안타) · <b>스윕 실패</b></div>
+  </div>
+
+  <div class="verdict">
+    <div class="hit">
+      <span class="big">✘ 패인 1순위 = 수비 붕괴</span>
+      <span class="txt"><b>5실점 중 자책은 2점뿐.</b> 3점이 실책발 비자책이다. <b>실책만 없었으면 4-2 두산 승리</b>였던 경기를 스스로 내줬다. 여기에 병살 3개로 공격까지 반납.</span>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>이닝별 스코어 — 다 잡았다 놓친 9회</h2>
+    <p class="sub">8회까지 2-4 열세 → 9회초 2점 동점(4-4) → 9회말 끝내기 실점</p>
+    <table class="lscore">
+      <thead><tr><th class="tm">팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th class="R">R</th><th>H</th><th>E</th></tr></thead>
+      <tbody>
+        <tr><td class="tm dl">두산</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>0</td><td>2</td><td class="R">4</td><td>9</td><td class="hl">2</td></tr>
+        <tr><td class="tm nc">NC</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td class="hl">2</td><td>0</td><td class="hl">1</td><td class="R">5</td><td>10</td><td>1</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:12px;margin-bottom:0">NC가 3·4회 1점씩 앞서 2-0. 두산이 <b>6회 안재석·박찬호 적시타로 2점</b>을 뽑아 2-2 동점. 그러나 NC가 <b>7회 안재석 실책이 얽혀 2점</b>을 달아나 2-4. 두산은 <b>9회초 2점을 뽑아 4-4 재동점</b>을 만들었으나, <b>9회말 김택연이 볼넷 2개로 2사 만루를 자초</b>하고 권희동에게 끝내기 좌전 안타를 허용했다.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>오답노트 — 3대 패인 (과정 관점)</h2>
+    <p class="sub">결과론 배격 · '어떻게 졌나'를 재현 방지 관점에서 분해</p>
+
+    <div class="culprit">
+      <div class="ct"><span class="rank">1순위</span>수비 실책 3실점 — 잭로그를 배신한 뒷수비</div>
+      <div class="cx"><b>잭로그 6⅓이닝 4실점이지만 자책은 2점.</b> 나머지 <b>2점(7회)은 안재석 3루 실책</b>에서 비롯됐고, <b>9회말 끝내기 상황도 양의지 포수 실책</b>이 빌미가 됐다. 팀 전체 <b>5실점 중 3점이 비자책</b>. 선발이 제 몫(QS급)을 했는데 <b>야수 실책이 3점을 헌납</b>해 이길 경기를 졌다. 실책은 재현성 낮은 '운'이 아니라 <b>집중력·수비 역량의 문제</b>다 — 오답노트 최우선 항목.</div>
+    </div>
+
+    <div class="culprit">
+      <div class="ct"><span class="rank">2순위</span>병살타 3개 — 스스로 반납한 찬스</div>
+      <div class="cx">두산 <b>병살 3개(양의지 1·8회 2개, 박지훈 9회)</b> vs NC 1개. 특히 <b>4번 양의지가 혼자 병살 2개</b>로 1회·8회 흐름을 끊었다. 9안타를 치고도 4득점에 그친 핵심 이유 — <b>득점권에서 장타·전진 대신 병살로 이닝 종료</b>. 팀 잔루 누적. 공격 효율(안타 대비 득점)의 명백한 실패.</div>
+    </div>
+
+    <div class="culprit">
+      <div class="ct"><span class="rank">3순위</span>9회말 김택연 볼넷 2개 → 만루 자초</div>
+      <div class="cx">4-4 동점 9회말, 마무리 <b>김택연이 0⅔이닝 2볼넷</b>으로 <b>2사 후 만루를 스스로 만들고</b> 권희동에게 끝내기 안타. 30구를 던지며 제구가 흔들렸다. 아웃카운트를 잡아놓고 <b>볼넷으로 위기를 키운 실행 실패</b>. (기용 판단 자체는 정상 — 아래 감독 평가 참조.)</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>선수 평가 — 잘한 이 vs 아쉬운 이</h2>
+    <p class="sub">타선은 9안타로 나쁘지 않았으나 '중심'과 '상단'이 비었다</p>
+    <div class="grid2">
+      <div class="col good">
+        <h4>✔ 제 몫 이상</h4>
+        <div class="plr"><b>박준순 (3번·2B)</b> <span class="st">4타수 3안타 — 유일하게 뜨거웠던 방망이. 사전 우려(vs좌완)를 무색케 함.</span></div>
+        <div class="plr"><b>박찬호 (7번·SS)</b> <span class="st">3타수 2안타 1타점 1볼넷 — 하위타선에서 추격의 불씨.</span></div>
+        <div class="plr"><b>안재석 (6번·3B)</b> <span class="st">타격 4타수 2안타 1타점(공격은 합격) — 단, 7회 <b style="color:#d93838">수비 실책</b>이 실점으로.</span></div>
+        <div class="plr"><b>조수행 (2번·LF)</b> <span class="st">4타수 2안타 — vs좌완 약점(.568) 우려를 뒤집은 멀티히트.</span></div>
+        <div class="plr"><b>잭로그 (선발)</b> <span class="st">6⅓이닝 자책 2 — 수비 도움만 받았으면 승리투수감. 볼넷 3개는 옥에 티.</span></div>
+      </div>
+      <div class="col bad">
+        <h4>✘ 발목을 잡은</h4>
+        <div class="plr"><b>양의지 (4번·C)</b> <span class="st">3타수 0안타 <b style="color:#d93838">병살 2개</b> + 9회 포수 실책. 공·수 모두 최악 — 중심타자가 흐름을 두 번 끊고 끝내기 빌미까지.</span></div>
+        <div class="plr"><b>김대한 (1번·RF)</b> <span class="st">5타수 0안타 — 테이블세터 최다타석인데 공전. 리드오프가 나가야 병살도 준다.</span></div>
+        <div class="plr"><b>김민석 (5번·DH)</b> <span class="st">4타수 0안타 1삼진 — 중심 5번 침묵.</span></div>
+        <div class="plr"><b>박지훈 (9번·1B)</b> <span class="st">4타수 0안타 + 9회 병살 — 하위타선 마무리 실패.</span></div>
+        <div class="plr"><b>김택연 (마무리)</b> <span class="st">0⅔이닝 2볼넷 1실점 끝내기 패 — 제구 난조.</span></div>
+      </div>
+    </div>
+    <div class="honest" style="margin-top:14px">
+      <b>타선 진단:</b> 9안타–4득점. <b>박준순·조수행·박찬호·안재석(하위·중위)은 쳤는데, 1번 김대한(0/5)·4번 양의지(0/3 병살2)·5번 김민석(0/4) 등 상단·중심이 비었다.</b> 사전 리포트가 우려한 건 '좌타의 좌완 약점'이었으나, 실제 발목을 잡은 건 <b>우타 상단(김대한)과 4번(양의지)</b>이었다 — 예측과 결과의 엇갈림.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>감독 작전 평가 — 과정 vs 결과</h2>
+    <p class="sub">이겼는지 졌는지가 아니라, 판단이 옳았는지를 본다</p>
+    <div class="match"><div class="mchk half">△</div><div class="mp"><span class="pred">9회말 김택연 투입:</span> <b>기용 판단은 정상</b>(동점 홈경기 아닌 원정 9회말, 필승조 마무리 카드가 맞다). 다만 <b>결과가 나빴다</b> — 볼넷 2개는 감독이 아니라 투수의 실행 실패. '과정 정상 · 결과 불운+실투' 혼재. 문책보다 <b>제구 난조의 원인 점검</b>이 오답.</div></div>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">잭로그 6⅓이닝 운용:</span> 자책 2점으로 잘 막던 선발을 <b>7회까지 끌고 간 판단은 합리적</b>. 무너진 건 뒤 수비(실책)였지 투수 교체 타이밍이 아니다.</div></div>
+    <div class="match"><div class="mchk half">△</div><div class="mp"><span class="pred">병살 양산 국면의 작전:</span> 4번 양의지가 1·8회 병살. <b>주자 1루 병살 위험 국면에서 히트앤런·번트 등 병살 회피 작전</b>이 있었는지 되짚을 지점. 3병살은 우연만으로 보기 어렵다.</div></div>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">9회초 동점 추격:</span> 8회까지 2-4 열세를 9회초 2점으로 따라붙어 4-4를 만든 집념은 <b>과정상 칭찬할 부분</b>. 승부를 연장까지 끌 뻔했다.</div></div>
+    <div class="honest" style="margin-top:14px">
+      <b>총평:</b> 이 패배는 <b>'해줘 야구'가 아니라 '자멸'</b>이다. 선발(잭로그 자책2)과 타선(9안타)은 이길 만큼 했는데, <b>실책 3실점 + 병살 3개</b>라는 <b>기본기·집중력의 실패</b>가 승부를 뒤집었다. 감독 작전에 치명적 오판은 없었고, <b>패인의 8할은 그라운드 위 실행(수비·주루·병살)</b>에 있다 — 재현 방지 대상이 뚜렷하다는 점이 그나마 오답노트의 소득.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>사전예측 복기 — 무엇이 맞고 틀렸나</h2>
+    <p class="sub">사전 리포트(두산 53%, 근소 우위 접전) 대비</p>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">적중:</span> <b>"접전"</b> 예측은 정확했다 — 1점차 끝내기. 승패는 동전 던지기급이었고, <b>NC의 안티-좌완 라인업이 잭로그에 위협</b>이라는 지적도 유효(NC 10안타).</div></div>
+    <div class="match"><div class="mchk no">✘</div><div class="mp"><span class="pred">빗나감:</span> <b>승패는 두산 우위로 봤으나 패.</b> 다만 결정 요인은 예측 불가 영역(<b>실책 3실점·끝내기</b>)이었다. 전력 모델이 아니라 <b>수비 변수</b>가 결과를 갈랐다.</div></div>
+    <div class="match"><div class="mchk half">△</div><div class="mp"><span class="pred">엇갈림:</span> 우려한 <b>두산 좌타의 좌완 약점(조수행·안재석)은 빗나갔고</b>(둘 다 멀티히트), 오히려 <b>우타 상단(김대한)·4번(양의지)이 부진</b>했다. 좌우 스플릿만으로 타순을 읽는 것의 한계.</div></div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>다음을 위한 오답 정리</h2>
+    <ul class="todo">
+      <li><b>수비 집중력이 최우선 과제.</b> 최근 승리(8/19)도, 이 패배도 결국 수비가 갈랐다. 실책 3실점은 전력과 무관한 실점 — <b>내야 송구·포구 안정</b>이 4위 굳히기의 관건.</li>
+      <li><b>4번 양의지의 병살·타격 슬럼프 관리.</b> 이날 0안타 2병살 + 실책. 체력·타격 사이클 점검, 필요 시 <b>타순 조정(중심 부담 완화)</b> 검토.</li>
+      <li><b>1번 김대한의 리드오프 적합성 재검토.</b> 0/5. 출루형 테이블세터가 상단에 서야 병살도 준다.</li>
+      <li><b>마무리 김택연의 제구 상태.</b> 30구 2볼넷 끝내기 — 일시적 난조인지 피로 누적인지 모니터링.</li>
+      <li><b>그래도 위닝시리즈는 지켰다.</b> 8/18·19 승리로 창원 시리즈 2승 1패. 스윕은 놓쳤지만 시즌 상대전적 두산 8승 3패 우위 유지 — <b>과정을 고치면 결과는 따라온다.</b></li>
+    </ul>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 기록은 <b>제공된 8/20 창원 박스스코어(네이버 스포츠) 실측</b>. 실책·병살·투수 자책/비자책·타순별 결과는 박스스코어 기반. 이닝별 득점 전개는 스코어·적시타 기록으로 재구성(세부 순서 일부 추정). 자책 2/비자책 3의 분해는 잭로그 2자책·팀 5실점 기록에 근거. WPA 등 세부 승리기여 수치는 본 자료에 없어 미표기. 본 리포트는 결과 확정 후 <b>과정 관점 평가·재현 방지</b>에 한정한다.
+  </div>
+
+  <footer>
+    데이터 출처: 네이버 스포츠 박스스코어(8/20 창원, 사용자 제공) · 사전 리포트(승률 53%) 대비 복기.<br>
+    두산 vs NC · 2026.8.20 창원 · 사후 오답노트 리포트.
+  </footer>
+
+</div>
+</body>
+</html>
