@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs NC · 8.20 창원 — 사전 승률예측 (확정 라인업 반영)</title>
+<style>
+  :root{
+    --navy:#131a4a; --navy2:#1c2560; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --nc:#1d5fbf;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 55%,#123063 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;
+    background:radial-gradient(circle,rgba(120,160,255,.28),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:12px}
+  .matchup{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .team{font-size:30px;font-weight:800;letter-spacing:-.5px}
+  .team .rec{display:block;font-size:12px;font-weight:500;opacity:.8;letter-spacing:0}
+  .vs{font-size:15px;opacity:.65;font-weight:600}
+  .meta{margin-top:14px;font-size:13.5px;opacity:.92;display:flex;gap:16px;flex-wrap:wrap}
+  .meta b{font-weight:700}
+  .verdict{background:var(--card);border-radius:20px;padding:24px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06);text-align:center}
+  .vhead{font-size:13px;color:var(--ink2);font-weight:600;letter-spacing:.3px;margin-bottom:14px}
+  .bar{position:relative;height:44px;border-radius:12px;overflow:hidden;display:flex;
+    box-shadow:inset 0 0 0 1px var(--line)}
+  .bar .d{background:linear-gradient(90deg,var(--navy),#2b357e);display:flex;align-items:center;
+    justify-content:flex-start;padding-left:16px;color:#fff;font-weight:800;font-size:19px}
+  .bar .n{background:linear-gradient(90deg,#3f86e0,var(--nc));display:flex;align-items:center;
+    justify-content:flex-end;padding-right:16px;color:#fff;font-weight:800;font-size:19px}
+  .barlbl{display:flex;justify-content:space-between;margin-top:9px;font-size:13px;font-weight:700}
+  .barlbl .dl{color:var(--doosan)} .barlbl .nl{color:var(--nc)}
+  .judge{display:inline-block;margin-top:16px;background:#e7ecfb;color:var(--navy);
+    border:1px solid #c3cef0;font-weight:800;font-size:15px;padding:7px 18px;border-radius:999px}
+  .rng{font-size:12.5px;color:var(--ink2);margin-top:9px}
+  .move{font-size:12px;color:var(--pos);margin-top:6px;font-weight:700}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--navy)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:9px 8px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:11.5px;color:var(--ink2);font-weight:700;letter-spacing:.2px}
+  td.metric{text-align:left;font-weight:700;color:var(--ink)}
+  td.dv{color:var(--doosan);font-weight:800} td.nv{color:var(--nc);font-weight:800}
+  tr:last-child td{border-bottom:none}
+  .win{background:#eef4ff}
+  .sp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.n{border-top:4px solid var(--nc)}
+  .spname{font-size:18px;font-weight:800} .sptag{font-size:12px;color:var(--ink2);margin-bottom:12px}
+  .spgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;font-size:13px}
+  .spgrid .lab{color:var(--ink2)} .spgrid .num{font-weight:800;text-align:right}
+  .hl-good{color:var(--ok)} .hl-bad{color:var(--neg)}
+  .form{margin-top:12px;font-size:12px;color:var(--ink2);border-top:1px dashed var(--line);padding-top:10px}
+  .lineups{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .lu{border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .lu h3{font-size:13.5px;padding:11px 14px;color:#fff;display:flex;justify-content:space-between;align-items:center}
+  .lu.d h3{background:var(--doosan)} .lu.n h3{background:var(--nc)}
+  .lu h3 small{font-weight:600;opacity:.9;font-size:11.5px}
+  .lu table{font-size:12px}
+  .lu td,.lu th{padding:6px 6px;text-align:center}
+  .lu td.n{color:var(--ink2);width:16px}
+  .lu td.nm{text-align:left;font-weight:700}
+  .lu td.hot{color:var(--ok);font-weight:800} .lu td.cold{color:var(--neg);font-weight:800}
+  .luavg{font-size:12px;color:var(--ink2);padding:9px 14px;background:#f7f8fc;border-top:1px solid var(--line)}
+  .factor{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .factor:last-child{border-bottom:none}
+  .fic{flex:none;width:30px;height:30px;border-radius:9px;display:flex;align-items:center;
+    justify-content:center;font-size:15px;font-weight:800;color:#fff}
+  .fd{background:var(--doosan)} .fn{background:var(--nc)} .fq{background:var(--ink2)}
+  .ft{font-weight:700;font-size:14px} .fx{font-size:13px;color:var(--ink2)}
+  .strat li{margin:9px 0 9px 4px;font-size:14px;list-style:none;padding-left:22px;position:relative}
+  .strat li:before{content:"›";position:absolute;left:4px;top:-1px;color:var(--navy);font-weight:800;font-size:17px}
+  .strat b{color:var(--navy)}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12.5px;
+    color:#41496a;margin-top:16px}
+  .honest b{color:var(--navy)}
+  .keybox{background:#fff7ed;border:1px solid #f4d9ae;border-radius:12px;padding:15px 17px;font-size:13px;color:#5b3d16;margin-top:14px}
+  .keybox b{color:#9a6a12}
+  @media(max-width:640px){.sp,.lineups{grid-template-columns:1fr}.team{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사전 승률예측 · 양팀 확정 라인업 반영 (최종)</span>
+    <div class="matchup">
+      <div class="team" style="color:#c9d2ff">두산 <span class="rec">5위 · 57승 48패 (.543)</span></div>
+      <div class="vs">원정 @</div>
+      <div class="team" style="color:#a9c6ff">NC <span class="rec">7위 · 46승 54패 (.460)</span></div>
+    </div>
+    <div class="meta">
+      <span>📅 <b>8월 20일(목) 19:00</b></span>
+      <span>🏟️ <b>창원 NC파크</b> (두산 원정)</span>
+      <span>🎯 <b>잭로그</b>(좌) vs <b>구창모</b>(좌)</span>
+      <span>🧹 <b>스윕 도전</b> (8/18·8/19 연승)</span>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="vhead">예측 승률 — 두산 관점 (확정 라인업 반영)</div>
+    <div class="bar">
+      <div class="d" style="width:53%">53%</div>
+      <div class="n" style="width:47%">47%</div>
+    </div>
+    <div class="barlbl"><span class="dl">두산 승</span><span class="nl">NC 승</span></div>
+    <div class="judge">판정 · 두산 근소 우위 접전</div>
+    <div class="rng">추정 범위 50~56%</div>
+    <div class="move">▼ 잠정 54% → 확정 53%로 소폭 하향 · <b>NC가 좌완 잭로그 상대로 극단적 안티-좌완 라인업</b>(9명 중 8명 vs좌투 .819+)을 세운 게 확인 — 두산의 불펜·전력 우위를 일부 상쇄</div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>선발 맞대결 — 좌완 vs 좌완, 초박빙</h2>
+    <p class="sub">스탯티즈 실측 2026 · rRA9pf=구장·수비 보정 실점, FIP=수비무관 세부지표</p>
+    <div class="sp">
+      <div class="spcard d">
+        <div class="spname" style="color:var(--doosan)">잭로그 <small style="font-weight:600;color:var(--ink2)">LHP</small></div>
+        <div class="sptag">두산 · 좌투좌타 · 2026 21선발 113.1이닝 (6승6패)</div>
+        <div class="spgrid">
+          <span class="lab">ERA</span><span class="num">3.97</span>
+          <span class="lab">FIP</span><span class="num hl-good">4.05</span>
+          <span class="lab">rRA9pf</span><span class="num">4.59</span>
+          <span class="lab">WHIP</span><span class="num">1.32</span>
+          <span class="lab">K/9</span><span class="num">7.86</span>
+          <span class="lab">BB/9</span><span class="num hl-good">1.75</span>
+        </div>
+        <div class="form">
+          <b>강점:</b> <b class="hl-good">엘리트 제구(BB/9 1.75·91%ile)</b> — 볼넷을 안 줘 빅이닝을 억제. FIP 4.05로 실속 있음.<br>
+          <b>최근:</b> 8/14 @KIA 6IP 2자책 7K 승. 6일 휴식.<br>
+          <b class="hl-bad">경계:</b> 7/18 창원 NC전 <b>3IP 6R 난타</b> — 오늘 NC의 좌완 맞춤 라인업이 최대 위협.
+        </div>
+      </div>
+      <div class="spcard n">
+        <div class="spname" style="color:var(--nc)">구창모 <small style="font-weight:600;color:var(--ink2)">LHP</small></div>
+        <div class="sptag">NC · 좌투좌타 · 2026 20선발 114.1이닝 (9승4패)</div>
+        <div class="spgrid">
+          <span class="lab">ERA</span><span class="num">3.94</span>
+          <span class="lab">FIP</span><span class="num hl-bad">4.35</span>
+          <span class="lab">rRA9pf</span><span class="num hl-good">4.15</span>
+          <span class="lab">WHIP</span><span class="num hl-good">1.26</span>
+          <span class="lab">K/9</span><span class="num">7.79</span>
+          <span class="lab">BB/9</span><span class="num">2.60</span>
+        </div>
+        <div class="form">
+          <b>강점:</b> rRA9pf 4.15로 구장보정 실점억제 우위. 포심48.8·슬라이더31.6·포크16.3%.<br>
+          <b class="hl-bad">약점:</b> FIP 4.35·피홈런 14로 장타 허용형. 7월 3연속 부진 → 8/12 반등. <b>8일 롱레스트.</b><br>
+          <b>vs 두산:</b> 3/28 5IP 0R · 7/18 6IP 5R 3피홈런 — 편차 큼.
+        </div>
+      </div>
+    </div>
+    <div class="honest" style="margin-top:14px">
+      <b>선발 요약 (초박빙):</b> ERA 3.97 vs 3.94로 사실상 동일. 잭로그는 FIP·제구, 구창모는 구장보정 실점·WHIP에서 앞서 <b>어느 쪽도 명확한 우위가 없다</b>. 다만 <b>7/18 창원 맞대결은 두 선발 모두 털린 12:9 난타전</b>이었고, 오늘 양팀 모두 <b>상대 좌완을 겨냥한 타순</b>을 짰다. 선발보다 <b>불펜·타선 platoon</b>이 승부처.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>확정 라인업 — 좌완 스플릿 매핑</h2>
+    <p class="sub"><b>vs좌</b>=2026 좌투 상대 OPS(오늘 선발 모두 좌완) · <b>구창모/잭로그</b>=오늘 선발 상대 통산 BvP(소표본, 참고) · ★강점 ▼약점</p>
+    <div class="lineups">
+      <div class="lu d">
+        <h3><span>두산 (vs 좌완 구창모)</span><small>좌완 취약 구간 존재</small></h3>
+        <table>
+          <thead><tr><th class="n"></th><th style="text-align:left">타자</th><th>Pos</th><th>타</th><th>vs좌 OPS</th><th>구창모 BvP</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td class="nm">김대한</td><td>RF</td><td>우</td><td class="hot">1.348*</td><td>3타석 1안타</td></tr>
+            <tr><td class="n">2</td><td class="nm">조수행</td><td>LF</td><td>좌</td><td class="cold">.568▼</td><td>3타석 1안타</td></tr>
+            <tr><td class="n">3</td><td class="nm">박준순</td><td>2B</td><td>우</td><td>.815</td><td class="hot">5타수3안타<b>1HR</b></td></tr>
+            <tr><td class="n">4</td><td class="nm">양의지</td><td>C</td><td>우</td><td>.826</td><td>5타석 0안타</td></tr>
+            <tr><td class="n">5</td><td class="nm">김민석</td><td>DH</td><td>좌</td><td>.748</td><td>3타석 0안타</td></tr>
+            <tr><td class="n">6</td><td class="nm">안재석</td><td>3B</td><td>좌</td><td class="cold">.581▼</td><td class="hot">5타수2안타<b>1HR</b></td></tr>
+            <tr><td class="n">7</td><td class="nm">박찬호</td><td>SS</td><td>우</td><td>.794</td><td>6타석1안타1HR</td></tr>
+            <tr><td class="n">8</td><td class="nm">정수빈</td><td>CF</td><td>좌</td><td class="hot">.865</td><td>2타석 0안타</td></tr>
+            <tr><td class="n">9</td><td class="nm">박지훈</td><td>1B</td><td>우</td><td>.745</td><td>2타석 0안타</td></tr>
+          </tbody>
+        </table>
+        <div class="luavg">우타 5(김대한·박준순·양의지·박찬호·박지훈)·좌타 4. <b class="cold">2번 조수행(.568)·6번 안재석(.581)이 vs좌완 약점</b>. 반면 정수빈(.865)·양의지(.826)·박준순(.815)은 견고. BvP상 <b>박준순·안재석이 구창모 상대 홈런</b> 보유(소표본).</div>
+      </div>
+      <div class="lu n">
+        <h3><span>NC (vs 좌완 잭로그)</span><small>극단적 안티-좌완</small></h3>
+        <table>
+          <thead><tr><th class="n"></th><th style="text-align:left">타자</th><th>Pos</th><th>타</th><th>vs좌 OPS</th><th>잭로그 BvP</th></tr></thead>
+          <tbody>
+            <tr><td class="n">1</td><td class="nm">김주원</td><td>SS</td><td>양</td><td class="cold">.725▼</td><td>2타석 0안타</td></tr>
+            <tr><td class="n">2</td><td class="nm">권희동</td><td>RF</td><td>우</td><td class="hot">1.021★</td><td>—</td></tr>
+            <tr><td class="n">3</td><td class="nm">블레인</td><td>1B</td><td>우</td><td class="hot">.845</td><td>2타석 1안타</td></tr>
+            <tr><td class="n">4</td><td class="nm">김휘집</td><td>3B</td><td>우</td><td class="hot">.881★</td><td>2타석1안타1HR</td></tr>
+            <tr><td class="n">5</td><td class="nm">박건우</td><td>DH</td><td>우</td><td class="hot">.850</td><td>2타석 1안타</td></tr>
+            <tr><td class="n">6</td><td class="nm">이우성</td><td>LF</td><td>우</td><td class="hot">.819</td><td>2타석 1안타</td></tr>
+            <tr><td class="n">7</td><td class="nm">천재환</td><td>CF</td><td>우</td><td class="hot">.945★</td><td>1타석 1안타</td></tr>
+            <tr><td class="n">8</td><td class="nm">김형준</td><td>C</td><td>우</td><td class="hot">.918★</td><td>2타석 0안타</td></tr>
+            <tr><td class="n">9</td><td class="nm">김한별</td><td>2B</td><td>우</td><td>.881*</td><td>—</td></tr>
+          </tbody>
+        </table>
+        <div class="luavg"><b class="hot">9명 중 8명이 vs좌투 .819+</b> — 우타 8명으로 좌완 잭로그를 정조준. 권희동 1.021·천재환 .945·김형준 .918·김휘집 .881. <b class="cold">1번 김주원(.725)만 좌완 약점</b>. <b>박민우(주전 2B) 오늘 결장</b>.</div>
+      </div>
+    </div>
+    <div class="keybox">
+      <b>⚠ 오늘의 매치업 비대칭 =</b> NC는 우타 8명으로 <b>좌완 잭로그를 겨냥한 완성형 안티-좌완 라인업</b>(잭로그는 7/18 NC전 3이닝 6실점 전력)인 반면, 두산은 좌타가 4명이라 <b>2·6번(조수행·안재석)이 좌완 구창모에 약점</b>. <b>타자 대 선발 매치업만 보면 오늘은 NC 타선이 유리</b>하다 — 이 점이 두산의 팀 전력 우위를 상쇄해 예측을 소폭 낮춘 근거다. 두산이 믿을 구석은 <b>선발 제구(잭로그 볼넷 억제)와 불펜(NC 대비 압도)</b>이다.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>팀 프로필 — 두산 투수·불펜 vs NC 불펜 최약</h2>
+    <p class="sub">2026 시즌 · 스탯티즈 팀순위(WAA) · 시즌 상대전적</p>
+    <table>
+      <thead><tr><th class="metric">팀 지표</th><th>두산</th><th>NC</th><th>해석</th></tr></thead>
+      <tbody>
+        <tr><td class="metric">타격 WAA (순위)</td><td>-0.45 (7위)</td><td class="nv">-0.17 (6위)</td><td>둘 다 평균이하, NC 근소↑</td></tr>
+        <tr class="win"><td class="metric">선발 WAA (순위)</td><td class="dv">6.09 (1위)</td><td>3.37 (7위)</td><td>두산 압도</td></tr>
+        <tr class="win"><td class="metric">구원 WAA (순위)</td><td class="dv">1.08 (3위)</td><td>-4.64 (8위·꼴찌)</td><td>두산 결정적 우위</td></tr>
+        <tr class="win"><td class="metric">시즌 상대전적</td><td class="dv">8승</td><td>2패</td><td>두산 8-2 압도(.800)</td></tr>
+        <tr><td class="metric">승률(순위)</td><td class="dv">.543 (5위)</td><td>.460 (7위)</td><td>두산 우위</td></tr>
+      </tbody>
+    </table>
+    <div class="honest" style="margin-top:14px">
+      <b>프로필 대비:</b> 양 팀 공격력은 구장보정 시 도토리 키재기(두산 7위·NC 6위). 승부를 가르는 건 <b>투수·불펜</b>인데, 두산은 <b>선발 1위·불펜 3위</b>이고 <b>NC 불펜은 리그 꼴찌(-4.64)</b>다. <b>시즌 상대전적도 두산 8승 2패</b>. 8/18·8/19 창원 승리도 불펜 셧다운이 핵심이었다. <b>단, 오늘 NC 타선은 좌완 맞춤이라 시즌 평균보다 강하다</b> — 접전이 후반 불펜 싸움으로 가면 두산이, 잭로그가 초반 흔들려 빅이닝을 내주면 NC가 유리하다.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>승부처 변수</h2>
+    <p class="sub">확정 라인업 기준</p>
+    <div class="factor"><div class="fic fn">N</div><div><div class="ft">NC의 좌완 맞춤 라인업</div><div class="fx">우타 8명 전원이 vs좌투 강세(.819+). 좌완 잭로그(7/18 NC전 3IP 6R)에겐 최악의 상대. <b>초반 실투가 빅이닝으로 번질 위험</b>이 오늘 두산의 최대 리스크.</div></div></div>
+    <div class="factor"><div class="fic fd">D</div><div><div class="ft">잭로그의 엘리트 제구 = 빅이닝 억제 장치</div><div class="fx">BB/9 1.75(91%ile). 강한 타선이라도 <b>볼넷을 안 줘 대량실점 확률을 낮춘다</b>. 솔로 위주로 막고 5~6이닝을 버티면 두산 불펜에 넘길 수 있다.</div></div></div>
+    <div class="factor"><div class="fic fd">D</div><div><div class="ft">두산 불펜 vs NC 불펜 = 리그 3위 vs 꼴찌</div><div class="fx">접전 후반은 두산에 크게 유리. NC 불펜(8위)은 8/18에도 블론세이브. <b>6회 이후 리드를 쥔 쪽이 두산이면 승산이 급등</b>한다.</div></div></div>
+    <div class="factor"><div class="fic fq">?</div><div><div class="ft">두산 2·6번 좌타(조수행·안재석)의 구창모 공략</div><div class="fx">둘 다 vs좌완 .5대(약점). 다만 안재석은 <b>구창모 상대 홈런</b> 보유(소표본). 이 구간이 막히면 두산 득점력이 정체될 수 있다. 정수빈(.865)·양의지·박준순이 상쇄해야.</div></div></div>
+    <div class="factor"><div class="fic fq">?</div><div><div class="ft">구창모 8일 롱레스트 + 기복</div><div class="fx">7월 3연속 부진 후 8/12 반등. 컨디션 양방향. 두산이 초반 흔들면 7월 붕괴 재현 여지.</div></div></div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>핵심 전략</h2>
+    <p class="sub">두산 근소 우위 접전, 스윕을 위한 실행 포인트</p>
+    <ul class="strat">
+      <li><b>잭로그, 볼넷 없이 솔로로 막아라.</b> NC 우타 라인이 강해도 <b>주자 없이 맞는 홈런은 감당 가능</b>하다. 제구를 살려 빅이닝만 피하고 5~6이닝 3~4실점 이내로 버티는 게 현실적 목표.</li>
+      <li><b>두산은 우타 중심(박준순·양의지·박찬호)과 정수빈으로 득점.</b> 좌완 약점인 2·6번(조수행·안재석)에 기대기보다, <b>vs좌완 강한 타자들이 구창모(FIP 4.35·피홈런多)의 실투를 장타로</b> 연결해야.</li>
+      <li><b>승부는 불펜에서 건다.</b> 리드만 쥐면 리그 3위 불펜으로 잠근다(NC 불펜 꼴찌). <b>6회 이후 동점 이상이면 두산 우세</b>.</li>
+      <li><b>스윕 = 창원 3연전 싹쓸이.</b> 이미 위닝시리즈 확보. 선취점 + 잭로그 QS + 뒷문이면 시즌 상대전적 9승 2패로 벌리며 4위 굳히기.</li>
+    </ul>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 선발·팀·타자 지표는 <b>스탯티즈(statiz.co.kr) 실측</b>(2026 시즌누적, 8/20 조회). 라인업은 <b>양팀 발표 확정 9명</b>(등록말소 없음). <b>vs좌 OPS는 시즌 좌투 상대 실측</b>이며 김대한(21PA)·김한별(22PA)·블레인(29PA)은 소표본(*). <b>BvP(오늘 선발 상대 통산)는 대부분 2~6타석 소표본이라 참고용</b>. 승률은 팀 전력(피타고리안 .545 vs .470)·선발·불펜·<b>확정 라인업 platoon</b>·원정·구장을 종합, <b>두산 근소 우위 53%</b>. NC 외인 1루수는 <b>블레인(Blaine Crim)</b>으로 확정(스탯티즈 주전에 표기됐던 '데이비슨'은 과거 정보). 전날 승패·기세는 미반영.
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈(팀 WAA순위·시즌 상대전적·선발 FIP/rRA9pf·타자 vs좌투 스플릿·BvP) · 라인업/구장 메타 확인.<br>
+    두산 vs NC · 2026.8.20 창원 · 사전 승률예측 리포트 (양팀 확정 라인업 반영 최종본).
+  </footer>
+
+</div>
+</body>
+</html>
