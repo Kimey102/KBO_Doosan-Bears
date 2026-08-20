@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 6 : 4 NC · 8.18 창원 — 사후 결과분석</title>
+<style>
+  :root{
+    --navy:#131a4a; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --nc:#1d5fbf;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,#0d1442 0%,#131a4a 50%,#10204a 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(120,160,255,.30),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .score{display:flex;align-items:center;justify-content:center;gap:20px;margin:6px 0 4px}
+  .sc-t{text-align:center;flex:1}
+  .sc-t .nm{font-size:19px;font-weight:800;letter-spacing:-.5px}
+  .sc-t .rn{font-size:52px;font-weight:900;line-height:1;margin-top:4px}
+  .sc-t.win .rn{color:#a9c6ff} .sc-t.win .nm{color:#9ab8ff}
+  .sc-t.lose{opacity:.72}
+  .sc-mid{text-align:center;font-size:12px;opacity:.8;line-height:1.5}
+  .sc-mid .final{display:inline-block;background:rgba(255,255,255,.16);border-radius:999px;padding:2px 10px;font-weight:700;margin-bottom:4px}
+  .winbadge{text-align:center;margin-top:8px;font-size:13.5px;font-weight:700;color:#a9c6ff}
+  .verdict{background:var(--card);border-radius:20px;padding:20px 22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06)}
+  .hit{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;text-align:center}
+  .hit .big{font-size:14.5px;font-weight:800;color:var(--warn);background:#fdf3e0;border:1px solid #f0d9a8;
+    padding:7px 16px;border-radius:999px}
+  .hit .txt{font-size:13.5px;color:var(--ink2)}
+  .hit b{color:var(--ink)}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--doosan)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:11px;color:var(--ink2);font-weight:700}
+  .lscore td,.lscore th{padding:8px 7px}
+  .lscore .tm{text-align:left;font-weight:800;min-width:52px}
+  .lscore .R{font-weight:900;font-size:15px;background:#f7f8fc}
+  .lscore .dwin{color:var(--doosan)} .lscore .nc{color:var(--nc)}
+  .sp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.n{border-top:4px solid var(--nc)}
+  .spname{font-size:17px;font-weight:800}
+  .spres{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:6px}
+  .spres.w{background:#e8f6ee;color:var(--ok)} .spres.l{background:#fdeaea;color:var(--neg)}
+  .spres.nd{background:#eef1f8;color:var(--ink2)}
+  .sptag{font-size:12px;color:var(--ink2);margin:3px 0 12px}
+  .spline{font-size:13.5px;font-weight:700}
+  .spnote{font-size:12px;color:var(--ink2);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+  .stars li{margin:9px 0;font-size:13.5px;list-style:none;padding-left:24px;position:relative}
+  .stars li:before{content:"★";position:absolute;left:2px;top:0;color:var(--warn);font-size:13px}
+  .stars b{color:var(--navy)}
+  .match{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .match:last-child{border-bottom:none}
+  .mchk{flex:none;width:26px;height:26px;border-radius:50%;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+  .mchk.ok{background:var(--ok)} .mchk.no{background:var(--neg)} .mchk.half{background:var(--warn)}
+  .mp{font-size:12.5px;color:var(--ink2)} .mp b{color:var(--ink)}
+  .mp .pred{color:var(--navy);font-weight:700}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12.5px;color:#41496a;margin-top:16px}
+  .honest b{color:var(--navy)}
+  @media(max-width:640px){.sp{grid-template-columns:1fr}.sc-t .rn{font-size:42px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사후 결과분석 · 경기종료 · 사전분석 미실시</span>
+    <div class="score">
+      <div class="sc-t win"><div class="nm">두산 베어스</div><div class="rn">6</div></div>
+      <div class="sc-mid"><span class="final">경기 종료</span><br>8.18(화)<br>창원 NC파크</div>
+      <div class="sc-t lose"><div class="nm">NC 다이노스</div><div class="rn">4</div></div>
+    </div>
+    <div class="winbadge">🐻 두산 원정 역전승 · 승 김택연(3-2) / 세 이영하(19S) / 패 손주환 · 2연패 탈출</div>
+  </div>
+
+  <div class="verdict">
+    <div class="hit">
+      <span class="big">⚖ 결과 우위 &gt; 과정 우위</span>
+      <span class="txt">역전승은 값지지만, 승리의 상당 부분은 <b>8~9회 NC 불펜 자멸</b>에서 나왔다. 두산 타선은 라일리를 끝내 공략하지 못했다 — <b>'운' 요소가 큰 승리.</b></span>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>이닝별 스코어</h2>
+    <p class="sub">초반 밀리다 5·6회 솔로포로 추격 → 8회 동점 → 9회 대량 역전</p>
+    <table class="lscore">
+      <thead><tr><th class="tm">팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th class="R">R</th></tr></thead>
+      <tbody>
+        <tr><td class="tm dwin">두산</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>3</td><td class="R">6</td></tr>
+        <tr><td class="tm nc">NC</td><td>2</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td class="R">4</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:12px;margin-bottom:0">두산은 1회 수비 실책(박준순·박찬호)이 얽혀 2실점, 2회 1점을 더 내주며 <b>0-3</b>으로 끌려갔다. 이후 라일리에게 침묵하다 <b>윤준호(5회)·양의지(6회) 솔로포</b>로 따라붙었고, 8회 김민석 동점타로 3-3, 9회 NC 불펜이 무너진 틈에 3점을 몰아쳐 승부를 결정지었다.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>선발 리뷰</h2>
+    <p class="sub">양 선발 모두 제 몫 — 승부는 불펜에서 갈렸다</p>
+    <div class="sp">
+      <div class="spcard d">
+        <div><span class="spname">벤자민</span><span class="spres nd">ND</span></div>
+        <div class="sptag">두산 · 선발</div>
+        <div class="spline">5이닝 · 5피안타 · <b>3실점(자책 1)</b> · 5K</div>
+        <div class="spnote">3실점 중 <b>2점은 내야 실책발 비자책</b>. 92구 5탈삼진으로 내용 자체는 나쁘지 않았고, 수비 도움만 받았다면 더 적은 실점도 가능했던 등판.</div>
+      </div>
+      <div class="spcard n">
+        <div><span class="spname">라일리</span><span class="spres nd">ND</span></div>
+        <div class="sptag">NC · 선발</div>
+        <div class="spline">6이닝 · <b>2자책 · QS</b> · 7K · 2피홈런</div>
+        <div class="spnote">솔로 2방(윤준호·양의지)만 허용하며 <b>6이닝을 2자책으로 틀어막은 호투</b>. 라일리가 마운드에 있는 동안 두산은 리드를 잡지 못했다.</div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:12px;margin-bottom:0">승부처는 7회 이후. NC는 이용준(홀드) 뒤 <b>전사민이 8회 블론세이브(볼넷·폭투)</b>, 손주환·김진호가 9회 볼넷을 남발하며 스스로 무너졌다. 두산은 김택연(승)-이영하(세)로 리드를 지켰다.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>오늘의 주역 (두산)</h2>
+    <p class="sub">양의지 원맨쇼급 활약 — WPA 0.427로 승리 기여 압도적</p>
+    <ul class="stars">
+      <li><b>양의지 (4번·지명)</b> — <b>6회 솔로포(시즌 16호) + 9회 밀어내기 볼넷, 2타점 3볼넷.</b> 경기 WPA 0.427로 사실상 경기를 끌고 온 주역. NC 배터리가 승부를 피할수록 살아났다.</li>
+      <li><b>정수빈 (대주자→중견)</b> — <b>9회 2타점 결승 적시타.</b> 교체 투입돼 승부에 쐐기를 박았다.</li>
+      <li><b>윤준호 (9번·포수)</b> — 5회 솔로 홈런(4호)으로 추격의 물꼬. 하위타선의 한 방.</li>
+      <li><b>조수행 (2번)</b> — 3안타 1볼넷 1도루로 계속 출루하며 테이블을 세팅. 김민석은 8회 동점 적시타.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>과정 vs 결과 — 판정</h2>
+    <p class="sub">결과론 배격 — 이겼지만 '어떻게' 이겼나를 본다</p>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">잘한 것:</span> 0-3 열세에서도 <b>양의지·윤준호의 장타와 끈질긴 출루</b>로 경기를 놓지 않았다. 필승조(김택연-이영하) 운영도 적절.</div></div>
+    <div class="match"><div class="mchk half">△</div><div class="mp"><span class="pred">운의 영역:</span> 8~9회 <b>NC 불펜의 볼넷·폭투·블론세이브</b>가 역전의 직접 원인. 상대 자멸이 아니었다면 결과는 달랐을 수 있다.</div></div>
+    <div class="match"><div class="mchk no">✘</div><div class="mp"><span class="pred">아쉬운 것:</span> 두산 타선은 <b>라일리(6이닝 2자책)를 끝내 공략하지 못했다.</b> 솔로 2방 외엔 득점권에서 약했다(득점권 8타수 2안타).</div></div>
+    <div class="honest" style="margin-top:14px">
+      <b>총평:</b> 2연패를 끊은 값진 역전승이지만, <b>과정보다 결과가 앞선 승리</b>다. 두산이 잘 싸운 부분(양의지의 존재감, 포기하지 않은 추격)과 상대가 던져준 부분(NC 불펜 붕괴)을 분리해서 봐야 한다. '해줘 야구'로 얻은 3점 차 리드가 아니라 <b>상대 실투가 만들어준 승리</b>인 만큼, 재현성은 높지 않다고 본다.
+    </div>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 선발·타자·불펜 기록은 <b>스탯티즈 박스스코어 실측</b>(8/18 창원). 이닝별 득점 전개는 타점·홈런 기록 기반 재구성. 사전 승률예측은 실시하지 않았으며(사후 정리), 본 리포트는 결과 확정 후 과정 관점 평가에 한정한다.
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈(박스스코어 실측) · 뉴스핌 AI상보(득점 전개 보조).<br>
+    두산 vs NC · 2026.8.18 창원 · 사후 결과분석 리포트.
+  </footer>
+
+</div>
+</body>
+</html>
