@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs 롯데 · 8.21 잠실 — 사전 승률예측</title>
+<style>
+  :root{
+    --navy:#131a4a; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --lotte:#c30452;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,#0d1442 0%,#131a4a 50%,#10204a 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(120,160,255,.30),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .matchup{display:flex;align-items:center;justify-content:center;gap:18px;margin:8px 0 6px}
+  .mt{text-align:center;flex:1}
+  .mt .nm{font-size:20px;font-weight:800;letter-spacing:-.5px}
+  .mt .sp{font-size:12.5px;opacity:.8;margin-top:3px}
+  .mt .pct{font-size:46px;font-weight:900;line-height:1;margin-top:8px}
+  .mt.fav .pct{color:#ff9db9} .mt.dog .pct{color:#a9c6ff}
+  .vs{font-size:13px;opacity:.7;font-weight:700}
+  .hbar{margin-top:14px}
+  .hbar .track{height:12px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden;display:flex}
+  .hbar .d{background:#7aa0ff;height:100%} .hbar .l{background:#ff7aa5;height:100%}
+  .hbar .lab{display:flex;justify-content:space-between;font-size:11.5px;margin-top:6px;opacity:.85}
+  .verdict{background:var(--card);border-radius:20px;padding:18px 22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06);display:flex;gap:14px;align-items:flex-start}
+  .vbadge{flex:none;font-size:13.5px;font-weight:800;color:#fff;background:var(--lotte);
+    padding:8px 14px;border-radius:12px;white-space:nowrap}
+  .vtxt{font-size:13.5px;color:var(--ink2)} .vtxt b{color:var(--ink)}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--doosan)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  .sp2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.l{border-top:4px solid var(--lotte)}
+  .spname{font-size:18px;font-weight:800}
+  .sptag{font-size:12px;color:var(--ink2);margin:3px 0 12px}
+  .sprow{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px dashed var(--line)}
+  .sprow:last-child{border-bottom:none}
+  .sprow .k{color:var(--ink2)} .sprow .v{font-weight:700}
+  .bad{color:var(--neg)} .good{color:var(--ok)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  th,td{padding:7px 5px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:10.5px;color:var(--ink2);font-weight:700}
+  td.nm{text-align:left;font-weight:700;white-space:nowrap}
+  .star{color:var(--warn)}
+  .ops-hi{color:var(--ok);font-weight:800} .ops-lo{color:var(--neg)}
+  .mini{font-size:11px;color:var(--ink2)}
+  .factors li{margin:10px 0;font-size:13.5px;list-style:none;padding-left:26px;position:relative}
+  .factors li:before{content:attr(data-i);position:absolute;left:0;top:1px;width:19px;height:19px;
+    background:var(--navy);color:#fff;border-radius:50%;font-size:11px;font-weight:800;
+    display:flex;align-items:center;justify-content:center}
+  .factors b{color:var(--navy)}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px;margin-left:4px}
+  .pill.lo{background:#fdeaea;color:var(--neg)} .pill.hi{background:#e8f6ee;color:var(--ok)}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12px;color:#41496a;margin-top:16px;line-height:1.7}
+  .honest b{color:var(--navy)}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  @media(max-width:640px){.sp2{grid-template-columns:1fr}.mt .pct{font-size:38px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사전 승률예측 · 데이터기반 · 확정 라인업 반영</span>
+    <div class="matchup">
+      <div class="mt dog">
+        <div class="nm">두산 베어스</div>
+        <div class="sp">선발 최승용 (좌완)</div>
+        <div class="pct">44%</div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="mt fav">
+        <div class="nm">롯데 자이언츠</div>
+        <div class="sp">선발 김진욱 (좌완)</div>
+        <div class="pct">56%</div>
+      </div>
+    </div>
+    <div class="hbar">
+      <div class="track"><div class="d" style="width:44%"></div><div class="l" style="width:56%"></div></div>
+      <div class="lab"><span>두산 44%</span><span>8.21(금) · 잠실 · 두산 홈</span><span>롯데 56%</span></div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <span class="vbadge">롯데 우세 접전</span>
+    <div class="vtxt">범위 <b>두산 41~47%</b>. 하방의 핵심은 <b>선발 매치업 열세</b>(부진한 최승용 vs 강세·5연승 김진욱). 다만 <b>양 팀 모두 주전 결장으로 타선이 얇고</b>, 두산의 <b>홈 이점 + 불펜 강점</b>이 격차를 접전으로 좁힌다. '해줘 야구'가 아니라 최승용이 약체 롯데 타선을 버텨주고 초반 리드를 잡느냐가 관건.</div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>선발 매치업 — 좌완 대결, 폼은 확연히 엇갈림</h2>
+    <p class="sub">스탯티즈 2026 시즌누적 실측 · 최승용 부진 vs 김진욱 강세 (rRA9 약 1.7점 격차)</p>
+    <div class="sp2">
+      <div class="spcard d">
+        <div><span class="spname">최승용</span></div>
+        <div class="sptag">두산 · 좌완 · 2001생 · 5일 휴식</div>
+        <div class="sprow"><span class="k">성적</span><span class="v bad">18선발 3승 9패</span></div>
+        <div class="sprow"><span class="k">ERA / rRA9</span><span class="v bad">5.71 / 5.77</span></div>
+        <div class="sprow"><span class="k">FIP / WHIP</span><span class="v">5.07 / 1.58</span></div>
+        <div class="sprow"><span class="k">K9 / BB9 / HR9</span><span class="v">6.23 / 3.53 / 1.04</span></div>
+        <div class="sprow"><span class="k">WAR</span><span class="v bad">0.70</span></div>
+        <div class="sprow"><span class="k">구종</span><span class="v mini">포심46·슬라19·커브18·커터12</span></div>
+      </div>
+      <div class="spcard l">
+        <div><span class="spname">김진욱</span></div>
+        <div class="sptag">롯데 · 좌완 · 2002생 · 5연승 흐름</div>
+        <div class="sprow"><span class="k">성적</span><span class="v good">20선발 5승 5패</span></div>
+        <div class="sprow"><span class="k">ERA / rRA9</span><span class="v good">3.46 / 4.11</span></div>
+        <div class="sprow"><span class="k">FIP / WHIP</span><span class="v">4.81 / 1.28</span></div>
+        <div class="sprow"><span class="k">K9 / BB9 / HR9</span><span class="v">7.71 / 2.99 / 1.26</span></div>
+        <div class="sprow"><span class="k">WAR</span><span class="v good">3.31 <span class="mini">(리그 9위권)</span></span></div>
+        <div class="sprow"><span class="k">구종</span><span class="v mini">포심50·슬라29·커브13·체인지8</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>두산 라인업 vs 김진욱 (통산 상대전적)</h2>
+    <p class="sub">검증된 위협은 6번 박찬호·7번 정수빈에 집중 · 상위타선은 김진욱 상대 대형 표본 강타자 부족</p>
+    <table>
+      <thead><tr><th>순</th><th>타자</th><th>포지션</th><th>PA</th><th>AVG/OBP/SLG</th><th>OPS</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="nm">김대한</td><td>우익</td><td>—</td><td>—</td><td>—</td><td class="mini">대결기록 없음</td></tr>
+        <tr><td>2</td><td class="nm">조수행</td><td>좌익</td><td>6</td><td>.000/.500/.000</td><td>.500</td><td class="mini">볼넷3·출루형</td></tr>
+        <tr><td>3</td><td class="nm">박준순</td><td>2루</td><td>6</td><td>.500/.500/.667</td><td class="ops-hi">1.167</td><td class="mini">소표본 호조</td></tr>
+        <tr><td>4</td><td class="nm">양의지</td><td>지명</td><td>18</td><td>.231/.444/.231</td><td>.675</td><td class="mini">무장타·볼넷5</td></tr>
+        <tr><td>5</td><td class="nm">안재석</td><td>3루</td><td>3</td><td>.000</td><td>—</td><td class="mini">소표본</td></tr>
+        <tr><td>6</td><td class="nm">박찬호 <span class="star">★</span></td><td>유격</td><td>27</td><td>.348/.407/.522</td><td class="ops-hi">.929</td><td class="mini">최다표본·강세</td></tr>
+        <tr><td>7</td><td class="nm">정수빈 <span class="star">★</span></td><td>중견</td><td>18</td><td>.438/.500/.625</td><td class="ops-hi">1.125</td><td class="mini">강세·1HR</td></tr>
+        <tr><td>8</td><td class="nm">윤준호</td><td>포수</td><td>2</td><td>.000</td><td>—</td><td class="mini">소표본</td></tr>
+        <tr><td>9</td><td class="nm">박지훈</td><td>1루</td><td>6</td><td>.500/.600/.500</td><td class="ops-hi">1.100</td><td class="mini">소표본 호조</td></tr>
+      </tbody>
+    </table>
+    <p class="mini" style="margin-top:8px">좌타 3명(조수행·안재석·정수빈)이 좌완 김진욱을 상대. 상위 1~5번은 검증된 강타 부족(양의지 출루형), 위협은 하위 6·7번에 배치.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:var(--lotte)"></span>롯데 라인업 vs 최승용 (통산 상대전적)</h2>
+    <p class="sub">검증된 위협은 5번 고승민 정도 · 상위 테이블(황성빈·레이예스·윤동희) 최승용 상대 표본상 열세</p>
+    <table>
+      <thead><tr><th>순</th><th>타자</th><th>포지션</th><th>PA</th><th>AVG/OBP/SLG</th><th>OPS</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="nm">황성빈</td><td>중견</td><td>7</td><td>.143/.143/.143</td><td class="ops-lo">.286</td><td class="mini">열세</td></tr>
+        <tr><td>2</td><td class="nm">나승엽</td><td>지명</td><td>5</td><td>.250/.400/.250</td><td>.650</td><td class="mini">출루</td></tr>
+        <tr><td>3</td><td class="nm">레이예스</td><td>좌익</td><td>8</td><td>.125/.125/.125</td><td class="ops-lo">.250</td><td class="mini">열세</td></tr>
+        <tr><td>4</td><td class="nm">한동희</td><td>3루</td><td>6</td><td>.333/.333/.833</td><td class="ops-hi">1.166</td><td class="mini">소표본·1HR</td></tr>
+        <tr><td>5</td><td class="nm">고승민 <span class="star">★</span></td><td>1루</td><td>11</td><td>.400/.455/.400</td><td class="ops-hi">.855</td><td class="mini">강세</td></tr>
+        <tr><td>6</td><td class="nm">한태양</td><td>2루</td><td>2</td><td>.500/.500/1.500</td><td>—</td><td class="mini">소표본·3루타</td></tr>
+        <tr><td>7</td><td class="nm">손성빈</td><td>포수</td><td>2</td><td>1.000/1.000/1.000</td><td>—</td><td class="mini">소표본·2안타</td></tr>
+        <tr><td>8</td><td class="nm">전민재</td><td>유격</td><td>6</td><td>.167/.167/.333</td><td>.500</td><td class="mini">—</td></tr>
+        <tr><td>9</td><td class="nm">윤동희</td><td>우익</td><td>5</td><td>.200/.200/.200</td><td class="ops-lo">.400</td><td class="mini">열세</td></tr>
+      </tbody>
+    </table>
+    <p class="mini" style="margin-top:8px">롯데도 좌타 3명(황성빈·나승엽·고승민)을 상단에 배치했지만 좌완 최승용 상대라 플래툰상 불리. 표본상 최승용을 확실히 공략한 타자는 고승민 정도.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>승부처 — 왜 두산 44%인가</h2>
+    <p class="sub">데이터가 가리키는 우선순위</p>
+    <ul class="factors">
+      <li data-i="1"><b>선발 열세(최대 하방).</b> 최승용 rRA9 5.77 vs 김진욱 4.11 — 9이닝당 약 1.7점 격차. 김진욱은 5연승 상승세, 최승용은 3승 9패로 시즌 내내 부진. <span class="pill lo">두산 −</span></li>
+      <li data-i="2"><b>양 팀 타선 모두 결장 다수.</b> 두산은 김재환·양석환(2군), 롯데는 전준우·유강남·손아섭·손호영이 1군에 없음. 두 라인업 모두 얇아 상대전적 신뢰표본이 적고, 대량득점 기대는 낮음. <span class="pill">중립</span></li>
+      <li data-i="3"><b>두산 홈 + 불펜 강점(상쇄 요인).</b> 잠실 홈 어드밴티지, 그리고 최근 리그 최소실점급 두산 불펜(김정우·박치국·이용찬·김택연)이 선발 열세를 부분 상쇄. <span class="pill hi">두산 +</span></li>
+      <li data-i="4"><b>약체 롯데 타선 → 최승용 생존 시나리오.</b> 롯데 상위타선이 최승용 상대 표본상 열세(황성빈·레이예스·윤동희). 최승용이 5이닝을 3실점 안쪽으로 버티면 두산의 홈+불펜으로 접전 승부 가능. <span class="pill hi">두산 +</span></li>
+    </ul>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 선발 지표·양 팀 타자 상대전적은 <b>스탯티즈(statiz.co.kr) 실측</b>(선발=2026 시즌누적, 상대전적=통산 m=rival). 라인업·1군 명단은 <b>KBO 등록현황 8/20(목) 기준</b> + 확정 발표 라인업. 상대전적은 대부분 20타석 이하 소표본으로 회귀 여지가 크며, 이번 예측의 지배 변수는 <b>선발 폼 격차</b>다. 팀 wRC+는 이번 회차에 별도 산출하지 않고 상대전적+선발폼+로스터 뎁스로 대체 평가. 승률 44%는 홈·불펜·약체 상대타선을 반영한 조정치(범위 41~47%). <b>벤자민 1군 말소</b>는 8/23 로테이션 이슈로 금일 경기와 무관(부상 사유는 미확인).
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈(선발·상대전적 실측), KBO 등록현황(1군 명단).<br>
+    두산 vs 롯데 · 2026.8.21(금) 잠실 · 사전 승률예측 리포트 · 데이터기반 야구.
+  </footer>
+
+</div>
+</body>
+</html>
