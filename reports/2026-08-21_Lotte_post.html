@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>롯데 11 : 4 두산 · 8.21 잠실 — 사후 결과분석</title>
+<style>
+  :root{
+    --navy:#131a4a; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --lotte:#c30452;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,#0d1442 0%,#131a4a 50%,#10204a 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(255,120,160,.30),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .score{display:flex;align-items:center;justify-content:center;gap:20px;margin:6px 0 4px}
+  .sc-t{text-align:center;flex:1}
+  .sc-t .nm{font-size:19px;font-weight:800;letter-spacing:-.5px}
+  .sc-t .rn{font-size:52px;font-weight:900;line-height:1;margin-top:4px}
+  .sc-t.win .rn{color:#ff9db9} .sc-t.win .nm{color:#ff9db9}
+  .sc-t.lose{opacity:.72}
+  .sc-mid{text-align:center;font-size:12px;opacity:.8;line-height:1.5}
+  .sc-mid .final{display:inline-block;background:rgba(255,255,255,.16);border-radius:999px;padding:2px 10px;font-weight:700;margin-bottom:4px}
+  .losebadge{text-align:center;margin-top:8px;font-size:13.5px;font-weight:700;color:#ffd0dd}
+  .verdict{background:var(--card);border-radius:20px;padding:20px 22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06)}
+  .hit{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;text-align:center}
+  .hit .big{font-size:14px;font-weight:800;color:var(--warn);background:#fdf3e3;border:1px solid #f0d9ad;
+    padding:7px 16px;border-radius:999px}
+  .hit .txt{font-size:13.5px;color:var(--ink2)}
+  .hit b{color:var(--ink)}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--doosan)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:11px;color:var(--ink2);font-weight:700}
+  .lscore .tm{text-align:left;font-weight:800;min-width:52px}
+  .lscore .R{font-weight:900;font-size:15px;background:#f7f8fc}
+  .lscore .dl{color:var(--doosan)} .lscore .lt{color:var(--lotte)}
+  .lscore .boom{background:#fdeaea;color:var(--neg);font-weight:900}
+  .sp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.l{border-top:4px solid var(--lotte)}
+  .spname{font-size:17px;font-weight:800}
+  .spres{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:6px}
+  .spres.w{background:#e8f6ee;color:var(--ok)} .spres.l{background:#fdeaea;color:var(--neg)}
+  .sptag{font-size:12px;color:var(--ink2);margin:3px 0 12px}
+  .spline{font-size:13.5px;font-weight:700}
+  .spnote{font-size:12px;color:var(--ink2);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+  .stars li{margin:9px 0;font-size:13.5px;list-style:none;padding-left:24px;position:relative}
+  .stars li:before{content:"★";position:absolute;left:2px;top:0;color:var(--warn);font-size:13px}
+  .stars b{color:var(--navy)}
+  .match{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .match:last-child{border-bottom:none}
+  .mchk{flex:none;width:26px;height:26px;border-radius:50%;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+  .mchk.ok{background:var(--ok)} .mchk.no{background:var(--neg)} .mchk.half{background:var(--warn)}
+  .mp{font-size:12.5px;color:var(--ink2)} .mp b{color:var(--ink)}
+  .mp .pred{color:var(--navy);font-weight:700}
+  .predbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:13px}
+  .predbar .k{font-weight:800;color:var(--navy)}
+  .chip{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+  .chip.ok{background:#e8f6ee;color:var(--ok)} .chip.no{background:#fdeaea;color:var(--neg)} .chip.half{background:#fdf3e3;color:var(--warn)}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12px;color:#41496a;margin-top:16px;line-height:1.7}
+  .honest b{color:var(--navy)}
+  @media(max-width:640px){.sp{grid-template-columns:1fr}.sc-t .rn{font-size:42px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사후 결과분석 · 경기종료 · 사전예측 대조</span>
+    <div class="score">
+      <div class="sc-t win"><div class="nm">롯데 자이언츠</div><div class="rn">11</div></div>
+      <div class="sc-mid"><span class="final">경기 종료</span><br>8.21(금)<br>잠실 · 두산 홈</div>
+      <div class="sc-t lose"><div class="nm">두산 베어스</div><div class="rn">4</div></div>
+    </div>
+    <div class="losebadge">🐻 두산 홈 대패 · 승 김진욱(6-5) / 패 최승용(3-10) · 8회 불펜 붕괴</div>
+  </div>
+
+  <div class="verdict">
+    <div class="hit">
+      <span class="big">◐ 예측 방향 적중 · 스코어는 빗나감</span>
+      <span class="txt">사전 예측 <b>두산 44%·열세</b> → 실제 <b>패(적중)</b>. 7회까지 <b>4-3 접전</b>도 예측대로였으나, '상쇄 요인'으로 봤던 <b>불펜이 8회 붕괴</b>하며 접전이 대패로. 과정의 시작은 예측대로, 결말은 예측 밖.</span>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>이닝별 스코어 — 7회까지 4-3, 8회에 무너졌다</h2>
+    <p class="sub">최승용 5이닝 2자책 호투 → 6회 이후 불펜이 9실점, 8회 고승민 만루포로 승부 갈림</p>
+    <table class="lscore">
+      <thead><tr><th class="tm">팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th class="R">R</th><th>H</th><th>E</th></tr></thead>
+      <tbody>
+        <tr><td class="tm lt">롯데</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td class="boom">5</td><td>2</td><td class="R">11</td><td>16</td><td>0</td></tr>
+        <tr><td class="tm dl">두산</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td>0</td><td>1</td><td class="R">4</td><td>5</td><td>2</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:12px;margin-bottom:0">5회 <b>레이예스 결승 적시타</b>로 롯데가 앞서간 뒤 한 점씩 달아났고, <b>7회까지 4-3 살얼음</b>이었다. 그러나 <b>8회 두산 불펜이 무너지며 5실점</b>(고승민 만루홈런 포함), 사실상 이 이닝에 경기가 끝났다. 두산은 김진욱에게 6이닝 1실점으로 묶여 반격 동력을 잃었다.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>선발 리뷰 — 최승용은 '버텨줬다', 문제는 그 다음</h2>
+    <p class="sub">사전 예측의 전제(최승용 5이닝 생존)는 충족 · 승부는 불펜에서 갈림</p>
+    <div class="sp">
+      <div class="spcard d">
+        <div><span class="spname">최승용</span><span class="spres l">패전</span></div>
+        <div class="sptag">두산 · 좌완 · 시즌 3승 10패</div>
+        <div class="spline">5이닝 · 6피안타 · <b>2자책</b> · 1볼넷 · 4K · 95구</div>
+        <div class="spnote">시즌 부진(rRA9 5.77) 대비 <b>기대 이상으로 버틴 5이닝 2자책</b>. 사전 리포트가 제시한 "5이닝 3실점 이내 생존" 시나리오를 실제로 충족했다. 패전이지만 <b>선발의 과정은 합격점</b>.</div>
+      </div>
+      <div class="spcard l">
+        <div><span class="spname">김진욱</span><span class="spres w">승리</span></div>
+        <div class="sptag">롯데 · 좌완 · 시즌 6승 5패 · 6연승 흐름</div>
+        <div class="spline">6이닝 · <b>1실점</b> · 3사사구 · 7K · 98구</div>
+        <div class="spnote">강세 예측 그대로 <b>두산 타선을 6이닝 1실점으로 완벽 봉쇄</b>. 얇은 두산 라인업이 좌완 에이스를 넘지 못했다. 승률 예측의 최대 하방 요인이 그대로 현실화.</div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:12px;margin-bottom:0">사전 리포트가 <b>강점(상쇄 요인)으로 꼽았던 두산 불펜이 정반대로 붕괴</b>했다. 6회 이후 <b>4이닝 9실점</b>, 고승민에게 솔로포(11호)·<b>만루포(12호)</b>를 연달아 헌납한 것이 패인의 핵심.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:var(--lotte)"></span>승부를 가른 타자 — 고승민(6타점)</h2>
+    <p class="sub">사전 리포트가 지목한 '유일한 최승용 킬러'가 그대로 터졌다</p>
+    <ul class="stars">
+      <li><b>고승민 (5번·1루, 롯데)</b> — <b>5타수 2안타 2홈런(11·12호) 6타점.</b> 6회 솔로에 이어 8회 <b>만루홈런</b>으로 승부에 쐐기. 사전 상대전적에서 <b>최승용 상대 통산 .855로 유일하게 지목한 위협</b>이 정확히 현실화됐다.</li>
+      <li><b>레이예스 (3번·좌익, 롯데)</b> — <b>5타수 4안타 2득점, 5회 결승 적시타.</b> 사전엔 최승용 상대 .250 열세로 봤으나 이날은 4안타 맹타 — <b>예측이 빗나간 대표 케이스</b>.</li>
+      <li><b>정수빈 (7번·중견, 두산)</b> — 4타수 3안타 1타점. 김진욱 상대 강세(통산 1.125) 예측 그대로 <b>두산 타선 중 유일하게 살아났다</b>.</li>
+      <li><b>양의지 (4번·지명, 두산)</b> — 무안타지만 <b>볼넷 3개.</b> "무장타·출루형" 예측대로였으나, 팀 타선이 뒤를 잇지 못했다(두산 5안타 침묵).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>사전 예측 검증 — 무엇이 맞고 틀렸나</h2>
+    <p class="sub">데이터기반 예측의 사후 채점 (결과론이 아니라 과정 대조)</p>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">적중:</span> <b>승부 판정 '두산 열세'(44%) → 실제 패.</b> 방향은 정확. 선발 매치업 열세를 최대 하방으로 짚은 것이 그대로 실현.</div></div>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">적중:</span> <b>김진욱 강세·두산 타선 침묵</b>(6이닝 1실점, 두산 5안타), <b>정수빈 강세·양의지 출루·고승민(최승용 킬러) 위협</b> — 상대전적 기반 개별 예측 다수 적중.</div></div>
+    <div class="match"><div class="mchk half">◐</div><div class="mp"><span class="pred">부분:</span> <b>"접전" 전개는 7회(4-3)까지만.</b> 승률 44%는 접전을 시사했는데 8회 붕괴로 <b>스코어(11-4)는 예측보다 크게 벌어짐</b>. 판정은 맞고 마진은 빗나감.</div></div>
+    <div class="match"><div class="mchk no">✕</div><div class="mp"><span class="pred">빗나감:</span> <b>불펜을 '강점·상쇄 요인'으로 본 것이 정반대.</b> 8회 5실점 붕괴가 패인의 핵심 — 이 경기 최대 오판.</div></div>
+    <div class="match"><div class="mchk no">✕</div><div class="mp"><span class="pred">빗나감:</span> <b>레이예스(열세 예측 .250) 4안타.</b> 소표본 상대전적의 한계 — 회귀·반등 리스크가 그대로 드러남.</div></div>
+    <div class="honest" style="margin-top:14px">
+      <b>총평:</b> '믿음의 야구'가 아니라 데이터로 <b>두산 열세를 정확히 봤고(적중)</b>, 선발·개별 타자 매치업 예측도 대체로 맞았다. 다만 <b>강점으로 본 불펜이 무너지며 접전이 대패로</b> 커졌다 — 이건 결과론적 불운이라기보다, <b>얇은 뎁스에서 불펜을 과대평가한 사전 판단의 실책</b>에 가깝다. 다음 예측에선 <b>선발 조기 강판 대비 불펜 뎁스/최근 등판 부하</b>를 승률에 더 보수적으로 반영할 필요.
+    </div>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 스코어·타자/투수 기록·이닝별 득점은 <b>네이버 스포츠 박스스코어 실측</b>(8/21 잠실, LTOB02026). 사전 예측치(두산 44%·열세)는 8/21 사전 리포트 기준. 일부 불펜 개별 이닝 배분은 박스스코어 요약 기반 재구성. 본 리포트는 결과 확정 후 <b>사전예측 대조 + 과정 관점 평가</b>에 한정한다.
+  </div>
+
+  <footer>
+    데이터 출처: 네이버 스포츠(박스스코어 실측), 8/21 사전 승률예측 리포트.<br>
+    롯데 11 : 4 두산 · 2026.8.21(금) 잠실 · 사후 결과분석 리포트 · 데이터기반 야구.
+  </footer>
+
+</div>
+</body>
+</html>
