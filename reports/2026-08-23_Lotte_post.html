@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 3 : 1 롯데 · 8.23 잠실 — 사후 결과분석</title>
+<style>
+  :root{
+    --navy:#131a4a; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --lotte:#c30452;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,#0d1442 0%,#131a4a 50%,#10204a 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(120,170,255,.30),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .score{display:flex;align-items:center;justify-content:center;gap:20px;margin:6px 0 4px}
+  .sc-t{text-align:center;flex:1}
+  .sc-t .nm{font-size:19px;font-weight:800;letter-spacing:-.5px}
+  .sc-t .rn{font-size:52px;font-weight:900;line-height:1;margin-top:4px}
+  .sc-t.win .rn{color:#9dc0ff} .sc-t.win .nm{color:#9dc0ff}
+  .sc-t.lose{opacity:.72}
+  .sc-mid{text-align:center;font-size:12px;opacity:.8;line-height:1.5}
+  .sc-mid .final{display:inline-block;background:rgba(255,255,255,.16);border-radius:999px;padding:2px 10px;font-weight:700;margin-bottom:4px}
+  .winbadge{text-align:center;margin-top:8px;font-size:13.5px;font-weight:700;color:#cfe0ff}
+  .verdict{background:var(--card);border-radius:20px;padding:20px 22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06)}
+  .hit{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:center;text-align:center}
+  .hit .big{font-size:14px;font-weight:800;color:var(--navy);background:#eef1f8;border:1px solid #d3d9ec;
+    padding:7px 16px;border-radius:999px}
+  .hit .txt{font-size:13.5px;color:var(--ink2)}
+  .hit b{color:var(--ink)}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--doosan)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:11px;color:var(--ink2);font-weight:700}
+  .lscore .tm{text-align:left;font-weight:800;min-width:52px}
+  .lscore .R{font-weight:900;font-size:15px;background:#f7f8fc}
+  .lscore .dl{color:var(--doosan)} .lscore .lt{color:var(--lotte)}
+  .lscore .boom{background:#e9f0fd;color:var(--pos);font-weight:900}
+  .sp{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.l{border-top:4px solid var(--lotte)}
+  .spname{font-size:17px;font-weight:800}
+  .spres{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;margin-left:6px}
+  .spres.w{background:#e8f6ee;color:var(--ok)} .spres.l{background:#fdeaea;color:var(--neg)}
+  .sptag{font-size:12px;color:var(--ink2);margin:3px 0 12px}
+  .spline{font-size:13.5px;font-weight:700}
+  .spnote{font-size:12px;color:var(--ink2);margin-top:8px;border-top:1px dashed var(--line);padding-top:8px}
+  .stars li{margin:9px 0;font-size:13.5px;list-style:none;padding-left:24px;position:relative}
+  .stars li:before{content:"★";position:absolute;left:2px;top:0;color:var(--warn);font-size:13px}
+  .stars b{color:var(--navy)}
+  .bp{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:4px}
+  .bpcard{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:12.5px}
+  .bpcard .nm{font-weight:800;font-size:13.5px}
+  .bpcard .ln{color:var(--ink2);margin-top:3px}
+  .bpcard.warn{background:#fdf9f1;border-color:#f0e0c2}
+  .match{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .match:last-child{border-bottom:none}
+  .mchk{flex:none;width:26px;height:26px;border-radius:50%;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800}
+  .mchk.ok{background:var(--ok)} .mchk.no{background:var(--neg)} .mchk.half{background:var(--warn)} .mchk.info{background:var(--navy)}
+  .mp{font-size:12.5px;color:var(--ink2)} .mp b{color:var(--ink)}
+  .mp .pred{color:var(--navy);font-weight:700}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12px;color:#41496a;margin-top:16px;line-height:1.7}
+  .honest b{color:var(--navy)}
+  @media(max-width:640px){.sp{grid-template-columns:1fr}.bp{grid-template-columns:1fr}.sc-t .rn{font-size:42px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사후 결과분석 · 경기종료 · 롯데 3연전 3차전</span>
+    <div class="score">
+      <div class="sc-t win"><div class="nm">두산 베어스</div><div class="rn">3</div></div>
+      <div class="sc-mid"><span class="final">경기 종료</span><br>8.23(일)<br>잠실 · 두산 홈</div>
+      <div class="sc-t lose"><div class="nm">롯데 자이언츠</div><div class="rn">1</div></div>
+    </div>
+    <div class="winbadge">🐻 두산 홈 승 · 승 곽빈(10-5) / 세 이영하(20S) / 패 박세웅(2-8) · 곽빈 7이닝 1피안타 무자책</div>
+  </div>
+
+  <div class="verdict">
+    <div class="hit">
+      <span class="big">◆ 사전 예측 미기록 경기 · 결과 기록 + 과정 평가</span>
+      <span class="txt">8/22 <b>우천취소</b>로 로테이션이 밀리고 <b>벤자민 말소</b>로 일요일 매치업이 불확정이었던 탓에 <b>사전 승률예측을 남기지 않은 경기</b>. 따라서 본 리포트는 예측 대조가 아니라 <b>결과 확정 기록 + 과정 관점 평가</b>에 한정한다.</span>
+    </div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>이닝별 스코어 — 3회 한 이닝으로 끝낸 경기</h2>
+    <p class="sub">두산 11안타 대 롯데 2안타로 내용 압도 · 득점은 3회 빅이닝에 집중</p>
+    <table class="lscore">
+      <thead><tr><th class="tm">팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th class="R">R</th><th>H</th><th>E</th></tr></thead>
+      <tbody>
+        <tr><td class="tm lt">롯데</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td class="R">1</td><td>2</td><td>1</td></tr>
+        <tr><td class="tm dl">두산</td><td>0</td><td>0</td><td class="boom">3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>-</td><td class="R">3</td><td>11</td><td>1</td></tr>
+      </tbody>
+    </table>
+    <p class="sub" style="margin-top:12px;margin-bottom:0">3회 <b>류승민·박찬호·양의지의 2루타 3방</b>이 집중되며 단숨에 3점. <b>결승타는 박찬호(무사 2루서 좌익수 2루타)</b>. 롯데 <b>박승욱 실책</b>도 얽혀 3실점 중 1점은 비자책이었다. 이후 곽빈이 7회까지 무실점으로 잠그며 사실상 3회에 승부가 끝났고, 롯데의 유일한 득점은 8회 대타 노진혁 적시타 1점에 그쳤다.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>선발 리뷰 — 곽빈의 완벽투</h2>
+    <p class="sub">피안타 1개짜리 7이닝 · 이번 시리즈 두산의 핵심 우위 카드가 그대로 실현</p>
+    <div class="sp">
+      <div class="spcard d">
+        <div><span class="spname">곽빈</span><span class="spres w">승리</span></div>
+        <div class="sptag">두산 · 우완 · 시즌 10승 5패 · ERA 2점대</div>
+        <div class="spline">7이닝 · <b>1피안타</b> · 무실점 · 무자책 · 2사사구 · <b>8K</b> · 102구</div>
+        <div class="spnote">7이닝 <b>피안타 단 1개·무자책·8탈삼진</b>. 대략적 게임스코어 <b>80대</b> 수준의 완벽투로, 롯데 타선을 완전히 지웠다. 우천순연으로 토→일 밀린 등판이었지만 오히려 하루 더 쉬고 나온 효과가 컸다.</div>
+      </div>
+      <div class="spcard l">
+        <div><span class="spname">박세웅</span><span class="spres l">패전</span></div>
+        <div class="sptag">롯데 · 우완 · 시즌 2승 8패 · ERA 4.6</div>
+        <div class="spline">6이닝 · 9피안타 · 3실점 · <b>2자책</b> · 0사사구 · 5K · 103구</div>
+        <div class="spnote">볼넷 없이 6이닝을 끌었지만 <b>3회 2루타 3연타에 붕괴</b>. 9피안타로 계속 주자를 내보냈고, 자책은 2점(1점은 팀 수비 실책 연관 비자책)이지만 패전투수. 롯데 타선 지원이 2안타로 전무했다.</div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:12px;margin-bottom:0">이번 롯데 3연전에서 <b>곽빈 등판 카드는 두산의 가장 명확한 우위 지점</b>으로 지목돼 있었고, 우천으로 일요일로 밀렸음에도 결과는 그 그림 그대로 나왔다.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>불펜 리뷰 — 승부엔 무영향, 폼 체크만</h2>
+    <p class="sub">7회까지 3-0 리드 위에서 낮은 레버리지로 운영 · 8회 김택연 흔들림은 메모 대상</p>
+    <div class="bp">
+      <div class="bpcard warn">
+        <div class="nm">김택연 <span style="color:var(--warn);font-weight:700">— 8회 1실점</span></div>
+        <div class="ln">⅓이닝 1피안타 1실점 1자책 1사사구 1K · 8회 대타 노진혁에게 적시타. 저레버리지라 승부엔 무영향이나 <b>최근 폼 체크 대상</b>으로만 기록.</div>
+      </div>
+      <div class="bpcard">
+        <div class="nm">타카다 <span style="color:var(--ok);font-weight:700">— 홀드</span></div>
+        <div class="ln">⅔이닝 무피안타 무실점 · 8회 뒷정리를 깔끔하게 마무리하며 급한 불을 껐다.</div>
+      </div>
+      <div class="bpcard">
+        <div class="nm">이영하 <span style="color:var(--ok);font-weight:700">— 세이브(20S)</span></div>
+        <div class="ln">9회 1이닝 무피안타 무실점 <b>3K</b> · 시즌 20세이브 달성. 마무리로서 완벽한 이닝.</div>
+      </div>
+      <div class="bpcard">
+        <div class="nm">곽빈 → 불펜 인계</div>
+        <div class="ln">선발이 7이닝을 책임지며 불펜 부하를 최소화. 아시안게임 공백기 대비 불펜 관리 측면에서도 이상적 전개.</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:var(--lotte)"></span>승부를 가른 3회 — 2루타 3방</h2>
+    <p class="sub">다득점이 아니라 한 이닝 집중력으로 끝낸 경기</p>
+    <ul class="stars">
+      <li><b>박찬호 (1번·유격, 두산)</b> — <b>4타수 2안타 1타점 1도루.</b> 3회 무사 2루서 <b>좌익수 결승 2루타</b>로 선취점. 테이블세터가 승부처를 열었다.</li>
+      <li><b>안재석 (2번·3루, 두산)</b> — <b>4타수 3안타 1타점.</b> 1회 좌익선상 2루타, 3회 우전안타로 빅이닝에 가세. 이날 두산 최다안타.</li>
+      <li><b>양의지 (4번·지명, 두산)</b> — 4타수 1안타 1타점, 3회 좌중간 2루타로 추가 득점을 견인.</li>
+      <li><b>류승민 (9번·우익, 두산)</b> — 3타수 1안타, 3회 좌중간 2루타로 빅이닝의 물꼬. 하위타선이 제 몫을 했다.</li>
+      <li><b>노진혁 (대타, 롯데)</b> — 대타 안타 1타점으로 롯데의 유일한 득점. 이날 롯데 타선(2안타·12삼진)은 곽빈 앞에 완전히 침묵했다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>과정 관점 평가 — 데이터로 본 이 경기</h2>
+    <p class="sub">결과론이 아니라 내용·시리즈 맥락 기준</p>
+    <div class="match"><div class="mchk info">◆</div><div class="mp"><span class="pred">기록:</span> <b>사전 예측 미기록 경기.</b> 우천순연 + 벤자민 말소로 일요일 매치업이 불확정이라 승률예측을 남기지 않았다 — 예측 적중/빗나감 채점은 해당 없음.</div></div>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">내용 우위:</span> <b>두산 11안타 vs 롯데 2안타, 삼진 12개 유도.</b> 스코어(3-1)보다 내용 격차가 훨씬 컸던 완승. 3-0 리드를 곽빈이 7이닝 잠그며 롯데에 반격 창구를 주지 않았다.</div></div>
+    <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">선발 우위 실현:</span> 이번 시리즈 두산의 핵심 우위로 짚었던 <b>곽빈 카드</b>가 우천순연에도 그대로 관철. 선발 압도 → 불펜 최소 부하의 이상적 승리 공식.</div></div>
+    <div class="match"><div class="mchk half">◐</div><div class="mp"><span class="pred">주의:</span> <b>김택연 8회 1실점.</b> 저레버리지라 승부엔 무영향이지만, 아시안게임 공백기 진입을 앞두고 <b>핵심 불펜의 최근 폼</b>은 계속 체크 대상.</div></div>
+    <div class="honest" style="margin-top:14px">
+      <b>총평:</b> '해줘 야구'가 아니라 <b>선발 우위를 앞세워 3회 한 이닝에 승부를 끝낸 완성형 경기</b>다. 두산이 다득점형 팀이 아닌 만큼, 이런 <b>집중 득점 + 선발의 압도적 억제</b> 조합이 가장 현실적인 승리 시나리오다. 롯데 3연전은 1차전 대패 이후 <b>3차전을 곽빈으로 확실히 가져간</b> 형태. 앞으로 아시안게임 공백기 로테이션(김동주·최준호·타카다 대체 선발) 진입 시, 곽빈처럼 <b>이닝을 길게 끌어 불펜을 아끼는 선발 유무</b>가 승률을 좌우할 변수다.
+    </div>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 스코어·타자/투수 기록·이닝별 득점은 <b>네이버 스포츠 박스스코어 실측</b>(8/23 잠실, LTOB02026, 사용자 업로드 캡처). 스코어는 이닝별 합계 교차검증 완료(롯데 000 000 010=1 / 두산 003 000 00-=3). <b>사전 승률예측은 본 경기에 대해 기록되지 않았으므로</b> 예측 대조 없이 결과·과정 평가만 수행. 게임스코어는 박스스코어 기반 근사치. 선수 시즌기록(승패·세이브·ERA)은 네이버 반영 시즌 누계.
+  </div>
+
+  <footer>
+    데이터 출처: 네이버 스포츠(박스스코어 실측, 사용자 캡처).<br>
+    두산 3 : 1 롯데 · 2026.8.23(일) 잠실 · 사후 결과분석 리포트 · 데이터기반 야구.
+  </footer>
+
+</div>
+</body>
+</html>
