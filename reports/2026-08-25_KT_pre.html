@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>두산 vs KT · 8.25 수원 — 사전 승률분석</title>
+<style>
+  :root{
+    --navy:#131a3a; --navy2:#1d2650; --navy3:#28336b;
+    --ink:#0e1330; --paper:#f4f6fb; --card:#ffffff; --line:#e2e6f0;
+    --mut:#5b6480; --doosan:#1a1f71; --kt:#000000; --ktred:#eb1c24;
+    --good:#1f9d64; --warn:#d68a1e; --bad:#d24b4b; --accent:#3a56d4;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    line-height:1.55;-webkit-text-size-adjust:100%}
+  .wrap{max-width:820px;margin:0 auto;padding:0 16px 60px}
+  header{background:linear-gradient(135deg,var(--navy),var(--navy3));color:#fff;
+    border-radius:0 0 20px 20px;padding:26px 22px 30px;box-shadow:0 6px 22px rgba(19,26,58,.25)}
+  .kick{font-size:12.5px;letter-spacing:.14em;opacity:.8;font-weight:600}
+  h1{margin:6px 0 4px;font-size:25px;letter-spacing:-.01em}
+  .sub{opacity:.85;font-size:14px}
+  .badges{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px}
+  .badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);
+    padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:600}
+  section{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:20px 20px;margin-top:18px;box-shadow:0 2px 10px rgba(19,26,58,.05)}
+  h2{font-size:16.5px;margin:0 0 14px;display:flex;align-items:center;gap:8px}
+  h2::before{content:"";width:5px;height:18px;background:var(--accent);border-radius:3px}
+  /* win prob */
+  .wp{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .wpbar{flex:1;min-width:240px}
+  .wprow{display:flex;justify-content:space-between;font-weight:700;font-size:14px;margin-bottom:6px}
+  .track{height:26px;border-radius:8px;overflow:hidden;display:flex;border:1px solid var(--line)}
+  .seg-do{background:linear-gradient(90deg,#1a1f71,#3a56d4);color:#fff}
+  .seg-kt{background:linear-gradient(90deg,#5a5a5a,#111);color:#fff}
+  .seg-do,.seg-kt{display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px}
+  .wpnote{font-size:12.5px;color:var(--mut);margin-top:8px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:8px 9px;border-bottom:1px solid var(--line);text-align:center}
+  th{background:#f7f8fc;color:var(--mut);font-weight:700;font-size:12px}
+  td.l,th.l{text-align:left}
+  .name{font-weight:700}
+  .win{color:var(--good);font-weight:800}
+  .edge-do{background:rgba(58,86,212,.09)}
+  .edge-kt{background:rgba(0,0,0,.05)}
+  .lu{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:620px){.lu{grid-template-columns:1fr}}
+  .luhead{font-weight:800;font-size:13.5px;margin-bottom:8px;padding:5px 10px;border-radius:8px;color:#fff;display:inline-block}
+  .lh-do{background:var(--doosan)} .lh-kt{background:#111}
+  ol.bat{margin:0;padding-left:0;list-style:none;counter-reset:b}
+  ol.bat li{counter-increment:b;display:flex;gap:8px;padding:5px 4px;border-bottom:1px dashed var(--line);font-size:13.5px}
+  ol.bat li::before{content:counter(b);width:20px;height:20px;flex:none;background:var(--navy2);color:#fff;
+    border-radius:50%;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  ol.bat .pos{margin-left:auto;color:var(--mut);font-size:12px;font-weight:600}
+  .pitch{font-size:12.5px;color:var(--mut);margin-top:8px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:620px){.grid2{grid-template-columns:1fr}}
+  .entry{border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .entry h3{margin:0 0 8px;font-size:14px}
+  .chip{display:inline-block;background:#eef1fa;border:1px solid #dbe1f3;border-radius:7px;
+    padding:3px 9px;margin:3px 4px 0 0;font-size:12.5px;font-weight:600}
+  .chip.hl{background:#fff4e0;border-color:#f0d9a8;color:#8a5a10}
+  ul.key{margin:0;padding-left:0;list-style:none}
+  ul.key li{padding:9px 0 9px 30px;position:relative;border-bottom:1px solid var(--line);font-size:14px}
+  ul.key li:last-child{border-bottom:none}
+  ul.key li::before{content:"▸";position:absolute;left:8px;top:9px;color:var(--accent);font-weight:800}
+  .tag{display:inline-block;font-size:11px;font-weight:800;padding:1px 7px;border-radius:6px;margin-right:6px;vertical-align:1px}
+  .t-do{background:#e7ebfb;color:#1a1f71} .t-kt{background:#eee;color:#111} .t-x{background:#fdeaea;color:#b23}
+  .note{font-size:12px;color:var(--mut);line-height:1.6}
+  footer{margin-top:22px;font-size:11.5px;color:var(--mut);text-align:center;line-height:1.7}
+  .miss{color:var(--warn);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="kick">두산 베어스 · 사전 승률분석 리포트</div>
+  <h1>두산 <span style="opacity:.6">vs</span> KT 위즈</h1>
+  <div class="sub">2026. 8. 25 (화) 18:30 · 수원 KT위즈파크 (두산 원정) · 데이터기반 세이버메트릭스</div>
+  <div class="badges">
+    <span class="badge">두산 5위 58-4-50</span>
+    <span class="badge">KT 1위 64-3-41</span>
+    <span class="badge">시즌 상대전적 두산 3-6-1</span>
+    <span class="badge">확대엔트리 첫날</span>
+  </div>
+</header>
+
+<section>
+  <h2>승률 예측</h2>
+  <div class="wp">
+    <div class="wpbar">
+      <div class="wprow"><span>두산</span><span>KT</span></div>
+      <div class="track">
+        <div class="seg-do" style="width:43%">43%</div>
+        <div class="seg-kt" style="width:57%">57%</div>
+      </div>
+      <div class="wpnote">Pythagorean(exp1.83) → Log5 중립 45.9% · 원정 조정 −3.5%p · 선발 조정 ±0 (마운드 대등) → <b>두산 약 43%</b> (범위 41~46%).</div>
+    </div>
+  </div>
+  <p class="note" style="margin-top:12px">
+    8/24 로테이션 예측(47.3%)보다 소폭 하향. KT가 평균 이상 선발 <b>소형준</b>을 예고하면서 최민석의 선발 우위가 상쇄됐기 때문. 마운드는 대등하고, 승부는 <b>KT 홈·득점권 1위 타선</b>과 <b>두산 팀 평균자책 1위</b>의 대결로 갈린다.
+  </p>
+</section>
+
+<section>
+  <h2>선발 매치업 <span class="note" style="font-weight:400">— 스탯티즈 실측(올시즌)</span></h2>
+  <table>
+    <thead><tr><th class="l">지표</th><th>두산 최민석 <span class="note">(우·19)</span></th><th>KT 소형준 <span class="note">(우·24)</span></th><th>우위</th></tr></thead>
+    <tbody>
+      <tr><td class="l">G / IP</td><td>22G / 121.2</td><td>17G / 96.1</td><td>—</td></tr>
+      <tr><td class="l">승-패</td><td>12-3</td><td>6-3</td><td class="win">두산</td></tr>
+      <tr class="edge-do"><td class="l">ERA</td><td class="name">2.66</td><td>3.36</td><td class="win">두산</td></tr>
+      <tr><td class="l">rRA9</td><td>3.44</td><td>3.74</td><td class="win">두산</td></tr>
+      <tr class="edge-do"><td class="l">rRA9pf <span class="note">(파크보정)</span></td><td class="name">3.67</td><td>3.68</td><td>대등</td></tr>
+      <tr><td class="l">FIP</td><td>3.78</td><td class="name">3.70</td><td class="win" style="color:#111">KT</td></tr>
+      <tr><td class="l">WHIP</td><td>1.31</td><td>1.31</td><td>동일</td></tr>
+      <tr><td class="l">K / BB</td><td>109 / 51</td><td>79 / 19</td><td style="color:#111;font-weight:700">KT(제구)</td></tr>
+      <tr><td class="l">WAR</td><td class="name">3.60</td><td>2.96</td><td class="win">두산</td></tr>
+      <tr><td class="l">상대팀전 통산</td><td>vs KT 11IP·ERA 4.91<span class="note"> (소표본)</span></td><td>vs 두산 12IP·ERA 2.25<span class="note"> (소표본)</span></td><td style="color:#111;font-weight:700">KT</td></tr>
+    </tbody>
+  </table>
+  <p class="note" style="margin-top:10px">
+    <b>핵심:</b> 파크보정 실점억제(rRA9pf)가 3.67 vs 3.68로 사실상 동일. 최민석이 결과지표(ERA·rRA9·WAR)에서 앞서지만, 소형준은 볼넷 억제(BB 19개)와 FIP·상대전적에서 우위. <b>선발은 무승부에 가깝다.</b>
+  </p>
+</section>
+
+<section>
+  <h2>팀 지표 비교</h2>
+  <table>
+    <thead><tr><th class="l">지표</th><th>두산</th><th>KT</th></tr></thead>
+    <tbody>
+      <tr><td class="l">순위 / 승률</td><td>5위 / .537</td><td class="name">1위 / .610</td></tr>
+      <tr><td class="l">피타고리안 승률</td><td>.535</td><td class="name">.576</td></tr>
+      <tr class="edge-kt"><td class="l">팀 타율</td><td>.270 (6위)</td><td class="name">.279 (1위)</td></tr>
+      <tr><td class="l">홈런</td><td class="name">84</td><td>82</td></tr>
+      <tr class="edge-kt"><td class="l">득점</td><td>522</td><td class="name">598</td></tr>
+      <tr class="edge-kt"><td class="l">득점권 타율</td><td>.265 (9위)</td><td class="name">.304 (1위)</td></tr>
+      <tr class="edge-do"><td class="l">팀 평균자책</td><td class="name">3.71 (1위)</td><td>4.38 (3위)</td></tr>
+    </tbody>
+  </table>
+  <p class="note" style="margin-top:10px">KT는 <b>공격(타율·득점·득점권 전부 1위)</b>, 두산은 <b>투수력(팀 ERA 1위)</b>이 강점. 원정+상대 클러치 1위가 두산에 가장 큰 부담.</p>
+</section>
+
+<section>
+  <h2>라인업</h2>
+  <div class="lu">
+    <div>
+      <span class="luhead lh-do">두산 (확정 · 공개)</span>
+      <ol class="bat">
+        <li><span class="name">박찬호</span><span class="pos">SS</span></li>
+        <li><span class="name">안재석</span><span class="pos">3B</span></li>
+        <li><span class="name">박준순</span><span class="pos">2B</span></li>
+        <li><span class="name">양의지</span><span class="pos">C</span></li>
+        <li><span class="name">김민석</span><span class="pos">DH</span></li>
+        <li><span class="name">세베리노</span><span class="pos">1B</span></li>
+        <li><span class="name">김대한</span><span class="pos">RF</span></li>
+        <li><span class="name">류승민</span><span class="pos">LF</span></li>
+        <li><span class="name">정수빈</span><span class="pos">CF</span></li>
+      </ol>
+      <div class="pitch">선발 <b>최민석</b> (우) · 마무리 이영하</div>
+    </div>
+    <div>
+      <span class="luhead lh-kt">KT (예상 · 미발표)</span>
+      <ol class="bat">
+        <li><span class="name">최원준</span><span class="pos">CF</span></li>
+        <li><span class="name">김민혁</span><span class="pos">DH</span></li>
+        <li><span class="name">안현민</span><span class="pos">RF</span></li>
+        <li><span class="name">힐리어드</span><span class="pos">LF</span></li>
+        <li><span class="name">김현수</span><span class="pos">1B</span></li>
+        <li><span class="name">류현인</span><span class="pos">2B</span></li>
+        <li><span class="name">허경민</span><span class="pos">3B</span></li>
+        <li><span class="name">한승택/장성우</span><span class="pos">C</span></li>
+        <li><span class="name">권동진</span><span class="pos">SS</span></li>
+      </ol>
+      <div class="pitch">선발 <b>소형준</b> (우) · 마무리 박영현 · <span class="miss">8/23 기준 예상(발표 시 교체 가능)</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>확대엔트리 첫날 콜업 (8/25)</h2>
+  <div class="grid2">
+    <div class="entry">
+      <h3><span class="tag t-do">두산</span>+4</h3>
+      <span class="chip hl">김영현 投 · 허경민 보상선수 첫 콜업</span>
+      <span class="chip">김한중 投</span>
+      <span class="chip">류현준 捕</span>
+      <span class="chip">임종성 內</span>
+      <p class="note" style="margin-top:8px">불펜 뎁스(우완 2명)·백업 보강. 즉시 전력보다 시즌 막판 운영·부담 분산 성격.</p>
+    </div>
+    <div class="entry">
+      <h3><span class="tag t-kt">KT</span>+4</h3>
+      <span class="chip hl">장성우 捕 · 베테랑 안방 보강</span>
+      <span class="chip">김민석 捕</span>
+      <span class="chip">손민석 內</span>
+      <span class="chip">유준규 外</span>
+      <p class="note" style="margin-top:8px">포수 2명 추가로 안방·대타 옵션 확대. 장성우 가세로 리드·수비 안정.</p>
+    </div>
+  </div>
+  <p class="note" style="margin-top:10px">양 팀 모두 <b>말소 없이 순증(+4)</b>. 두산은 투수, KT는 포수 중심 보강.</p>
+</section>
+
+<section>
+  <h2>승부처 3</h2>
+  <ul class="key">
+    <li><span class="tag t-x">선발</span> 마운드는 대등(rRA9pf 3.67=3.68). <b>먼저 실점하지 않는 쪽</b>이 유리 — 최민석이 소형준의 제구(BB9 낮음)를 초반에 흔들 수 있는지가 관건.</li>
+    <li><span class="tag t-kt">타선</span> KT는 <b>득점권 1위(.304)</b>, 두산은 <b>9위(.265)</b>. 주자 있을 때 결정력 격차가 원정 두산의 최대 리스크. 두산은 병살·잔루 최소화 필요.</li>
+    <li><span class="tag t-do">불펜</span> 두산 <b>팀 ERA 1위</b>가 버팀목. 최민석 5~6이닝 뒤 이영하까지 연결하는 계투에서 리드를 지켜야 승산. 확대엔트리 김영현이 변수.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>결론</h2>
+  <p style="font-size:14.5px;margin:0 0 8px">
+    <b>두산 승률 약 43% (KT 우세).</b> 선발 맞대결은 사실상 대등하지만, KT의 홈·상위 타선·클러치 능력이 원정 두산을 압박한다. 두산이 이기려면 <b>최민석의 선발 호투 + 소형준 조기 공략 + 팀 ERA 1위 불펜의 리드 사수</b>가 동시에 필요하다. 지는 그림은 득점권 빈타로 소형준에게 끌려가는 저득점 접전.
+  </p>
+  <p class="note">참고: 이번 KT 원정 3연전(8/25~27) 시리즈 기대 승수는 1.24승(모달 1승 2패). 오늘은 두산 로테이션상 승산이 가장 높은 1차전.</p>
+</section>
+
+<footer>
+  데이터 출처: KBO 공식 등록현황(2026.08.25 기준) · 스탯티즈(선발 세이버지표 실측) · 뉴스 프리뷰(라인업·팀지표 보조) ·
+  두산 라인업은 공식 발표분, KT 라인업은 8/23 기준 예상(미발표).<br>
+  승률은 Pythagorean+Log5 기반 추정치이며 예고선발·구장·홈원정을 반영한 근사값. 세이버 지표는 스탯티즈 실측.<br>
+  ⓒ 밍지의 세이버메트릭스 · 2026-08-25 사전 리포트
+</footer>
+</div>
+</body>
+</html>
