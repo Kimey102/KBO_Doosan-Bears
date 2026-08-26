@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs KT · 8.26 수원 — 사전 승률예측</title>
+<style>
+  :root{
+    --navy:#131a4a; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --kt:#d0112b;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,#0d1442 0%,#131a4a 50%,#10204a 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(120,160,255,.30),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .matchup{display:flex;align-items:center;justify-content:center;gap:18px;margin:8px 0 6px}
+  .mt{text-align:center;flex:1}
+  .mt .nm{font-size:20px;font-weight:800;letter-spacing:-.5px}
+  .mt .sp{font-size:12.5px;opacity:.8;margin-top:3px}
+  .mt .pct{font-size:46px;font-weight:900;line-height:1;margin-top:8px}
+  .mt.fav .pct{color:#ff9db9} .mt.dog .pct{color:#a9c6ff}
+  .vs{font-size:13px;opacity:.7;font-weight:700}
+  .hbar{margin-top:14px}
+  .hbar .track{height:12px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden;display:flex}
+  .hbar .d{background:#7aa0ff;height:100%} .hbar .l{background:#ff7a8f;height:100%}
+  .hbar .lab{display:flex;justify-content:space-between;font-size:11.5px;margin-top:6px;opacity:.85}
+  .verdict{background:var(--card);border-radius:20px;padding:18px 22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06);display:flex;gap:14px;align-items:flex-start}
+  .vbadge{flex:none;font-size:13.5px;font-weight:800;color:#fff;background:var(--kt);
+    padding:8px 14px;border-radius:12px;white-space:nowrap}
+  .vtxt{font-size:13.5px;color:var(--ink2)} .vtxt b{color:var(--ink)}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--doosan)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  .sp2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.l{border-top:4px solid var(--kt)}
+  .spname{font-size:18px;font-weight:800}
+  .sptag{font-size:12px;color:var(--ink2);margin:3px 0 12px}
+  .sprow{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px dashed var(--line)}
+  .sprow:last-child{border-bottom:none}
+  .sprow .k{color:var(--ink2)} .sprow .v{font-weight:700}
+  .bad{color:var(--neg)} .good{color:var(--ok)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  th,td{padding:7px 5px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:10.5px;color:var(--ink2);font-weight:700}
+  td.nm{text-align:left;font-weight:700;white-space:nowrap}
+  .L{color:var(--pos);font-weight:700;font-size:11px} .R{color:var(--neg);font-weight:700;font-size:11px} .S{color:var(--warn);font-weight:700;font-size:11px}
+  .star{color:var(--warn)}
+  .ops-hi{color:var(--ok);font-weight:800} .ops-lo{color:var(--neg)}
+  .mini{font-size:11px;color:var(--ink2)}
+  .arsenal{margin-top:6px}
+  .arow{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:12.5px}
+  .arow .anm{width:110px;flex:none;font-weight:700}
+  .arow .abar{flex:1;height:14px;background:#eef1f8;border-radius:7px;overflow:hidden}
+  .arow .afill{height:100%;background:linear-gradient(90deg,#131a4a,#3350b0)}
+  .arow .apct{width:46px;text-align:right;flex:none;color:var(--ink2);font-weight:700}
+  .factors li{margin:10px 0;font-size:13.5px;list-style:none;padding-left:26px;position:relative}
+  .factors li:before{content:attr(data-i);position:absolute;left:0;top:1px;width:19px;height:19px;
+    background:var(--navy);color:#fff;border-radius:50%;font-size:11px;font-weight:800;
+    display:flex;align-items:center;justify-content:center}
+  .factors b{color:var(--navy)}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px;margin-left:4px}
+  .pill.lo{background:#fdeaea;color:var(--neg)} .pill.hi{background:#e8f6ee;color:var(--ok)} .pill.mid{background:#eef1f8;color:#41496a}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12px;color:#41496a;margin-top:16px;line-height:1.7}
+  .honest b{color:var(--navy)}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  @media(max-width:640px){.sp2{grid-template-columns:1fr}.mt .pct{font-size:38px}.arow .anm{width:92px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사전 승률예측 · 데이터기반 · 확정 라인업 반영</span>
+    <div class="matchup">
+      <div class="mt dog">
+        <div class="nm">두산 베어스</div>
+        <div class="sp">선발 잭로그 (좌완)</div>
+        <div class="pct">40%</div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="mt fav">
+        <div class="nm">KT 위즈</div>
+        <div class="sp">선발 대니엘 (우완)</div>
+        <div class="pct">60%</div>
+      </div>
+    </div>
+    <div class="hbar">
+      <div class="track"><div class="d" style="width:40%"></div><div class="l" style="width:60%"></div></div>
+      <div class="lab"><span>두산 40%</span><span>8.26(수) · 수원 · 두산 원정</span><span>KT 60%</span></div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <span class="vbadge">KT 우세 접전</span>
+    <div class="vtxt">범위 <b>두산 37~43%</b>. 하방은 <b>원정 + 팀체급 열세</b>(피타 두산 .536 vs KT .574)와 <b>첫 대면 선발 대니엘</b>. 상방은 두산이 <b>우완 상대 좌타 6명 플래툰</b>을 세웠고 대니엘이 <b>저구속·2경기 소표본</b>이라는 점. '해줘 야구'가 아니라 <b>대니엘을 타순 한 바퀴 전에 공략</b>하고 <b>잭로그가 KT 우타·안현민의 장타를 억제</b>하느냐가 승부처.</div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>선발 매치업 — 좌완 vs 우완, 지표 대등 · 표본은 상반</h2>
+    <p class="sub">스탯티즈 2026 시즌누적 실측 · 대니엘은 KBO 통산 3선발(표본 극소)로 FIP가 실질에 근접</p>
+    <div class="sp2">
+      <div class="spcard d">
+        <div><span class="spname">잭로그 <span class="mini">(Zach Logue)</span></span></div>
+        <div class="sptag">두산 · 좌완 · 1996생 · 6일 휴식 (8/20 등판)</div>
+        <div class="sprow"><span class="k">성적</span><span class="v">22선발 6승 6패</span></div>
+        <div class="sprow"><span class="k">ERA / rRA9</span><span class="v">4.06 / 4.56</span></div>
+        <div class="sprow"><span class="k">rRA9pf / FIP</span><span class="v">4.60 / <b>4.08</b></span></div>
+        <div class="sprow"><span class="k">WHIP</span><span class="v">1.32</span></div>
+        <div class="sprow"><span class="k">K / BB / HR</span><span class="v">102 / <span class="good">23</span> / <span class="bad">13</span></span></div>
+        <div class="sprow"><span class="k">특징</span><span class="v mini">제구 A(BB9 상위9%)·<span class="bad">피홈런多</span></span></div>
+        <div class="sprow"><span class="k">구종</span><span class="v mini">포심36·슬라27·커터18·투심10·체인지8</span></div>
+      </div>
+      <div class="spcard l">
+        <div><span class="spname">대니엘 <span class="mini">(Davis Daniel)</span></span></div>
+        <div class="sptag">KT · 우완 · 신규 외인 · 7일 휴식 (8/19 등판)</div>
+        <div class="sprow"><span class="k">성적</span><span class="v">2선발 (통산 3G)</span></div>
+        <div class="sprow"><span class="k">ERA / rRA9</span><span class="v good">2.70 / 2.70 <span class="mini">※소표본</span></span></div>
+        <div class="sprow"><span class="k">rRA9pf / FIP</span><span class="v">2.72 / <b>4.19</b></span></div>
+        <div class="sprow"><span class="k">WHIP</span><span class="v">1.20</span></div>
+        <div class="sprow"><span class="k">K / BB / HR</span><span class="v">8 / 3 / 1 <span class="mini">(10IP)</span></span></div>
+        <div class="sprow"><span class="k">특징</span><span class="v mini">제구 양호·<span class="bad">구속 하위권</span>·탈삼진 적음</span></div>
+        <div class="sprow"><span class="k">구종</span><span class="v mini">투심36·체인지27·커터15·슬라13·포심8</span></div>
+      </div>
+    </div>
+    <p class="mini" style="margin-top:10px">▸ 표면 ERA는 대니엘이 압도적이지만 <b>단 2경기(10이닝)</b>다. FIP는 <b>잭로그 4.08 &lt; 대니엘 4.19</b>로 실질 체급은 대등~잭로그 소폭 우위. 예측의 지배 변수는 개인 지표가 아니라 <b>원정·팀체급·첫 대면</b>이다.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:var(--kt)"></span>KT 선발 대니엘 — 저구속 핀포인트 제구형 (두산 첫 대면)</h2>
+    <p class="sub">투심·체인지업 중심의 땅볼·약한타구 유도형 · 구위로 윽박지르는 파워피처 아님</p>
+    <div class="arsenal">
+      <div class="arow"><span class="anm">투심(싱커)</span><span class="abar"><span class="afill" style="width:73%"></span></span><span class="apct">36.4%</span></div>
+      <div class="arow"><span class="anm">체인지업</span><span class="abar"><span class="afill" style="width:55%"></span></span><span class="apct">27.3%</span></div>
+      <div class="arow"><span class="anm">커터</span><span class="abar"><span class="afill" style="width:31%"></span></span><span class="apct">15.3%</span></div>
+      <div class="arow"><span class="anm">슬라이더</span><span class="abar"><span class="afill" style="width:26%"></span></span><span class="apct">13.1%</span></div>
+      <div class="arow"><span class="anm">포심</span><span class="abar"><span class="afill" style="width:16%"></span></span><span class="apct">8.0%</span></div>
+    </div>
+    <ul class="factors" style="margin-top:14px">
+      <li data-i="1"><b>초구 투심을 노려라.</b> 제구가 좋아 유리한 카운트를 방치하면 안 된다. 처음 보는 궤적이라 인내가 필요하지만, <b>가운데로 몰리는 투심 초구는 초반부터 적극 공략</b>이 정답(타순 한 바퀴 돌기 전 선취점).</li>
+      <li data-i="2"><b>낮은 체인지업은 참아라.</b> 결정구가 바깥·낮은 체인지업. <b>ERA 2.70은 소표본 거품, FIP 4.19가 실질</b>이라 한 번 공략 실마리를 잡으면 무너질 수 있다.</li>
+      <li data-i="3"><b>저구속 = 타이밍 승부.</b> 구속이 리그 하위권이라 타이밍만 맞으면 장타가 가능. 세베리노·김민석 등 당겨치는 좌타의 한 방이 열쇠.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>두산 라인업 vs 대니엘 — 좌타 6명 플래툰 배치</h2>
+    <p class="sub">전 타자 <b>첫 대면(상대전적 전무)</b> · 우완 대니엘 상대 좌타·양타 6명으로 플래툰 어드밴티지 극대화</p>
+    <table>
+      <thead><tr><th>순</th><th>타자</th><th>포지션</th><th>타격</th><th>대니엘 상대</th><th>메모</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="nm">박찬호</td><td>유격</td><td><span class="R">우</span></td><td class="mini">첫 대면</td><td class="mini">테이블세터·기동력</td></tr>
+        <tr><td>2</td><td class="nm">정수빈</td><td>중견</td><td><span class="L">좌</span></td><td class="mini">첫 대면</td><td class="mini">전날 HR·출루형 <span class="star">★</span></td></tr>
+        <tr><td>3</td><td class="nm">안재석</td><td>3루</td><td><span class="L">좌</span></td><td class="mini">첫 대면</td><td class="mini">좌타 테이블세터</td></tr>
+        <tr><td>4</td><td class="nm">양의지</td><td>포수</td><td><span class="R">우</span></td><td class="mini">첫 대면</td><td class="mini">전날 결승포 <span class="star">★</span></td></tr>
+        <tr><td>5</td><td class="nm">김민석</td><td>지명</td><td><span class="L">좌</span></td><td class="mini">첫 대면</td><td class="mini">전날 멀티히트</td></tr>
+        <tr><td>6</td><td class="nm">세베리노</td><td>1루</td><td><span class="S">양</span></td><td class="mini">첫 대면</td><td class="mini">중심 파워 <span class="star">★</span></td></tr>
+        <tr><td>7</td><td class="nm">오명진</td><td>2루</td><td><span class="L">좌</span></td><td class="mini">첫 대면</td><td class="mini">좌타 하위연결</td></tr>
+        <tr><td>8</td><td class="nm">김대한</td><td>우익</td><td><span class="R">우</span></td><td class="mini">첫 대면</td><td class="mini">—</td></tr>
+        <tr><td>9</td><td class="nm">조수행</td><td>좌익</td><td><span class="L">좌</span></td><td class="mini">첫 대면</td><td class="mini">기동력·테이블 회전</td></tr>
+      </tbody>
+    </table>
+    <p class="mini" style="margin-top:8px"><span class="L">좌</span> 5명(정수빈·안재석·김민석·오명진·조수행) + <span class="S">양</span> 1명(세베리노) = <b>6명이 우완 대니엘 상대 플래툰 우위</b>. 2·3번 좌타 테이블세터가 투심을 노려 출루 → 4번 양의지(우타)로 연결하는 그림이 핵심.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:var(--kt)"></span>KT 라인업 vs 잭로그 — 통산 상대전적 (실측)</h2>
+    <p class="sub">스탯티즈 통산(m=rival) · 위협은 <b>안현민·허경민(우타)</b>에 집중 · 잭로그 피홈런 취약과 겹쳐 안현민 최우선 경계</p>
+    <table>
+      <thead><tr><th>순</th><th>타자</th><th>포지션</th><th>타격</th><th>PA</th><th>AVG/OBP/SLG</th><th>OPS</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="nm">최원준</td><td>중견</td><td><span class="L">좌</span></td><td>2</td><td>.000/.000/.000</td><td class="ops-lo">.000</td><td class="mini">소표본</td></tr>
+        <tr><td>2</td><td class="nm">김현수</td><td>1루</td><td><span class="L">좌</span></td><td>10</td><td>.400/.400/.400</td><td class="ops-hi">.800</td><td class="mini">최다표본·강세</td></tr>
+        <tr><td>3</td><td class="nm">안현민 <span class="star">★</span></td><td>우익</td><td><span class="R">우</span></td><td>6</td><td>.800/.833/1.400</td><td class="ops-hi">2.233</td><td class="mini">1HR·최대경계</td></tr>
+        <tr><td>4</td><td class="nm">힐리어드</td><td>좌익</td><td><span class="L">좌</span></td><td>3</td><td>.000/.000/.000</td><td class="ops-lo">.000</td><td class="mini">단 30홈런 파워</td></tr>
+        <tr><td>5</td><td class="nm">장성우</td><td>지명</td><td><span class="R">우</span></td><td>3</td><td>.000/.000/.000</td><td class="ops-lo">.000</td><td class="mini">소표본</td></tr>
+        <tr><td>6</td><td class="nm">김상수</td><td>2루</td><td><span class="R">우</span></td><td>3</td><td>.333/.333/.333</td><td>.666</td><td class="mini">소표본</td></tr>
+        <tr><td>7</td><td class="nm">허경민 <span class="star">★</span></td><td>3루</td><td><span class="R">우</span></td><td>5</td><td>.400/.400/.600</td><td class="ops-hi">1.000</td><td class="mini">2안타·2루타</td></tr>
+        <tr><td>8</td><td class="nm">한승택</td><td>포수</td><td><span class="R">우</span></td><td>—</td><td>—</td><td>—</td><td class="mini">대결기록 없음</td></tr>
+        <tr><td>9</td><td class="nm">권동진</td><td>유격</td><td><span class="L">좌</span></td><td>2</td><td>.000/.500/.000</td><td>.500</td><td class="mini">볼넷1·출루</td></tr>
+      </tbody>
+    </table>
+    <p class="mini" style="margin-top:8px">KT는 좌완 잭로그 상대 <b>우타 5명</b>(안현민·장성우·김상수·허경민·한승택)을 배치. 표본상 확실한 위협은 <b>안현민(6PA OPS 2.233·홈런 보유)</b>과 <b>허경민(5PA 1.000)</b>, 그리고 최다표본 <b>김현수(10PA .800)</b>. 나머지는 소표본 침묵. <b>잭로그 피홈런 13개 + 안현민 장타력</b>이 겹치는 3번 타석이 최대 실점 위험.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>승부처 — 왜 두산 40%인가</h2>
+    <p class="sub">데이터가 가리키는 우선순위</p>
+    <ul class="factors">
+      <li data-i="1"><b>원정 + 팀체급 열세(기저 하방).</b> Log5 중립 46.2%(피타 두산 .536 vs KT .574)에서 수원 원정 −3.5%p. KT는 리그 1위·홈. <span class="pill lo">두산 −</span></li>
+      <li data-i="2"><b>첫 대면 선발 대니엘.</b> 표면 ERA 2.70은 2경기 소표본이나, <b>처음 보는 궤적 + 최근 2경기 호투</b>는 단기적으로 두산에 불리. 단 FIP 4.19라 과대평가는 금물(8/21 교훈). <span class="pill mid">중립~두산 −</span></li>
+      <li data-i="3"><b>두산 좌타 플래툰(상방).</b> 우완 대니엘 상대 좌타·양타 6명 배치 + 저구속. 초구 투심 공략과 당겨친 장타 한 방이 나오면 승산이 열린다. <span class="pill hi">두산 +</span></li>
+      <li data-i="4"><b>잭로그 피홈런 관리가 최대 리스크.</b> 잭로그 HR 13개(취약) + KT 팀 82홈런·힐리어드 30홈런·안현민(잭로그 상대 HR). <b>실투 한 개가 경기를 가른다.</b> <span class="pill lo">두산 −</span></li>
+      <li data-i="5"><b>접전 시 불펜 우위(상방).</b> 리드를 잡으면 김택연·이영하 등 두산 뒷문이 격차를 지킨다(전날 3이닝 무실점). <span class="pill hi">두산 +</span></li>
+    </ul>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 선발 지표는 <b>스탯티즈(statiz.co.kr) 2026 시즌누적 실측</b>(잭로그 p_no=16299 / 대니엘 p_no=16669). KT 타자 상대전적은 <b>잭로그 통산 m=rival 실측</b>(대부분 10PA 이하 소표본 → 회귀 여지 큼). 두산 타자 vs 대니엘은 <b>전원 첫 대면(상대전적 전무)</b>이라 구종·좌우 프로파일로 대체 평가. 라인업은 양 팀 확정 발표 오더, 1군 명단은 KBO 등록현황(8/26 등말소 반영: 두산 무변동 / KT 오원석·이재원 등록·이정범 말소, <b>오원석은 불펜 콜업이며 선발 아님</b>). 승률 40%는 원정·팀체급·선발·플래툰·불펜을 반영한 조정치(범위 37~43%), 8/24 로테이션 예측(39.3%)과 정합. <b>대니엘 ERA 2.70은 2경기 소표본</b>이며 FIP 4.19가 실질에 가깝다는 점을 명시한다.
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈(선발 지표·상대전적 실측), KBO 등록현황(1군 명단·등말소).<br>
+    두산 vs KT · 2026.8.26(수) 수원 · 사전 승률예측 리포트 · 데이터기반 야구.
+  </footer>
+
+</div>
+</body>
+</html>
