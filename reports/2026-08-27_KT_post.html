@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs KT · 8.27 수원 — 사후 결과분석</title>
+<style>
+  :root{
+    --navy:#131a4a; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --kt:#d0112b;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,#0d1442 0%,#131a4a 50%,#10204a 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(255,120,140,.28),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .score{display:flex;align-items:center;justify-content:center;gap:22px;margin:6px 0 4px}
+  .st{text-align:center;flex:1}
+  .st .nm{font-size:19px;font-weight:800;letter-spacing:-.5px}
+  .st .sp{font-size:12px;opacity:.8;margin-top:3px}
+  .st .rn{font-size:54px;font-weight:900;line-height:1;margin-top:4px}
+  .st.win .rn{color:#ff9db9} .st.lose .rn{color:#cfe0ff}
+  .st .res{font-size:12px;font-weight:700;margin-top:4px;opacity:.9}
+  .vs{font-size:13px;opacity:.7;font-weight:700}
+  .heroft{display:flex;justify-content:space-between;font-size:11.5px;margin-top:12px;opacity:.85}
+  .verdict{background:var(--card);border-radius:20px;padding:18px 22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06);display:flex;gap:14px;align-items:flex-start}
+  .vbadge{flex:none;font-size:13px;font-weight:800;color:#fff;background:var(--ok);
+    padding:8px 14px;border-radius:12px;white-space:nowrap;text-align:center;line-height:1.3}
+  .vtxt{font-size:13.5px;color:var(--ink2)} .vtxt b{color:var(--ink)}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--doosan)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  th,td{padding:7px 5px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:10.5px;color:var(--ink2);font-weight:700}
+  td.nm{text-align:left;font-weight:700;white-space:nowrap}
+  .ls td,.ls th{padding:6px 3px;font-size:11.5px}
+  .ls .tm{text-align:left;font-weight:800}
+  .ls .rhe{font-weight:800}
+  .ls .ehi{color:var(--warn)}
+  .bad{color:var(--neg)} .good{color:var(--ok)}
+  .mini{font-size:11px;color:var(--ink2)}
+  .sp2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.l{border-top:4px solid var(--kt)}
+  .spname{font-size:17px;font-weight:800}
+  .sptag{font-size:11.5px;color:var(--ink2);margin:3px 0 12px}
+  .sprow{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px dashed var(--line)}
+  .sprow:last-child{border-bottom:none}
+  .sprow .k{color:var(--ink2)} .sprow .v{font-weight:700}
+  .tl{list-style:none;margin-top:6px}
+  .tl li{position:relative;padding:0 0 16px 62px;font-size:13.5px}
+  .tl li:before{content:attr(data-in);position:absolute;left:0;top:0;width:48px;text-align:center;
+    font-size:11px;font-weight:800;color:#fff;background:var(--navy);border-radius:7px;padding:3px 0}
+  .tl li.err:before{background:var(--warn)}
+  .tl li.run:before{background:var(--kt)}
+  .tl li.doo:before{background:var(--pos)}
+  .tl li:after{content:"";position:absolute;left:23px;top:24px;bottom:0;width:2px;background:var(--line)}
+  .tl li:last-child:after{display:none}
+  .tl b{color:var(--navy)} .tl .x{color:var(--neg);font-weight:800} .tl .g{color:var(--ok);font-weight:800}
+  .factors li{margin:10px 0;font-size:13.5px;list-style:none;padding-left:26px;position:relative}
+  .factors li:before{content:attr(data-i);position:absolute;left:0;top:1px;width:19px;height:19px;
+    background:var(--navy);color:#fff;border-radius:50%;font-size:11px;font-weight:800;
+    display:flex;align-items:center;justify-content:center}
+  .factors li.hit:before{content:"\2713";background:var(--ok)}
+  .factors li.miss:before{content:"\2717";background:var(--neg)}
+  .factors b{color:var(--navy)}
+  .callout{background:#fdeef0;border-left:4px solid var(--kt);border-radius:10px;padding:14px 16px;
+    font-size:13px;color:#5a2530;margin-top:14px;line-height:1.7}
+  .callout b{color:var(--kt)}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12px;color:#41496a;margin-top:16px;line-height:1.7}
+  .honest b{color:var(--navy)}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  @media(max-width:640px){.sp2{grid-template-columns:1fr}.st .rn{font-size:44px}.ls td,.ls th{font-size:10px;padding:5px 1px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사후 결과분석 · 데이터기반 · 스탯티즈 실측</span>
+    <div class="score">
+      <div class="st lose">
+        <div class="nm">두산 베어스</div>
+        <div class="sp">선발 최승용 · 마무리 이용찬(패)</div>
+        <div class="rn">4</div>
+        <div class="res">패 · 11회 끝내기 허용</div>
+      </div>
+      <div class="vs">FINAL<br><span style="font-size:10px;opacity:.7">11회</span></div>
+      <div class="st win">
+        <div class="nm">KT 위즈</div>
+        <div class="sp">선발 고영표 · 승 손동현</div>
+        <div class="rn">5</div>
+        <div class="res">끝내기 승</div>
+      </div>
+    </div>
+    <div class="heroft"><span>8.27(목) · 수원 · 두산 원정</span><span>사전예측 두산 35%(열세) → 결과 패 · 방향 적중</span></div>
+  </div>
+
+  <div class="verdict">
+    <span class="vbadge">예측<br>적중</span>
+    <div class="vtxt">사전예측 <b>두산 35%·열세</b>가 방향대로 적중. 다만 <b>어제와 달리 실책은 1개(안재석), 끝내기도 실책이 아닌 이용찬 피홈런</b>이었다. 진짜 패인은 수비가 아니라 <b>고영표에 또 막힌 빈공(양의지 3점포가 유일 반격)</b> + <b>연장 찬스 2번 무산</b> + <b>뒷문 이용찬의 11회 끝내기 피홈런</b>. 어제(이영하)에 이어 <b>이틀 연속 뒷문 붕괴·이틀 연속 4-5 끝내기 패</b>.</div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>라인스코어</h2>
+    <p class="sub">두산 8회 양의지 3점포로 4-4 동점 → 11회말 끝내기 솔로 피홈런 · 실책 두산 1 : KT 1</p>
+    <table class="ls">
+      <thead><tr><th class="tm">팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>R</th><th>H</th><th>E</th></tr></thead>
+      <tbody>
+        <tr><td class="tm">두산</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>0</td><td class="rhe">4</td><td class="rhe">9</td><td class="rhe ehi">1</td></tr>
+        <tr><td class="tm">KT</td><td>0</td><td>2</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td class="rhe">5</td><td class="rhe">9</td><td class="rhe">1</td></tr>
+      </tbody>
+    </table>
+    <p class="mini" style="margin-top:8px">승 손동현 · 패 이용찬(3-1) · KT 11회말 끝내기(walk-off) · 결승타 장진혁 끝내기 솔로홈런.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:var(--kt)"></span>흐름 타임라인 — 빈공·찬스무산·끝내기 피홈런</h2>
+    <p class="sub">스탯티즈 WPA 기반 · 오늘 패인은 수비보다 공격 결정력과 뒷문</p>
+    <ul class="tl">
+      <li class="doo" data-in="2회초"><b>두산 선취</b>: 윤준호 2사 1,2루 좌전 적시타 → <b>1:0</b>.</li>
+      <li class="run" data-in="2회말"><b>KT 역전 2점</b>: 한승택 적시타 + 최승용 낫아웃 폭투로 추가실점 → 1:2.</li>
+      <li class="err" data-in="4회말"><b>안재석(3B) 송구실책</b>으로 <b>비자책 1점</b> 헌납 → 1:3. <span class="mini">※오늘 유일 실책이 만든 결승점급 비자책 실점(최승용 4실점 중 3자책).</span></li>
+      <li class="run" data-in="5회말"><b>안현민 좌월 2루타</b> 적시 → 1:4. 최승용 <b>4.2IP 4R</b>로 조기강판.</li>
+      <li class="doo" data-in="8회초"><b class="g">양의지 3점 홈런</b>(스기모토 상대, 시즌 19호)으로 <b>4:4 동점</b> · 스기모토 블론. <span class="mini">양의지 원맨쇼로 겨우 따라붙음.</span></li>
+      <li class="err" data-in="10~11회초"><b class="x">연장 찬스 2번 무산</b>: 10회 2사 2,3루 김민석 투수땅볼 / 11회 1사 2루(박찬호 2루타) 후 무득점.</li>
+      <li class="run" data-in="11회말"><b>이용찬 등판 즉시 장진혁에게 우익수 뒤 끝내기 솔로홈런</b> → <span class="x">4:5 종료.</span> <span class="mini">이용찬 0.0IP 1피홈런 패(WPA −0.363).</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>선발 리뷰 — 고영표 완벽투 vs 최승용 조기강판</h2>
+    <p class="sub">스탯티즈 박스스코어 실측 · 사전 지목대로 선발 체급차가 그대로 드러남</p>
+    <div class="sp2">
+      <div class="spcard d">
+        <div><span class="spname">최승용</span> <span style="font-size:11.5px;color:var(--ink2)">두산·좌완</span></div>
+        <div class="sptag">4.2IP · 조기강판 (WPA −0.216)</div>
+        <div class="sprow"><span class="k">IP</span><span class="v bad">4.2</span></div>
+        <div class="sprow"><span class="k">H / R / ER</span><span class="v">5 / 4 / 3</span></div>
+        <div class="sprow"><span class="k">BB / K / HR</span><span class="v">0 / 6 / 0</span></div>
+        <div class="sprow"><span class="k">평가</span><span class="v mini" style="font-size:11px">볼넷 0은 好, 5피안타·실책발 실점으로 조기강판</span></div>
+      </div>
+      <div class="spcard l">
+        <div><span class="spname">고영표</span> <span style="font-size:11.5px;color:var(--ink2)">KT·우언</span></div>
+        <div class="sptag">7IP QS · 두산 봉쇄</div>
+        <div class="sprow"><span class="k">IP</span><span class="v good">7.0</span></div>
+        <div class="sprow"><span class="k">H / R / ER</span><span class="v good">4 / 1 / 1</span></div>
+        <div class="sprow"><span class="k">BB / K / HR</span><span class="v">2 / 6 / 0</span></div>
+        <div class="sprow"><span class="k">평가</span><span class="v mini" style="font-size:11px">사전예측대로 두산 타선 완전봉쇄(시즌 3연승급)</span></div>
+      </div>
+    </div>
+    <p class="mini" style="margin-top:10px">두산 <b class="good">중간불펜 6.1IP 무실점</b>(김정우·윤태호·박치국 2K·타카다 2K) → <b class="bad">이용찬 0.0IP 1R(끝내기 피홈런·패)</b>. KT: 고영표 후 스기모토(블론)·박영현 2IP 무실점·손동현(승).</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>타선 — 양의지 원맨쇼, 나머지 침묵</h2>
+    <p class="sub">두산 9안타 4득점 · 고영표+박영현 상대 득점권 7타수 2안타</p>
+    <table>
+      <thead><tr><th>타자</th><th>기록</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td class="nm">양의지 (DH)</td><td class="good">2안타 1홈런 3타점</td><td class="mini">8회 동점 3점포 · <b>게임 MVP</b>(WPA +0.376)</td></tr>
+        <tr><td class="nm">박준순 (2B)</td><td>2안타 1볼넷</td><td class="mini">멀티히트(사전 이력無 우려 딛음)</td></tr>
+        <tr><td class="nm">박찬호 (SS)</td><td>2안타 (11회 2루타)</td><td class="mini">연장 찬스 연결</td></tr>
+        <tr><td class="nm">조수행 (RF)</td><td>2안타</td><td class="mini">9회 도루실패</td></tr>
+        <tr><td class="nm">윤준호 (C)</td><td>1안타 1타점</td><td class="mini">2회 선취타점</td></tr>
+        <tr><td class="nm">김민석 (LF)</td><td class="bad">0-5</td><td class="mini"><span class="bad">10회 2사 2,3루 무산</span> · WPA −0.246</td></tr>
+        <tr><td class="nm">정수빈 (CF)</td><td>0-4 (볼넷1)</td><td class="mini">테이블 침묵</td></tr>
+        <tr><td class="nm">세베리노 (1B)</td><td>0-4</td><td class="mini">중심 무득점</td></tr>
+      </tbody>
+    </table>
+    <p class="mini" style="margin-top:8px">사전 [A] 고영표 강세로 꼽은 강승호(대타 0-1)·정수빈(0-4)도 침묵, <b>양의지만 예측대로 폭발</b>. KT: 김상수 3안타, 한승택 2안타 1타점, <b>장진혁 끝내기 홈런</b>.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>사전예측 검증 — 방향·핵심 적중</h2>
+    <p class="sub">예측 35%(열세) → 실제 4-5 패 · 지목한 리스크가 그대로 실현</p>
+    <ul class="factors">
+      <li class="hit"><b>판정 적중.</b> 열세(35%) → 패. 1점차 접전으로 예측 범위(34~37%)와 부합.</li>
+      <li class="hit"><b>고영표 봉쇄 적중.</b> "공략은 요행에 가깝다" → 7IP 1ER. 양의지 홈런 없었으면 무득점급.</li>
+      <li class="hit"><b>최승용 KT전 약세 적중.</b> "진짜 변수는 최승용" → 4.2IP 4R 조기강판으로 초반 승부 기울임.</li>
+      <li class="hit"><b>접전 시 불펜 승부 적중.</b> 연장 11회까지 가는 1점차 승부.</li>
+      <li class="miss"><b>세부 패인은 어제와 달랐다.</b> 어제=수비붕괴(3실책), 오늘=<b>공격 결정력(연장 찬스 무산)+뒷문 피홈런</b>. 실책은 1개였다.</li>
+    </ul>
+  </section>
+
+  <div class="callout">
+    <b>이틀 연속 뒷문 붕괴 —</b> 8/26·8/27 <b>연속 끝내기 패 + 연속 4-5</b>. 두 경기 공통 구조는 ①선발이 리드를 못 지키거나 조기 실점 → ②중간불펜은 버팀 → ③<b>마무리(이영하→이용찬)가 끝내기 허용</b>. 어제는 수비(3실책)가, 오늘은 빈공+뒷문이 갈랐다. 사전 리포트가 지목한 "두산의 좁은 승리 경로(최승용 선방+고영표 공략)"가 둘 다 막히자 결국 접전 끝 뒷문에서 무너졌다. <b>AG 브레이크(9/14~)를 앞두고 마무리 안정과 고영표류 저구속 제구형 공략이 다음 과제.</b>
+  </div>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 라인스코어·투수 기록·수비 실책·WPA는 <b>스탯티즈 박스스코어(s_no 20260629) 실측</b>. 실책 귀속은 공식 표기(안재석 4회 1호)를 따랐고, 최승용 4실점 중 1점은 이 실책이 만든 비자책이다. 끝내기는 장진혁 11회 솔로홈런(이용찬). 사전예측 35%(열세)는 방향이 적중했으며, 세부 패인(연장 찬스 무산·뒷문 피홈런)은 어제의 수비붕괴와는 다른 양상이었다. 웹검색 수치 대체 없음.
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈 박스스코어(라인스코어·투수·수비·WPA 실측, s_no 20260629).<br>
+    두산 vs KT · 2026.8.27(목) 수원 · 사후 결과분석 리포트 · 데이터기반 야구.
+  </footer>
+
+</div>
+</body>
+</html>
