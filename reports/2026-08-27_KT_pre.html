@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs KT · 8.27 수원 — 사전 승률예측</title>
+<style>
+  :root{
+    --navy:#131a4a; --ink:#0f1424; --ink2:#5b6478;
+    --line:#e6e8f0; --bg:#f4f5f9; --card:#ffffff;
+    --doosan:#131a4a; --kt:#d0112b;
+    --pos:#1a73e8; --neg:#d93838; --warn:#c8851b; --ok:#1e9e5a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px; margin:0 auto; padding:22px 16px 60px}
+  .hero{background:linear-gradient(135deg,#0d1442 0%,#131a4a 50%,#10204a 100%);
+    color:#fff; border-radius:20px; padding:26px 26px 22px; position:relative; overflow:hidden}
+  .hero:before{content:"";position:absolute;right:-40px;top:-40px;width:200px;height:200px;
+    background:radial-gradient(circle,rgba(120,160,255,.30),transparent 70%);border-radius:50%}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.5px;background:rgba(255,255,255,.14);
+    padding:4px 11px;border-radius:999px;margin-bottom:14px}
+  .matchup{display:flex;align-items:center;justify-content:center;gap:18px;margin:8px 0 6px}
+  .mt{text-align:center;flex:1}
+  .mt .nm{font-size:20px;font-weight:800;letter-spacing:-.5px}
+  .mt .sp{font-size:12.5px;opacity:.8;margin-top:3px}
+  .mt .pct{font-size:46px;font-weight:900;line-height:1;margin-top:8px}
+  .mt.fav .pct{color:#ff9db9} .mt.dog .pct{color:#a9c6ff}
+  .vs{font-size:13px;opacity:.7;font-weight:700}
+  .hbar{margin-top:14px}
+  .hbar .track{height:12px;border-radius:999px;background:rgba(255,255,255,.18);overflow:hidden;display:flex}
+  .hbar .d{background:#7aa0ff;height:100%} .hbar .l{background:#ff7a8f;height:100%}
+  .hbar .lab{display:flex;justify-content:space-between;font-size:11.5px;margin-top:6px;opacity:.85}
+  .verdict{background:var(--card);border-radius:20px;padding:18px 22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.06);display:flex;gap:14px;align-items:flex-start}
+  .vbadge{flex:none;font-size:13.5px;font-weight:800;color:#fff;background:var(--kt);
+    padding:8px 14px;border-radius:12px;white-space:nowrap}
+  .vtxt{font-size:13.5px;color:var(--ink2)} .vtxt b{color:var(--ink)}
+  section{background:var(--card);border-radius:18px;padding:22px;margin-top:16px;
+    box-shadow:0 2px 14px rgba(20,26,74,.05)}
+  h2{font-size:17px;font-weight:800;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--doosan)}
+  .sub{font-size:12.5px;color:var(--ink2);margin-bottom:16px}
+  .sp2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .spcard{border:1px solid var(--line);border-radius:14px;padding:16px}
+  .spcard.d{border-top:4px solid var(--doosan)} .spcard.l{border-top:4px solid var(--kt)}
+  .spname{font-size:18px;font-weight:800}
+  .sptag{font-size:12px;color:var(--ink2);margin:3px 0 12px}
+  .sprow{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px dashed var(--line)}
+  .sprow:last-child{border-bottom:none}
+  .sprow .k{color:var(--ink2)} .sprow .v{font-weight:700}
+  .bad{color:var(--neg)} .good{color:var(--ok)}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:4px}
+  th,td{padding:7px 5px;text-align:center;border-bottom:1px solid var(--line)}
+  th{font-size:10.5px;color:var(--ink2);font-weight:700}
+  td.nm{text-align:left;font-weight:700;white-space:nowrap}
+  .L{color:var(--pos);font-weight:700;font-size:11px} .R{color:var(--neg);font-weight:700;font-size:11px} .S{color:var(--warn);font-weight:700;font-size:11px}
+  .star{color:var(--warn)}
+  .ops-hi{color:var(--ok);font-weight:800} .ops-lo{color:var(--neg)}
+  .mini{font-size:11px;color:var(--ink2)}
+  .arsenal{margin-top:6px}
+  .arow{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:12.5px}
+  .arow .anm{width:110px;flex:none;font-weight:700}
+  .arow .abar{flex:1;height:14px;background:#eef1f8;border-radius:7px;overflow:hidden}
+  .arow .afill{height:100%;background:linear-gradient(90deg,#d0112b,#e8546c)}
+  .arow .apct{width:46px;text-align:right;flex:none;color:var(--ink2);font-weight:700}
+  .factors li{margin:10px 0;font-size:13.5px;list-style:none;padding-left:26px;position:relative}
+  .factors li:before{content:attr(data-i);position:absolute;left:0;top:1px;width:19px;height:19px;
+    background:var(--navy);color:#fff;border-radius:50%;font-size:11px;font-weight:800;
+    display:flex;align-items:center;justify-content:center}
+  .factors b{color:var(--navy)}
+  .pill{display:inline-block;font-size:11px;font-weight:700;padding:1px 7px;border-radius:6px;margin-left:4px}
+  .pill.lo{background:#fdeaea;color:var(--neg)} .pill.hi{background:#e8f6ee;color:var(--ok)} .pill.mid{background:#eef1f8;color:#41496a}
+  .honest{background:#eef1f8;border-radius:12px;padding:14px 16px;font-size:12px;color:#41496a;margin-top:16px;line-height:1.7}
+  .honest b{color:var(--navy)}
+  .keybox{background:#fbf3e6;border:1px solid #f0dcb8;border-radius:12px;padding:14px 16px;margin-top:12px;font-size:12.5px;color:#6b5320;line-height:1.7}
+  .keybox b{color:#8a5a12}
+  footer{margin-top:22px;font-size:11.5px;color:var(--ink2);line-height:1.7;padding:0 6px}
+  @media(max-width:640px){.sp2{grid-template-columns:1fr}.mt .pct{font-size:38px}.arow .anm{width:92px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">⚾ 사전 승률예측 · 데이터기반 · 확정 라인업 반영</span>
+    <div class="matchup">
+      <div class="mt dog">
+        <div class="nm">두산 베어스</div>
+        <div class="sp">선발 최승용 (좌완)</div>
+        <div class="pct">35%</div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="mt fav">
+        <div class="nm">KT 위즈</div>
+        <div class="sp">선발 고영표 (우언)</div>
+        <div class="pct">65%</div>
+      </div>
+    </div>
+    <div class="hbar">
+      <div class="track"><div class="d" style="width:35%"></div><div class="l" style="width:65%"></div></div>
+      <div class="lab"><span>두산 35%</span><span>8.27(목) · 수원 · 두산 원정</span><span>KT 65%</span></div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <span class="vbadge">KT 우세</span>
+    <div class="vtxt">범위 <b>두산 34~37%</b>. 하방은 <b>선발 체급 격차</b>(부진한 최승용 vs 리그 5위 고영표)와 <b>KT의 최승용 저격 라인업</b>, 그리고 <b>6/16 두 선발 직접 맞대결서 최승용 완패</b>(시즌 두산 vs 고영표 0승 2패). 상방은 <b>고영표도 최근 두 경기 3실점씩 허용</b>했고, 두산에 <b>고영표 킬러 강승호(통산 OPS .958)를 대타 카드로 보유</b>한 점. '해줘 야구'가 아니라 <b>최승용이 KT 2~5번 중심타선을 초반에 버티느냐</b>가 승부의 전부다.</div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>선발 매치업 — 부진한 좌완 vs 리그 정상급 사이드암</h2>
+    <p class="sub">스탯티즈 2026 시즌누적 실측 · 개인 지표·표본 모두 고영표 우위 · FIP도 고영표(3.22) &lt; 최승용(4.96)</p>
+    <div class="sp2">
+      <div class="spcard d">
+        <div><span class="spname">최승용 <span class="mini">(두산)</span></span></div>
+        <div class="sptag">좌완 · 2001생(24세) · 6일 휴식 (8/21 등판)</div>
+        <div class="sprow"><span class="k">성적</span><span class="v bad">19선발 3승 10패</span></div>
+        <div class="sprow"><span class="k">ERA / rRA9</span><span class="v">5.60 / 5.65</span></div>
+        <div class="sprow"><span class="k">rRA9pf / FIP</span><span class="v">5.80 / <b>4.96</b></span></div>
+        <div class="sprow"><span class="k">WHIP</span><span class="v bad">1.57</span></div>
+        <div class="sprow"><span class="k">K / BB / HR</span><span class="v">64 / <span class="bad">35</span> / <span class="bad">10</span></span></div>
+        <div class="sprow"><span class="k">특징</span><span class="v mini">저구속·탈삼진 적음·<span class="bad">피홈런·볼넷多</span></span></div>
+        <div class="sprow"><span class="k">구종</span><span class="v mini">포심45·슬라19·커브17·커터13·체인지3</span></div>
+      </div>
+      <div class="spcard l">
+        <div><span class="spname">고영표 <span class="mini">(KT)</span></span></div>
+        <div class="sptag">우언(사이드암) · 1991생(34세) · 7일 휴식 (8/20 등판)</div>
+        <div class="sprow"><span class="k">성적</span><span class="v good">21선발 10승 6패</span></div>
+        <div class="sprow"><span class="k">ERA / rRA9</span><span class="v good">3.74 / 3.76</span></div>
+        <div class="sprow"><span class="k">rRA9pf / FIP</span><span class="v">3.71 / <b>3.22</b></span></div>
+        <div class="sprow"><span class="k">WHIP</span><span class="v good">1.15</span></div>
+        <div class="sprow"><span class="k">K / BB / HR</span><span class="v"><span class="good">133</span> / <span class="good">16</span> / 13</span></div>
+        <div class="sprow"><span class="k">특징</span><span class="v mini">WAR 리그 5위·<span class="good">극강 제구·헛스윙 유도</span></span></div>
+        <div class="sprow"><span class="k">구종</span><span class="v mini">체인지43·투심31·커브15·포심7·슬라4</span></div>
+      </div>
+    </div>
+    <div class="keybox">
+      <b>★ 6/16 직접 맞대결 전례 —</b> 6월 16일 두산-KT전이 바로 <b>최승용 vs 고영표 맞대결</b>이었고 결과는 <b>KT 6-2 승</b>(최승용 4.2이닝 6자책 완패 / 고영표 6이닝 2자책 승). 여기에 5/28까지 포함해 <b>시즌 두산 vs 고영표 0승 2패</b>, 고영표는 두 경기 모두 6이닝 2자책으로 두산을 막았다.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:var(--kt)"></span>KT 선발 고영표 — 저구속 극강 제구 사이드암 (공략 난도 高)</h2>
+    <p class="sub">서클체인지업 + 투심 중심 · 볼넷 극소(122.2이닝 16BB)·헛스윙율 리그 상위 5%·탈삼진 SO% 99</p>
+    <div class="arsenal">
+      <div class="arow"><span class="anm">체인지업</span><span class="abar"><span class="afill" style="width:86%"></span></span><span class="apct">42.9%</span></div>
+      <div class="arow"><span class="anm">투심(싱커)</span><span class="abar"><span class="afill" style="width:61%"></span></span><span class="apct">30.5%</span></div>
+      <div class="arow"><span class="anm">커브</span><span class="abar"><span class="afill" style="width:31%"></span></span><span class="apct">15.3%</span></div>
+      <div class="arow"><span class="anm">포심</span><span class="abar"><span class="afill" style="width:14%"></span></span><span class="apct">6.9%</span></div>
+      <div class="arow"><span class="anm">슬라이더</span><span class="abar"><span class="afill" style="width:9%"></span></span><span class="apct">4.3%</span></div>
+    </div>
+    <ul class="factors" style="margin-top:14px">
+      <li data-i="1"><b>유리한 카운트를 방치하지 마라.</b> 제구가 리그 최상급이라 몰고 가면 삼진(SO% 99)에 잡힌다. <b>초구·2구 존에 들어오는 투심을 초반부터 적극 공략</b>해야 한다.</li>
+      <li data-i="2"><b>바깥·낮은 체인지업은 참아라.</b> 결정구가 체인지업(42.9%)이고 헛스윙 유도가 리그 상위 5%. 존 밖 체인지업에 방망이가 나가면 그 이닝은 끝난다.</li>
+      <li data-i="3"><b>빈틈은 최근폼과 장타.</b> 저구속이라 타이밍이 맞으면 장타 가능(시즌 피홈런 13). 실제로 최근 8/14·8/20 <b>연속 3실점</b>했다. 강승호·정수빈·양의지 등 통산 강세 타자의 한 방이 유일한 실마리.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>두산 라인업 vs 고영표 — 통산 상대전적 (실측)</h2>
+    <p class="sub">스탯티즈 통산(m=rival) · 검증된 강세는 <b>정수빈·양의지</b>뿐 · 고영표 킬러 강승호(.958)는 포지션 제약(1루 전용·세베리노와 중복)으로 벤치</p>
+    <table>
+      <thead><tr><th>순</th><th>타자</th><th>포지션</th><th>타격</th><th>PA</th><th>AVG/OBP/SLG</th><th>OPS</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="nm">정수빈 <span class="star">★</span></td><td>중견</td><td><span class="L">좌</span></td><td>36</td><td>.371/.389/.486</td><td class="ops-hi">.875</td><td class="mini">꾸준 강세</td></tr>
+        <tr><td>2</td><td class="nm">안재석</td><td>3루</td><td><span class="L">좌</span></td><td>25</td><td>.217/.280/.261</td><td class="ops-lo">.541</td><td class="mini">5삼진·열세</td></tr>
+        <tr><td>3</td><td class="nm">박준순</td><td>2루</td><td><span class="R">우</span></td><td>—</td><td>—</td><td>—</td><td class="mini">첫 대면</td></tr>
+        <tr><td>4</td><td class="nm">양의지 <span class="star">★</span></td><td>지명</td><td><span class="R">우</span></td><td>56</td><td>.286/.345/.388</td><td class="ops-hi">.733</td><td class="mini">최다대결·준수</td></tr>
+        <tr><td>5</td><td class="nm">김민석</td><td>좌익</td><td><span class="L">좌</span></td><td>12</td><td>.364/.417/.455</td><td>.872</td><td class="mini">소표본</td></tr>
+        <tr><td>6</td><td class="nm">세베리노</td><td>1루</td><td><span class="S">양</span></td><td>—</td><td>—</td><td>—</td><td class="mini">첫 대면·외인</td></tr>
+        <tr><td>7</td><td class="nm">박찬호</td><td>유격</td><td><span class="R">우</span></td><td>40</td><td>.205/.225/.359</td><td class="ops-lo">.584</td><td class="mini">열세(2루타는 有)</td></tr>
+        <tr><td>8</td><td class="nm">조수행</td><td>우익</td><td><span class="L">좌</span></td><td>15</td><td>.250/.357/.250</td><td class="ops-lo">.607</td><td class="mini">출루형</td></tr>
+        <tr><td>9</td><td class="nm">윤준호</td><td>포수</td><td><span class="R">우</span></td><td>3</td><td>.333/.333/.333</td><td>.666</td><td class="mini">소표본</td></tr>
+      </tbody>
+    </table>
+    <p class="mini" style="margin-top:8px">고영표 상대 검증된 강세는 <b>정수빈(36PA .875)·양의지(56PA .733)</b> 둘. 3·6번(<b>박준순·세베리노</b>)은 상대전적 전무, 2·7·8번(안재석·박찬호·조수행)은 열세라 <b>중심타선 뎁스가 얇다</b>. 최강 카드 <b>강승호(43PA OPS .958)</b>는 1루 전용이라 세베리노와 겹쳐 선발 제외 → <b>후반 대타로 보존</b>.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot" style="background:var(--kt)"></span>KT 라인업 vs 최승용 — 통산 상대전적 (실측)</h2>
+    <p class="sub">스탯티즈 통산(m=rival) · KT는 <b>최승용에게 강한 2~5번</b>을 전면 배치한 저격 오더 · 약세 배정대는 벤치</p>
+    <table>
+      <thead><tr><th>순</th><th>타자</th><th>포지션</th><th>타격</th><th>PA</th><th>AVG/OBP/SLG</th><th>OPS</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td class="nm">최원준</td><td>중견</td><td><span class="L">좌</span></td><td>14</td><td>.333/.357/.333</td><td>.690</td><td class="mini">출루형</td></tr>
+        <tr><td>2</td><td class="nm">김현수 <span class="star">★</span></td><td>1루</td><td><span class="L">좌</span></td><td>28</td><td>.318/.393/.364</td><td class="ops-hi">.757</td><td class="mini">다수대결·강세</td></tr>
+        <tr><td>3</td><td class="nm">안현민 <span class="star">★</span></td><td>우익</td><td><span class="R">우</span></td><td>11</td><td>.333/.455/.333</td><td class="ops-hi">.788</td><td class="mini">출루강세·전날 결정타</td></tr>
+        <tr><td>4</td><td class="nm">장성우 <span class="star">★</span></td><td>지명</td><td><span class="R">우</span></td><td>23</td><td>.524/.565/.619</td><td class="ops-hi">1.184</td><td class="mini">최승용 킬러·전날 HR</td></tr>
+        <tr><td>5</td><td class="nm">김상수 <span class="star">★</span></td><td>2루</td><td><span class="R">우</span></td><td>25</td><td>.333/.360/.500</td><td class="ops-hi">.860</td><td class="mini">2루타4·장타경계</td></tr>
+        <tr><td>6</td><td class="nm">허경민</td><td>3루</td><td><span class="R">우</span></td><td>10</td><td>.300/.300/.300</td><td>.600</td><td class="mini">중립</td></tr>
+        <tr><td>7</td><td class="nm">장진혁</td><td>좌익</td><td><span class="L">좌</span></td><td>2</td><td>.000/.000/.000</td><td class="ops-lo">.000</td><td class="mini">소표본</td></tr>
+        <tr><td>8</td><td class="nm">한승택</td><td>포수</td><td><span class="R">우</span></td><td>5</td><td>.600/.600/1.000</td><td class="ops-hi">1.600</td><td class="mini">소표본 강세</td></tr>
+        <tr><td>9</td><td class="nm">권동진</td><td>유격</td><td><span class="L">좌</span></td><td>5</td><td>.250/.250/.250</td><td>.500</td><td class="mini">소표본</td></tr>
+      </tbody>
+    </table>
+    <p class="mini" style="margin-top:8px"><b>2~5번(김현수·안현민·장성우·김상수) 전원이 최승용 통산 강세</b> = 최승용에겐 재앙적 중심타선. 특히 <b>장성우(23PA OPS 1.184)</b>는 최승용 킬러이자 전날 홈런 타자다. 최승용에 약한 <b>배정대(13PA .473)</b>는 벤치로 제외 — KT가 상대전적을 정확히 반영한 저격 라인업.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>승부처 — 왜 두산 35%인가</h2>
+    <p class="sub">데이터가 가리키는 우선순위</p>
+    <ul class="factors">
+      <li data-i="1"><b>선발 체급 격차(최대 하방).</b> 부진한 최승용(3승10패·ERA 5.60·FIP 4.96) vs 리그 5위 고영표(FIP 3.22). 개인 지표·표본 전부 KT 우위. <span class="pill lo">두산 −</span></li>
+      <li data-i="2"><b>직접 맞대결·상성 열세.</b> 6/16 두 선발 맞대결 최승용 완패, 시즌 두산 vs 고영표 <b>0승 2패</b>(모두 6이닝 2자책 허용). <span class="pill lo">두산 −</span></li>
+      <li data-i="3"><b>KT의 최승용 저격 라인업.</b> 2~5번(김현수·안현민·장성우·김상수)이 전원 최승용 통산 강세. 초반 실점 위험이 매우 높다. <span class="pill lo">두산 −</span></li>
+      <li data-i="4"><b>고영표의 최근 빈틈(유일한 상방).</b> 8/14·8/20 연속 3실점. 정수빈·양의지 중심으로 조기 득점 + 후반 강승호 대타 한 방이 나오면 승산이 열린다. <span class="pill hi">두산 +</span></li>
+      <li data-i="5"><b>수비·피홈런 리스크.</b> 어제 실책 3개(끝내기 실책 포함)로 드러난 내야 불안 + 수원구장·KT 장타라인 상대 최승용 피홈런 위험. <span class="pill lo">두산 −</span></li>
+    </ul>
+    <p class="mini" style="margin-top:6px">▸ 오늘의 진짜 변수는 고영표가 아니라 <b>최승용</b>이다. 고영표를 두들기는 그림(공략)은 확률이 낮고, 현실적 승리 경로는 <b>저득점 접전에서 최승용이 KT 중심타선을 2~3점 이하로 버티는 것</b>이다.</p>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 선발 지표는 <b>스탯티즈(statiz.co.kr) 2026 시즌누적 실측</b>(최승용 p_no=14770 / 고영표 p_no=11308). 상대전적은 <b>양 선발 통산 m=rival 실측</b>(두산 타자 vs 고영표, KT 타자 vs 최승용) — 일부는 10PA 이하 소표본이라 회귀 여지가 있다. 6/16 직접 맞대결은 두 선수 날짜별(m=day) 교차확인. 1군 명단은 KBO 등록현황(8/27 등말소: 두산 무변동 / KT 힐리어드 말소·문상철 등록). <b>강승호는 1루 전용(3루 불가)</b>이라 세베리노와 포지션이 겹쳐 선발 제외됐으며, 이는 감독의 실수가 아니라 로스터·포지션 제약이다. 승률 35%(범위 34~37%)는 선발·상성·라인업·수비를 반영한 조정치이며, 라인업 전 예비 추정(35~38%)에서 KT 저격 라인업을 반영해 하단으로 조정했다.
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈(선발 지표·상대전적 실측), KBO 등록현황(1군 명단·등말소).<br>
+    두산 vs KT · 2026.8.27(목) 수원 · 사전 승률예측 리포트 · 데이터기반 야구.
+  </footer>
+
+</div>
+</body>
+</html>
