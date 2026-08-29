@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs 키움 · 8.29 잠실 · 사전 승률예측</title>
+<style>
+  :root{
+    --bg:#0c0f16; --card:#141924; --card2:#1a2030; --line:#252d3d;
+    --tx:#e8edf6; --sub:#95a1b6; --dim:#6b7688;
+    --doo:#1a2b6b; --doo2:#2d4bb5; --kiw:#7a1030; --kiw2:#c2264f;
+    --good:#37c489; --warn:#f2c14e; --bad:#e8654f; --neu:#5b6577;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--tx);font-family:'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:26px 18px 60px}
+  .hero{background:linear-gradient(135deg,#0f1830 0%,#1a1526 55%,#2a0f1e 100%);border:1px solid var(--line);border-radius:18px;padding:28px 26px;position:relative;overflow:hidden}
+  .hero .tag{display:inline-block;font-size:12px;letter-spacing:2px;color:var(--sub);border:1px solid var(--line);border-radius:20px;padding:4px 12px;margin-bottom:14px}
+  .hero h1{font-size:30px;font-weight:800;letter-spacing:-.5px;line-height:1.25}
+  .hero h1 .doo{color:#7f9dff}.hero h1 .kiw{color:#ff7a9c}
+  .hero .meta{margin-top:10px;color:var(--sub);font-size:14px}
+  .matchup{display:flex;gap:14px;margin-top:20px;flex-wrap:wrap}
+  .mp{flex:1;min-width:250px;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .mp .role{font-size:11px;letter-spacing:1px;color:var(--dim)}
+  .mp .nm{font-size:19px;font-weight:800;margin-top:2px}
+  .mp .ln{font-size:13px;color:var(--sub);margin-top:6px}
+  .mp.d{border-left:3px solid var(--doo2)}.mp.k{border-left:3px solid var(--kiw2)}
+
+  .verdict{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px 24px 20px;text-align:center}
+  .verdict .lab{font-size:13px;color:var(--sub);letter-spacing:1px}
+  .bar{margin:16px 0 10px;height:42px;border-radius:10px;overflow:hidden;display:flex;font-weight:800;font-size:16px}
+  .bar .d{background:linear-gradient(90deg,var(--doo),var(--doo2));display:flex;align-items:center;justify-content:flex-start;padding-left:16px;color:#fff}
+  .bar .k{background:linear-gradient(90deg,var(--kiw2),var(--kiw));display:flex;align-items:center;justify-content:flex-end;padding-right:16px;color:#fff}
+  .verdict .call{font-size:22px;font-weight:800;margin-top:6px}
+  .verdict .call b{color:#7f9dff}
+  .verdict .rng{font-size:13px;color:var(--dim);margin-top:4px}
+
+  section{margin-top:26px}
+  h2{font-size:19px;font-weight:800;display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--doo2);box-shadow:0 0 0 4px rgba(45,75,181,.18)}
+  .sub{color:var(--sub);font-size:13px;margin-bottom:14px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .card h3{font-size:16px;font-weight:800;margin-bottom:2px}
+  .card h3.d{color:#7f9dff}.card h3.k{color:#ff7a9c}
+  .card .role2{font-size:12px;color:var(--dim);margin-bottom:12px}
+  .stat{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .stat:last-child{border-bottom:0}
+  .stat .k{color:var(--sub)}.stat .v{font-weight:700;font-variant-numeric:tabular-nums}
+  .stat .v.hi{color:var(--good)}.stat .v.lo{color:var(--bad)}
+  .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;background:var(--card2);color:var(--sub);margin-top:10px}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+  th,td{padding:8px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  th{color:var(--sub);font-weight:600;font-size:12px}
+  td.nm{text-align:left;font-weight:700}
+  td.pos{color:var(--dim);font-size:12px}
+  .wrc{font-weight:800;font-variant-numeric:tabular-nums}
+  .w-hi{color:var(--good)}.w-mid{color:var(--tx)}.w-lo{color:var(--bad)}
+  .lt{font-size:10px;padding:1px 5px;border-radius:4px;background:#20406a;color:#9fc0ff;margin-left:4px}
+  .rt{font-size:10px;padding:1px 5px;border-radius:4px;background:#333;color:#bbb;margin-left:4px}
+  tr.hl td{background:rgba(45,75,181,.08)}
+
+  .h2h{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:14px}
+  .h2h .row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px;flex-wrap:wrap;gap:6px}
+  .h2h .row:last-child{border-bottom:0}
+  .h2h .nm{font-weight:700;min-width:70px}
+  .h2h .line{color:var(--sub);font-size:13px;font-variant-numeric:tabular-nums}
+  .h2h .verdict-s{font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px}
+  .vs-pit{background:rgba(55,196,137,.15);color:var(--good)}
+  .vs-bat{background:rgba(232,101,79,.15);color:var(--bad)}
+  .vs-neu{background:#2a2f3d;color:var(--sub)}
+
+  .factor{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .factor:last-child{border-bottom:0}
+  .fic{width:26px;height:26px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff}
+  .fd{background:var(--doo2)}.fk{background:var(--kiw2)}.fn{background:#4a5568}
+  .ft{font-weight:700;font-size:15px}
+  .fx{color:var(--sub);font-size:13.5px;margin-top:2px}
+  .fx b{color:var(--tx)}
+
+  ul.strat{list-style:none;margin-top:6px}
+  ul.strat li{padding:10px 0 10px 22px;position:relative;border-bottom:1px solid var(--line);font-size:14.5px;color:#dbe2ee}
+  ul.strat li:last-child{border-bottom:0}
+  ul.strat li:before{content:"▸";position:absolute;left:2px;color:var(--doo2);font-weight:800}
+  ul.strat li b{color:#fff}
+
+  .honest{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:12.5px;color:var(--sub);margin-top:22px;line-height:1.7}
+  .honest b{color:var(--tx)}
+  footer{margin-top:24px;text-align:center;color:var(--dim);font-size:12px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">KBO 사전 승률예측 · 데이터기반</span>
+    <h1><span class="doo">두산 베어스</span> vs <span class="kiw">키움 히어로즈</span></h1>
+    <div class="meta">2026. 8. 29 (토) 18:00 · 잠실야구장 · 두산 홈 · 주말 3연전 2차전</div>
+    <div class="matchup">
+      <div class="mp d">
+        <div class="role">두산 선발 · 우완</div>
+        <div class="nm">곽빈</div>
+        <div class="ln">10승5패 · ERA 2.33 · FIP 2.77 · WHIP 1.07 · WAR 5.39 <b style="color:#7f9dff">(리그 1위)</b></div>
+      </div>
+      <div class="mp k">
+        <div class="role">키움 선발 · 우완</div>
+        <div class="nm">안우진</div>
+        <div class="ln">3승6패 · ERA 3.39 · FIP 3.06 · WHIP 1.21 · WAR 2.30 (승운 없음)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="verdict">
+    <div class="lab">종합 승률 예측</div>
+    <div class="bar">
+      <div class="d" style="width:65%">두산 65%</div>
+      <div class="k" style="width:35%">키움 35%</div>
+    </div>
+    <div class="call">판정: <b>두산 우세</b></div>
+    <div class="rng">추정 범위 62~67% · 곽빈 등판 + 홈 + 뒷문 우위, 단 상대 에이스 안우진이 변수 (잠실 투수전 가능성)</div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>선발 매치업 — 곽빈 우위, 안우진도 상위급 에이스</h2>
+    <p class="sub">양쪽 다 파워 우완. 스탯티즈 실측(2026 시즌누적) · 최근5선발 rRA9 병기</p>
+    <div class="grid2">
+      <div class="card">
+        <h3 class="d">곽빈 <span style="font-size:12px;color:var(--dim)">두산 RHP</span></h3>
+        <div class="role2">23선발 135.0IP · 리그 WAR 1위 에이스</div>
+        <div class="stat"><span class="k">rRA9 (실점억제)</span><span class="v hi">2.64</span></div>
+        <div class="stat"><span class="k">FIP</span><span class="v hi">2.77</span></div>
+        <div class="stat"><span class="k">WHIP</span><span class="v hi">1.07</span></div>
+        <div class="stat"><span class="k">K/9 · BB/9</span><span class="v">10.7 · 2.2</span></div>
+        <div class="stat"><span class="k">최근 5선발 rRA9</span><span class="v hi">≈1.1</span></div>
+        <div class="stat"><span class="k">최근 등판</span><span class="v">8/23 롯데 7IP 0R</span></div>
+        <span class="pill">8월 사실상 무실점 행진 · 6일 휴식 · 구속 99퍼센타일</span>
+      </div>
+      <div class="card">
+        <h3 class="k">안우진 <span style="font-size:12px;color:var(--dim)">키움 RHP</span></h3>
+        <div class="role2">18선발 85.0IP · FIP 3.06 리그 상위, 승운 없음</div>
+        <div class="stat"><span class="k">rRA9 (실점억제)</span><span class="v">3.51</span></div>
+        <div class="stat"><span class="k">FIP</span><span class="v hi">3.06</span></div>
+        <div class="stat"><span class="k">WHIP</span><span class="v">1.21</span></div>
+        <div class="stat"><span class="k">K/9 · BB/9</span><span class="v">10.7 · 2.9</span></div>
+        <div class="stat"><span class="k">최근 5선발 rRA9</span><span class="v hi">≈2.8</span></div>
+        <div class="stat"><span class="k">최근 등판</span><span class="v hi">8/22 KIA 7IP 0R</span></div>
+        <span class="pill">직전 완봉급 반등 · 8일 휴식 · 구속 99퍼센타일 · 6/6 두산전 3IP 6R 참사 이력</span>
+      </div>
+    </div>
+    <div class="honest" style="margin-top:14px">
+      <b>선발 해석:</b> 핵심지표 전반에서 <b>곽빈 우위</b>(rRA9 2.64<3.51, WHIP 1.07<1.21, WAR 5.39 vs 2.30). 다만 <b>안우진의 FIP 3.06·K/9 10.7</b>은 리그 상위급이고 3승6패는 키움 타선·불펜 탓의 승운 문제일 뿐 내용은 강하다. 직전 8/22 KIA전 7이닝 무실점으로 반등해 컨디션도 최상. <b>곽빈이 명백히 한 수 위지만, "곽빈 등판=대승" 공식이 통하지 않는 상대 에이스</b>라 예측 상향폭을 제한한다.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>확정 라인업 타력 (wRC+)</h2>
+    <p class="sub">양팀 발표 라인업 9명 · 스탯티즈 실측 · 우완 선발 상대 좌타(<span class="lt">좌</span>) 플래툰 표시</p>
+    <div class="grid2">
+      <div class="card" style="padding:14px">
+        <h3 class="d">두산 (vs 안우진)</h3>
+        <div class="role2">라인업 평균 wRC+ <b style="color:#7f9dff">98.8</b> · 중심타선(3~5번) 강점</div>
+        <table>
+          <tr><th>#</th><th>선수</th><th>Pos</th><th>wRC+</th><th>OPS</th></tr>
+          <tr><td>1</td><td class="nm">박찬호</td><td class="pos">SS</td><td class="wrc w-mid">102.9</td><td>.743</td></tr>
+          <tr><td>2</td><td class="nm">안재석<span class="lt">좌</span></td><td class="pos">3B</td><td class="wrc w-mid">92.4</td><td>.727</td></tr>
+          <tr class="hl"><td>3</td><td class="nm">박준순</td><td class="pos">2B</td><td class="wrc w-hi">138.7</td><td>.894</td></tr>
+          <tr class="hl"><td>4</td><td class="nm">양의지</td><td class="pos">DH</td><td class="wrc w-hi">124.4</td><td>.830</td></tr>
+          <tr class="hl"><td>5</td><td class="nm">김민석<span class="lt">좌</span></td><td class="pos">LF</td><td class="wrc w-hi">120.1</td><td>.788</td></tr>
+          <tr><td>6</td><td class="nm">세베리노<span class="lt">양</span></td><td class="pos">1B</td><td class="wrc w-mid">86.7</td><td>.653</td></tr>
+          <tr><td>7</td><td class="nm">정수빈<span class="lt">좌</span></td><td class="pos">CF</td><td class="wrc w-mid">93.9</td><td>.709</td></tr>
+          <tr><td>8</td><td class="nm">김대한</td><td class="pos">RF</td><td class="wrc w-lo">68.9</td><td>.649</td></tr>
+          <tr><td>9</td><td class="nm">윤준호</td><td class="pos">C</td><td class="wrc w-lo">61.4</td><td>.627</td></tr>
+        </table>
+      </div>
+      <div class="card" style="padding:14px">
+        <h3 class="k">키움 (vs 곽빈)</h3>
+        <div class="role2">라인업 평균 wRC+ <b style="color:#ff7a9c">97.4</b> · 테이블세터 강점 + 하위 2명 구멍</div>
+        <table>
+          <tr><th>#</th><th>선수</th><th>Pos</th><th>wRC+</th><th>OPS</th></tr>
+          <tr class="hl"><td>1</td><td class="nm">서건창<span class="lt">좌</span></td><td class="pos">2B</td><td class="wrc w-hi">136.3</td><td>.815</td></tr>
+          <tr class="hl"><td>2</td><td class="nm">추재현<span class="lt">좌</span></td><td class="pos">CF</td><td class="wrc w-hi">125.6</td><td>.804</td></tr>
+          <tr><td>3</td><td class="nm">데이비슨</td><td class="pos">1B</td><td class="wrc w-mid">114.8</td><td>.815</td></tr>
+          <tr><td>4</td><td class="nm">히우라</td><td class="pos">LF</td><td class="wrc w-mid">111.6</td><td>.759</td></tr>
+          <tr><td>5</td><td class="nm">김웅빈<span class="lt">좌</span></td><td class="pos">3B</td><td class="wrc w-mid">112.4</td><td>.756</td></tr>
+          <tr><td>6</td><td class="nm">안치홍</td><td class="pos">DH</td><td class="wrc w-mid">100.1</td><td>.724</td></tr>
+          <tr><td>7</td><td class="nm">김건희</td><td class="pos">C</td><td class="wrc w-mid">101.7</td><td>.745</td></tr>
+          <tr><td>8</td><td class="nm">원성준<span class="lt">좌</span></td><td class="pos">RF</td><td class="wrc w-lo">38.2*</td><td>.494</td></tr>
+          <tr><td>9</td><td class="nm">권혁빈</td><td class="pos">SS</td><td class="wrc w-lo">35.8</td><td>.524</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="honest" style="margin-top:14px">
+      <b>타선 정직 표기:</b> 명목 평균은 <b>두산 98.8 vs 키움 97.4로 거의 대등</b>(두산 미세 우위). 구조가 다르다 — 두산은 <b>3~5번(박준순 139·양의지 124·김민석 120)</b> 중심타선이 강하고, 키움은 <b>1~2번(서건창 136·추재현 126)</b> 테이블세터가 강하다. 하위타선은 <b>양팀 모두 약하나 키움의 8~9번(원성준 38*·권혁빈 36)이 더 심각한 구멍</b>이다(*원성준 PA 35 소표본이라 실제론 더 높게 회귀 가능). 곽빈이 이 하위 2명을 확실히 잡으면 키움 득점 루트가 크게 좁아진다.
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>선발 vs 타자 상대전적 (통산, 2013~)</h2>
+    <p class="sub">표본 충분 위주 · 스탯티즈 실측. 소표본(≤5PA)은 서사 참고만</p>
+    <div class="grid2">
+      <div class="h2h">
+        <div style="font-weight:800;color:#ff7a9c;margin-bottom:8px;font-size:14px">곽빈 상대 — 키움 주요타자</div>
+        <div class="row"><span class="nm">안치홍</span><span class="line">19PA .375/.474/.563 · OPS 1.037</span><span class="verdict-s vs-bat">타자 강세</span></div>
+        <div class="row"><span class="nm">데이비슨</span><span class="line">14PA .286/.286/.643 · HR 1</span><span class="verdict-s vs-bat">타자 강세</span></div>
+        <div class="row"><span class="nm">서건창</span><span class="line">15PA .357/.400/.429 · OPS .829</span><span class="verdict-s vs-bat">타자 강세</span></div>
+        <div class="row"><span class="nm">김건희</span><span class="line">9PA .111/.111/.111 · 3K</span><span class="verdict-s vs-pit">곽빈 우위</span></div>
+        <div class="row"><span class="nm">원성준</span><span class="line">6PA .000/.167/.000</span><span class="verdict-s vs-pit">곽빈 우위</span></div>
+        <div class="row"><span class="nm">히우라</span><span class="line">대전 기록 없음</span><span class="verdict-s vs-neu">첫 대결</span></div>
+      </div>
+      <div class="h2h">
+        <div style="font-weight:800;color:#7f9dff;margin-bottom:8px;font-size:14px">안우진 상대 — 두산 주요타자</div>
+        <div class="row"><span class="nm">김민석</span><span class="line">15PA .500/.533/.571 · OPS 1.104</span><span class="verdict-s vs-bat">타자 강세</span></div>
+        <div class="row"><span class="nm">양의지</span><span class="line">30PA .296/.367/.370 · 12K</span><span class="verdict-s vs-neu">호각·삼진多</span></div>
+        <div class="row"><span class="nm">정수빈</span><span class="line">31PA .179/.226/.214 · OPS .440</span><span class="verdict-s vs-pit">안우진 우위</span></div>
+        <div class="row"><span class="nm">박찬호</span><span class="line">26PA .208/.231/.292 · OPS .523</span><span class="verdict-s vs-pit">안우진 우위</span></div>
+        <div class="row"><span class="nm">안재석</span><span class="line">7PA .286/.286/.714 (소표본)</span><span class="verdict-s vs-neu">소표본</span></div>
+        <div class="row"><span class="nm">세베리노·윤준호</span><span class="line">대전 기록 없음</span><span class="verdict-s vs-neu">첫 대결</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>승부처 변수</h2>
+    <p class="sub">양팀 확정 라인업 기준</p>
+    <div class="factor"><div class="fic fd">D</div><div><div class="ft">곽빈이라는 리그 1위 선발 + 홈 + 8월 무실점</div><div class="fx">ERA 2.33·FIP 2.77·WHIP 1.07 리그 최정상. <b>8/23 롯데 7이닝 무실점</b> 등 8월 사실상 무실점 행진. 잠실 홈에서 최상 컨디션으로 등판한다.</div></div></div>
+    <div class="factor"><div class="fic fd">D</div><div><div class="ft">뒷문·팀 전력 격차</div><div class="fx">두산(5위·.537) vs 키움(10위·.368), 시즌 상대전적 <b>두산 7승4패</b> 우위. 두산 불펜(리그 상위·마무리 김택연)은 키움 불펜(최하위권)을 크게 앞선다. 접전 후반이 올수록 두산이 유리하다.</div></div></div>
+    <div class="factor"><div class="fic fk">K</div><div><div class="ft">상대 에이스 안우진 (최대 변수)</div><div class="fx">키움 최강 선발이자 FIP 3.06·최근 완봉급. <b>6/6 두산전 3이닝 6실점</b> 참사도 있지만 5/2엔 5이닝 2실점 호투. 안우진이 제 컨디션이면 <b>두산 타선도 3점 이하로 묶일 수 있는</b> 잠실 투수전이 된다.</div></div></div>
+    <div class="factor"><div class="fic fk">K</div><div><div class="ft">곽빈 상대 강한 키움 상위·중심</div><div class="fx">안치홍(통산 OPS 1.037)·데이비슨(.929, 장타)·서건창(.829)이 곽빈에게 강했다. 서건창·추재현 테이블세터(wRC+ 136·126)가 살면 득점권을 만든다. 곽빈의 <b>실투 관리와 하위(원성준·권혁빈) 확실한 제압</b>이 관건.</div></div></div>
+    <div class="factor"><div class="fic fn">?</div><div><div class="ft">두산 좌타 라인 vs 우완 안우진</div><div class="fx">안재석·김민석·정수빈·세베리노(양타) 좌타 배치로 플래툰 이점. 특히 <b>김민석은 안우진 통산 15PA OPS 1.104</b>로 강하다. 반대로 정수빈·박찬호는 안우진에게 눌려온 만큼 좌타 중심 공략이 현실적 득점 루트.</div></div></div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>핵심 전략</h2>
+    <p class="sub">두산 우세, 승부를 가르는 실행 포인트</p>
+    <ul class="strat">
+      <li><b>곽빈, 키움 상위·중심(1~6번) 실투 관리가 핵심.</b> 서건창·추재현이 나가고 안치홍·데이비슨에게 장타를 맞는 그림만 피하면 된다. <b>8~9번 원성준·권혁빈(wRC+ 30대)은 확실히 잡아</b> 투구수를 아끼고 이닝을 길게 끌면 경기를 지배한다.</li>
+      <li><b>안우진의 완봉급 컨디션을 초반에 흔든다.</b> 안우진은 6/6 두산전처럼 무너진 적이 있다. <b>김민석(vs안우진 OPS 1.104)</b>을 중심으로 좌타 라인이 카운트 싸움에서 인내하고, 박준순·양의지 중심타선이 <b>실투를 장타로</b> 연결해 5회 전후 키움 불펜을 끌어내야 한다.</li>
+      <li><b>선취점 잡고 뒷문으로 잠그는 접전.</b> 안우진이 버티면 대량득점은 어렵다. <b>3~4점 선취 → 곽빈 6이닝+ → 리그 상위 불펜(김택연)</b>으로 마무리하는 전형적 접전 승리 경로가 가장 현실적이다.</li>
+      <li><b>위닝시리즈·10위 상대 확실히 잡을 경기.</b> 곽빈 등판 + 홈 + 키움 10위. 데이터상 가장 승산 높은 경기다. 타선이 3점만 받쳐주면 승률은 급등한다.</li>
+    </ul>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 모든 지표는 <b>스탯티즈(statiz.co.kr) 실측</b>(2026 시즌누적, 8/29 조회). 라인업 wRC+는 양팀 확정 발표 라인업 9명 기준. 승률은 팀 탤런트(선발·타선·뒷문)·시즌 상대전적·홈 이점·양팀 확정 라인업을 종합한 추정치다. <b>선발은 곽빈 대우위이나 상대 에이스 안우진(FIP 3.06)이 예측 상향폭을 제한</b>해 두산 65%(범위 62~67%)로 판정했다 — 8/24 주간예측의 78.7%(키움 선발 미확정 가정)보다 낮춘 이유는 키움 최강 선발 안우진이 확정됐기 때문이다. 세베리노(PA 74)·데이비슨·추재현·히우라(반시즌 표본)·원성준(PA 35)은 표본이 작아 wRC+ 변동 가능. 전날 승패·기세는 미반영.
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈(팀 순위·선발 ERA/FIP/rRA9/WHIP·라인업 wRC+·최근등판·통산 상대전적) · KBO 등록현황(1군 명단)·라인업 메타 확인.<br>
+    두산 vs 키움 · 2026.8.29 잠실 · 사전 승률예측 리포트 (양팀 확정 라인업 반영).
+  </footer>
+
+</div>
+</body>
+</html>
