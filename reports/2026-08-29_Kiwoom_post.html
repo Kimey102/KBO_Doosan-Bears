@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 7 : 2 키움 · 8.29 잠실 · 사후 결과분석</title>
+<style>
+  :root{
+    --bg:#0c0f16; --card:#141924; --card2:#1a2030; --line:#252d3d;
+    --tx:#e8edf6; --sub:#95a1b6; --dim:#6b7688;
+    --doo:#1a2b6b; --doo2:#2d4bb5; --kiw:#7a1030; --kiw2:#c2264f;
+    --good:#37c489; --warn:#f2c14e; --bad:#e8654f;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--tx);font-family:'Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:26px 18px 60px}
+  .hero{background:linear-gradient(135deg,#0f1830 0%,#141a2c 60%,#101827 100%);border:1px solid var(--line);border-radius:18px;padding:28px 26px;position:relative;overflow:hidden}
+  .hero .tag{display:inline-block;font-size:12px;letter-spacing:2px;color:var(--sub);border:1px solid var(--line);border-radius:20px;padding:4px 12px;margin-bottom:14px}
+  .score{display:flex;align-items:center;justify-content:center;gap:26px;margin:8px 0 4px}
+  .score .tm{text-align:center;flex:1}
+  .score .tm .n{font-size:17px;font-weight:700;color:var(--sub)}
+  .score .tm .p{font-size:58px;font-weight:900;line-height:1;margin-top:4px}
+  .score .tm.win .p{color:#7f9dff}
+  .score .tm.win .n{color:#7f9dff}
+  .score .vs{font-size:14px;color:var(--dim);font-weight:700}
+  .score .tm.lose .p{color:var(--dim)}
+  .hero .res{text-align:center;color:var(--sub);font-size:14px;margin-top:8px}
+  .hero .res b{color:#7f9dff}
+  .hero .meta{text-align:center;color:var(--dim);font-size:13px;margin-top:6px}
+
+  .predbox{margin-top:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+  .predbox .big{font-size:15px;font-weight:800}
+  .predbox .hit{background:rgba(55,196,137,.15);color:var(--good);font-weight:800;padding:6px 14px;border-radius:8px;font-size:15px}
+  .predbox .txt{color:var(--sub);font-size:13.5px;flex:1;min-width:220px}
+  .predbox .txt b{color:var(--tx)}
+
+  section{margin-top:26px}
+  h2{font-size:19px;font-weight:800;display:flex;align-items:center;gap:9px;margin-bottom:4px}
+  h2 .dot{width:9px;height:9px;border-radius:50%;background:var(--doo2);box-shadow:0 0 0 4px rgba(45,75,181,.18)}
+  .sub{color:var(--sub);font-size:13px;margin-bottom:14px}
+
+  .flow{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 18px}
+  .inn{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+  .inn:last-child{border-bottom:0}
+  .inn .ts{font-weight:800;font-size:14px;min-width:52px;color:var(--warn)}
+  .inn .sc{font-weight:800;font-size:14px;min-width:46px;font-variant-numeric:tabular-nums}
+  .inn .sc.d{color:#7f9dff}.inn .sc.k{color:#ff7a9c}
+  .inn .desc{font-size:14px;color:#dbe2ee;flex:1}
+  .inn .desc b{color:#fff}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .card h3{font-size:16px;font-weight:800;margin-bottom:2px}
+  .card h3.d{color:#7f9dff}.card h3.k{color:#ff7a9c}
+  .card .role2{font-size:12px;color:var(--dim);margin-bottom:12px}
+  .stat{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .stat:last-child{border-bottom:0}
+  .stat .k{color:var(--sub)}.stat .v{font-weight:700;font-variant-numeric:tabular-nums}
+  .stat .v.hi{color:var(--good)}.stat .v.lo{color:var(--bad)}
+  .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;background:var(--card2);color:var(--sub);margin-top:10px}
+
+  .star{background:linear-gradient(135deg,#16223f,#1a1830);border:1px solid #33406a;border-radius:14px;padding:20px 22px;margin-top:14px}
+  .star .lab{font-size:12px;letter-spacing:1px;color:var(--warn)}
+  .star .nm{font-size:22px;font-weight:900;margin-top:2px}
+  .star .ln{font-size:20px;font-weight:800;color:#7f9dff;margin:6px 0}
+  .star .dx{color:var(--sub);font-size:13.5px}
+  .star .dx b{color:var(--tx)}
+
+  .match{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .match:last-child{border-bottom:0}
+  .mchk{width:24px;height:24px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:#fff}
+  .ok{background:var(--good)}.half{background:var(--warn);color:#3a2e00}.no{background:var(--bad)}
+  .mp{font-size:14px;color:#dbe2ee}.mp b{color:#fff}
+  .mp .pred{font-weight:800;color:var(--sub);margin-right:4px}
+
+  .honest{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:12.5px;color:var(--sub);margin-top:22px;line-height:1.7}
+  .honest b{color:var(--tx)}
+  footer{margin-top:24px;text-align:center;color:var(--dim);font-size:12px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <span class="tag">KBO 사후 결과분석 · 데이터기반</span>
+    <div class="score">
+      <div class="tm win"><div class="n">두산 베어스</div><div class="p">7</div></div>
+      <div class="vs">FINAL</div>
+      <div class="tm lose"><div class="n">키움 히어로즈</div><div class="p">2</div></div>
+    </div>
+    <div class="res"><b>두산 승</b> · 2연패 탈출 · 곽빈 vs 안우진 '세기의 맞대결' 판정승</div>
+    <div class="meta">2026. 8. 29 (토) · 잠실야구장 · 두산 홈</div>
+  </div>
+
+  <div class="predbox">
+    <div class="hit">예측 적중 ✔</div>
+    <div class="txt">사전 예측 <b>두산 65% · 두산우세</b> → 실제 <b>7-2 두산 승</b>. 판정·승자 모두 적중. 다만 "잠실 투수전 가능성"으로 본 전개와 달리 <b>두산 타선이 안우진을 5실점으로 공략</b>하며 예측보다 수월하게 이겼다.</div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>이닝별 득점 흐름</h2>
+    <p class="sub">최종 7-2 · 두산 1(1회)+4(5회)+1(7회)+1(8회) / 키움 2(3회)</p>
+    <div class="flow">
+      <div class="inn"><div class="ts">1회말</div><div class="sc d">1-0</div><div class="desc">박찬호 좌전안타 후 <b>안재석 우중간 적시 2루타</b>로 선취점.</div></div>
+      <div class="inn"><div class="ts">3회초</div><div class="sc k">1-2</div><div class="desc">권혁빈 2루타 → <b>서건창 적시 3루타</b>(동점) → <b>추재현 적시 2루타</b>로 키움 역전. 예측대로 키움 상위타선(서건창·추재현)이 곽빈을 흔든 유일한 구간.</div></div>
+      <div class="inn"><div class="ts">5회말</div><div class="sc d">5-2</div><div class="desc">빅이닝. 박찬호 중전안타 후 <b>안재석 투런포(비거리 125m)</b>로 재역전 → 박준순 안타, 양의지·김민석 연속 볼넷 2사 만루에서 <b>세베리노 2타점 우전 적시타</b>. 이 이닝 4득점.</div></div>
+      <div class="inn"><div class="ts">7회말</div><div class="sc d">6-2</div><div class="desc"><b>안재석 솔로포</b>(타구속도 174.2km/h) — 데뷔 첫 연타석 홈런.</div></div>
+      <div class="inn"><div class="ts">8회말</div><div class="sc d">7-2</div><div class="desc"><b>김대한 솔로포</b>로 쐐기. 사전 최약(wRC+ 68.9)으로 본 하위타자의 보너스 한 방.</div></div>
+    </div>
+  </section>
+
+  <div class="star">
+    <div class="lab">PLAYER OF THE GAME</div>
+    <div class="nm">안재석 <span style="font-size:13px;color:var(--dim);font-weight:600">2번 · 3B</span></div>
+    <div class="ln">4타수 3안타 4타점 · 2홈런(투런+솔로)</div>
+    <div class="dx"><b>데뷔 첫 연타석 홈런.</b> 최근 3경기 연속 실책의 부진을 방망이로 갚았다. 사전 리포트에서 <b>wRC+ 92.4로 평범하게 평가</b>했지만, 함께 표기했던 <b>"안우진 상대 통산 7PA OPS 1.000(소표본)"이 그대로 실현</b>됐다 — 이번엔 소표본 상대전적이 적중한 케이스.</div>
+  </div>
+
+  <section>
+    <h2><span class="dot"></span>선발 맞대결 결과 — 곽빈 판정승</h2>
+    <p class="sub">1999년 동갑·2018 1차지명 두 정상급 우완의 맞대결</p>
+    <div class="grid2">
+      <div class="card">
+        <h3 class="d">곽빈 <span style="font-size:12px;color:var(--dim)">두산 · 승리투수</span></h3>
+        <div class="role2">퀄리티스타트 · 시즌 11승 달성</div>
+        <div class="stat"><span class="k">이닝</span><span class="v">6.0 IP</span></div>
+        <div class="stat"><span class="k">실점 / 자책</span><span class="v hi">2 R</span></div>
+        <div class="stat"><span class="k">피안타 / 볼넷</span><span class="v">5 H / 3 BB</span></div>
+        <div class="stat"><span class="k">탈삼진</span><span class="v hi">8 K</span></div>
+        <div class="stat"><span class="k">최고구속</span><span class="v hi">160.3 km/h</span></div>
+        <span class="pill">3회 상위타선에만 실점 · 이후 안정 · 예측 "곽빈 우위" 적중</span>
+      </div>
+      <div class="card">
+        <h3 class="k">안우진 <span style="font-size:12px;color:var(--dim)">키움 · 패전투수</span></h3>
+        <div class="role2">78구 5이닝 조기 강판</div>
+        <div class="stat"><span class="k">이닝</span><span class="v">5.0 IP</span></div>
+        <div class="stat"><span class="k">실점 / 자책</span><span class="v lo">5 R</span></div>
+        <div class="stat"><span class="k">피안타 / 피홈런</span><span class="v lo">7 H / 1 HR</span></div>
+        <div class="stat"><span class="k">볼넷 / 탈삼진</span><span class="v">3 BB / 5 K</span></div>
+        <div class="stat"><span class="k">고비</span><span class="v lo">5회 안재석 투런</span></div>
+        <span class="pill">직전 완봉급이었으나 5회 무너짐 · 두산 좌타+안재석에 공략</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>사전예측 대조 — 무엇이 맞고 틀렸나</h2>
+    <p class="sub">8/29 사전 리포트(두산 65%·두산우세) 대비 실제 결과</p>
+    <div class="flow" style="padding:8px 18px">
+      <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">적중:</span> <b>판정·승자.</b> 두산 65% 우세 → 7-2 두산 승. 곽빈 등판 + 홈 + 뒷문 우위라는 승리 경로가 그대로 실현.</div></div>
+      <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">적중:</span> <b>선발 곽빈 우위.</b> 6이닝 2실점 8K QS로 안우진(5이닝 5실점)을 명확히 눌렀다. 핵심 판단이 그대로 맞음.</div></div>
+      <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">적중:</span> <b>키움 상위타선(서건창·추재현) 경계.</b> "곽빈 상대 서건창 강세"를 지적했고, 실제 키움 2득점이 모두 3회 서건창 3루타·추재현 2루타에서 나왔다.</div></div>
+      <div class="match"><div class="mchk ok">✔</div><div class="mp"><span class="pred">적중:</span> <b>안재석-안우진 상대전적.</b> 소표본이라 참고로만 표기했던 "안우진 상대 OPS 1.000"이 3안타 4타점 2홈런으로 실현.</div></div>
+      <div class="match"><div class="mchk half">◐</div><div class="mp"><span class="pred">부분:</span> <b>"잠실 투수전 가능성"은 빗나감.</b> 안우진을 과대평가해 상향폭을 제한했으나, 실제 두산 타선이 안우진을 5실점으로 두들겨 <b>예측(65%)보다 수월한 낙승</b>이었다.</div></div>
+      <div class="match"><div class="mchk half">◐</div><div class="mp"><span class="pred">부분:</span> <b>키움 하위타선 구멍(권혁빈).</b> 장기 약점으로 본 권혁빈이 3회 2루타로 득점에 관여. 다만 전체적으로 키움 하위는 무득점에 그쳐 큰 그림은 유효.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>총평</h2>
+    <div class="honest" style="margin-top:0">
+      <b>데이터가 다시 맞았다.</b> '믿음의 야구'가 아니라 <b>곽빈 대우위·홈·뒷문 우위</b>라는 사전 근거대로 두산이 이겼고(적중), 개별 매치업(서건창 강세, 안재석 상대전적)까지 상당수 실현됐다. 유일한 오차는 <b>승리의 마진</b> — 안우진의 최근 완봉급 컨디션을 근거로 "투수전"을 경계하며 승률을 65%로 눌렀지만, 실제로는 두산 타선이 5회 안재석 투런·세베리노 적시타로 안우진을 조기 강판시키며 7-2 낙승이었다. <b>판정은 정확했고, 상향폭을 더 줘도 됐던 경기.</b> 소표본 상대전적(안재석)이 이번엔 적중했지만, 8/21 롯데전(레이예스)처럼 반대로 튀는 리스크도 상존하므로 여전히 서사 참고로만 다루는 원칙은 유지한다.
+    </div>
+  </section>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 스코어·이닝별 득점·양선발 투구내용·홈런/타점은 <b>언론 박스스코어·경기리뷰 실측</b>(8/29 잠실, 머니투데이·스포츠경향). 이닝별 득점은 1(1회)+4(5회)+1(7회)+1(8회)=7 / 키움 2(3회)로 최종 7-2와 교차검증 완료. 사전 예측치(두산 65%·두산우세)는 8/29 사전 리포트 기준. 본 리포트는 결과 확정 후 사전예측 대조 + 과정 평가에 한정한다.
+  </div>
+
+  <footer>
+    데이터 출처: 머니투데이·스포츠경향(박스스코어·경기리뷰) · 8/29 사전 승률예측 리포트.<br>
+    두산 7 : 2 키움 · 2026.8.29(토) 잠실 · 사후 결과분석 리포트 · 데이터기반 야구.
+  </footer>
+
+</div>
+</body>
+</html>
