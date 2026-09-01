@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 1:3 LG 사후 결과분석 · 9.1 잠실</title>
+<style>
+  :root{
+    --bg:#0e1116; --card:#171b22; --line:#2a3240;
+    --ink:#e8edf4; --sub:#9aa7b8; --accent:#4da3ff;
+    --good:#37d67a; --warn:#ffb020; --bad:#ff5c5c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:22px 16px 60px}
+  header{text-align:center;padding:22px 14px;border-radius:16px;
+    background:linear-gradient(135deg,#2a1420,#1a1140);border:1px solid var(--line);margin-bottom:16px}
+  header .tag{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+    border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:12px}
+  .score{display:flex;align-items:center;justify-content:center;gap:20px;margin:8px 0}
+  .score .t{font-size:18px;font-weight:800}
+  .score .n{font-size:44px;font-weight:900;line-height:1}
+  .score .du{color:#8fb3ff}.score .lg{color:#ff7ea8}
+  .score .win{color:var(--good);font-size:12px;display:block;margin-top:2px}
+  .score .lose{color:var(--bad);font-size:12px;display:block;margin-top:2px}
+  header .meta{color:var(--sub);font-size:14px;margin-top:6px}
+  h2{font-size:17px;margin:26px 0 10px;padding-left:10px;border-left:3px solid var(--accent)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:7px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  th{color:var(--sub);font-weight:600;font-size:12px}
+  td.lbl{text-align:left;color:var(--sub)}
+  .du-c{color:#8fb3ff;font-weight:700}.lg-c{color:#ff7ea8;font-weight:700}
+  .good{color:var(--good);font-weight:700}.bad{color:var(--bad);font-weight:700}
+  .pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .callout{border-radius:12px;padding:12px 14px;margin:10px 0;font-size:13.5px}
+  .c-warn{background:rgba(255,176,32,.08);border:1px solid rgba(255,176,32,.3)}
+  .c-bad{background:rgba(255,92,92,.08);border:1px solid rgba(255,92,92,.3)}
+  .c-good{background:rgba(55,214,122,.08);border:1px solid rgba(55,214,122,.3)}
+  .c-info{background:rgba(77,163,255,.08);border:1px solid rgba(77,163,255,.3)}
+  ul{margin:6px 0;padding-left:20px}li{margin:5px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}.score .n{font-size:34px}}
+  .foot{color:var(--sub);font-size:12px;text-align:center;margin-top:28px;line-height:1.7}
+  .step{font-size:13px;color:var(--sub)}.step b{color:var(--ink)}
+  .big{font-size:30px;font-weight:900}
+  .lin{font-variant-numeric:tabular-nums;font-size:13px}
+  .lin td,.lin th{padding:5px 7px;border:1px solid var(--line)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">사후 결과분석 · 최종</span>
+    <div class="score">
+      <div class="t"><span class="du">두산</span><span class="lose">패</span></div>
+      <div class="n"><span class="du">1</span> : <span class="lg">3</span></div>
+      <div class="t"><span class="lg">LG</span><span class="win">승</span></div>
+    </div>
+    <div class="meta">2026. 9. 1 (화) · 잠실 · 승 임찬규 / 패 잭로그 / 세 손주영 · 결승타 송찬의(4회 3점 홈런)</div>
+  </header>
+
+  <div class="callout c-info">
+    <b>예측 검증 — 방향 적중.</b> 사전 예측 <b>LG 54% (두산 46%)</b> → 실제 <b>LG 3:1 승</b>. 방향 적중이며 Brier 기여 (0.46)² = <b>0.212</b>(모델 평균 0.203 수준).
+    리포트가 최대 승부처로 지목한 <b>"두산 산발성 극복"</b>이 그대로 패인이 됐다. 수비·불펜은 이번엔 문제가 아니었다(실책 0·병살 0).
+  </div>
+
+  <h2>한 줄 요약 — "맞혔는데 못 불러들였다"</h2>
+  <div class="card">
+    <div class="grid2">
+      <div class="callout c-bad" style="margin:0">
+        <div class="step">두산</div>
+        <div class="big">6안타 · 4볼넷 → <span class="bad">1점</span></div>
+        <div class="step">주자 10명 출루, 득점 1. 홈런 0.</div>
+      </div>
+      <div class="callout c-good" style="margin:0">
+        <div class="step">LG</div>
+        <div class="big">4안타 · 1볼넷 → <span class="good">3점</span></div>
+        <div class="step">주자 5명, 득점 3. 송찬의 3점 홈런 한 방.</div>
+      </div>
+    </div>
+    <p class="step" style="margin-top:10px">
+      경기의 전부가 이 대비다. <b>두산은 LG보다 안타(6&gt;4)도, 볼넷(4&gt;1)도 많았지만 졌다.</b>
+      두산은 주자 10명을 흩어 1점, LG는 주자 5명을 4회에 몰아 <b>한 스윙(송찬의)으로 3점</b>. 순수 <b>산발성/장타 부재</b>가 승패를 갈랐다.
+    </p>
+    <table class="lin" style="margin-top:8px;width:auto">
+      <tr><th>팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>R</th><th>H</th><th>E</th></tr>
+      <tr><td class="lg-c">LG</td><td>0</td><td>0</td><td>0</td><td class="good">3</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><b>3</b></td><td>4</td><td>0</td></tr>
+      <tr><td class="du-c">두산</td><td class="du-c">1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><b>1</b></td><td>6</td><td>0</td></tr>
+    </table>
+    <div class="step">이닝별 R 합계 교차검증: 두산 1 / LG 3 — 스코어 일치.</div>
+  </div>
+
+  <h2>선발 리뷰 — 잭로그는 제 몫을 했다</h2>
+  <div class="card">
+    <table>
+      <tr><th style="text-align:left">선발</th><th>IP</th><th>H</th><th>R/ER</th><th>BB</th><th>K</th><th>HR</th><th>NP</th></tr>
+      <tr><td class="lbl du-c">잭로그 (패)</td><td>6</td><td>4</td><td>3/3</td><td>1</td><td>6</td><td>1</td><td>93</td></tr>
+      <tr><td class="lbl lg-c">임찬규 (승)</td><td>6</td><td>6</td><td>1/1</td><td>3</td><td>6</td><td>0</td><td>91</td></tr>
+    </table>
+    <div class="callout c-good" style="margin-top:10px">
+      <b>잭로그: 6이닝 3자책 6탈삼진, 사실상 QS급.</b> 실점은 4회 <b>송찬의에게 맞은 3점 홈런 딱 한 방</b>이 전부. 예측(rRA9 4.56·안정)대로 던졌고, 패전은 타선 지원 부재 탓이지 투구 내용 문제가 아니다.
+    </div>
+    <div class="callout c-warn" style="margin-top:8px">
+      <b>임찬규의 역설.</b> 임찬규도 <b>6안타 3볼넷으로 주자 9명</b>을 내줬다. 그런데 실점 1. 두산이 임찬규를 상대로도 주자는 냈지만 <b>불러들이질 못했다</b>. "임찬규가 두산을 완벽히 막았다"기보다 <b>두산이 스스로 기회를 흘렸다</b>가 더 정확하다.
+    </div>
+  </div>
+
+  <h2>산발성 해부 — 침묵한 중심타선</h2>
+  <div class="card">
+    <table>
+      <tr><th>타순</th><th>선수</th><th>기록</th><th>내용</th></tr>
+      <tr><td>1</td><td>박찬호</td><td class="bad">3타수 0안타 (볼넷1)</td><td class="step">출루는 했으나 무안타</td></tr>
+      <tr><td>3</td><td>박준순</td><td class="bad">3타수 0안타 (사구1)</td><td class="step">wRC+ 139의 3번 침묵</td></tr>
+      <tr><td>4</td><td>양의지</td><td class="good">4타수 2안타 1타점</td><td class="step">1회 적시 2루타 = 팀 유일 득점</td></tr>
+      <tr><td>5</td><td>김민석</td><td class="bad">3타수 0안타</td><td class="step">wRC+ 119의 5번 침묵</td></tr>
+      <tr><td>8</td><td>김대한</td><td class="bad">4타수 1안타 2삼진</td><td class="step">하위타선 생산력 저조</td></tr>
+      <tr><td>9</td><td>정수빈</td><td class="bad">2타수 0안타</td><td class="step">테이블 재정비 실패</td></tr>
+    </table>
+    <div class="callout c-bad" style="margin-top:10px">
+      <b>핵심 진단.</b> 두산의 득점은 <b>1회 양의지 적시타 1점이 전부</b>. 이후 8이닝 무득점. 특히 <b>3번 박준순(139)·5번 김민석(119)</b> 두 상위 wRC+ 타자가 나란히 무안타로, 4번 양의지가 만든 기회가 앞뒤에서 끊겼다.
+      6안타가 <b>서로 다른 이닝에 흩어져</b> 큰 이닝을 못 만든 전형적 산발성. 장타(2루타 1개 외 전무, 홈런 0)가 없어 단타를 엮어야 했으나 연결이 끊겼다.
+    </div>
+  </div>
+
+  <h2>§v4.5-④ 캘리브레이션 갱신</h2>
+  <div class="card">
+    <table>
+      <tr><th style="text-align:left">항목</th><th>이번 경기</th><th>누적 관찰</th></tr>
+      <tr><td class="lbl">예측 두산 승률</td><td>46% (열세)</td><td class="step">&lt;50% 예측 경기</td></tr>
+      <tr><td class="lbl">실제</td><td class="bad">패</td><td class="step">언더독 예측 적중</td></tr>
+      <tr><td class="lbl">방향</td><td class="good">적중</td><td class="step">-</td></tr>
+      <tr><td class="lbl">Brier 기여</td><td>0.212</td><td class="step">모델 평균 0.203과 정합</td></tr>
+    </table>
+    <div class="callout c-info" style="margin-top:10px">
+      §v4.5-④ 관찰(열세 &lt;50% 예측 경기 1승 4패)에 <b>이번 패가 추가 → 열세 예측의 신뢰도 재확인</b>. 두산을 언더독으로 찍었을 때 실제로 지는 경향이 이어진다.
+      단 이번 패인은 <b>수비·뒷문(v4.5-①②)이 아니라 산발성</b> — 즉 v4.5 하방 항이 아닌 <b>공격 측 구조 문제</b>가 도드라진 케이스다. 향후 <b>두산 타선 공격지수에 산발성 디스카운트를 상시 반영</b>할 근거가 하나 더 쌓였다.
+    </div>
+  </div>
+
+  <h2>그래서, 타격을 어떻게 — 실행 방향</h2>
+  <div class="card">
+    <p class="step">시즌 20여 경기 남은 시점에 팀 장타력을 갑자기 늘리거나 영입할 방법은 없다. 답은 <b>가진 자원으로 1점을 효율적으로 짜내는 야구</b>다.</p>
+    <ul>
+      <li><b>득점권 = '한 방'보다 '최소 득점'.</b> 2·3루에서 큰 스윙 대신 외야 플라이·진루타·스퀴즈로 1점을 확정. 두산 주루는 리그 2위라 이 방향과 강점이 맞는다.</li>
+      <li><b>주루로 득점권을 먼저 만든다.</b> 어제 볼넷 4개는 좋았다 — 문제는 그 뒤. 출루를 도루·히트앤런으로 스코어링 포지션까지 밀어붙여 단타 한 개로 불러들이는 적극성.</li>
+      <li><b>라인업 집중화.</b> 6~9번(세베리노·조수행·김대한·정수빈) 타점 생산력이 약해 상위 출루가 하위에서 끊긴다. 장타 기대가 있는 양의지·김민석·박준순을 득점권이 만들어지는 구간에 모으는 배치.</li>
+      <li><b>소프트콘택트 투수 대비.</b> 임찬규 같은 맞춰잡기 유형엔 큰 것을 노리지 말고, 존을 좁혀 볼넷·짧은 안타로 주자를 쌓고 스몰볼로 전환.</li>
+    </ul>
+    <div class="step" style="margin-top:6px">핵심: <b>두산은 "한 방 기다리는 야구"가 체질에 안 맞는다.</b> 그걸 인정하고 1점씩 짜내는 야구로 가야 주자 10명 내고 1점 내는 경기를 줄인다.</div>
+  </div>
+
+  <h2>결론</h2>
+  <div class="callout c-warn">
+    <b>모델은 맞혔고(LG 54% → LG 승), 잭로그도 던졌다. 진 이유는 오직 타선의 산발성이다.</b>
+    6안타 4볼넷 주자 10명에 1점 — 어제 경기는 두산의 구조적 약점을 압축한 표본이다.
+    수비·불펜이 아닌 <b>공격 연결</b>이 무너진 패배라, 개선의 방향도 명확하다: <b>장타를 기다리지 말고 주루·상황타격으로 1점을 설계하는 야구.</b>
+    3연전 2·3차전은 상대 선발이 바뀌므로, 좌우 매치업과 라인업 집중화를 다시 짚어 재산출한다.
+  </div>
+
+  <div class="foot">
+    데이터: 네이버 스포츠 박스스코어(2026.09.01) 이닝별 교차검증 · 스탯티즈 사전 실측 · 모델 v4.5<br>
+    사전 리포트: 승률예측보고서(두산 46%/LG 54%) · 본 문서 = 최종분석보고서
+  </div>
+</div>
+</body>
+</html>
