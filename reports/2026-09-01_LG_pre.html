@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs LG 사전 승률분석 · 9.1 잠실 (양팀 라인업 확정)</title>
+<style>
+  :root{
+    --bg:#0e1116; --card:#171b22; --line:#2a3240;
+    --ink:#e8edf4; --sub:#9aa7b8; --accent:#4da3ff;
+    --good:#37d67a; --warn:#ffb020; --bad:#ff5c5c;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Malgun Gothic","Apple SD Gothic Neo",sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:22px 16px 60px}
+  header{text-align:center;padding:22px 14px;border-radius:16px;
+    background:linear-gradient(135deg,#151a33,#1a1140);border:1px solid var(--line);margin-bottom:16px}
+  header .tag{display:inline-block;font-size:12px;letter-spacing:.14em;color:var(--sub);
+    border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin-bottom:12px}
+  header h1{margin:4px 0 6px;font-size:25px;letter-spacing:-.01em}
+  header .meta{color:var(--sub);font-size:14px}
+  .matchup{display:flex;align-items:center;justify-content:center;gap:18px;margin:18px 0 4px;flex-wrap:wrap}
+  .team{font-size:20px;font-weight:800}
+  .team small{display:block;font-size:12px;font-weight:500;color:var(--sub);margin-top:2px}
+  .vs{font-size:14px;color:var(--sub)}
+  .prob-row{display:flex;gap:12px;margin:16px 0}
+  .prob{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;text-align:center}
+  .prob .n{font-size:40px;font-weight:800;line-height:1}
+  .prob .l{font-size:13px;color:var(--sub);margin-top:6px}
+  .prob.du .n{color:#8fb3ff}
+  .prob.lg .n{color:#ff7ea8}
+  .bar{height:16px;border-radius:8px;overflow:hidden;display:flex;margin:2px 0 6px;border:1px solid var(--line)}
+  .bar i{display:block;height:100%}
+  .bar .bdu{background:linear-gradient(90deg,#2a3a6b,#4da3ff)}
+  .bar .blg{background:linear-gradient(90deg,#c30452,#ff7ea8)}
+  h2{font-size:17px;margin:26px 0 10px;padding-left:10px;border-left:3px solid var(--accent)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+  table{width:100%;border-collapse:collapse;font-size:13.5px}
+  th,td{padding:7px 6px;text-align:center;border-bottom:1px solid var(--line)}
+  th{color:var(--sub);font-weight:600;font-size:12px}
+  td.lbl{text-align:left;color:var(--sub)}
+  .du-c{color:#8fb3ff;font-weight:700}
+  .lg-c{color:#ff7ea8;font-weight:700}
+  .win{color:var(--good);font-weight:700}
+  .pill{display:inline-block;font-size:11px;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--sub)}
+  .callout{border-radius:12px;padding:12px 14px;margin:10px 0;font-size:13.5px}
+  .c-warn{background:rgba(255,176,32,.08);border:1px solid rgba(255,176,32,.3)}
+  .c-bad{background:rgba(255,92,92,.08);border:1px solid rgba(255,92,92,.3)}
+  .c-good{background:rgba(55,214,122,.08);border:1px solid rgba(55,214,122,.3)}
+  .c-info{background:rgba(77,163,255,.08);border:1px solid rgba(77,163,255,.3)}
+  ul{margin:6px 0;padding-left:20px}
+  li{margin:5px 0}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.grid2{grid-template-columns:1fr}.prob .n{font-size:32px}}
+  .foot{color:var(--sub);font-size:12px;text-align:center;margin-top:28px;line-height:1.7}
+  .step{font-size:13px;color:var(--sub)}
+  .step b{color:var(--ink)}
+  .hl{color:var(--warn);font-weight:700}
+  .lhb{color:#7fd0ff} .rhb{color:#ffcf8f}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">사전 승률분석 · 양팀 라인업 확정 반영</span>
+    <div class="matchup">
+      <div class="team" style="color:#8fb3ff">두산 베어스<small>홈 · 61-4-52 (5위)</small></div>
+      <div class="vs">VS</div>
+      <div class="team" style="color:#ff7ea8">LG 트윈스<small>원정 · 64-1-51 (4위)</small></div>
+    </div>
+    <div class="meta">2026. 9. 1 (화) 18:30 · 잠실구장 · 3연전 1차전</div>
+    <div class="meta">선발: <b style="color:#8fb3ff">잭로그</b> (좌) &nbsp;vs&nbsp; <b style="color:#ff7ea8">임찬규</b> (우)</div>
+  </header>
+
+  <div class="prob-row">
+    <div class="prob du"><div class="n">46%</div><div class="l">두산 승리확률</div></div>
+    <div class="prob lg"><div class="n">54%</div><div class="l">LG 승리확률</div></div>
+  </div>
+  <div class="bar"><i class="bdu" style="width:46%"></i><i class="blg" style="width:54%"></i></div>
+  <p style="text-align:center;color:var(--sub);font-size:13px;margin-top:2px">
+    <b style="color:var(--warn)">접전</b> · LG 소폭 우위 (범위 두산 44~48%)
+  </p>
+
+  <div class="callout c-info">
+    <b>양팀 라인업 확정 반영 (잠정 43% → 48% → 46%).</b> 두산 라인업은 시즌 타격 순위(7위)보다 강했고(공격지수 ~1.08), 두산 핵심이 임찬규를 통산 잘 상대해온 점·박준순 2루 안정으로 48%까지 올랐다.
+    이후 <b>LG 라인업 확정</b>에서 중심(오스틴 194·송찬의 155·문정빈 146·문보경 112)이 무겁고 이 강타자들이 <b>우타→좌완 잭로그에 플래툰 우위</b>임이 확인돼 2%p 하향, <b>46%</b>로 수렴했다. LG 상단(신민재·홍창기 9번)이 약해 큰 격차는 아니다.
+  </div>
+
+  <h2>두산 확정 라인업 (타순 wRC+)</h2>
+  <div class="card">
+    <table>
+      <tr><th>타순</th><th>선수</th><th>포지션</th><th>좌우</th><th>wRC+</th><th>vs 임찬규 통산</th></tr>
+      <tr><td>1</td><td>박찬호</td><td>유격수</td><td class="rhb">우</td><td>105</td><td class="win">48타석 OPS .808</td></tr>
+      <tr><td>2</td><td>안재석</td><td>3루수</td><td class="lhb">좌</td><td>108</td><td>15타석 .619</td></tr>
+      <tr><td>3</td><td class="win">박준순</td><td>2루수</td><td class="rhb">우</td><td class="win">139</td><td>9타석 .111 <span class="pill">소표본</span></td></tr>
+      <tr><td>4</td><td>양의지</td><td>포수</td><td class="rhb">우</td><td>124</td><td class="win">46타석 OPS .806</td></tr>
+      <tr><td>5</td><td>김민석</td><td>지명</td><td class="lhb">좌</td><td>119</td><td>12타석 .473 <span class="pill">약</span></td></tr>
+      <tr><td>6</td><td>세베리노</td><td>1루수</td><td>양</td><td>111*</td><td>대전적 없음</td></tr>
+      <tr><td>7</td><td>조수행</td><td>좌익수</td><td class="lhb">좌</td><td>~90†</td><td>14타석 .607</td></tr>
+      <tr><td>8</td><td>김대한</td><td>우익수</td><td class="rhb">우</td><td>~90†</td><td>2타석 <span class="pill">소표본</span></td></tr>
+      <tr><td>9</td><td>정수빈</td><td>중견수</td><td class="lhb">좌</td><td>92</td><td class="win">57타석 OPS .796 (9BB)</td></tr>
+    </table>
+    <div class="step" style="margin-top:8px">
+      * 세베리노 82타석 소표본(회귀 필요) · † 조수행·김대한은 p_no 미확인으로 추정치.
+      타순 가중 공격지수 ≈ <b>1.08</b> (산발성 디스카운트 후 모델 반영 ~1.00~1.04).
+    </div>
+    <div class="callout c-good" style="margin-top:10px">
+      <b>H2H 반전 포인트.</b> "임찬규가 두산을 봉쇄한다"는 <b>올해 3경기</b> 기준. 더 큰 <b>통산 표본</b>에서는 상위·중심의
+      <b>박찬호(.808)·양의지(.806)·정수빈(.796·볼넷 9개)</b>이 임찬규를 잘 공략해왔다. 반대로 5번 김민석(.473)·3번 박준순(소표본 .111)은 약점.
+    </div>
+    <div class="callout c-warn" style="margin-top:8px">
+      <b>수비 관점.</b> 박준순이 2루 선발(안정) + 오명진 벤치 → 두산 고질 내야 불안(포구·연결)이 완화. 다만 팀 실책은 여전히 리그 최다라 §v4.5 수비 하방은 기본치로 유지.
+    </div>
+  </div>
+
+  <h2>LG 확정 라인업 (타순 wRC+)</h2>
+  <div class="card">
+    <table>
+      <tr><th>타순</th><th>선수</th><th>포지션</th><th>좌우</th><th>wRC+</th><th>vs 잭로그 통산</th></tr>
+      <tr><td>1</td><td>신민재</td><td>2루수</td><td class="lhb">좌</td><td>79</td><td>9타석 .819</td></tr>
+      <tr><td>2</td><td>박해민</td><td>중견수</td><td class="lhb">좌</td><td>107</td><td class="win">12타석 .258 <span class="pill">억제</span></td></tr>
+      <tr><td>3</td><td class="lg-c">오스틴</td><td>지명</td><td class="rhb">우</td><td class="lg-c">194</td><td class="lg-c">7타석 OPS 1.429 ⚠</td></tr>
+      <tr><td>4</td><td class="lg-c">송찬의</td><td>좌익수</td><td class="rhb">우</td><td class="lg-c">155*</td><td>10타석 .500</td></tr>
+      <tr><td>5</td><td>문보경</td><td>3루수</td><td class="lhb">좌</td><td>112</td><td>12타석 장타 .500</td></tr>
+      <tr><td>6</td><td class="lg-c">문정빈</td><td>1루수</td><td class="rhb">우</td><td class="lg-c">146*</td><td>대전적 적음</td></tr>
+      <tr><td>7</td><td>오지환</td><td>유격수</td><td class="lhb">좌</td><td>86</td><td>7타석 .858</td></tr>
+      <tr><td>8</td><td>박동원</td><td>포수</td><td class="rhb">우</td><td>102</td><td class="lg-c">7타석 OPS 1.000 ⚠</td></tr>
+      <tr><td>9</td><td>홍창기</td><td>우익수</td><td class="lhb">좌</td><td>101</td><td class="win">10타석 .522 <span class="pill">억제</span></td></tr>
+    </table>
+    <div class="step" style="margin-top:8px">* 송찬의·문정빈은 소표본 호조(회귀 반영). 타순 가중 wRC+ raw ≈ 1.20 → 회귀 후 <b>~1.14</b> 모델 반영.</div>
+    <div class="callout c-bad" style="margin-top:10px">
+      <b>핵심 위협 = 우타 중심의 플래툰 우위.</b> LG의 최강 타자 <b>오스틴(194)·송찬의(155)·문정빈(146)·박동원(102)</b>이 전부 <b>우타</b> →
+      좌완 잭로그에 <b>플래툰 유리</b>. 특히 <b>오스틴(OPS 1.429)·박동원(1.000)</b>은 잭로그 통산 상대 압도. 주자 있을 때 이 둘은 승부 회피가 정석.
+    </div>
+    <div class="callout c-good" style="margin-top:8px">
+      <b>두산에 유리한 편성.</b> LG 상단 <b>신민재(79)·박해민(107)</b>과 9번 <b>홍창기(올해 101·부진)</b>가 약하고, 잭로그가 <b>박해민(.258)·홍창기(.522)</b>를 억제해 왔다.
+      → 강타자 앞뒤가 비어 <b>득점권 연결이 끊기기 쉬운</b> 편성. 큰 격차가 안 나는 이유.
+    </div>
+  </div>
+
+  <h2>선발 맞대결</h2>
+  <div class="card">
+    <table>
+      <tr><th style="text-align:left">지표</th><th>잭로그 (두산·좌)</th><th>임찬규 (LG·우)</th></tr>
+      <tr><td class="lbl">시즌</td><td>6승 6패 · 125.2IP</td><td class="hl">12승 4패 · 127.2IP</td></tr>
+      <tr><td class="lbl">rRA9</td><td class="du-c">4.56</td><td class="lg-c">3.89</td></tr>
+      <tr><td class="lbl">FIP</td><td>4.11</td><td>4.44</td></tr>
+      <tr><td class="lbl">WHIP</td><td>1.31</td><td>1.36</td></tr>
+      <tr><td class="lbl">최근 5선발 rRA9</td><td>4.30 <span class="pill">안정</span></td><td class="lg-c">3.43 <span class="pill" style="color:#ffb020;border-color:#ffb020">초호조</span></td></tr>
+      <tr><td class="lbl">상대팀 이력</td><td>vs LG 혼조<br><span class="step">(6IP 2R·5.2IP 1R·1IP 4R)</span></td><td>vs 두산 올해 3선발 봉쇄<br><span class="step">(1·1·2R) — 단 통산은 두산 핵심에 피안타 다수</span></td></tr>
+    </table>
+    <div class="step" style="margin-top:10px">
+      선발 우위는 <b>임찬규</b>(rRA9 3.89·초호조·소프트콘택트형). 이 <b>선발 매치업 차이</b>가 두산 홈어드밴티지를 상쇄해 최종 미세 LG 우위를 만든다.
+      임찬규 FIP 4.44(&gt; rRA9)는 실력이 기록보다 약할 수 있다는 회귀 여지 — 두산 승률의 상방 변수.
+    </div>
+  </div>
+
+  <h2>팀 전력 비교</h2>
+  <div class="card">
+    <table>
+      <tr><th style="text-align:left">부문</th><th>두산</th><th>LG</th><th>비고</th></tr>
+      <tr><td class="lbl">득점/실점 (경기당)</td><td>4.74 / <span class="win">4.26</span></td><td>5.20 / 5.14</td><td class="step">두산 팀ERA 3.64 <b>1위</b></td></tr>
+      <tr><td class="lbl">피타고리안</td><td class="win">.549</td><td>.505</td><td class="step">득실차=두산 우위</td></tr>
+      <tr><td class="lbl">타격 WAA</td><td>−0.45 (7위)</td><td class="lg-c">+4.89 (<b>1위</b>)</td><td class="step">LG 최강 타선</td></tr>
+      <tr><td class="lbl">선발 WAA</td><td class="du-c">+7.38 (<b>1위</b>)</td><td>+1.23 (8위)</td><td class="step">두산 로테이션 최강</td></tr>
+      <tr><td class="lbl">구원 WAA</td><td class="du-c">+1.21 (3위)</td><td>−1.60 (5위)</td><td class="step">두산 뒷문 우위·오늘 신선</td></tr>
+      <tr><td class="lbl">수비 WAA</td><td class="lg-c">−0.61 (7위)</td><td>+0.19 (4위)</td><td class="step">두산 실책 최다</td></tr>
+      <tr><td class="lbl">주루 WAA</td><td class="du-c">+0.39 (2위)</td><td>−0.65 (10위)</td><td class="step">LG 주루 최하위</td></tr>
+    </table>
+  </div>
+
+  <h2>§v4.5 모델 보정 단계</h2>
+  <div class="card">
+    <p class="step"><b>① 투수 실점력</b> — 두산: 잭로그 4.48×0.61 + 불펜 4.2×0.39 = <b>4.37</b> · LG: 임찬규 3.75×0.61 + 불펜 4.7×0.39 = <b>4.12</b></p>
+    <p class="step"><b>② 수비·실책 하방(v4.5-①)</b> — 두산 실책 리그 최다지만 박준순 2B 선발로 tail 비상승 → effRA <b>4.47</b>(기본치). 접전이라 하방 반영은 유지.</p>
+    <p class="step"><b>③ 뒷문(v4.5-②)</b> — 8/31 휴식 + 8/30 15-1 대승으로 필승조 <b>신선</b> → 뎁스 페널티 미적용(김택연 가용).</p>
+    <p class="step"><b>④ 선발 소표본 상한(v4.5-③)</b> — 양 선발 |폼−시즌| ≤ 0.75 이내, 시즌값 70% 가중 유지.</p>
+    <p class="step"><b>⑤ 기대득점(잠실 0.92)</b> — 두산 공격지수 ~1.02~1.06 → 두산 ≈ <b>3.8~4.1점</b> · LG 공격지수 ~1.14(회귀 후) + 우타 중심 플래툰 → LG ≈ <b>4.6~4.7점</b>.</p>
+    <p class="step"><b>⑥ 홈 보정</b> — 두산 홈 오즈 ×1.174.</p>
+    <div class="callout c-warn" style="margin-top:10px">
+      단일경기 피타고리안 → 홈보정 → <b>두산 46% / LG 54%</b>. 시나리오 밴드 44~48%(LG 중심 회귀 강도·두산 산발성에 따라).
+    </div>
+  </div>
+
+  <h2>승리 전략 (두산)</h2>
+  <div class="card">
+    <ul>
+      <li><b>임찬규 = 인내·투구수로 조기강판.</b> 삼진 적은(K/9 5.2) 소프트콘택트형 → 초반부터 공 많이 보고 6이닝 전 강판 유도. LG 선발뎁스(8위)를 노려 임찬규만 넘기면 불펜 승부 두산 우위.</li>
+      <li><b>상위·중심 집중.</b> 박찬호·양의지·정수빈은 임찬규 통산 강세 → 이들이 나가는 이닝에 <b>연속 공격·득점권 집중</b>. 산발성 극복이 이 경기 최대 과제.</li>
+      <li><b>주루 압박.</b> LG 주루 최하위 + 두산 주루 2위 → 출루 시 도루·추가진루로 산발 안타를 득점 전환.</li>
+      <li><b>초·중반 리드.</b> LG 불펜은 셋업이 얇지 않아(HLD 76) 역전 난도↑ → 리드는 6회 전에, 김택연으로 마무리.</li>
+      <li><b>잭로그 = 우타 중심 플래툰 관리가 핵심.</b> 오스틴(OPS 1.429)·박동원(1.000)은 주자 시 정면승부 회피, 송찬의·문정빈도 조심. 반대로 좌타 신민재·박해민·홍창기(9번)는 과감히 존 승부 → 강타자 앞을 비워라.</li>
+    </ul>
+  </div>
+
+  <h2>결론</h2>
+  <div class="callout c-warn">
+    <b>두산 46% · LG 54% — 접전, LG 소폭 우위.</b>
+    두산 타선이 예상보다 단단하고(공격지수 ~1.08) 핵심이 임찬규를 통산 잘 쳐온 점·박준순 2루 안정이 두산을 끌어올렸으나,
+    LG 확정 라인업의 <b>우타 중심 화력(오스틴·송찬의·문정빈·박동원)이 좌완 잭로그에 플래툰 우위</b>라 최종 LG 소폭 우위로 기운다.
+    두산의 활로는 <b>임찬규 조기강판 + 산발성 극복 + 무실책</b>, 그리고 <b>잭로그가 LG 우타 중심에 장타를 안 맞는 것</b>. 반대로 <b>오스틴·박동원 장타 + 임찬규 6이닝+</b> 시 패배 확률이 급등한다.
+  </div>
+
+  <div class="foot">
+    데이터: 스탯티즈(www.statiz.co.kr) 실측 · KBO 등록현황/팀기록(2026.08.31) · 양팀 라인업 확정 · 잠실 park 0.92<br>
+    모델: 경기 승률 분석 지침 라이브 v4.5 (피타고리안 1.83 · 홈오즈 1.174 · 수비/뒷문 하방 · 소표본 선발 상한)<br>
+    ※ LG 라인업 발표·우천 변수 시 재산출.
+  </div>
+</div>
+</body>
+</html>
