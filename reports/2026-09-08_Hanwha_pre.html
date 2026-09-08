@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs 한화 · 9.8 대전 · 사전 승률예측</title>
+<style>
+  :root{
+    --ink:#12151c; --ink2:#5a6472; --line:#e6e9ef; --bg:#f6f7fa; --card:#fff;
+    --doo:#131a4a; --han:#f37321; --pos:#1a7f4b; --neg:#c0392b; --warn:#b7791f;
+    --hi:#eef4ff; --lo:#fff3ec;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Apple SD Gothic Neo','Malgun Gothic',system-ui,-apple-system,sans-serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 16px 60px}
+  header{background:linear-gradient(135deg,#0f1436,#1c2a5e);color:#fff;
+    margin:0 -16px 22px;padding:26px 24px 22px;border-radius:0 0 18px 18px}
+  .tag{display:inline-block;font-size:12px;letter-spacing:.06em;opacity:.85;
+    border:1px solid rgba(255,255,255,.35);border-radius:20px;padding:3px 11px;margin-bottom:12px}
+  header h1{margin:0 0 4px;font-size:23px;font-weight:800;letter-spacing:-.01em}
+  header .meta{font-size:13.5px;opacity:.88}
+  .verdict{display:flex;align-items:stretch;gap:12px;margin:20px 0 26px}
+  .vbox{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:16px 14px;text-align:center;position:relative;overflow:hidden}
+  .vbox .t{font-size:13px;color:var(--ink2);font-weight:600}
+  .vbox .p{font-size:34px;font-weight:800;letter-spacing:-.02em;line-height:1.1;margin:4px 0 0}
+  .vbox.doo{border-top:4px solid var(--doo)}
+  .vbox.han{border-top:4px solid var(--han)}
+  .vbox.doo .p{color:var(--doo)} .vbox.han .p{color:var(--han)}
+  .vmid{flex:0 0 118px;display:flex;flex-direction:column;justify-content:center;align-items:center;
+    background:#12151c;color:#fff;border-radius:14px;padding:10px}
+  .vmid .lab{font-size:11px;opacity:.7} .vmid .val{font-size:15px;font-weight:800;margin-top:2px;text-align:center}
+  h2{font-size:16.5px;margin:26px 0 10px;padding-left:11px;position:relative}
+  h2::before{content:"";position:absolute;left:0;top:3px;bottom:3px;width:4px;background:var(--doo);border-radius:3px}
+  .sub{font-size:12.5px;color:var(--ink2);margin:-6px 0 12px;padding-left:11px}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;font-size:13.5px}
+  th,td{padding:9px 10px;text-align:center;border-bottom:1px solid var(--line)}
+  th{background:#f0f2f7;font-weight:700;color:#3a414d;font-size:12.5px}
+  td.l,th.l{text-align:left}
+  tr:last-child td{border-bottom:none}
+  .cy{color:var(--doo);font-weight:700} .ry{color:var(--han);font-weight:700}
+  .good{color:var(--pos);font-weight:700} .bad{color:var(--neg);font-weight:700}
+  .factors{list-style:none;padding:0;margin:0;counter-reset:f}
+  .factors li{background:var(--card);border:1px solid var(--line);border-radius:11px;
+    padding:12px 14px 12px 44px;margin-bottom:9px;position:relative;font-size:14px}
+  .factors li::before{counter-increment:f;content:counter(f);position:absolute;left:12px;top:12px;
+    width:22px;height:22px;background:var(--doo);color:#fff;border-radius:50%;
+    font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .pill{display:inline-block;font-size:11px;font-weight:700;border-radius:20px;padding:1px 9px;margin-left:6px;vertical-align:1px}
+  .pill.hi{background:var(--hi);color:var(--doo)} .pill.lo{background:var(--lo);color:var(--han)}
+  .pill.mid{background:#eef0f3;color:var(--ink2)}
+  .strat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 4px}
+  .strat div{padding:9px 14px;border-bottom:1px dashed var(--line);font-size:13.8px}
+  .strat div:last-child{border-bottom:none}
+  .strat b{color:var(--doo)}
+  .honest{background:#fbfbf8;border:1px solid #ece7d6;border-radius:11px;padding:13px 15px;
+    font-size:12px;color:#6b6350;margin-top:22px;line-height:1.7}
+  .honest b{color:#8a7a4d}
+  footer{text-align:center;color:var(--ink2);font-size:11.5px;margin-top:18px;line-height:1.7}
+  .barwrap{background:#eef0f3;border-radius:8px;height:26px;display:flex;overflow:hidden;margin:2px 0 4px}
+  .bar-d{background:var(--doo);color:#fff} .bar-h{background:var(--han);color:#fff}
+  .barwrap>div{display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="tag">사전 승률예측 · 데이터기반 야구</span>
+    <h1>두산 vs 한화 · 9.8 대전</h1>
+    <div class="meta">2026.09.08(화) 18:30 · 대전 한화생명볼파크 · 두산 원정 &nbsp;|&nbsp; 최승용(좌) vs 류현진(좌)</div>
+  </header>
+
+  <div class="verdict">
+    <div class="vbox doo"><div class="t">두산</div><div class="p">43%</div></div>
+    <div class="vmid"><div class="lab">판정</div><div class="val">근소 열세<br>(접전 경계)</div></div>
+    <div class="vbox han"><div class="t">한화</div><div class="p">57%</div></div>
+  </div>
+  <div class="barwrap">
+    <div class="bar-d" style="width:43%">두산 43%</div>
+    <div class="bar-h" style="width:57%">한화 57%</div>
+  </div>
+  <p class="sub" style="padding-left:0">단일경기 피타고리안 45.2% → 원정·홈보정 41.3% → 류현진 최근 난조·두산 불펜 우위를 상방 반영해 <b>중앙 43%(범위 40~46%)</b>. 8/13 잠실 홈승(예측 55~56% → 9:6 승)과 같은 매치업이나, <b>구장이 대전 원정(타자친화)으로 바뀌며 홈·구장 이점이 한화로 넘어간 것</b>이 열세 전환의 핵심.</p>
+
+  <h2>선발 매치업 — 두산 열세(약 1.4run 격차)</h2>
+  <p class="sub">스탯티즈 2026 시즌누적 실측 · 폼값은 최근5선발 가중(v4.5 상한 적용)</p>
+  <table>
+    <tr><th class="l">지표</th><th>최승용 <span style="font-weight:400">(두산·좌)</span></th><th>류현진 <span style="font-weight:400">(한화·좌)</span></th></tr>
+    <tr><td class="l">시즌 성적</td><td>3승 11패 · 21선발</td><td>8승 5패 · 22선발</td></tr>
+    <tr><td class="l">rRA9 (실점억제)</td><td class="bad">5.88</td><td class="good">4.48</td></tr>
+    <tr><td class="l">FIP</td><td>4.76</td><td class="good">3.23</td></tr>
+    <tr><td class="l">WHIP</td><td>1.55</td><td class="good">1.20</td></tr>
+    <tr><td class="l">BB/9 (제구)</td><td>3.2</td><td class="good">1.2</td></tr>
+    <tr><td class="l">최근5선발 rRA9</td><td class="bad">≈7.6 (부진)</td><td class="bad">≈7.4 (난조)</td></tr>
+    <tr><td class="l">폼값(모델 입력)</td><td class="cy">6.10</td><td class="ry">4.71</td></tr>
+  </table>
+  <p class="sub" style="padding-left:0;margin-top:9px">류현진은 시즌 지표(rRA9 4.48·FIP 3.23·BB/9 1.2)에서 최승용을 압도하지만, 최근 5선발 rRA9가 7.4로 흔들리고 있으며 <b>8/13 두산전에서 3.1이닝 8실점으로 무너진 전례</b>가 있다. 다만 소표본 최근폼은 v4.5 상한(|Δ|≤0.75run)으로 제한 반영했다. 최승용은 시즌 내내 부진(3승 11패)한 데다 최근 5선발 rRA9 7.6으로 폼도 나쁘다.</p>
+
+  <h2>팀 지표 — 대전 구장이 한화 강타선을 키운다</h2>
+  <p class="sub">2026 순위표 실측(9/7 기준) · wRC+는 park-neutral</p>
+  <table>
+    <tr><th class="l">부문</th><th>두산</th><th>한화</th></tr>
+    <tr><td class="l">순위 / 승률</td><td>5위 .521</td><td>7위 .444</td></tr>
+    <tr><td class="l">득점 / 경기</td><td>4.68</td><td class="bad">5.85 (강타)</td></tr>
+    <tr><td class="l">실점 / 경기</td><td class="good">4.25 (2위)</td><td>5.75 (약함)</td></tr>
+    <tr><td class="l">라인업 공격지수</td><td>≈1.06</td><td class="bad">≈1.14</td></tr>
+    <tr><td class="l">불펜(구원 순위)</td><td class="good">강점(2위)</td><td>약점(8위)</td></tr>
+    <tr><td class="l">수비(실책)</td><td class="bad">리그 최다</td><td>7위</td></tr>
+  </table>
+  <p class="sub" style="padding-left:0;margin-top:9px">한화는 팀 득점 리그 공동 1위(702)의 강타선을 보유하고, 오늘 그 타선이 <b>타자친화 구장인 대전 홈</b>에서 나온다(류현진의 rRA9pf 4.40 &lt; rRA9 4.48이 대전이 타자친화임을 방증). 두산의 강점인 리그 2위 실점력·2위 불펜이 이 화력을 억제할 열쇠지만, 리그 최다 실책의 수비 불안은 접전에서 하방 요인으로 작용한다.</p>
+
+  <h2>상대전적(통산 H2H) — 양쪽 모두 상위타선이 위협</h2>
+  <p class="sub">스탯티즈 m=rival 통산(2013~) · 20타석 안팎만 유의미, 나머지는 서사</p>
+  <table>
+    <tr><th class="l">한화 타자 vs 최승용</th><th>타석</th><th>OPS</th><th class="l">두산 타자 vs 류현진</th><th>타석</th><th>OPS</th></tr>
+    <tr><td class="l bad">노시환</td><td>18</td><td class="bad">1.306</td><td class="l good">박찬호</td><td>20</td><td class="good">.850</td></tr>
+    <tr><td class="l">강백호</td><td>20</td><td>.733</td><td class="l good">양의지</td><td>22</td><td>.773</td></tr>
+    <tr><td class="l">페라자</td><td>3</td><td>3.333*</td><td class="l">강승호</td><td>15</td><td>.734</td></tr>
+    <tr><td class="l">김태연</td><td>17</td><td>.352</td><td class="l">정수빈</td><td>14</td><td>.571</td></tr>
+    <tr><td class="l">문현빈</td><td>11</td><td>.091</td><td class="l bad">김민석</td><td>9</td><td>.222</td></tr>
+  </table>
+  <p class="sub" style="padding-left:0;margin-top:9px">한화 쪽 최대 위협은 <b>노시환(18타석 OPS 1.306, 5볼넷·홈런·2루타 2개)</b>으로 최승용을 확실히 공략해 왔고, 강백호도 20타석 접촉이 좋다(.733). 페라자는 3타석 홈런의 소표본 경계 신호다. 두산 쪽은 <b>박찬호(20타석 .850)·양의지(22타석 .773)</b>가 류현진 상대 표본·성적 모두 앞서고, 반대로 김민석은 9타석 .222로 냉하다. *페라자·이도윤 등 4타석 이하는 회귀 대상(서사만).</p>
+
+  <h2>승부처 — 왜 두산 43%인가</h2>
+  <ul class="factors">
+    <li><b>구장·홈 이점이 한화로 이동(최대 하방).</b> 8/13 같은 매치업을 잠실 홈에서 55~56%로 이겼지만, 오늘은 대전 원정이다. 원정·홈보정만으로 승률이 45.2%에서 41.3%로 내려간다. <span class="pill lo">두산 −</span></li>
+    <li><b>선발 격차(하방).</b> 폼값 최승용 6.10 vs 류현진 4.71로 9이닝당 약 1.4run 열세. 최승용은 시즌·최근폼 모두 부진하다. <span class="pill lo">두산 −</span></li>
+    <li><b>한화 강타선 × 대전(하방).</b> 리그 공동 1위 득점의 한화 타선이 타자친화 구장에서, 노시환·강백호가 최승용 상대 강세다. <span class="pill lo">두산 −</span></li>
+    <li><b>류현진 최근 난조(상방).</b> 최근 5선발 rRA9 7.4, 8/13 두산전 3.1이닝 8실점. 초반 공략 시 조기 강판 여지. <span class="pill hi">두산 +</span></li>
+    <li><b>두산 불펜 우위 + 박찬호·양의지 H2H(상방).</b> 리그 2위 불펜은 접전 후반 뒤집기·리드 지키기의 절대 자산이고, 한화 불펜은 8위로 얇다. <span class="pill hi">두산 +</span></li>
+  </ul>
+
+  <h2>승리 전략</h2>
+  <div class="strat">
+    <div><b>① 최승용 초반 노시환·강백호 관리.</b> 노시환(볼넷 유도 후 큰것)·강백호에게 카운트 몰리지 않게, 1~3회 대량실점 회피가 최우선 고비다.</div>
+    <div><b>② 류현진 초반 흔들 때 몰아치기.</b> 최근 난조·8/13 폭투 전례. 박찬호·양의지가 앞에서 출루하면 5회 전후 조기 강판을 노려 얇은 한화 불펜(8위)을 끌어낸다.</div>
+    <div><b>③ 무실책·수비 집중.</b> 리그 최다 실책이 접전에서 비자책 실점으로 번지는 패턴을 차단해야 한다(오늘 승부의 분산 관리 핵심).</div>
+    <div><b>④ 불펜 우위로 접전 승부.</b> 6~7회 리드·동점이면 두산 필승조(구원 2위)로 뒷문을 잠그는 그림이 두산의 승리 경로다.</div>
+    <div><b>⑤ 주루 압박.</b> 산발성 타선을 추가 진루·기동력으로 보완해 대전 구장에서의 득점 기대를 끌어올린다.</div>
+  </div>
+
+  <div class="honest">
+    <b>데이터 정직 표기 ·</b> 선발 지표(rRA9·FIP·WHIP·최근폼)와 상대전적은 <b>스탯티즈(statiz.co.kr) 실측</b>(선발=2026 시즌누적, H2H=통산 m=rival). 팀 순위·득실은 스탯티즈 순위표 2026-09-07 기준 실측(두산 62-4-57·득575/실523, 한화 52-3-65·득702/실690, 리그 R/G 5.10). <b>라인업 wRC+ 공격지수(두산 1.06·한화 1.14)는 8/11 스탯티즈 실측 보드에 소표본 회귀·최근 추세를 반영한 추정치</b>이며, 당일 팀페이지 재실측은 렌더 오류로 미수행했다(변동 시 미세조정). <b>대전 파크팩터 1.05·불펜 유닛 rRA9(두산 4.0·한화 5.4)</b>는 각각 타자친화 방증·시즌 구원순위 기반 추정이다. 승률 43%는 단일 피타고리안 45.2%에 원정·홈보정을 적용한 41.3%를 기준으로, 류현진 난조·두산 불펜 우위를 상방 반영한 조정 중앙값(범위 40~46%)이다. 양팀 오늘 기준 1군 등말소 없음(사용자 확인).
+  </div>
+
+  <footer>
+    데이터 출처: 스탯티즈(선발·상대전적·순위 실측), KBO 라인업(사용자 제공).<br>
+    두산 vs 한화 · 2026.9.8(화) 대전 · 사전 승률예측 리포트 · 데이터기반 야구.
+  </footer>
+</div>
+</body>
+</html>
