@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs SSG 사전 승률분석 · 9.9 잠실</title>
+<style>
+  :root{--doosan:#1a1748;--ssg:#ce0e2d;--ink:#1a1a1a;--sub:#5c5c66;--line:#e6e6ec;--bg:#f7f7fa;--card:#fff;--good:#0a7d3d;--bad:#c0392b;--warn:#b9770a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{background:linear-gradient(120deg,var(--doosan),#2d2870);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px}
+  header .tag{font-size:12px;letter-spacing:1px;opacity:.8}
+  header h1{font-size:22px;margin:4px 0 2px}
+  header .meta{font-size:13px;opacity:.9}
+  .verdict{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;flex-wrap:wrap}
+  .gauge{flex:1;min-width:260px}
+  .bar{height:26px;border-radius:13px;overflow:hidden;display:flex;font-size:12px;font-weight:700;color:#fff}
+  .bar .d{background:var(--doosan);display:flex;align-items:center;justify-content:flex-start;padding-left:10px}
+  .bar .s{background:var(--ssg);display:flex;align-items:center;justify-content:flex-end;padding-right:10px}
+  .verdict .call{font-size:15px;font-weight:800;min-width:200px}
+  .verdict .call span{color:var(--doosan)}
+  h2{font-size:16px;margin:22px 0 10px;padding-left:10px;border-left:4px solid var(--doosan)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 0;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+  th,td{padding:9px 12px;text-align:center;border-bottom:1px solid var(--line)}
+  th{background:#fafafc;color:var(--sub);font-weight:600;font-size:12px}
+  td.l,th.l{text-align:left}
+  .d-col{color:var(--doosan);font-weight:700}
+  .s-col{color:var(--ssg);font-weight:700}
+  .win{color:var(--good);font-weight:700}.lose{color:var(--bad);font-weight:700}
+  .note{font-size:12px;color:var(--sub);margin-top:6px;padding:0 4px}
+  ul{margin:6px 0 0 18px;font-size:13.5px}li{margin:4px 0}
+  .callout{background:#fff8ec;border:1px solid #f0dfb8;border-radius:10px;padding:12px 14px;font-size:13px;margin:10px 0}
+  .src{font-size:11.5px;color:#9a9aa4;margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+  .step{font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+  .step b{color:var(--doosan)}
+  .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:20px;background:#eef;color:var(--doosan);font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">KBO 사전 승률분석 · 데이터기반</div>
+    <h1>두산 베어스 vs SSG 랜더스</h1>
+    <div class="meta">2026-09-09(화) 18:30 · 잠실 · <b>두산 홈</b> · 곽빈(우) vs 이로운(우)</div>
+  </header>
+
+  <div class="verdict">
+    <div class="gauge">
+      <div class="bar"><div class="d" style="width:75%">두산 75%</div><div class="s" style="width:25%">SSG 25%</div></div>
+      <div class="note">단일경기 피타고리안(1.83)+홈오즈 raw ≈78~81% → 이로운 스팟선발 불확실성·두산 산발성·단일경기 분산 하향. 범위 70~80%.</div>
+    </div>
+    <div class="call">판정: <span>두산 강한 우세</span><br><span style="font-weight:600;color:var(--sub);font-size:12.5px">9/8 대전 원정 43% 열세 → 홈복귀+곽빈으로 반전</span></div>
+  </div>
+
+  <h2>1. 팀 전력 (스탯티즈 실측 · 9/8 기준)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">지표</th><th>두산</th><th>SSG</th><th class="l">해석</th></tr>
+    <tr><td class="l">순위·전적</td><td class="d-col">5위 62-4-58 (.517)</td><td class="s-col">9위 52-5-68 (.433)</td><td class="l">두산 상위권, SSG 하위권</td></tr>
+    <tr><td class="l">득점 (RS/G)</td><td>576 (4.65)</td><td>622 (4.98)</td><td class="l">SSG 원점수↑(문학 타자친화)</td></tr>
+    <tr><td class="l">실점 (RA/G)</td><td class="d-col">529 (4.27·리그2위)</td><td class="s-col">721 (5.77·리그9위)</td><td class="l">실점 억제력 격차가 이 경기 핵심</td></tr>
+    <tr><td class="l">WAA 선발</td><td class="d-col">+7.17 (2위)</td><td class="s-col">−1.41 (9위)</td><td class="l">선발진 최상위 vs 최하위</td></tr>
+    <tr><td class="l">WAA 구원</td><td class="d-col">+1.03 (3위)</td><td class="s-col">−3.95 (8위)</td><td class="l">뒷문도 두산 우위</td></tr>
+    <tr><td class="l">WAA 타격</td><td>−1.73 (7위)</td><td>−3.17 (8위)</td><td class="l">둘 다 리그 평균 이하, 두산이 근소 우위</td></tr>
+    <tr><td class="l">WAA 수비</td><td>+0.08 (5위)</td><td>+0.74 (2위)</td><td class="l">SSG 수비가 오히려 안정</td></tr>
+  </table>
+  </div>
+  <div class="note">피타고리안 팀 기대승률(1.83): 두산 .541 · SSG .430 — 팀 레벨에서도 두산 우위. 리그 R/G 5.09(총득점 6,207÷1,220경기 실계산).</div>
+
+  <h2>2. 선발 매치업 — 곽빈(에이스) vs 이로운(스팟 선발)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">항목</th><th>곽빈 (두산·우)</th><th>이로운 (SSG·우)</th></tr>
+    <tr><td class="l">시즌</td><td class="d-col">25G25GS 148.0IP 11승6패</td><td class="s-col">46G <b>선발 1G</b> 44.2IP 5승3패7홀드</td></tr>
+    <tr><td class="l">rRA9 · FIP</td><td class="d-col">2.59 · 2.77</td><td class="s-col">7.99 · 5.18</td></tr>
+    <tr><td class="l">WHIP · BB/9</td><td>1.06 · 2.3</td><td>1.72 · <b>5.6</b></td></tr>
+    <tr><td class="l">K · WAR</td><td class="d-col">177K · WAR 5.91 (리그 1위)</td><td>43K · WAR −1.10</td></tr>
+    <tr><td class="l">최근폼</td><td class="d-col">최근5 rRA9 1.36 (33IP·2회 무실점 QS+)</td><td>9/3 시즌 첫 선발 4.0IP 2ER(GSC50)</td></tr>
+    <tr><td class="l">모델 폼값</td><td class="d-col">2.22run</td><td class="s-col">5.7run (FIP 회귀)</td></tr>
+  </table>
+  </div>
+  <div class="callout">
+    <b>이로운은 정식 선발이 아니라 불펜 전향 스팟 선발입니다.</b> 시즌 등판 46경기 중 선발은 9/3 단 1경기(4.0IP 2ER)뿐. rRA9 7.99는 극단값이라 FIP 5.18로 회귀했으나, 제구 난조(BB/9 5.6·WHIP 1.72)로 주자 허용이 많습니다. 예상 소화 이닝이 짧아(≈4IP) <b>리그 8위 SSG 불펜에 조기 노출</b>되는 구조가 두산에 유리하게 작동합니다.
+  </div>
+  <div class="note">곽빈 시즌 rRA9(2.59)와 FIP(2.77)가 완전히 정합해 회귀·보정이 필요 없는 정상급 에이스 시즌이며, 최근폼도 시즌치보다 좋아 v4.5-③ 하향상한(|Δ|≤0.75) 안에서 소폭만 반영했습니다.</div>
+
+  <h2>3. 상대전적 (통산 H2H · 스탯티즈 m=rival)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">SSG 타자 vs 곽빈</th><th>PA</th><th>OPS</th><th class="l">SSG 타자 vs 곽빈</th><th>PA</th><th>OPS</th></tr>
+    <tr><td class="l">정준재</td><td>20</td><td class="win">1.021</td><td class="l">조형우</td><td>7</td><td class="lose">.167</td></tr>
+    <tr><td class="l">최지훈</td><td>40</td><td class="win">.925</td><td class="l">에레디아</td><td>19</td><td class="lose">.325</td></tr>
+    <tr><td class="l">안상현</td><td>9</td><td>.833</td><td class="l">박성한</td><td>41</td><td class="lose">.515</td></tr>
+    <tr><td class="l">김재환</td><td>9</td><td class="lose">.111</td><td class="l">고명준</td><td>15</td><td class="lose">.400</td></tr>
+  </table>
+  </div>
+  <div class="note">곽빈이 SSG <b>중심타선(박성한 41PA .515 · 에레디아 19PA .325 · 김재환 9PA .111)을 통산 압도</b>. 반대로 테이블세터 정준재(20PA)·최지훈(40PA)은 곽빈에 강해 1~2번 출루 관리가 관건. H2H는 K=40 회귀 적용(소표본은 서사로만).</div>
+  <div class="card" style="margin-top:8px">
+  <table>
+    <tr><th class="l">두산 타자 vs 이로운</th><th>PA</th><th>OPS</th><th class="l">두산 타자 vs 이로운</th><th>PA</th><th>OPS</th></tr>
+    <tr><td class="l">박찬호</td><td>16</td><td class="lose">.464</td><td class="l">김민석</td><td>6</td><td class="lose">.000</td></tr>
+    <tr><td class="l">정수빈</td><td>9</td><td>.583</td><td class="l">강승호</td><td>9</td><td class="lose">.333</td></tr>
+  </table>
+  </div>
+  <div class="note">두산 타자의 이로운 상대 표본은 전부 소표본(불펜 시절 몇 타석)이라 신호 약함 — 오늘 이로운의 선발 프로파일(제구·투구수)에 좌우.</div>
+
+  <h2>4. 라인업 공격지수 (타순 PA가중 wRC+/100)</h2>
+  <div class="card">
+  <table>
+    <tr><th>타순</th><th class="d-col">두산 (vs 우완)</th><th>wRC+</th><th class="s-col">SSG (vs 우완)</th><th>wRC+</th></tr>
+    <tr><td>1</td><td class="l">박찬호 (유)</td><td>~100</td><td class="l">정준재 (2)</td><td>~95</td></tr>
+    <tr><td>2</td><td class="l">안재석 (3)</td><td>~92</td><td class="l">최지훈 (중)</td><td>~105</td></tr>
+    <tr><td>3</td><td class="l">박준순 (2)</td><td>~105</td><td class="l">박성한 (유)</td><td>~140</td></tr>
+    <tr><td>4</td><td class="l">양의지 (지)</td><td><b>116.5</b>*</td><td class="l">에레디아 (좌)</td><td>~125</td></tr>
+    <tr><td>5</td><td class="l">김민석 (좌)</td><td>~123</td><td class="l">김재환 (지)</td><td>~110</td></tr>
+    <tr><td>6</td><td class="l">강승호 (1)</td><td>~92</td><td class="l">조형우 (포)</td><td>~90</td></tr>
+    <tr><td>7</td><td class="l">정수빈 (중)</td><td>~95</td><td class="l">안상현 (3)</td><td>~85</td></tr>
+    <tr><td>8</td><td class="l">조수행 (우)</td><td>~85</td><td class="l">임근우 (우)</td><td>~85</td></tr>
+    <tr><td>9</td><td class="l">윤준호 (포)</td><td>~80</td><td class="l">안재연 (1)</td><td>~80</td></tr>
+    <tr><td class="l">공격지수</td><td class="d-col">≈ 0.98</td><td></td><td class="s-col">≈ 0.96</td><td></td></tr>
+  </table>
+  </div>
+  <div class="note">* 양의지 wRC+ 116.5는 스탯티즈 실측. 나머지는 팀 타격 WAA(두산 7위·SSG 8위)+개인 레이트스탯+직전 세션 보드 기반 <b>추정치</b>(정직 표기). 두 타선 모두 리그 평균 이하로 공격은 큰 변수가 아니며, SSG 중심타선은 곽빈 H2H로 실효 지수가 더 낮아집니다.</div>
+
+  <h2>5. 승률 산출 단계 (§v4.5)</h2>
+  <div class="step"><b>① 투수 실점력</b> — 두산 = 0.658×곽빈2.22 + 0.342×불펜4.5 = <b>3.00</b> / SSG = 0.44×이로운5.7 + 0.56×불펜5.9(8위×피로1.05) = <b>5.81</b></div>
+  <div class="step"><b>② 수비 보정 effRA</b> — 두산 3.00 + 실책하방 0.06 = <b>3.06</b> / SSG 5.81 − 수비RAA 0.06 = <b>5.75</b></div>
+  <div class="step"><b>③ 기대득점</b>(잠실 PF 0.92) — 두산 0.98×5.75×0.92 = <b>5.2</b> / SSG 0.96×3.06×0.92 → 곽빈 H2H 억제 반영 <b>2.7</b></div>
+  <div class="step"><b>④ 피타고리안(1.83)</b> 두산 ≈ 78% → <b>⑤ 홈오즈 ×1.174</b> → 81%</div>
+  <div class="step"><b>⑥ 하향 조정</b> — 이로운 스팟선발 불확실성(1선발 표본)·두산 산발성·단일경기 분산 → <b>채택 두산 75% / SSG 25% (범위 70~80%)</b></div>
+  <div class="note">두산 우세(>0.60) 구간이라 수비 실책 하방은 방향을 바꾸지 않아 <b>분산(하방 꼬리) 표기</b>로만 반영(−%p 직접적용 아님).</div>
+
+  <h2>6. 승리 전략</h2>
+  <ul>
+    <li><b>이로운 제구 공략·투구수 압박</b> — BB/9 5.6·WHIP 1.72. 인내로 볼넷·투구수 늘려 4~5회 조기강판 유도 → <b>리그 8위 SSG 불펜</b>을 중반부터 노출시키는 게 최우선 승부처.</li>
+    <li><b>곽빈은 SSG 중심을 억제</b> — 박성한·에레디아·김재환 H2H 열세. 다만 1~2번 정준재(1.021)·최지훈(.925)에 강하므로 <b>테이블세터 출루 차단</b>이 실점 방지의 핵심.</li>
+    <li><b>주루 압박</b> — 곽빈 호투 전제 하 스몰볼로 소량 득점을 확실히 가져가면 낮은 실점 환경에서 충분. 두산 주루 WAA 2위.</li>
+    <li><b>무실책·뒷문 관리</b> — 두산 실책 리스크는 상시 하방 꼬리. 곽빈 6이닝+ 소화 시 필승조(이영하·김택연) 부담 적음(9/8 대패로 불펜 충분 휴식).</li>
+    <li><b>산발성 경계</b> — 두산 타선은 득점권 집중력이 약점이나, 상대 불펜이 약체라 후반 폭발로 덮일 여지가 크다.</li>
+  </ul>
+
+  <h2>7. 결론</h2>
+  <div class="callout" style="background:#eef4ff;border-color:#c9dcff">
+    <b>두산 75% 강한 우세.</b> 리그 실점 억제 2위(곽빈 rRA9 2.59·에이스 시즌)를 앞세운 홈경기에, 상대는 실점 억제 9위·불펜 8위의 SSG가 정식 선발이 아닌 <b>스팟 선발 이로운</b>을 낸 매치업. 두 타선 모두 평균 이하라 공격은 변수가 작고, 승부는 선발·구장·홈 이점에서 두산이 크게 앞선다. 관건은 ①이로운 조기 강판 유도 ②정준재·최지훈 테이블세터 차단 ③무실책. 9/8 대전 원정 43% 열세가 홈복귀와 에이스 등판으로 정확히 반전됐다.
+  </div>
+
+  <div class="src">
+    <b>데이터 출처</b>: 스탯티즈(statiz.co.kr) 실측 — 팀 순위표·WAA 부문표, 곽빈·이로운 종합/날짜별(m=day)/상대별(m=rival, 통산), 양의지 종합(wRC+). 라인업: 네이버 스포츠 라인업(사용자 제공, 확정). 계산식: 프로젝트 「경기 승률 분석 지침 v4.5」. 기준일 9/8 순위표(두산 5위 576·529 / SSG 9위 622·721), 리그 R/G 5.09 실계산.<br>
+    ※ 라인업 하위 wRC+는 추정치이며 팀 타격 WAA·개인 레이트스탯 기반입니다(실측=양의지). 승률은 방향·구간 예측이며 단일경기 분산이 큽니다.
+  </div>
+</div>
+</body>
+</html>
