@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs NC 사후 결과분석 · 9.30 잠실</title>
+<style>
+  :root{--doosan:#1a1748;--nc:#315288;--ink:#1a1a1a;--sub:#5c5c66;--line:#e6e6ec;--bg:#f7f7fa;--card:#fff;--good:#0a7d3d;--bad:#c0392b;--warn:#b9770a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{background:linear-gradient(120deg,var(--doosan),#2d2870);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px}
+  header .tag{font-size:12px;letter-spacing:1px;opacity:.8}
+  header h1{font-size:22px;margin:4px 0 2px}
+  header .meta{font-size:13px;opacity:.9}
+  .score{display:flex;align-items:center;justify-content:center;gap:26px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;flex-wrap:wrap}
+  .score .t{text-align:center;font-size:14px;font-weight:700}
+  .score .n{font-size:40px;font-weight:800;line-height:1.1}
+  .score .res{font-size:13px;font-weight:700;color:#fff;background:var(--good);border-radius:20px;padding:4px 12px}
+  h2{font-size:16px;margin:22px 0 10px;padding-left:10px;border-left:4px solid var(--doosan)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 0;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+  th,td{padding:8px 10px;text-align:center;border-bottom:1px solid var(--line)}
+  th{background:#fafafc;color:var(--sub);font-weight:600;font-size:12px}
+  td.l,th.l{text-align:left}
+  .d-col{color:var(--doosan);font-weight:700}
+  .s-col{color:var(--nc);font-weight:700}
+  .win{color:var(--good);font-weight:700}.lose{color:var(--bad);font-weight:700}
+  .note{font-size:12px;color:var(--sub);margin-top:6px;padding:0 4px}
+  ul{margin:6px 0 0 18px;font-size:13.5px}li{margin:5px 0}
+  .callout{background:#fff8ec;border:1px solid #f0dfb8;border-radius:10px;padding:12px 14px;font-size:13px;margin:10px 0}
+  .src{font-size:11.5px;color:#9a9aa4;margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+  .hl{background:#eef4ff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">KBO 사후 결과분석 · 데이터기반</div>
+    <h1>두산 베어스 vs NC 다이노스</h1>
+    <div class="meta">2026-09-30(수) 18:30 · 잠실 · <b>두산 홈</b> · 잭로그(좌) vs 라일리(우) · 사전 예측 두산 45%</div>
+  </header>
+
+  <div class="score">
+    <div class="t" style="color:var(--nc)">NC<div class="n">5</div></div>
+    <div class="res">두산 9회말 끝내기 승</div>
+    <div class="t" style="color:var(--doosan)">두산<div class="n">6</div></div>
+  </div>
+
+  <h2>1. 스코어보드 (이닝별 R 합계 교차검증 완료)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>R</th><th>H</th><th>E</th><th>B</th></tr>
+    <tr><td class="l s-col">NC</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>0</td><td>0</td><td>1</td><td>1</td><td class="s-col">5</td><td>15</td><td>1</td><td>3</td></tr>
+    <tr><td class="l d-col">두산</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>3</td><td class="d-col">6</td><td>12</td><td>0</td><td>5</td></tr>
+  </table>
+  </div>
+  <div class="note">점수 흐름은 3회 두산 1:0, 5회 NC 3:1 역전, 6회 세베리노 솔로(시즌 6호, 라일리 상대) 3:2, 8회 양 팀 1점씩 4:3, 9회초 NC 5:3, 9회말 두산 3점으로 6:5입니다. 승 이병헌 · 패 손주환 · 결승타 강승호(9회 1사 2·3루 2루수 앞 안타).</div>
+
+  <h2>2. 예측 vs 결과</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">항목</th><th>사전 예측</th><th>실제</th><th class="l">판정</th></tr>
+    <tr><td class="l">두산 승률 · 결과</td><td>45% (접전·열세 쪽)</td><td class="win">승 6:5</td><td class="l">Brier (0.45−1)² = <b>0.3025</b></td></tr>
+    <tr class="hl"><td class="l">기대득점 (두산 : NC)</td><td>3.54 : 4.09</td><td>8회까지 3 : 4 → 최종 6 : 5</td><td class="l win">8회까지는 기대득점과 거의 일치</td></tr>
+    <tr><td class="l">선발 우위</td><td>NC (폼값 2.52 vs 4.70)</td><td>라일리 6IP 2R · 잭로그 5IP 3R</td><td class="l win">적중</td></tr>
+    <tr><td class="l">불펜 우위</td><td>두산 (구원 WAA 3위 vs 8위)</td><td>두산 4IP 2R · NC 2⅓IP 4R</td><td class="l win">적중, 승부를 가른 구간</td></tr>
+    <tr><td class="l">NC 마무리 불안</td><td>전사민 최근 2경기 연속 3실점</td><td>전사민 ⅔IP 2R · 손주환 0IP 1R(패)</td><td class="l win">적중</td></tr>
+    <tr><td class="l">경계 타자 김휘집</td><td>잭로그 상대 8PA 2HR</td><td>4타수 1안타 1타점</td><td class="l">장타 억제</td></tr>
+    <tr><td class="l">수비 하방 (−2%p 반영)</td><td>실책 리스크</td><td>두산 0실책 · NC 1실책(김형준)</td><td class="l">오늘은 NC 쪽으로 발생</td></tr>
+  </table>
+  </div>
+  <div class="callout">
+    <b>과정은 예측대로, 결과는 반대로 나온 경기입니다.</b> 모델이 지목한 두 축, 즉 라일리 우위의 선발전과 NC 불펜 약점이 그대로 나타났고, 8회까지의 스코어(4:3 NC 리드)는 사전 기대득점(4.09:3.54)과 거의 같았습니다. 45%짜리 쪽이 이길 확률은 두 번에 한 번에 가까우므로 이 결과는 모델 오류라기보다 단일경기 분산 범위 안의 사건이며, 방법론 평가는 적중 여부가 아닌 누적 Brier·구간 캘리브레이션으로 합니다.
+  </div>
+
+  <h2>3. 선발 매치업 결과</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">투수</th><th>IP</th><th>H</th><th>R/ER</th><th>BB/HBP</th><th>K</th><th>HR</th><th class="l">경기 rRA9 vs 사전 폼값</th></tr>
+    <tr><td class="l d-col">잭로그 (두산)</td><td>5</td><td>9</td><td>3/3</td><td>1</td><td>5</td><td>0</td><td class="l">5.40 vs 4.70 (소폭 부진, 피안타 과다)</td></tr>
+    <tr><td class="l s-col">라일리 (NC)</td><td>6</td><td>7</td><td>2/2</td><td>2</td><td>5</td><td>1</td><td class="l">3.00 vs 2.52 (시즌 수준, 1회 폭투)</td></tr>
+  </table>
+  </div>
+  <div class="note">잭로그는 사전 리포트의 승리 조건(6이닝 3실점 이하)에 1이닝 모자랐고, 9피안타 중 5회에 3실점이 몰렸습니다. 라일리는 6이닝 2실점으로 선발 싸움에서는 NC가 이겼습니다.</div>
+
+  <h2>4. 불펜 — 승부를 가른 구간</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">두산</th><th>IP</th><th>H</th><th>R</th><th class="l">메모</th><th class="l">NC</th><th>IP</th><th>H</th><th>R</th></tr>
+    <tr><td class="l">이용찬</td><td>1</td><td>1</td><td>0</td><td class="l">6회 무실점</td><td class="l">배재환 (홀)</td><td>1⅓</td><td>0</td><td>1</td></tr>
+    <tr><td class="l">김정우</td><td>1</td><td>0</td><td>0</td><td class="l">7회 무실점</td><td class="l">이용준 (홀)</td><td>⅓</td><td>2</td><td>0</td></tr>
+    <tr><td class="l">박치국</td><td>1</td><td>2</td><td>1</td><td class="l">8회 1실점</td><td class="l lose">전사민</td><td>⅔</td><td>1</td><td>2</td></tr>
+    <tr><td class="l lose">이영하</td><td>⅓</td><td>3</td><td>1</td><td class="l">연투, 9회초 5:3 허용</td><td class="l lose">손주환 (패)</td><td>0</td><td>1</td><td>1</td></tr>
+    <tr><td class="l win">이병헌 (승)</td><td>⅔</td><td>0</td><td>0</td><td class="l">9회초 추가실점 차단</td><td class="l">신영우</td><td>0</td><td>1</td><td>0</td></tr>
+    <tr><td class="l d-col">합계</td><td>4</td><td>6</td><td>2</td><td></td><td class="l s-col">합계</td><td>2⅓</td><td>5</td><td>4</td></tr>
+  </table>
+  </div>
+  <div class="note">NC 불펜은 2⅓이닝 동안 4실점했고, 9회에만 전사민·손주환·신영우가 아웃 하나를 잡는 동안 3점을 내줬습니다. 두산 쪽에서는 전날(9/29) 1이닝을 던진 마무리 이영하가 ⅓이닝 3피안타 1실점으로 흔들렸으며, 사전 분석에서 "연투 가능"으로만 처리한 이 부분이 두산의 실제 하방 리스크였습니다.</div>
+
+  <h2>5. 타선 — 주루와 벤치가 만든 득점</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">두산 주요 타자</th><th class="l">기록</th><th class="l">NC 주요 타자</th><th class="l">기록</th></tr>
+    <tr><td class="l">박준순</td><td class="l win">5타수 4안타 · 도루</td><td class="l">김주원</td><td class="l">4타수 2안타 1타점</td></tr>
+    <tr><td class="l">조수행</td><td class="l win">4타수 3안타 1타점 · 2루타 · 도루</td><td class="l">김형준</td><td class="l">3타수 2안타 1타점 2볼넷 · 실책 · 주루사</td></tr>
+    <tr><td class="l">세베리노</td><td class="l">4타수 2안타 · 솔로 HR</td><td class="l">오태양</td><td class="l">4타수 2안타 1타점 · 2루타 · 도루</td></tr>
+    <tr><td class="l">김민석</td><td class="l">5타수 1안타 2타점 · 9회 2루타</td><td class="l">한재환</td><td class="l">3타수 2안타</td></tr>
+    <tr><td class="l">강승호 (대주자→1루)</td><td class="l win">1타수 1안타 1타점 · 결승타</td><td class="l">블레인</td><td class="l lose">5타수 1안타 3삼진</td></tr>
+    <tr><td class="l">박찬호 · 정수빈 · 윤준호</td><td class="l lose">합계 10타수 무안타 (볼넷 2)</td><td class="l">신재인 (대타)</td><td class="l lose">9회 병살타</td></tr>
+  </table>
+  </div>
+  <ul>
+    <li><b>주루</b>는 사전 전략대로 작동했습니다. 두산은 도루 3개(안재석·박준순 3회, 조수행 4회)를 기록했고, 6득점 중 3점을 대주자 이유찬·전다민·김대한이 올렸습니다.</li>
+    <li><b>테이블 양 끝의 공백</b>이 컸습니다. 1번 박찬호, 8번 윤준호, 9번 정수빈이 10타수 무안타에 그쳐 12안타가 중심·하위 일부에 몰렸고, 이는 두산 타선의 산발성 메모(§4-2)와 같은 패턴입니다.</li>
+    <li><b>NC</b>는 15안타 2볼넷으로 17명이 출루했지만 5득점에 그쳤는데, 9회 병살, 4회 김형준 주루사, 두산의 0실책이 잔루로 이어진 결과입니다.</li>
+  </ul>
+
+  <h2>6. 모델 피드백</h2>
+  <ul>
+    <li><b>유지</b>: 선발 폼값 블렌드, NC 불펜 8위 반영, 접전 불펜 상향폭 ×0.5 규칙은 모두 오늘 흐름과 맞았으므로 수정하지 않습니다.</li>
+    <li><b>보완 후보</b>: 마무리 연투일(전날 등판)에는 가용 필승조로 세더라도 해당 유닛 실점력에 소폭 페널티(예: ×1.05)를 주는 방안을 검토합니다. 오늘 이영하 사례 1건만으로 상수를 바꾸지는 않고, 연투일 마무리 성적을 누적해 판단합니다.</li>
+    <li><b>캘리브레이션</b>: 열세(&lt;50%) 구간에 1승이 추가됐습니다. v4.5 편입 시 "열세 5경기 1승4패, 언더독 추가 하향 여지"라는 관찰이 있었으므로, 이번 결과는 그 하향을 서두르지 말아야 한다는 반대 근거로 함께 기록합니다.</li>
+  </ul>
+
+  <h2>7. 결론</h2>
+  <div class="callout" style="background:#eef4ff;border-color:#c9dcff">
+    <b>예측 45%, 결과는 9회말 끝내기 승리입니다.</b> 선발전은 라일리(6IP 2R)가 잭로그(5IP 3R)를 앞섰고 8회까지 스코어도 기대득점과 거의 같았으나, 사전에 지목한 NC 불펜 약점이 9회에 3실점으로 터지면서 결과가 뒤집혔습니다. 두산 쪽에서는 박준순 4안타·조수행 3안타와 도루 3개, 대주자 3득점이 승리를 만들었고, 연투한 마무리 이영하의 부진은 다음 접전에서 고려할 리스크로 남았습니다.
+  </div>
+
+  <div class="src">
+    <b>데이터 출처</b>: 네이버 스포츠 경기 기록(스코어보드·타자/투수 기록·결승타/홈런/도루/실책, 사용자 제공 캡처). 사전 예측값·기대득점: 본 프로젝트 사전 리포트(2026-09-30_NC_pre.html, 스탯티즈 실측 기반). 계산식: 노션 「경기 승률 분석 지침 (라이브·v4)」 §v4.5.<br>
+    ※ 9회 득점의 세부 타석 순서는 캡처에 없어 결승타·2루타 기록만 인용했습니다. 누적 Brier·구간 캘리브레이션은 이번 리포트에서 재계산하지 않았습니다.
+  </div>
+</div>
+</body>
+</html>
