@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs NC 사전 승률분석 · 9.30 잠실</title>
+<style>
+  :root{--doosan:#1a1748;--nc:#315288;--ink:#1a1a1a;--sub:#5c5c66;--line:#e6e6ec;--bg:#f7f7fa;--card:#fff;--good:#0a7d3d;--bad:#c0392b;--warn:#b9770a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{background:linear-gradient(120deg,var(--doosan),#2d2870);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px}
+  header .tag{font-size:12px;letter-spacing:1px;opacity:.8}
+  header h1{font-size:22px;margin:4px 0 2px}
+  header .meta{font-size:13px;opacity:.9}
+  .verdict{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;flex-wrap:wrap}
+  .gauge{flex:1;min-width:260px}
+  .bar{height:26px;border-radius:13px;overflow:hidden;display:flex;font-size:12px;font-weight:700;color:#fff}
+  .bar .d{background:var(--doosan);display:flex;align-items:center;justify-content:flex-start;padding-left:10px}
+  .bar .s{background:var(--nc);display:flex;align-items:center;justify-content:flex-end;padding-right:10px}
+  .verdict .call{font-size:15px;font-weight:800;min-width:200px}
+  .verdict .call span{color:var(--warn)}
+  h2{font-size:16px;margin:22px 0 10px;padding-left:10px;border-left:4px solid var(--doosan)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 0;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+  th,td{padding:9px 12px;text-align:center;border-bottom:1px solid var(--line)}
+  th{background:#fafafc;color:var(--sub);font-weight:600;font-size:12px}
+  td.l,th.l{text-align:left}
+  .d-col{color:var(--doosan);font-weight:700}
+  .s-col{color:var(--nc);font-weight:700}
+  .win{color:var(--good);font-weight:700}.lose{color:var(--bad);font-weight:700}
+  .note{font-size:12px;color:var(--sub);margin-top:6px;padding:0 4px}
+  ul{margin:6px 0 0 18px;font-size:13.5px}li{margin:4px 0}
+  .callout{background:#fff8ec;border:1px solid #f0dfb8;border-radius:10px;padding:12px 14px;font-size:13px;margin:10px 0}
+  .src{font-size:11.5px;color:#9a9aa4;margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+  .step{font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+  .step b{color:var(--doosan)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">KBO 사전 승률분석 · 데이터기반</div>
+    <h1>두산 베어스 vs NC 다이노스</h1>
+    <div class="meta">2026-09-30(수) 18:30 · 잠실 · <b>두산 홈</b> · 잭로그(좌) vs 라일리(우)</div>
+  </header>
+
+  <div class="verdict">
+    <div class="gauge">
+      <div class="bar"><div class="d" style="width:45%">두산 45%</div><div class="s" style="width:55%">NC 55%</div></div>
+      <div class="note">기본 계산 홈 47.4% → 접전 불펜 상향폭 ×0.5 적용 46.0% → 접전 수비 하방 −2%p → 채택 45%(범위 42~50%). 라일리 FIP 회귀 민감도는 49.7%.</div>
+    </div>
+    <div class="call">판정: <span>접전(열세 쪽)</span><br><span style="font-weight:600;color:var(--sub);font-size:12.5px">시즌 전력은 두산 우위(Log5 55.8%)이나 선발 격차가 이를 뒤집는 구도</span></div>
+  </div>
+
+  <h2>1. 팀 전력 (스탯티즈 실측 · 9/30 경기 전 기준)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">지표</th><th>두산</th><th>NC</th><th class="l">해석</th></tr>
+    <tr><td class="l">순위·전적</td><td class="d-col">5위 68-5-63 (.519)</td><td class="s-col">6위 62-2-71 (.466)</td><td class="l">시즌 상대전적은 두산 10승 4패</td></tr>
+    <tr><td class="l">득점 (RS/G)</td><td>638 (4.69)</td><td>677 (5.01)</td><td class="l">원점수는 NC 타선이 더 많이 냄</td></tr>
+    <tr><td class="l">실점 (RA/G)</td><td class="d-col">592 (4.35)</td><td class="s-col">714 (5.29)</td><td class="l">실점 억제력은 두산이 크게 앞섬</td></tr>
+    <tr><td class="l">피타고리안(1.83)</td><td class="d-col">.534</td><td class="s-col">.476</td><td class="l">Log5 중립 기준선 두산 55.8%</td></tr>
+    <tr><td class="l">WAA 선발</td><td class="d-col">+6.90 (2위)</td><td>+3.64 (6위)</td><td class="l">팀 선발진은 두산 우위이나 오늘 개별 매치업은 반대</td></tr>
+    <tr><td class="l">WAA 구원</td><td class="d-col">+0.69 (3위)</td><td class="s-col">−5.22 (8위)</td><td class="l">뒷문은 두산이 뚜렷이 우위</td></tr>
+    <tr><td class="l">WAA 타격</td><td>−1.66 (7위)</td><td>−0.87 (6위)</td><td class="l">둘 다 리그 평균 이하</td></tr>
+    <tr><td class="l">WAA 수비 · 주루</td><td>+0.32 (4위) · +0.53 (2위)</td><td>−0.18 (7위) · +0.28 (4위)</td><td class="l">수비·주루 모두 두산 소폭 우위</td></tr>
+  </table>
+  </div>
+  <div class="note">리그 R/G 5.079는 스탯티즈 팀기록실 리그 총득점 6,857을 1,350 팀경기로 나눈 실계산 값입니다.</div>
+
+  <h2>2. 선발 매치업 — 잭로그 vs 라일리</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">항목</th><th>잭로그 (두산·좌)</th><th>라일리 (NC·우)</th></tr>
+    <tr><td class="l">시즌</td><td>28GS 153.1IP 7승7패</td><td class="s-col">21GS 127.2IP 8승1패</td></tr>
+    <tr><td class="l">rRA9 · FIP</td><td>4.62 · 4.29</td><td class="s-col">2.75 · 3.40</td></tr>
+    <tr><td class="l">WHIP · 탈삼진</td><td>1.27 · 130K</td><td class="s-col">1.03 · 157K (K/9 11.1)</td></tr>
+    <tr><td class="l">WAR</td><td>2.76</td><td class="s-col">5.19</td></tr>
+    <tr><td class="l">최근 5선발</td><td class="lose">27.2IP 15R (rRA9 4.88)</td><td class="s-col">32IP 7R (rRA9 1.97)</td></tr>
+    <tr><td class="l">모델 폼값 · 선발 비중</td><td>4.70run · 0.608</td><td class="s-col">2.52run · 0.675</td></tr>
+  </table>
+  </div>
+  <div class="callout">
+    <b>오늘 승률을 결정하는 변수는 선발 격차입니다.</b> 라일리의 폼값(2.52)은 잭로그(4.70)보다 9이닝당 약 2.2점 낮고, 라일리는 경기당 평균 6이닝 이상을 소화해 두산 타선이 약한 NC 불펜을 만나는 시점이 늦습니다. 잭로그는 9/12 NC전 5IP 6실점, 9/18 키움전 4.2IP 3실점으로 9월 기복이 있었으나 직전 9/23 KIA전 6IP 2실점으로 회복했으므로 급성부진 플래그는 켜지 않았습니다.
+  </div>
+  <div class="note">라일리는 rRA9(2.75)가 FIP(3.40)보다 0.65 낮아 회귀 트리거(|Δ|≳2)에는 해당하지 않지만, 운이 섞였을 가능성을 고려해 FIP 회귀판(폼값 2.96)을 민감도 시나리오로 따로 계산했습니다.</div>
+
+  <h2>3. 상대전적 (통산 H2H · 스탯티즈 m=rival)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">NC 타자 vs 잭로그</th><th>PA</th><th>OPS</th><th class="l">NC 타자 vs 잭로그</th><th>PA</th><th>OPS</th></tr>
+    <tr><td class="l">김휘집</td><td>8</td><td class="win">2.750 (2HR)</td><td class="l">김형준</td><td>7</td><td>.715</td></tr>
+    <tr><td class="l">김한별</td><td>5</td><td>1.167</td><td class="l">김주원</td><td>8</td><td class="lose">.500</td></tr>
+    <tr><td class="l">권희동</td><td>8</td><td class="lose">.500</td><td class="l">천재환</td><td>6</td><td class="lose">.400 (3K)</td></tr>
+  </table>
+  </div>
+  <div class="card" style="margin-top:8px">
+  <table>
+    <tr><th class="l">두산 타자 vs 라일리</th><th>PA</th><th>OPS</th><th class="l">두산 타자 vs 라일리</th><th>PA</th><th>OPS</th></tr>
+    <tr><td class="l">양의지</td><td>6</td><td class="win">1.917 (1HR)</td><td class="l">김민석</td><td>6</td><td>.666</td></tr>
+    <tr><td class="l">윤준호</td><td>4</td><td class="win">2.000 (1HR)</td><td class="l">세베리노</td><td>3</td><td>.666</td></tr>
+    <tr><td class="l">조수행</td><td>3</td><td>1.334</td><td class="l">안재석</td><td>6</td><td class="lose">.334</td></tr>
+    <tr><td class="l">박준순</td><td>6</td><td>.750</td><td class="l">박찬호</td><td>5</td><td class="lose">.000</td></tr>
+  </table>
+  </div>
+  <div class="note">양 팀 모두 타자별 표본이 8타석 이하라서 K=40 회귀 후에는 확률 기여가 거의 없으므로 서사로만 활용했으며, 그중 김휘집의 잭로그 상대 장타력은 전략상 경계 신호로 기록합니다.</div>
+
+  <h2>4. 라인업 공격지수 (타순 PA가중 wRC+/100 · 스탯티즈 실측)</h2>
+  <div class="card">
+  <table>
+    <tr><th>타순</th><th class="d-col">두산</th><th>wRC+ (반영값)</th><th class="s-col">NC</th><th>wRC+ (반영값)</th></tr>
+    <tr><td>1</td><td class="l">박찬호 (유)</td><td>97.8</td><td class="l">김주원 (유)</td><td>115.6</td></tr>
+    <tr><td>2</td><td class="l">안재석 (3)</td><td>102.7</td><td class="l">천재환 (우)</td><td>113.6 (108.2)</td></tr>
+    <tr><td>3</td><td class="l">박준순 (2)</td><td>131.1</td><td class="l">블레인 크림 (지)</td><td>95.0 (97.3)</td></tr>
+    <tr><td>4</td><td class="l">양의지 (지)</td><td>117.9</td><td class="l">김휘집 (3)</td><td>126.6 (116.3)</td></tr>
+    <tr><td>5</td><td class="l">김민석 (좌)</td><td>126.4</td><td class="l">김형준 (포)</td><td>93.2</td></tr>
+    <tr><td>6</td><td class="l">세베리노 (1)</td><td>125.8 (110.7)</td><td class="l">권희동 (좌)</td><td>90.3 (94.3)</td></tr>
+    <tr><td>7</td><td class="l">조수행 (우)</td><td>128.8 (114.6)</td><td class="l">한재환 (1)</td><td>57.7 (80.9)</td></tr>
+    <tr><td>8</td><td class="l">윤준호 (포)</td><td>51.7 (68.9)</td><td class="l">김한별 (2)</td><td>73.0 (79.9)</td></tr>
+    <tr><td>9</td><td class="l">정수빈 (중)</td><td>88.2</td><td class="l">오태양 (중)</td><td>67.3 (82.0)</td></tr>
+    <tr><td class="l">공격지수</td><td class="d-col">1.069</td><td></td><td class="s-col">0.971</td><td></td></tr>
+  </table>
+  </div>
+  <div class="note">350타석 미만 타자는 k=200으로 평균 쪽 회귀를 적용했으며(주전급 prior 100, 백업 prior 85), 괄호 안이 모델 반영값입니다. 좌우 스플릿은 반영하지 않았으므로 두산 타선의 우완 라일리 상대 실효값은 확인되지 않은 상태입니다.</div>
+
+  <h2>5. 불펜 가용 상황</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">투수</th><th>rRA9 · FIP</th><th class="l">최근 등판 · 비고</th></tr>
+    <tr><td class="l d-col">이영하 (두산 마무리)</td><td>3.28 · 3.00</td><td class="l">9/29 1IP 무실점, 오늘 연투 가능</td></tr>
+    <tr><td class="l d-col">김택연 (두산)</td><td>3.30 · 4.30</td><td class="l">9/29 1IP 무실점, 오늘 연투 가능</td></tr>
+    <tr><td class="l d-col">김정우 (두산)</td><td>1.59 · 4.37</td><td class="l">9/27 이후 휴식, ERA≪FIP이라 FIP 회귀 적용</td></tr>
+    <tr><td class="l s-col">전사민 (NC 마무리)</td><td>6.33 · 5.26</td><td class="l lose">9/25 0IP 3실점, 9/27 1.1IP 3실점</td></tr>
+    <tr><td class="l s-col">김진호 (NC 팀 내 홀드 1위)</td><td>7.10 · 7.11</td><td class="l">최근 4경기 중 3경기 실점</td></tr>
+  </table>
+  </div>
+  <div class="note">두산은 필승조 3명이 가용해 뎁스 페널티(×1.10~1.15)를 적용하지 않았으나, 결과가 접전 구간이므로 §v4.5-②에 따라 불펜 우위 상향폭을 절반으로 제한했습니다(두산 불펜 실점력 4.4→4.75, NC 5.8은 추정치).</div>
+
+  <h2>6. 승률 산출 단계 (§v4.5)</h2>
+  <div class="step"><b>① 투수 실점력</b> — 두산 = 0.608×잭로그 4.70 + 0.392×불펜 4.4 = <b>4.58</b> / NC = 0.675×라일리 2.52 + 0.325×불펜 5.8 = <b>3.58</b></div>
+  <div class="step"><b>② 수비 보정 effRA</b> — 두산 4.58 − 수비RAA 0.02 + 실책 하방 0.02 = <b>4.57</b> / NC 3.58 + 수비 0.01 = <b>3.59</b></div>
+  <div class="step"><b>③ 기대득점</b>(잠실 PF 0.92) — 두산 1.069×3.59×0.92 = <b>3.54</b> / NC 0.971×4.57×0.92 = <b>4.09</b></div>
+  <div class="step"><b>④ 피타고리안(1.83)</b> 두산 43.4% → <b>⑤ 홈오즈 ×1.174</b> → 47.4%</div>
+  <div class="step"><b>⑥ 접전 보정</b> — 불펜 상향폭 ×0.5 → 46.0%, 수비 하방 −2%p → <b>채택 두산 45% / NC 55% (범위 42~50%)</b></div>
+  <div class="note">라일리 FIP 회귀 민감도(폼값 2.96)를 넣으면 49.7%이므로, 라일리가 FIP 수준으로 돌아오는 날이면 사실상 반반 승부입니다.</div>
+
+  <h2>7. 승리 전략</h2>
+  <ul>
+    <li><b>라일리 상대 1점 싸움</b> — 라일리의 WHIP은 1.03, 9이닝당 탈삼진은 11.1이므로 대량득점을 기대하기 어렵고, 출루 후 두산 주루(WAA 2위)로 한 베이스를 더 가는 방식이 현실적인 득점 경로입니다.</li>
+    <li><b>잭로그 6이닝 3실점 이하</b> — 두산의 승리 조건이며, 통산 8타석 2홈런을 친 김휘집(4번) 타석에서 주자를 쌓지 않는 것이 실점 방지의 핵심입니다.</li>
+    <li><b>후반 NC 불펜 공략</b> — NC 구원 WAA는 리그 8위이고 마무리 전사민은 최근 2경기 연속 3실점했으므로, 7회까지 동점이나 1점 차를 유지하면 승산이 크게 올라갑니다.</li>
+    <li><b>무실책</b> — 접전 구간이라 실책 1개가 승률을 직접 깎는 경기이며, 이 하방은 모델에 −2%p로 이미 반영했습니다.</li>
+  </ul>
+
+  <h2>8. 결론</h2>
+  <div class="callout" style="background:#eef4ff;border-color:#c9dcff">
+    <b>두산 45%, NC가 약간 앞서는 접전입니다.</b> 시즌 팀 전력(피타고리안 .534 vs .476)과 불펜(구원 WAA 3위 vs 8위)은 두산이 앞서지만, 오늘은 WAR 5.19의 라일리(최근 5선발 rRA9 1.97)가 나서고 두산은 최근 기복이 있는 잭로그가 나서므로 선발 격차가 팀 전력 차이를 뒤집습니다. 경기의 분기점은 라일리가 내려가는 시점의 점수 차이이며, 1점 차 이내로 버티면 두산 불펜 우위가 작동할 여지가 있습니다.
+  </div>
+
+  <div class="src">
+    <b>데이터 출처</b>: 스탯티즈(statiz.co.kr) 실측 — 시즌 순위표·팀 WAA 부문표, 팀기록실(타격·투구), 잭로그·라일리 종합/날짜별(m=day)/상대별(m=rival, 통산), 양 팀 라인업 18명 종합(wRC+), 이영하·김택연·김정우·전사민·김진호 종합/날짜별. 라인업: 사용자 제공. 계산식: 노션 「경기 승률 분석 지침 (라이브·v4)」 §v4.5.<br>
+    ※ 불펜 실점력(두산 4.4·NC 5.8)은 구원 WAA와 개별 투수 기록에 근거한 추정치이며, 좌우 스플릿과 잠실 날씨는 반영하지 않았습니다. 승률은 방향·구간 예측이며 단일경기 분산이 큽니다.
+  </div>
+</div>
+</body>
+</html>
