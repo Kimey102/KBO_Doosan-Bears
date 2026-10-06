@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs 롯데 사전 승률분석 · 10.6 사직</title>
+<style>
+  :root{--doosan:#1a1748;--lotte:#c8102e;--ink:#1a1a1a;--sub:#5c5c66;--line:#e6e6ec;--bg:#f7f7fa;--card:#fff;--good:#0a7d3d;--bad:#c0392b;--warn:#b9770a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{background:linear-gradient(120deg,var(--doosan),#2d2870);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px}
+  header .tag{font-size:12px;letter-spacing:1px;opacity:.8}
+  header h1{font-size:22px;margin:4px 0 2px}
+  header .meta{font-size:13px;opacity:.9}
+  .verdict{display:flex;align-items:center;gap:18px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;flex-wrap:wrap}
+  .gauge{flex:1;min-width:260px}
+  .bar{height:26px;border-radius:13px;overflow:hidden;display:flex;font-size:12px;font-weight:700;color:#fff}
+  .bar .d{background:var(--doosan);display:flex;align-items:center;justify-content:flex-start;padding-left:10px}
+  .bar .s{background:var(--lotte);display:flex;align-items:center;justify-content:flex-end;padding-right:10px}
+  .verdict .call{font-size:15px;font-weight:800;min-width:200px}
+  .verdict .call span{color:var(--good)}
+  h2{font-size:16px;margin:22px 0 10px;padding-left:10px;border-left:4px solid var(--doosan)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 0;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+  th,td{padding:9px 12px;text-align:center;border-bottom:1px solid var(--line)}
+  th{background:#fafafc;color:var(--sub);font-weight:600;font-size:12px}
+  td.l,th.l{text-align:left}
+  .d-col{color:var(--doosan);font-weight:700}
+  .s-col{color:var(--lotte);font-weight:700}
+  .win{color:var(--good);font-weight:700}.lose{color:var(--bad);font-weight:700}
+  .est{color:var(--warn);font-size:11px;font-weight:700}
+  .note{font-size:12px;color:var(--sub);margin-top:6px;padding:0 4px}
+  ul{margin:6px 0 0 18px;font-size:13.5px}li{margin:4px 0}
+  .callout{background:#fff8ec;border:1px solid #f0dfb8;border-radius:10px;padding:12px 14px;font-size:13px;margin:10px 0}
+  .alert{background:#fdeeee;border:1px solid #f3c6c6;border-radius:10px;padding:12px 14px;font-size:13px;margin:10px 0}
+  .src{font-size:11.5px;color:#9a9aa4;margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+  .step{font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:8px}
+  .step b{color:var(--doosan)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">KBO 사전 승률분석 · 데이터기반</div>
+    <h1>두산 베어스 vs 롯데 자이언츠</h1>
+    <div class="meta">2026-10-06(화) 18:30 · 사직 · <b>두산 원정</b> · 곽빈(우) vs 박세웅(우) · 정규시즌 잔여 3경기 중 첫 경기</div>
+  </header>
+
+  <div class="verdict">
+    <div class="gauge">
+      <div class="bar"><div class="d" style="width:66%">두산 66%</div><div class="s" style="width:34%">롯데 34%</div></div>
+      <div class="note">§v4.5 기본 계산 70.1% → 곽빈 4주 공백 리스크(폼 상한 +0.75run·이닝 단축 시나리오 평균) 반영 → 채택 66%(범위 60~70%). 비관 시나리오를 모두 겹치면 51%까지 내려갑니다.</div>
+    </div>
+    <div class="call">판정: <span>두산 우세</span><br><span style="font-weight:600;color:var(--sub);font-size:12.5px">선발 격차(9이닝당 약 3점)가 원정·결장 악재를 넉넉히 상쇄하는 구도</span></div>
+  </div>
+
+  <div class="alert">
+    <b>엔트리·라인업 변동</b> — 등록 곽빈 / 말소 서준오·<b>박준순</b>(10/4 주루 중 우측 허벅지 통증, 10/6 정밀검진 <b>우측 대퇴부 근육 부분손상</b>, 5월 같은 부위 이탈 이력). <b>양의지 휴식</b>(내일 LG전 대비 추정), 포수 윤준호. 2루 강승호·1루 양석환 재편.
+  </div>
+
+  <h2>1. 팀 전력 (KBO 공식 팀기록 · 10/5 경기 후)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">지표</th><th>두산</th><th>롯데</th><th class="l">해석</th></tr>
+    <tr><td class="l">순위·전적</td><td class="d-col">5위 72-5-64 (.529)</td><td class="s-col">8위 61-3-74 (.452)</td><td class="l">롯데는 가을야구 탈락 확정</td></tr>
+    <tr><td class="l">득점 (RS/G)</td><td>676 (4.79)</td><td>651 (4.72)</td><td class="l">득점력은 비슷</td></tr>
+    <tr><td class="l">실점 (RA/G)</td><td class="d-col">615 (4.36)</td><td class="s-col">717 (5.20)</td><td class="l">팀 평균자책 두산 1위(3.84) vs 롯데 6위(4.77)</td></tr>
+    <tr><td class="l">피타고리안(1.83)</td><td class="d-col">.543</td><td class="s-col">.456</td><td class="l">Log5 중립 기준선 두산 58.7%</td></tr>
+  </table>
+  </div>
+  <div class="note">리그 R/G 5.078은 KBO 기록실 리그 총득점 7,099를 팀경기 1,398로 나눈 실계산 값입니다.</div>
+
+  <h2>2. 선발 매치업 — 곽빈 vs 박세웅 (스탯티즈 날짜별 m=day 합산)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">항목</th><th>곽빈 (두산·우)</th><th>박세웅 (롯데·우)</th></tr>
+    <tr><td class="l">시즌</td><td class="d-col">26GS 155IP 44실점</td><td>25GS 137⅓IP 83실점</td></tr>
+    <tr><td class="l">9이닝당 실점 · 평균자책</td><td class="d-col">2.55 · 2.26</td><td>5.44 · 4.92</td></tr>
+    <tr><td class="l">최근 5선발 9이닝당 실점</td><td class="d-col">1.59 (34IP 6R)</td><td>5.86 (27⅔IP 18R)</td></tr>
+    <tr><td class="l">평균 이닝 / 선발</td><td>5.96</td><td>5.49</td></tr>
+    <tr><td class="l">모델 폼값</td><td class="d-col">2.26run</td><td>5.56run</td></tr>
+    <tr><td class="l">올해 상대 팀 상대</td><td class="win">롯데전 5GS 30IP 8실점, 팀 4승 1패</td><td class="lose">두산전 4GS 21⅔IP 18실점, 팀 4전 전패</td></tr>
+    <tr><td class="l">직전 등판</td><td>9/9 SSG 7IP 1실점 (이후 아시안게임 공백 약 4주)</td><td>9/29 키움 5⅔IP 2실점 (정상 로테이션)</td></tr>
+  </table>
+  </div>
+  <div class="callout">
+    <b>오늘 승률을 결정하는 변수는 선발 격차입니다.</b> 폼값 기준 곽빈(2.26)은 박세웅(5.56)보다 9이닝당 약 3.3점 낮고, 박세웅은 올해 두산을 상대로 등판한 4경기를 모두 졌습니다. 반대로 <b>곽빈은 9/9 이후 약 4주 만의 1군 등판이고, 전담이던 양의지 대신 윤준호와 배터리를 맞춥니다.</b> 최민석이 아시안게임 복귀전(10/1)에서 3이닝 4실점으로 짧게 끝난 전례가 있어, 이 공백을 모델 밖 리스크로 따로 반영했습니다.
+  </div>
+  <div class="note">곽빈 폼값은 0.7×시즌 2.55 + 0.3×최근5 1.59 = 2.26으로 §v4.5-③ 상한(|폼−시즌| ≤ 0.75) 안이며, 9이닝당 실점은 스탯티즈 날짜별 기록의 실점 합계로 계산했습니다(스탯티즈 rRA9 원값과 소폭 차이 가능).</div>
+
+  <h2>3. 상대전적 (통산 H2H · 스탯티즈 m=rival)</h2>
+  <div class="card">
+  <table>
+    <tr><th>타순</th><th class="l">롯데 타자 vs 곽빈</th><th>PA</th><th>타율</th><th>OPS</th><th class="l">비고</th></tr>
+    <tr><td>1</td><td class="l">황성빈 (중)</td><td>33</td><td>.185</td><td class="lose">.498</td><td class="l">곽빈 우위, 도루 54개 주자</td></tr>
+    <tr><td>2</td><td class="l">레이예스 (지)</td><td>45</td><td>.372</td><td class="win">.888</td><td class="l">유일한 강세 타자, 1HR 8타점</td></tr>
+    <tr><td>3</td><td class="l">나승엽 (1)</td><td>32</td><td>.250</td><td>.634</td><td class="l"></td></tr>
+    <tr><td>4</td><td class="l">한동희 (3)</td><td>19</td><td>.176</td><td class="lose">.498</td><td class="l">곽빈 우위</td></tr>
+    <tr><td>5</td><td class="l">고승민 (2)</td><td>33</td><td>.250</td><td>.602</td><td class="l">불펜 상대가 더 위험(8/21 만루포)</td></tr>
+    <tr><td>6</td><td class="l">윤동희 (우)</td><td>30</td><td>.160</td><td class="lose">.460</td><td class="l">곽빈 우위</td></tr>
+    <tr><td>7</td><td class="l">전민재 (유)</td><td>19</td><td>.294</td><td>.610</td><td class="l"></td></tr>
+    <tr><td>8</td><td class="l">손성빈 (포)</td><td>15</td><td>.154</td><td>.652</td><td class="l">1HR</td></tr>
+    <tr><td>9</td><td class="l">조세진 (좌)</td><td>3</td><td>.000</td><td>—</td><td class="l">표본 없음</td></tr>
+  </table>
+  </div>
+  <div class="note">롯데 라인업 9명의 곽빈 상대 합계는 229타석이며, 레이예스를 제외한 8명 전원이 OPS .652 이하입니다. K=40 회귀를 거쳐도 롯데 타선이 곽빈 상대로 평균 이하라는 방향은 유지됩니다.</div>
+  <div class="callout">
+    <b>두산 타자 vs 박세웅 개인 상대전적은 이번 회차에 조회하지 못했습니다(스탯티즈 미확인).</b> 대신 팀 단위로 보면 박세웅은 올해 두산 상대 4경기에서 9이닝당 7.5실점이었고, 8/23 같은 매치업에서는 3회에 류승민·박찬호·양의지의 2루타로 3점을 내 3:1로 이겼습니다.
+  </div>
+
+  <h2>4. 라인업 공격지수 (타순 PA가중 wRC+/100)</h2>
+  <div class="card">
+  <table>
+    <tr><th>타순</th><th class="d-col">두산</th><th>wRC+</th><th class="s-col">롯데</th></tr>
+    <tr><td>1</td><td class="l">박찬호 (유)</td><td>97.8</td><td class="l">황성빈 (중) · 82.6</td></tr>
+    <tr><td>2</td><td class="l">정수빈 (중)</td><td>88.2</td><td class="l">레이예스 (지)</td></tr>
+    <tr><td>3</td><td class="l">안재석 (3)</td><td>102.7</td><td class="l">나승엽 (1)</td></tr>
+    <tr><td>4</td><td class="l">세베리노 (지)</td><td>110.7</td><td class="l">한동희 (3)</td></tr>
+    <tr><td>5</td><td class="l">김민석 (좌)</td><td>126.4</td><td class="l">고승민 (2)</td></tr>
+    <tr><td>6</td><td class="l">강승호 (2)</td><td>95 <span class="est">추정</span></td><td class="l">윤동희 (우)</td></tr>
+    <tr><td>7</td><td class="l">양석환 (1)</td><td>95 <span class="est">추정</span></td><td class="l">전민재 (유)</td></tr>
+    <tr><td>8</td><td class="l">류승민 (우)</td><td>85 <span class="est">추정</span></td><td class="l">손성빈 (포)</td></tr>
+    <tr><td>9</td><td class="l">윤준호 (포)</td><td>68.9</td><td class="l">조세진 (좌)</td></tr>
+    <tr><td class="l">공격지수</td><td class="d-col">0.970</td><td></td><td class="s-col">0.929 <span class="est">팀 득점 대용</span></td></tr>
+  </table>
+  </div>
+  <div class="note">두산 wRC+는 9/30 리포트 시점 스탯티즈 실측값(괄호 회귀값 포함)을 재사용했고, 9/30 라인업에 없던 강승호·양석환·류승민은 주전 prior 95·백업 prior 85를 넣은 추정치입니다. 롯데는 개인 wRC+를 조회하지 못해 팀 득점(4.72/G)을 리그 평균으로 나눈 값을 썼습니다. 박준순(wRC+ 131.1)과 양의지(117.9)가 동시에 빠지면서 두산 공격지수는 9/30(1.069)보다 약 0.10 낮아졌습니다. 우완 박세웅 상대로 좌타 4명(정수빈·안재석·김민석·류승민)과 양타 세베리노가 상위·중심에 배치된 플래툰 이점은 수치에 반영하지 않았습니다.</div>
+
+  <h2>5. 불펜 가용 상황</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">항목</th><th class="l">내용</th></tr>
+    <tr><td class="l d-col">두산</td><td class="l">김택연(10/5 1⅓IP)·이영하(10/5 1IP)가 연투 부담이 있고 내일 LG전이 더 중요해 아낄 가능성이 있음 → 불펜 실점력 4.4×1.05 = <b>4.62</b> <span class="est">추정</span></td></tr>
+    <tr><td class="l s-col">롯데</td><td class="l">개별 불펜 기록 미조회 → 팀 실점 수준 기반 <b>5.3</b> <span class="est">추정</span></td></tr>
+  </table>
+  </div>
+  <div class="note">예상 결과가 접전 구간(0.45~0.55) 밖이라 §v4.5-② 접전 불펜 상향폭 제한은 적용 대상이 아니며, 불펜 뎁스 페널티 ×1.15 시나리오는 민감도 표에 따로 넣었습니다.</div>
+
+  <h2>6. 승률 산출 단계 (§v4.5)</h2>
+  <div class="step"><b>① 투수 실점력</b> — 두산 = 0.589×곽빈 2.26 + 0.411×불펜 4.62 = <b>3.23</b> (곽빈 공백 반영해 예상 이닝 5.3) / 롯데 = 0.610×박세웅 5.56 + 0.390×불펜 5.3 = <b>5.46</b></div>
+  <div class="step"><b>② 수비 보정 effRA</b> — 두산 3.23 + 원정·내야 재편 실책 하방 0.05 = <b>3.28</b> / 롯데 <b>5.46</b></div>
+  <div class="step"><b>③ 기대득점</b>(사직 PF 1.00 가정) — 두산 0.970×5.46 = <b>5.30</b> / 롯데 0.929×3.28 = <b>3.05</b></div>
+  <div class="step"><b>④ 피타고리안(1.83)</b> 중립 73.3% → <b>⑤ 원정 오즈 ÷1.174</b> → <b>70.1%</b></div>
+  <div class="step"><b>⑥ 모델 밖 리스크</b> — 곽빈 4주 공백·첫 배터리 시나리오(폼 상한 65.0%, 4이닝 강판 66.1%) 평균 반영 → <b>채택 두산 66% / 롯데 34% (범위 60~70%)</b></div>
+
+  <div class="card" style="margin-top:10px">
+  <table>
+    <tr><th class="l">민감도 시나리오</th><th>두산 승률</th></tr>
+    <tr><td class="l">기본 계산</td><td class="d-col">70.1%</td></tr>
+    <tr><td class="l">곽빈 4이닝 강판</td><td>66.1%</td></tr>
+    <tr><td class="l">곽빈 폼 +0.75run(공백 리스크 상한)</td><td>65.0%</td></tr>
+    <tr><td class="l">두산 불펜 뎁스 ×1.15</td><td>68.0%</td></tr>
+    <tr><td class="l">롯데 불펜 4.6(예상보다 강함)</td><td>68.1%</td></tr>
+    <tr><td class="l">롯데 공격지수 1.00</td><td>67.2%</td></tr>
+    <tr><td class="l">두산 공격지수 0.92</td><td>68.0%</td></tr>
+    <tr><td class="l lose">비관 종합(위 항목 모두 + 실책 하방 확대)</td><td class="lose">50.8%</td></tr>
+  </table>
+  </div>
+  <div class="note">한 가지 악재만으로는 65% 아래로 잘 내려가지 않지만, 곽빈 조기 강판과 불펜 붕괴가 겹치면 반반 승부가 됩니다. 결과가 60%를 넘는 큰 우세 구간이므로 §v4.5-①에 따라 수비 하방은 승률에 직접 빼지 않고 분산(하방 꼬리)으로 표기했습니다.</div>
+  <div class="note">참고로 같은 날 낮에 팀 단위 수치만으로 낸 빠른 추정은 56%였습니다. 선발 개인 실점력(곽빈 2.55 vs 박세웅 5.44)을 정식 계산에 넣으면서 차이가 생겼고, 이 리포트의 66%가 지침 계산식 기준값입니다.</div>
+
+  <h2>7. 승리 전략</h2>
+  <ul>
+    <li><b>1회 황성빈 봉쇄</b> — 황성빈은 곽빈 상대 통산 출루율 .313이고, 그를 잡으면 곽빈 상대 OPS .888인 2번 레이예스를 주자 없이 상대할 수 있습니다. 출루하면 무리한 도루 시도가 많으니 윤준호의 견제·송구가 공짜 아웃의 기회입니다.</li>
+    <li><b>3~5회 박세웅 두 번째 타순 공략</b> — 8/23 같은 매치업의 결승점이 3회 2루타 3개(류승민·박찬호·양의지)였고, 박세웅은 올해 두산 상대 4경기 모두 3실점 이상을 기록했습니다. 좌타 비중이 높은 오늘 라인업이 플래툰 이점을 살릴 구간입니다.</li>
+    <li><b>곽빈 5~6이닝 2실점 이내</b> — 공백 뒤 첫 등판이므로 이닝보다 내용이 중요하며, 초반 1~2회 구속·제구가 오늘의 첫 체크포인트입니다.</li>
+    <li><b>필승조 아끼며 이기기</b> — 내일 LG전(4위 싸움·다승왕 결정전)을 위해 넉넉한 점수차로 김택연·이영하 연투를 피하는 것이 오늘 승리만큼 중요합니다. 불펜 구간에서는 고승민 타석을 특히 경계해야 합니다.</li>
+  </ul>
+
+  <h2>8. 결론</h2>
+  <div class="callout" style="background:#eef4ff;border-color:#c9dcff">
+    <b>두산 66%, 두산 우세입니다.</b> 시즌 전력(피타고리안 .543 vs .456)과 선발 격차(9이닝당 실점 2.55 vs 5.44)가 모두 두산 쪽이고, 롯데 타자 9명 중 8명이 곽빈 상대로 약합니다. 박준순·양의지가 동시에 빠져 타선 무게는 가벼워졌고 원정이지만, 박세웅이 올해 두산 상대 4전 전패였던 만큼 중반 득점 기회는 충분합니다. 하방 위험은 곽빈의 4주 공백 복귀전과 연투 부담이 있는 뒷문이며, 이 둘이 겹치는 경우에만 반반 승부로 내려갑니다.
+  </div>
+
+  <div class="src">
+    <b>데이터 출처</b>: 스탯티즈(statiz.co.kr) 실측 — 곽빈·박세웅 날짜별(m=day, 2026), 곽빈 상대별(m=rival, 통산), 황성빈 종합(wRC+); 두산 타자 wRC+는 9/30 사전 리포트 시점 스탯티즈 실측값 재사용. KBO 공식 기록실 — 팀 타격·투수 기록(득점·실점), 1군 등록현황. 라인업: 양 팀 공식 발표(사용자 제공). 박준순 진단: 언론 보도(사용자 제공). 계산식: 노션 「경기 승률 분석 지침 (라이브·v4)」 §v4.5.<br>
+    ※ <b>스탯티즈 미확인·추정 항목</b>: 두산 타자 vs 박세웅 개인 상대전적, 롯데 개인 wRC+, 강승호·양석환·류승민 wRC+, 양 팀 불펜 실점력, 사직 파크팩터, 날씨. 경기 시점 크롬 연결이 끊겨 조회하지 못했으며, 추정치는 표에 따로 표시했습니다. 승률은 방향·구간 예측이며 단일경기 분산이 큽니다.
+  </div>
+</div>
+</body>
+</html>
