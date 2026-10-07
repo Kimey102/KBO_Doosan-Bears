@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs 롯데 사후 결과분석 · 10.6 사직</title>
+<style>
+  :root{--doosan:#1a1748;--lotte:#c8102e;--ink:#1a1a1a;--sub:#5c5c66;--line:#e6e6ec;--bg:#f7f7fa;--card:#fff;--good:#0a7d3d;--bad:#c0392b;--warn:#b9770a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{background:linear-gradient(120deg,var(--doosan),#2d2870);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px}
+  header .tag{font-size:12px;letter-spacing:1px;opacity:.8}
+  header h1{font-size:22px;margin:4px 0 2px}
+  header .meta{font-size:13px;opacity:.9}
+  .score{display:flex;align-items:center;justify-content:center;gap:26px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;flex-wrap:wrap}
+  .score .t{text-align:center;font-size:14px;font-weight:700}
+  .score .n{font-size:40px;font-weight:800;line-height:1.1}
+  .score .res{font-size:13px;font-weight:700;color:#fff;background:var(--good);border-radius:20px;padding:4px 12px}
+  h2{font-size:16px;margin:22px 0 10px;padding-left:10px;border-left:4px solid var(--doosan)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 0;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+  th,td{padding:8px 10px;text-align:center;border-bottom:1px solid var(--line)}
+  th{background:#fafafc;color:var(--sub);font-weight:600;font-size:12px}
+  td.l,th.l{text-align:left}
+  .d-col{color:var(--doosan);font-weight:700}
+  .s-col{color:var(--lotte);font-weight:700}
+  .win{color:var(--good);font-weight:700}.lose{color:var(--bad);font-weight:700}.warn{color:var(--warn);font-weight:700}
+  .note{font-size:12px;color:var(--sub);margin-top:6px;padding:0 4px}
+  ul{margin:6px 0 0 18px;font-size:13.5px}li{margin:5px 0}
+  .callout{background:#fff8ec;border:1px solid #f0dfb8;border-radius:10px;padding:12px 14px;font-size:13px;margin:10px 0}
+  .src{font-size:11.5px;color:#9a9aa4;margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+  .hl{background:#eef4ff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">KBO 사후 결과분석 · 데이터기반</div>
+    <h1>두산 베어스 vs 롯데 자이언츠</h1>
+    <div class="meta">2026-10-06(화) · 사직 · <b>두산 원정</b> · 곽빈(우) vs 박세웅(우) · 사전 예측 두산 66% (두산우세)</div>
+  </header>
+
+  <div class="score">
+    <div class="t" style="color:var(--doosan)">두산<div class="n">3</div></div>
+    <div class="res">두산 승 · 9회초 결승</div>
+    <div class="t" style="color:var(--lotte)">롯데<div class="n">1</div></div>
+  </div>
+
+  <h2>1. 스코어보드 (이닝별 R 합계 교차검증 완료)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">팀</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>R</th><th>H</th><th>E</th><th>B</th></tr>
+    <tr><td class="l d-col">두산</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>2</td><td class="d-col">3</td><td>6</td><td>0</td><td>3</td></tr>
+    <tr><td class="l s-col">롯데</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td class="s-col">1</td><td>4</td><td>1</td><td>2</td></tr>
+  </table>
+  </div>
+  <div class="note">두산 이닝합 0+0+0+1+0+0+0+0+2=3, 롯데 이닝합 1로 R 컬럼과 일치합니다. 승 타카다(3승1패) · 패 이이무라(2승3패) · 세이브 이영하(26세이브) · 관중 13,292명.</div>
+
+  <h2>2. 득점 장면</h2>
+  <div class="card">
+  <table>
+    <tr><th>이닝</th><th class="l">상황</th><th>스코어</th><th class="l">성격</th></tr>
+    <tr><td>4회초</td><td class="l">안재석 2루수 포구실책(고승민) 출루 → 세베리노 볼넷 → 김민석 삼진 → 강승호 사구로 1사 만루 → 양석환 우익수 희생플라이</td><td>1:0</td><td class="l">비자책(박세웅 자책 0)</td></tr>
+    <tr><td>6회말</td><td class="l">1사 주자 없음, 레이예스가 3-1 카운트에서 곽빈 상대 우중간 솔로(시즌 17호)</td><td>1:1</td><td class="l">유일한 롯데 득점</td></tr>
+    <tr class="hl"><td>9회초</td><td class="l">이이무라 상대 안재석 내야안타 → 세베리노 우전안타(무사 1·3루, 대주자 조수행) → 조수행 2루 도루 → 김민석 좌전 적시타</td><td>2:1</td><td class="l">결승점</td></tr>
+    <tr class="hl"><td>9회초</td><td class="l">무사 1·3루에서 강승호 유격수 병살타, 그 사이 3루주자 조수행 득점 (이후 양석환 2루타, 대타 손아섭 삼진)</td><td>3:1</td><td class="l">병살과 맞바꾼 추가점</td></tr>
+  </table>
+  </div>
+
+  <h2>3. 예측 vs 결과</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">항목</th><th>사전 예측</th><th>실제</th><th class="l">판정</th></tr>
+    <tr><td class="l">두산 승률 · 결과</td><td>66% (60~70%)</td><td class="win">승 3:1</td><td class="l">Brier (1−0.66)² = <b>0.1156</b></td></tr>
+    <tr class="hl"><td class="l">기대득점 (두산 : 롯데)</td><td>5.30 : 3.05</td><td>3 : 1</td><td class="l">방향 일치, 양쪽 모두 과대 (저득점전)</td></tr>
+    <tr><td class="l">곽빈 (폼값 2.26 R/9)</td><td>예상 5.3이닝, 공백 리스크 시 4이닝</td><td>6이닝 1실점 11K 0BB · 89구</td><td class="l win">공백 리스크 미발현, 시즌 수준 투구</td></tr>
+    <tr><td class="l">박세웅 (폼값 5.56 R/9)</td><td>롯데 투수 실점력 5.46</td><td>6이닝 1실점(자책 0) 2피안타</td><td class="l lose">가장 크게 빗나간 입력값</td></tr>
+    <tr><td class="l">롯데 타자 vs 곽빈 H2H</td><td>8명 OPS .652 이하, 레이예스 .888</td><td>레이예스 3타수 2안타(HR), 나머지 19타수 2안타</td><td class="l win">경계 타자 지목 정확</td></tr>
+    <tr><td class="l">1회 황성빈 봉쇄 → 레이예스 주자 없이</td><td>전략</td><td>황성빈 4타수 무안타 2K, 레이예스 홈런은 주자 없을 때</td><td class="l win">피해를 솔로 1점으로 제한</td></tr>
+    <tr><td class="l">필승조 아끼며 승리</td><td>전략</td><td>김택연·타카다·이영하 각 1이닝 투입</td><td class="l lose">미달성 (1:1 동점이 8회까지 지속)</td></tr>
+    <tr><td class="l">수비 하방 항 (우세 구간이라 분산 표기만)</td><td>원정 실책 리스크</td><td>두산 0실책 · 롯데 1실책이 첫 득점으로 연결</td><td class="l">이번 경기는 롯데 쪽에서 발생</td></tr>
+  </table>
+  </div>
+  <div class="callout">
+    <b>방향은 맞았지만 승리 경로는 예측과 달랐습니다.</b> 사전 모델은 두산 우세의 근거를 "곽빈의 실점 억제"와 "박세웅 공략"이라는 두 축으로 잡았는데, 실제로는 앞의 축만 작동했습니다. 박세웅은 시즌 9이닝당 실점 5.44인 투수였지만 이날 6이닝 2피안타 비자책 1실점으로 시즌 평균보다 훨씬 잘 던졌고, 두산은 박세웅 상대로 실책 하나에 기댄 1점밖에 내지 못했습니다. 승부는 롯데가 9회에 올린 이이무라(1이닝 4피안타 2실점)에서 갈렸으므로, 이 경기를 "예측이 맞았다"보다는 "66% 쪽이 이긴 한 번의 표본"으로 기록합니다.
+  </div>
+
+  <h2>4. 선발 매치업 결과 (스탯티즈 박스스코어)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">투수</th><th>IP</th><th>TBF</th><th>H</th><th>R/ER</th><th>BB/HBP</th><th>K</th><th>HR</th><th>투구수</th><th class="l">경기 RA9 vs 사전 폼값</th></tr>
+    <tr><td class="l d-col">곽빈 (두산)</td><td>6.0</td><td>22</td><td>4</td><td>1/1</td><td>0/0</td><td>11</td><td>1</td><td>89</td><td class="l">1.50 vs 2.26</td></tr>
+    <tr><td class="l s-col">박세웅 (롯데)</td><td>6.0</td><td>23</td><td>2</td><td>1/0</td><td>2/1</td><td>6</td><td>0</td><td>92</td><td class="l">1.50 vs 5.56</td></tr>
+  </table>
+  </div>
+  <div class="note">곽빈은 약 4주 공백 뒤 복귀전에서 22타자 상대로 볼넷 없이 삼진 11개를 잡았고, 1:1 동점에서 89구로 6이닝 후 교체됐습니다. 공백 후 첫 등판이라 투구수를 관리한 교체로 보이지만, 교체 사유는 확인한 기록이 없어 추정으로만 적습니다. 곽빈의 최근 세 번 선발(9/3 LG 7이닝 1실점 패, 9/9 SSG 7이닝 1실점 패, 10/6 롯데 6이닝 1실점 노디시전)은 20이닝 3실점에 0승 2패입니다.</div>
+
+  <h2>5. 불펜</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">두산</th><th>IP</th><th>H</th><th>R</th><th class="l">메모</th><th class="l">롯데</th><th>IP</th><th>H</th><th>R</th></tr>
+    <tr><td class="l">김택연</td><td>1</td><td>0</td><td>0</td><td class="l">7회 삼자범퇴 · 14구</td><td class="l">김원중</td><td>1</td><td>0</td><td>0</td></tr>
+    <tr><td class="l win">타카다 (승)</td><td>1</td><td>0</td><td>0</td><td class="l">8회 볼넷 후 장두성 2루 도루 저지(윤준호) · 15구</td><td class="l">박정민</td><td>1</td><td>0</td><td>0</td></tr>
+    <tr><td class="l win">이영하 (세)</td><td>1</td><td>0</td><td>0</td><td class="l">9회 볼넷 1, 삼진 2 · 14구</td><td class="l lose">이이무라 (패)</td><td>1</td><td>4</td><td>2</td></tr>
+    <tr><td class="l d-col">합계</td><td>3</td><td>0</td><td>0</td><td></td><td class="l s-col">합계</td><td>3</td><td>4</td><td>2</td></tr>
+  </table>
+  </div>
+  <div class="note">두산 불펜은 3이닝 무안타 무실점이었고(사전 추정 실점력 4.4×1.05), 롯데는 7회 동점에서 김원중을 먼저 쓰고 9회를 이이무라에게 맡겼다가 실점했습니다. 두산 필승조 세 명은 각각 14~15구만 던졌으므로 10/7 LG전 가용성에는 큰 부담이 아니지만, 세 명이 10/5 대구전에도 등판했는지(연투 여부)는 이번 세션에서 확인하지 못했습니다.</div>
+
+  <h2>6. 타선 — 6안타 2볼넷 1사구, 병살 2개</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">두산 타자</th><th class="l">기록</th><th class="l">롯데 타자</th><th class="l">기록</th></tr>
+    <tr><td class="l">안재석 (3번)</td><td class="l win">3타수 2안타 1볼넷 · 2득점 (실책 출루 포함 4출루)</td><td class="l">레이예스</td><td class="l win">4타수 2안타 · 솔로 HR</td></tr>
+    <tr><td class="l">세베리노 (4번)</td><td class="l win">3타수 2안타 1볼넷 · 9회 1·3루 만든 안타</td><td class="l">한동희</td><td class="l">4타수 1안타 · 2회 2루타</td></tr>
+    <tr><td class="l">김민석 (5번)</td><td class="l">4타수 1안타 1타점(결승) · 6회 병살</td><td class="l">손성빈</td><td class="l">3타수 1안타</td></tr>
+    <tr><td class="l">양석환 (7번)</td><td class="l">3타수 1안타 1타점 · 희생플라이 · 9회 2루타</td><td class="l">황성빈</td><td class="l lose">4타수 무안타 2삼진</td></tr>
+    <tr><td class="l">강승호 (6번)</td><td class="l">3타수 무안타 · 사구 · 9회 병살(타점 없음, 득점은 인정)</td><td class="l">윤동희</td><td class="l lose">3타수 무안타 3삼진</td></tr>
+    <tr><td class="l">박찬호 · 정수빈 · 류승민 · 윤준호</td><td class="l lose">합계 14타수 무안타 5삼진</td><td class="l">롯데 팀 전체</td><td class="l lose">30타수 4안타 14삼진 · 득점권 3타수 무안타</td></tr>
+  </table>
+  </div>
+  <ul>
+    <li><b>출루는 3~5번에 몰렸습니다.</b> 두산의 6안타 중 5개와 볼넷 2개를 안재석·세베리노·김민석이 만들었고, 1·2번(박찬호·정수빈)과 8·9번(류승민·윤준호)은 14타수 무안타였습니다. 이는 9/30 NC전에서 기록한 테이블 양 끝 공백(박찬호·정수빈·윤준호 10타수 무안타)과 같은 패턴입니다.</li>
+    <li><b>출루 대비 득점 전환이 낮았습니다.</b> 두산은 안타 6·볼넷 2·사구 1·실책 출루 1로 10명이 출루했지만 3득점에 그쳤고, 득점권 6타수 1안타와 병살 2개(6회 김민석, 9회 강승호)가 겹쳤습니다. 이는 §4-2 "두산 타선 산발성" 메모와 같은 방향의 사례입니다.</li>
+    <li><b>윤준호</b>는 3타수 무안타였으나 8회 1:1 동점 1사 1루에서 대주자 장두성의 2루 도루를 저지했습니다(스탯티즈 WPA 기준 해당 장면 롯데 −0.081). 공격 기록만으로 평가하지 않도록 함께 적어 둡니다.</li>
+  </ul>
+
+  <h2>7. 누적 캘리브레이션 (노션 DB 예측+결과 19경기)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">구간</th><th>경기</th><th>평균 예측</th><th>실제 승률</th><th class="l">해석</th></tr>
+    <tr><td class="l">&lt;40%</td><td>1</td><td>35.0%</td><td>0/1</td><td class="l">표본 부족</td></tr>
+    <tr class="hl"><td class="l">40~50%</td><td>8</td><td>44.1%</td><td>2/8 (25.0%)</td><td class="l warn">두산 언더독 스팟을 약 19%p 과대평가</td></tr>
+    <tr><td class="l">50~60%</td><td>4</td><td>53.5%</td><td>3/4 (75.0%)</td><td class="l">표본 부족, 과소 쪽</td></tr>
+    <tr><td class="l">&gt;60%</td><td>6</td><td>67.7%</td><td>4/6 (66.7%)</td><td class="l win">눈금 양호</td></tr>
+    <tr><td class="l"><b>전체</b></td><td>19</td><td>53.1%</td><td>9/19 (47.4%)</td><td class="l">Brier <b>0.2227</b> (베이스레이트 0.2493보다 우수), 방향 13/18</td></tr>
+    <tr><td class="l">v4.5 편입 이후 (9/1~10/6)</td><td>6</td><td>53.5%</td><td>2/6 (33.3%)</td><td class="l warn">Brier 0.2648, 같은 기간 베이스레이트 0.2222보다 나쁨</td></tr>
+  </table>
+  </div>
+  <div class="note">계산 대상은 노션 「두산 경기 승률 분석」에서 예측값과 승/패가 모두 있는 19경기이며, 취소 2경기(8/4·8/5)와 결과가 비어 있는 8/16 KIA전은 제외했습니다. v4.5 이후 6경기 중 Brier를 가장 크게 올린 경기는 9/9 SSG전(75% → 패, 0.5625)입니다.</div>
+
+  <h2>8. 모델 피드백</h2>
+  <ul>
+    <li><b>유지</b>: 곽빈에 적용한 소표본·공백 하향(70.1% → 66%)은 결과적으로 필요 없었지만, 4주 공백이라는 사전 정보로는 합리적인 헤지였으므로 규칙을 바꾸지 않습니다. v4.5-③의 상한 규칙도 이번 경기에서 문제를 일으키지 않았습니다.</li>
+    <li><b>관찰(수정 아님)</b>: 박세웅처럼 시즌 실점력이 나쁜 상대 선발에서 두산 기대득점이 실제보다 크게 나오는 사례가 한 건 추가됐습니다. 단일경기 한 건으로 상수를 바꾸지는 않고, 상대 선발 폼값 5.0 이상 경기들에서 두산 실제 득점이 기대득점에 못 미치는 경향이 반복되는지 누적해 보겠습니다.</li>
+    <li><b>재검토 후보</b>: 40~50% 구간이 8경기 2승(25%)으로 예측 평균 44%보다 낮습니다. 9/30 사후에서는 1승 추가를 "언더독 하향을 서두르지 말 근거"로 적었으나, 누적치로 보면 v4.5 편입 시의 관찰(열세 구간 하향 여지)이 오히려 강해졌습니다. 다만 표본 8경기로는 우연과 구분하기 어려워, 10경기 이상 쌓이면 열세 구간에 −3~5%p 스케일 조정을 검토하는 것을 제안합니다.</li>
+  </ul>
+
+  <h2>9. 결론</h2>
+  <div class="callout" style="background:#eef4ff;border-color:#c9dcff">
+    <b>예측 66%, 결과는 3:1 원정 승리입니다(Brier 0.1156).</b> 곽빈은 4주 공백 뒤에도 6이닝 1실점 11탈삼진으로 사전에 지목한 선발 우위를 그대로 보여 줬고, 롯데 득점은 사전에 경계 타자로 꼽은 레이예스의 솔로 1점뿐이었습니다. 반면 박세웅 공략이라는 두 번째 축은 작동하지 않아 8회까지 1:1이었고, 승리는 9회 롯데 이이무라를 상대로 안재석·세베리노·김민석이 연속 안타를 만든 데서 나왔습니다. 그 결과 필승조 세 명을 모두 쓰게 됐으므로, 10/7 LG전 사전분석에서는 세 명의 연투 여부를 먼저 확인해야 합니다.
+  </div>
+
+  <div class="src">
+    <b>데이터 출처</b>: 스탯티즈(www.statiz.co.kr) 2026-10-06 사직 경기요약·박스스코어·경기로그(s_no=20261014) 및 곽빈 날짜별 기록(p_no=13061). 사전 예측값·기대득점·H2H: 본 프로젝트 사전 로그(2026-1006_롯데전_사전_예측.md)와 사전 리포트(2026-10-06_Lotte_pre.html). 누적 캘리브레이션: 노션 「⚾ 두산 경기 승률 분석」 DB. 계산식: 노션 「경기 승률 분석 지침 (라이브·v4)」 §v4.5.<br>
+    ※ 곽빈 교체 사유, 필승조의 10/5 등판 여부는 확인하지 않았습니다. 경기 RA9는 해당 경기 실점×9÷이닝으로 계산한 값입니다.
+  </div>
+</div>
+</body>
+</html>
