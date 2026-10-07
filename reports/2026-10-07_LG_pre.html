@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs LG 사전 승률분석 · 10.7 잠실</title>
+<style>
+  :root{--doosan:#1a1748;--lg:#c30452;--ink:#1a1a1a;--sub:#5c5c66;--line:#e6e6ec;--bg:#f7f7fa;--card:#fff;--good:#0a7d3d;--bad:#c0392b;--warn:#b9770a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+  .wrap{max-width:860px;margin:0 auto}
+  header{background:linear-gradient(120deg,var(--doosan),#2d2870);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px}
+  header .tag{font-size:12px;letter-spacing:1px;opacity:.8}
+  header h1{font-size:22px;margin:4px 0 2px}
+  header .meta{font-size:13px;opacity:.9}
+  .verdict{display:flex;align-items:center;justify-content:center;gap:26px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin-bottom:16px;flex-wrap:wrap;text-align:center}
+  .verdict .n{font-size:40px;font-weight:800;line-height:1.1;color:var(--doosan)}
+  .verdict .lab{font-size:13px;color:var(--sub)}
+  .badge{font-size:13px;font-weight:700;color:#fff;background:var(--warn);border-radius:20px;padding:4px 12px}
+  h2{font-size:16px;margin:22px 0 10px;padding-left:10px;border-left:4px solid var(--doosan)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 0;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+  th,td{padding:8px 10px;text-align:center;border-bottom:1px solid var(--line)}
+  th{background:#fafafc;color:var(--sub);font-weight:600;font-size:12px}
+  td.l,th.l{text-align:left}
+  .d-col{color:var(--doosan);font-weight:700}.s-col{color:var(--lg);font-weight:700}
+  .good{color:var(--good);font-weight:700}.bad{color:var(--bad);font-weight:700}.warn{color:var(--warn);font-weight:700}
+  .note{font-size:12px;color:var(--sub);margin-top:6px;padding:0 4px}
+  ul{margin:6px 0 0 18px;font-size:13.5px}li{margin:5px 0}
+  .callout{background:#fff8ec;border:1px solid #f0dfb8;border-radius:10px;padding:12px 14px;font-size:13px;margin:10px 0}
+  .src{font-size:11.5px;color:#9a9aa4;margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+  .hl{background:#eef4ff}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">KBO 사전 승률분석 · 데이터기반 · 정규시즌 최종 LG전</div>
+    <h1>두산 베어스 vs LG 트윈스</h1>
+    <div class="meta">2026-10-07(수) 18:30 · 잠실 · <b>두산 원정(LG 홈)</b> · 최민석(우) vs 임찬규(우) · 두 투수 모두 시즌 14승</div>
+  </header>
+
+  <div class="verdict">
+    <div><div class="lab">두산 승리 확률</div><div class="n">51%</div><div class="lab">범위 49~52%</div></div>
+    <div class="badge">접전</div>
+    <div><div class="lab">기대득점 (두산 : LG)</div><div class="n" style="font-size:28px">5.11 : 4.39</div><div class="lab">잠실 파크팩터 0.92 반영</div></div>
+  </div>
+
+  <div class="callout">
+    <b>한 줄 결론</b>: 선발 실점력(최민석 3.66 vs 임찬규 5.19)은 두산 우위이고 LG 타선(공격지수 1.14)은 두산(1.08)보다 강해, 두 효과가 상쇄된 상태에서 LG 홈 보정과 v4.5 접전 규칙(불펜 상향 절반, 수비 하방 −2%p)을 적용하면 두산 51%의 접전입니다. 가장 큰 불확실성은 임찬규가 시즌 내내 두산을 압도한 기록(4선발 9이닝당 1.90실점)과 최근 두 경기 연속 부진이 정반대 방향을 가리킨다는 점입니다.
+  </div>
+
+  <h2>1. 팀 전력 (스탯티즈 팀기록실, 10/6까지)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">팀</th><th>경기</th><th>득점</th><th>실점</th><th>피타고리안(1.83)</th><th>실제 승률</th><th>팀 wRC+</th><th>팀 RA9 / FIP</th></tr>
+    <tr><td class="l d-col">두산</td><td>142</td><td>679</td><td>616</td><td>.544</td><td>.533 (73-64-5)</td><td>100.0</td><td>4.38 / 4.10</td></tr>
+    <tr><td class="l s-col">LG</td><td>140</td><td>709</td><td>705</td><td>.503</td><td>.547 (76-63-1)</td><td>108.5</td><td>5.13 / 4.65</td></tr>
+  </table>
+  </div>
+  <div class="note">리그 평균 득점 5.07점/경기(7,141점 ÷ 1,408팀경기). LG는 득실차 +4로 피타고리안 .503인데 실제 승률이 .547이라 약 4.4%p의 행운 잉여가 있고, 두산은 반대로 실제 승률이 피타고리안보다 1.1%p 낮습니다. LG 최근 10경기 2승 8패.</div>
+
+  <h2>2. 선발 매치업</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">투수</th><th>시즌</th><th>rRA9 / FIP</th><th>최근 5선발</th><th>폼값</th><th class="l">메모</th></tr>
+    <tr><td class="l d-col">최민석 (두산)</td><td>26선발 141⅔이닝 14승 4패</td><td>3.59 / 3.82</td><td>26이닝 11실점 (3.81)</td><td class="good">3.66</td><td class="l">LG전 2선발 11이닝 4실점. 직전 10/1 NC전 3이닝 4실점(아시안게임 복귀 첫 등판), 1경기라 급성부진 플래그 아님</td></tr>
+    <tr><td class="l s-col">임찬규 (LG)</td><td>29선발 161⅓이닝 14승 7패</td><td>4.12 / 4.43</td><td>27⅔이닝 20실점 (6.51)</td><td class="bad">5.19</td><td class="l">9/26 5⅓이닝 4실점, 10/1 3이닝 4실점 → <b>급성부진 플래그 ON</b>(최근폼 가중 0.45). 체인지업 31%·커브 28%, 직구 구속 하위 12퍼센타일, 9이닝당 볼넷 87퍼센타일</td></tr>
+  </table>
+  </div>
+  <div class="callout" style="background:#fdf0f2;border-color:#f3c9d2">
+    <b>반대 방향 신호</b>: 임찬규는 올해 두산전 4선발에서 23⅔이닝 5실점(9이닝당 1.90)으로 4경기 모두 LG가 이겼습니다. 두산은 89타수 23안타로 안타는 쳤지만 장타가 2루타 1개·홈런 1개뿐이고 볼넷도 4개에 그쳐, 산발성(§4-2)이 이 투수 상대로 가장 강하게 나타났습니다. 지침상 팀 단위 시즌 상대전적은 확률에 넣지 않으므로 이 기록은 확률에는 빠져 있고, 대신 타자 개인별 통산 상대전적을 회귀해 두산 공격지수를 1.087에서 1.075로 낮췄습니다. 실제 하방 위험은 모델 수치보다 클 수 있습니다.
+  </div>
+
+  <h2>3. 라인업 공격지수 (스탯티즈 시즌 wRC+)</h2>
+  <div class="card">
+  <table>
+    <tr><th>타순</th><th class="l">두산</th><th>wRC+</th><th>vs 임찬규 보정</th><th class="l">LG</th><th>wRC+</th></tr>
+    <tr><td>1</td><td class="l">박찬호 (유)</td><td>99.3</td><td>×1.05 (51PA .789)</td><td class="l">박해민 (중)</td><td>109.5</td></tr>
+    <tr><td>2</td><td class="l">안재석 (3)</td><td>103.9</td><td>×0.94 (18PA .627)</td><td class="l">송찬의 (좌)</td><td>136.8</td></tr>
+    <tr><td>3</td><td class="l">세베리노 (지)</td><td>144.7</td><td>×0.98 (3PA)</td><td class="l">오스틴 (1)</td><td class="bad">197.9</td></tr>
+    <tr><td>4</td><td class="l">양의지 (포)</td><td>117.4</td><td>×1.04 (49PA .864)</td><td class="l">문정빈 (지)</td><td>122.1</td></tr>
+    <tr class="hl"><td>5</td><td class="l">김민석 (좌)</td><td>123.9</td><td class="bad">×0.85 (15PA .368)</td><td class="l">문보경 (3)</td><td>109.9</td></tr>
+    <tr><td>6</td><td class="l">강승호 (2)</td><td>106.5</td><td>×0.99 (22PA .757)</td><td class="l">이재원 (우)</td><td>119.1</td></tr>
+    <tr><td>7</td><td class="l">양석환 (1)</td><td>57.4</td><td>×1.09 (28PA .778)</td><td class="l">구본혁 (유)</td><td>87.4</td></tr>
+    <tr><td>8</td><td class="l">조수행 (우)</td><td>133.3</td><td>×0.96 (17PA .698)</td><td class="l">박동원 (포)</td><td>101.9</td></tr>
+    <tr><td>9</td><td class="l">정수빈 (중)</td><td>88.6</td><td>×1.07 (59PA .766)</td><td class="l">이영빈 (2)</td><td class="good">27.7</td></tr>
+    <tr class="hl"><td colspan="2" class="l d-col">공격지수</td><td colspan="2" class="d-col">1.087 → 보정 1.075</td><td class="l s-col">공격지수</td><td class="s-col">1.142</td></tr>
+  </table>
+  </div>
+  <div class="note">공격지수는 타순별 타석 가중(1번 4.65 → 9번 3.85) 평균 wRC+÷100입니다. 두산 상대전적 보정은 통산 vs 임찬규 OPS를 w=PA÷(PA+40)로 시즌 OPS 쪽으로 회귀한 추정 OPS ÷ 시즌 OPS입니다. LG 타자들의 최민석 상대 기록은 모두 6타석 이하라 보정에서 제외했습니다(오스틴 6타석 3안타가 가장 많음). 세베리노(167타석)·조수행(218타석)은 시즌 표본이 작아 wRC+가 높게 나왔을 수 있습니다.</div>
+
+  <h2>4. 불펜</h2>
+  <ul>
+    <li><b>두산</b>: 필승조 김택연·타카다·이영하가 오늘 3연투(사용자 확인)입니다. 10/6에는 각각 14~15구만 던졌고 내일부터 4일 휴식이라 오늘은 총력전이 예상되어, v4.5-②의 "연투 유닛 제외" 대신 <b>가용으로 세되 피로 ×1.10</b>을 적용했습니다(불펜 실점력 4.4 → 4.84, 4.4는 10/6 사전분석 추정치). 가용 인원이 3명이라 뎁스 페널티는 적용하지 않았습니다.</li>
+    <li><b>LG</b>: 구원진 분할 기록을 이번에 확보하지 못해 LG 팀 전체 RA9 5.13으로 대체했습니다(<b>스탯티즈 구원 분할 미확인·추정</b>). LG 불펜을 4.6~5.6으로 바꾸면 최종 확률은 49~53% 범위에서 움직입니다.</li>
+    <li>접전 구간이므로 두산 불펜 우위로 끌어올리는 폭은 절반만 반영했습니다(v4.5-②).</li>
+  </ul>
+
+  <h2>5. 승률 산출 단계 (노션 지침 §v4.5)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">단계</th><th>두산</th><th>LG</th><th class="l">근거</th></tr>
+    <tr><td class="l">선발 폼값</td><td>3.66</td><td>5.19</td><td class="l">0.7×시즌 rRA9 + 0.3×최근5 (임찬규는 급성부진 0.55/0.45)</td></tr>
+    <tr><td class="l">선발 담당 비중</td><td>0.606</td><td>0.618</td><td class="l">선발당 평균 이닝 ÷ 9 (상한 0.75)</td></tr>
+    <tr><td class="l">불펜 실점력</td><td>4.98</td><td>5.13</td><td class="l">두산 4.84를 접전 규칙으로 LG 쪽 절반 이동</td></tr>
+    <tr><td class="l">투수 실점력 (상대가 맞을 값)</td><td>4.18</td><td>5.17</td><td class="l">선발·불펜 가중합</td></tr>
+    <tr><td class="l">공격지수</td><td>1.075</td><td>1.142</td><td class="l">3번 표</td></tr>
+    <tr class="hl"><td class="l">기대득점</td><td>5.11</td><td>4.39</td><td class="l">5.07 × 공격지수 × (상대 실점력÷5.07) × 잠실 0.92</td></tr>
+    <tr><td class="l">중립 승률</td><td>56.9%</td><td>43.1%</td><td class="l">단일경기 피타고리안 1.83</td></tr>
+    <tr><td class="l">LG 홈 보정</td><td>52.9%</td><td>47.1%</td><td class="l">홈팀 오즈 ×1.174</td></tr>
+    <tr class="hl"><td class="l"><b>최종</b></td><td class="d-col">50.9%</td><td class="s-col">49.1%</td><td class="l">접전 수비 하방 −2%p (원정, v4.5-①)</td></tr>
+  </table>
+  </div>
+  <div class="note">민감도: 임찬규 급성부진 가중을 적용하지 않으면(0.30) 48.9%, 0.50이면 51.6%. 채택값은 51%(범위 49~52%)입니다. 팀 시즌 상대전적(올해 두산 4승 10패 1무)과 다승왕 경쟁 같은 동기 요인은 지침상 확률에 넣지 않았습니다.</div>
+
+  <h2>6. 승리 전략</h2>
+  <ul>
+    <li><b>임찬규를 일찍 끌어내리기</b>: 최근 두 경기 8⅓이닝 8실점이고 10/1에는 3이닝 만에 내려갔습니다. 볼넷을 거의 안 주는 투수(BB9 87퍼센타일)라 기다리기보다 카운트 초반 직구를 노려 3~5회에 두 번째 타순에서 승부를 보는 쪽이 맞습니다. 두산이 올해 이 투수 상대로 단타만 23개를 친 만큼, 장타 대신 주루로 단타를 득점으로 바꾸는 것이 관건입니다(두산 시즌 도루 114개, LG 89개).</li>
+    <li><b>오스틴 앞에 주자 두지 않기</b>: 오스틴은 wRC+ 197.9로 리그 최상위이고 최민석 상대로도 6타석 3안타입니다. 1·2번(박해민·송찬의) 출루를 막는 것이 최우선이고, 9번 이영빈(wRC+ 27.7)과 7번 구본혁(87.4)은 정면승부로 투구수를 아껴야 합니다.</li>
+    <li><b>최민석 6이닝</b>: 필승조가 3연투라 최민석이 6이닝 이상을 막아 주면 불펜 피로 위험이 크게 줄어듭니다. 다승왕 경쟁(최민석·임찬규 모두 14승)이 걸려 있어 벤치도 길게 끌고 갈 동기가 있습니다.</li>
+    <li><b>김민석 타석 관리</b>: 5번 김민석은 임찬규 상대 15타석 2안타로 라인업에서 가장 약한 매치업입니다. 득점권에서 김민석 앞에 주자가 쌓이는 상황을 경계해야 합니다.</li>
+    <li><b>무실책</b>: 원정 접전이라 수비 하방 −2%p를 이미 반영했고, 실책 한 번이 확률 차이 전체를 지울 수 있는 경기입니다.</li>
+  </ul>
+
+  <h2>7. 이 경기가 걸린 것</h2>
+  <div class="callout" style="background:#eef4ff;border-color:#c9dcff">
+    두산이 오늘과 10/12 롯데전을 모두 이기면 75승 64패 5무(.5396)가 되어, LG가 남은 3경기에서 1승 이하로 끝나거나 KIA가 남은 5경기에서 1승 이하로 끝날 때 4위가 됩니다. 이 조건부 4위 확률은 약 53~64%입니다(프로젝트 로그 2026-1007_잔여2경기_4위확률). 오늘 지면 LG 추월은 사실상 불가능해지므로, 오늘 경기가 4위 경쟁의 출발점입니다.
+  </div>
+
+  <div class="src">
+    <b>데이터 출처</b>: 스탯티즈(www.statiz.co.kr) 선수 종합·날짜별·상대별(최민석 p_no 16288, 임찬규 10652), 타자 시즌 wRC+(선수별 종합·시즌기록실), 팀기록실 타격·투구(10/6까지). 라인업·두산 필승조 3연투·김인태 엔트리 등록은 사용자 제공. 순위·잔여일정은 KBO 공식 사이트. 계산식은 노션 「경기 승률 분석 지침 (라이브·v4)」 §3·§v4.5.<br>
+    ※ 미확인·추정: LG 구원진 실점력(팀 전체 RA9로 대체), 두산 불펜 기준값 4.4(10/6 사전 추정치), 팀 수비 RAA·실책률(접전 규칙 −2%p로 대체), 잠실 날씨.
+  </div>
+</div>
+</body>
+</html>
