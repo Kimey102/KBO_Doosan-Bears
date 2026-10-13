@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>두산 vs LG 와일드카드 1차전 사전분석 · 10.14 잠실</title>
+<style>
+  :root{--doosan:#1a1748;--lg:#c30452;--ink:#1a1a1a;--sub:#5c5c66;--line:#e6e6ec;--bg:#f7f7fa;--card:#fff;--good:#0a7d3d;--bad:#c0392b;--warn:#b9770a;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding:16px}
+  .wrap{max-width:900px;margin:0 auto}
+  header{background:linear-gradient(120deg,var(--doosan),#2d2870);color:#fff;border-radius:14px;padding:22px 24px;margin-bottom:16px}
+  header .tag{font-size:12px;letter-spacing:1px;opacity:.8}
+  header h1{font-size:22px;margin:4px 0 2px}
+  header .meta{font-size:13px;opacity:.9}
+  .ver{display:inline-block;margin-top:8px;font-size:11.5px;background:rgba(255,255,255,.15);border-radius:12px;padding:2px 10px}
+  .verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:16px;text-align:center}
+  .verdict .n{font-size:34px;font-weight:800;line-height:1.15;color:var(--doosan)}
+  .verdict .n.lg{color:var(--lg)}
+  .verdict .lab{font-size:12.5px;color:var(--sub)}
+  h2{font-size:16px;margin:24px 0 10px;padding-left:10px;border-left:4px solid var(--doosan)}
+  h3{font-size:14px;margin:14px 0 6px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:6px 0;overflow-x:auto}
+  table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
+  th,td{padding:8px 10px;text-align:center;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#fafafc;color:var(--sub);font-weight:600;font-size:12px}
+  td.l,th.l{text-align:left}
+  .d-col{color:var(--doosan);font-weight:700}.s-col{color:var(--lg);font-weight:700}
+  .good{color:var(--good);font-weight:700}.bad{color:var(--bad);font-weight:700}.warn{color:var(--warn);font-weight:700}
+  .note{font-size:12px;color:var(--sub);margin-top:6px;padding:0 4px}
+  ul,ol{margin:6px 0 0 20px;font-size:13.5px}li{margin:5px 0}
+  .callout{background:#fff8ec;border:1px solid #f0dfb8;border-radius:10px;padding:12px 14px;font-size:13px;margin:10px 0}
+  .callout.blue{background:#eef4ff;border-color:#c9dcff}
+  .callout.red{background:#fdf0f2;border-color:#f3c9d2}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:13px}
+  .box h4{font-size:13.5px;margin-bottom:6px}
+  .pill{display:inline-block;font-size:11px;border-radius:10px;padding:1px 8px;margin-left:4px;color:#fff;background:var(--sub)}
+  .pill.d{background:var(--doosan)}.pill.g{background:var(--lg)}.pill.w{background:var(--warn)}
+  .src{font-size:11.5px;color:#9a9aa4;margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+  .hl{background:#eef4ff}
+  .bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin-top:6px}
+  .bar>span{display:block;height:100%;background:var(--doosan)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">KBO 포스트시즌 사전분석 · 와일드카드 결정전 1차전 · 단기전 모드(§v4.7-④)</div>
+    <h1>두산 베어스(5위) vs LG 트윈스(4위)</h1>
+    <div class="meta">2026-10-14(수) 18:30 · 잠실 · <b>두산 원정(LG 홈)</b> · 곽빈(우) vs 카라스코(우) · LG는 1승 어드밴티지(이기거나 비기면 통과), 두산은 2연승 필요</div>
+    <div class="ver">v1 · 예상 엔트리·예상 라인업 기준 (10/13 11시 작성) · 라인업 발표 후 갱신 예정</div>
+  </header>
+
+  <div class="verdict">
+    <div><div class="lab">1차전 두산 승리 확률 (편향 보정)</div><div class="n">63%</div><div class="lab">모델 원값 72% (범위 70~74%)</div><div class="bar"><span style="width:63%"></span></div></div>
+    <div><div class="lab">2차전 두산 (벤자민 vs 톨허스트)</div><div class="n">57%</div><div class="lab">모델 원값 65%</div><div class="bar"><span style="width:57%"></span></div></div>
+    <div><div class="lab">와일드카드 통과 (p₁ × p₂)</div><div class="n lg">36%</div><div class="lab">모델 원값 46%</div><div class="bar"><span style="width:36%"></span></div></div>
+    <div><div class="lab">1차전 기대득점 (두산 : LG)</div><div class="n" style="font-size:26px">4.3 : 2.4</div><div class="lab">보수적 예상 스코어 4 : 2</div></div>
+  </div>
+
+  <div class="callout">
+    <b>한 줄 결론</b>: 1차전은 선발 실점력(곽빈 2.42 vs 카라스코 4.75)과 필승조(3.03 vs 4.18) 차이로 두산이 데이터상 분명한 우위이지만, 모델의 두산 과대평가 이력(약 +8%p)을 빼면 63% 수준이고, 2연승이 필요한 시리즈 전체 통과 확률은 약 36%로 여전히 LG 쪽입니다. 1차전의 승부처는 <b>곽빈 vs LG 1·2번(박해민·문보경)</b>, <b>카라스코 강판 직후 박시원 구간</b>, 그리고 <b>7회 이후 LG 좌완 불펜 vs 두산 우타 대타</b> 세 곳입니다.
+  </div>
+
+  <h2>1. 부상·이탈 현황 (단기전 시나리오 구분)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">선수</th><th>상태</th><th>와일드카드 시나리오</th><th class="l">영향</th></tr>
+    <tr><td class="l d-col">박준순 (두산 2B, wRC+ 130.5)</td><td>오른쪽 허벅지 근육 부분 손상, 10/6 말소</td><td class="warn">대타 전용</td><td class="l">2루는 강승호(106.5)가 맡아 약 24포인트 손실. 출루 시 즉시 대주자</td></tr>
+    <tr><td class="l s-col">오지환 (LG SS, wRC+ 93.5)</td><td>왼쪽 무릎 내측 인대 부분 손상</td><td class="warn">대타 전용 (주루 통증 시 제외)</td><td class="l">유격수는 구본혁(84.9). 대타로는 곽빈 상대 통산 OPS .929라 위협적</td></tr>
+    <tr><td class="l s-col">손주영 (LG 마무리, 31세이브)</td><td>목 담 증세, 10/12 결장</td><td class="warn">등판 미정</td><td class="l">최근 10경기 4⅓이닝 9실점·사사구 6. 등판해도 확률 영향은 작음(아래 4장)</td></tr>
+    <tr><td class="l s-col">고우석</td><td>포스트시즌 엔트리 등록 불가</td><td class="bad">결장 확정</td><td class="l">LG 불펜 최고 카드(23이닝 FIP 2.36) 이탈</td></tr>
+    <tr><td class="l s-col">송승기·김진성·유영찬</td><td>팔꿈치·어깨 부상</td><td class="bad">결장 확정</td><td class="l">LG 선발·불펜 뎁스 축소</td></tr>
+    <tr><td class="l s-col">박동원 (LG C)</td><td>시즌 막판 무릎 이상으로 결장 이력</td><td>정상 출장 예상</td><td class="l">10/12 최종전 포수 선발</td></tr>
+  </table>
+  </div>
+
+  <h2>2. 예상 와일드카드 엔트리 (각 30명)</h2>
+  <div class="grid2">
+    <div class="box">
+      <h4 class="d-col">두산 · 투수 13 · 포수 3 · 야수 14</h4>
+      <b>선발</b> 곽빈(1차전), 벤자민(2차전), 최민석, 잭로그(불펜 대기)<br>
+      <b>불펜</b> 김택연, 이영하, 타카다, 이병헌, 이용찬, 김정우, 윤태호, 김영현, 최승용<br>
+      <b>포수</b> 양의지, 김기연, 윤준호<br>
+      <b>내야</b> 박찬호, 안재석, 강승호, 세베리노, 오명진, 양석환, 박지훈, 이유찬, 박준순(대타)<br>
+      <b>외야</b> 김민석, 조수행, 정수빈, 김인태, 김대한<br>
+      <b class="bad">제외</b> 박치국, 김한중, 류현준, 손아섭, 류승민<br>
+      <span class="note">1차전 미출장 지정 예상: 벤자민, 윤준호</span>
+    </div>
+    <div class="box">
+      <h4 class="s-col">LG · 투수 13 · 포수 3 · 야수 14</h4>
+      <b>선발</b> 카라스코(1차전), 톨허스트(2차전), 임찬규(롱), 박시원(벌크)<br>
+      <b>불펜</b> 케네디, 김진수, 이우찬, 김강률, 장현식, 김영우, 손주영(조건부), 김윤식, 우강훈<br>
+      <b>포수</b> 박동원, 이주헌, 김민수<br>
+      <b>내야</b> 오스틴, 문정빈, 문보경, 신민재, 구본혁, 천성호, 손용준, 오지환(대타)<br>
+      <b>외야</b> 박해민, 송찬의, 이재원, 홍창기, 문성주, 최원영<br>
+      <b class="bad">제외</b> 고우석(규정), 양우진, 이상영, 이영빈<br>
+      <span class="note">1차전 미출장 지정 예상: 톨허스트, 김민수</span>
+    </div>
+  </div>
+  <div class="note">주요 판단 근거: 두산 2차전 선발은 벤자민(시즌 rRA9 2.85·FIP 2.92, 최근 2경기 11이닝 2실점)이 최민석(3.90·3.84, 최근 7⅔이닝 11실점)보다 우위. 외야 마지막 자리는 김대한이 올해 LG 투수 상대 20타석 7안타(2루타 1·홈런 2)로 류승민(9타석 5단타)보다 회귀 후에도 근소 우위(OPS 약 .78 vs .73). 박치국(최근 3⅓이닝 7실점)은 제외, 최승용은 불펜 1경기(10/12) 표본이지만 좌완 단기 카드로 포함. LG 13번째 투수는 우강훈(FIP 4.67)이 양우진·이상영(FIP 7점대)보다 우위, 내야 마지막 자리는 유격수 백업 손용준(이영빈은 98타석 wRC+ 21.8).</div>
+
+  <h2>3. 1차전 예상 라인업</h2>
+  <div class="card">
+  <table>
+    <tr><th>타순</th><th class="l">두산 (vs 카라스코)</th><th>타석</th><th>시즌 wRC+</th><th>최근 10경기</th><th class="l">LG (vs 곽빈)</th><th>타석</th><th>시즌 wRC+</th><th>곽빈 상대 통산</th></tr>
+    <tr><td>1</td><td class="l">조수행 RF</td><td>좌</td><td>128.4</td><td>20타수 8안타, 출루 .458</td><td class="l">박해민 CF</td><td>좌</td><td>106.4</td><td class="bad">52타석 OPS .855</td></tr>
+    <tr><td>2</td><td class="l">김민석 LF</td><td>좌</td><td>125.6</td><td>출루 .429</td><td class="l">문보경 3B</td><td>좌</td><td>109.8</td><td class="bad">47타석 OPS .922</td></tr>
+    <tr><td>3</td><td class="l">세베리노 1B</td><td>양</td><td>140.3</td><td>출루 .436, 2홈런</td><td class="l">오스틴 DH</td><td>우</td><td>190.1</td><td class="good">34타석 OPS .622</td></tr>
+    <tr><td>4</td><td class="l">양의지 C</td><td>우</td><td>116.4</td><td>26타수 5안타, 3홈런</td><td class="l">문정빈 1B</td><td>우</td><td>137.5</td><td>6타석 OPS .334</td></tr>
+    <tr><td>5</td><td class="l">강승호 2B</td><td>우</td><td>106.5</td><td>출루 .455, WPA +0.81</td><td class="l">이재원 RF</td><td>우</td><td>116.8</td><td>3타석</td></tr>
+    <tr><td>6</td><td class="l">안재석 3B</td><td>좌</td><td>102.9</td><td>42타수 14안타</td><td class="l">송찬의 / 문성주 LF</td><td>우 / 좌</td><td>132.1 / 94.3</td><td>.347(9) / .826(38)</td></tr>
+    <tr><td>7</td><td class="l">오명진 DH</td><td>좌</td><td>96.7</td><td>표본 적음</td><td class="l">박동원 C</td><td>우</td><td>100.4</td><td class="good">33타석 OPS .618</td></tr>
+    <tr><td>8</td><td class="l">박찬호 SS</td><td>우</td><td>97.8</td><td>38타수 12안타</td><td class="l">천성호 / 신민재 2B</td><td>좌 / 좌</td><td>97.2 / 69.8</td><td>.938(16) / .327(25)</td></tr>
+    <tr><td>9</td><td class="l">정수빈 CF</td><td>좌</td><td>87.7</td><td>출루 .359</td><td class="l">구본혁 SS</td><td>우</td><td>84.9</td><td class="good">11타석 OPS .091</td></tr>
+    <tr class="hl"><td colspan="3" class="l d-col">공격지수 (상대 기록 반영 / 미반영)</td><td colspan="2" class="d-col">104.1 / 112.2</td><td colspan="2" class="l s-col">공격지수</td><td colspan="2" class="s-col">100.7 / 117.4</td></tr>
+  </table>
+  </div>
+  <div class="note">공격지수는 타순별 타석 가중 평균 wRC+입니다. 상대 기록은 w = 타석 ÷ (타석 + 40)으로 시즌 성적과 섞었습니다. 두산 타자의 카라스코 상대 기록은 8/1 노히트 1경기(삼진 2개, 인플레이 운의 몫이 큼, §v4.7-⑤)뿐이라 선수당 2~3타석, 가중치 5~7%로 거의 영향이 없습니다. LG는 2루수를 신민재·좌익수를 송찬의로 놓은 기준값이며, 천성호(2루 수비 가능 여부 미확인)·문성주가 나오면 LG 공격지수가 약 108로 올라 두산 확률이 2~3%p 내려갑니다.</div>
+
+  <h2>4. 투수 매치업과 불펜</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">투수</th><th>시즌 rRA9 / FIP</th><th>최근</th><th>폼값</th><th>선발 비중</th><th class="l">메모</th></tr>
+    <tr><td class="l d-col">곽빈 (두산)</td><td>2.50 / 2.68 · 161이닝 197K</td><td>최근 3선발 20이닝 3실점</td><td class="good">2.42</td><td>0.663</td><td class="l">rRA9가 회귀 기준(2.5)에 걸려 FIP와 반반. 직전 10/6 6이닝 89구 11K 무볼넷, 7일 휴식(긴 휴식은 이점으로 계산하지 않음). 올해 LG전 8/1 6이닝 2실점 10K, 9/3 7이닝 1실점</td></tr>
+    <tr><td class="l s-col">카라스코 (LG)</td><td>4.50 / 3.42 · 60이닝</td><td>최근 5선발 23⅔이닝 14실점(약 5.32)</td><td class="bad">4.75</td><td>0.606</td><td class="l">8월 합류 11선발. 최근 4⅓이닝(10/3)·5이닝(10/9)으로 길게 못 던짐. 직전 10/9 85구, 4일 휴식(정상)</td></tr>
+  </table>
+  </div>
+  <div class="grid2" style="margin-top:12px">
+    <div class="box">
+      <h4 class="d-col">두산 필승조 (가중 rRA9 3.03)</h4>
+      <ul>
+        <li>김택연 2.99 · 최근 7이닝 <b class="good">무실점</b>, 볼넷 2</li>
+        <li>이영하 3.20 · 최근 5⅔이닝 1실점, <b class="warn">볼넷 7</b></li>
+        <li>김정우 1.78(FIP 4.53) · 최근 5이닝 2실점, 볼넷 5</li>
+        <li>타카다(좌) 3.38 · 최근 7⅓이닝 2실점</li>
+        <li>이용찬 4.03 · 최근 6이닝 2실점</li>
+        <li>롱: 잭로그(연투 가능), 최민석 / 좌완 단기: 이병헌(최근 4이닝 1실점), 최승용</li>
+      </ul>
+      <div class="note">10/12 점검 경기에서 전원 22구 이하 → 정상 가용.</div>
+    </div>
+    <div class="box">
+      <h4 class="s-col">LG 불펜 (가중 rRA9 4.18, 손주영 제외)</h4>
+      <ul>
+        <li>박시원 3.95 · 최근 10⅓이닝 <b class="good">1실점</b>, 7일 휴식 → 벌크 1순위</li>
+        <li>케네디(좌) 3.42 · 최근 9⅓이닝 6실점, <b class="warn">볼넷 7</b></li>
+        <li>김진수 4.73 · 최근 4이닝 무실점</li>
+        <li>이우찬(좌) 3.97 · 최근 4⅓이닝 1실점</li>
+        <li>장현식 4.20 · 김영우 4.27(최근 등판 1회, 사유 미확인) · 김강률(8⅓이닝 소표본)</li>
+        <li>손주영(좌) 3.55 · 최근 4⅓이닝 <b class="bad">9실점</b>, 목 담 증세</li>
+      </ul>
+      <div class="note">손주영을 포함해도 가중 rRA9 4.09로 확률 차이는 0.3%p 이내.</div>
+    </div>
+  </div>
+
+  <h2>5. 승률 산출 단계 (노션 지침 §3·§v4.7)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">단계</th><th>두산</th><th>LG</th><th class="l">근거</th></tr>
+    <tr><td class="l">시즌 득점 / 실점</td><td>688 / 630</td><td>723 / 726</td><td class="l">KBO 공식 팀기록 144경기</td></tr>
+    <tr><td class="l">피타고리안 (1.83)</td><td>.540</td><td>.498</td><td class="l">LG 실제 .545(78-65-1)는 피타고리안보다 약 4.7%p 높음 → 행운 잉여</td></tr>
+    <tr><td class="l">Log5 기준선</td><td>54.2%</td><td>45.8%</td><td class="l">참고용</td></tr>
+    <tr><td class="l">투수 실점력 (상대가 맞을 값)</td><td>2.63</td><td>4.53</td><td class="l">선발 폼값 × 선발 비중 + 필승조 × 나머지</td></tr>
+    <tr><td class="l">공격지수 (상대 기록 반영)</td><td>104.1</td><td>100.7</td><td class="l">3장</td></tr>
+    <tr class="hl"><td class="l">기대득점</td><td>4.27</td><td>2.39</td><td class="l">리그 5.07점 × 공격지수 × (상대 실점력 ÷ 리그 RA9 5.15) × 잠실 0.92</td></tr>
+    <tr><td class="l">단일경기 승률</td><td>74.2%</td><td>25.8%</td><td class="l">피타고리안 1.83</td></tr>
+    <tr><td class="l">최근 10경기 폼 20% 블렌드</td><td>72.4%</td><td>27.6%</td><td class="l">최근 10경기 두산 61-52, LG 41-49</td></tr>
+    <tr><td class="l">홈 이점</td><td colspan="2">확률 미반영</td><td class="l">잠실 공유 단기전은 표본 전까지 분산으로만 표기(§v4.7-④). 정규시즌 방식(LG 홈 오즈 ×1.174)을 적용하면 69.1%</td></tr>
+    <tr class="hl"><td class="l"><b>모델 채택값</b></td><td class="d-col">72%</td><td class="s-col">28%</td><td class="l">상대 기록 미반영·투수 구장보정(rRA9pf) 변형 모두 70~74%</td></tr>
+    <tr><td class="l"><b>편향 보정 후</b></td><td class="d-col">약 63%</td><td class="s-col">약 37%</td><td class="l">지난 20경기 두산 과대평가 약 +8%p(§6-①)</td></tr>
+  </table>
+  </div>
+
+  <div class="callout red">
+    <b>두산 우세 판정 추가 점검 (§6-①)</b>
+    <ul>
+      <li>우세의 원천은 선발 실점력 차이 약 2.3점과 필승조 차이 약 1.15점이며, 둘 다 스탯티즈 시즌 기록실에서 직접 확인한 값입니다.</li>
+      <li>타선은 두산이 근소 우위가 아닙니다. 상대 기록을 빼면 LG 공격지수(117.4)가 두산(112.2)보다 높고, 상대 기록 반영 시 LG가 내려간 이유의 상당 부분은 구본혁(11타석 OPS .091)·신민재(25타석 .327) 같은 소표본입니다.</li>
+      <li>확률에 넣지 않은 신호는 모두 LG 쪽입니다: 정규시즌 상대전적 LG 11승 1무 4패, 역대 와일드카드에서 5위 통과 11번 중 1번, LG 홈 designation. 그래서 원값이 아니라 보정값 63%를 채택합니다.</li>
+      <li>반영하지 못한 변수: 팀 수비 RAA(미조회), 좌우 투수 상대 스플릿(미조회), 날씨.</li>
+    </ul>
+  </div>
+
+  <h2>6. 시리즈 통과 확률 (단기전 모드)</h2>
+  <div class="card">
+  <table>
+    <tr><th class="l">구분</th><th>1차전 p₁</th><th>2차전 p₂</th><th>통과 p₁ × p₂</th><th class="l">메모</th></tr>
+    <tr><td class="l">모델 원값</td><td>72%</td><td>65%</td><td>46%</td><td class="l" rowspan="2">2차전: 벤자민 폼값 2.49 vs 톨허스트 3.83(최근 2경기 10이닝 3실점). 좌완 벤자민 상대 LG 라인업이 바뀔 수 있어 2차전 공격지수는 상대 기록 미반영 기준값</td></tr>
+    <tr class="hl"><td class="l"><b>편향 보정 후</b></td><td>63%</td><td>57%</td><td><b>약 36%</b></td></tr>
+  </table>
+  </div>
+  <div class="note">1차전에서 비기면 두산은 탈락합니다. 즉 1차전은 두산에게 "이겨야만 하는" 경기이고, LG에게는 "지지만 않으면 되는" 경기라 연장전 운용의 무게가 다릅니다.</div>
+
+  <h2>7. 고레버리지 상황 시나리오 (클러치 구간 예상)</h2>
+  <div class="callout blue">
+    여기서 "클러치"는 선수의 클러치 능력이 아니라 <b>승부가 갈릴 가능성이 큰 구간(높은 레버리지)</b>을 미리 짚는 것입니다. 지침상 클러치 능력은 확률에 넣지 않으며(§3-5), 아래는 이미 확인한 매치업 데이터로 각 구간의 최선 대응을 정리한 것입니다.
+  </div>
+
+  <h3>① 1~3회 · 곽빈 vs LG 1·2번 (첫 번째 고비) <span class="pill d">두산 수비</span></h3>
+  <ul>
+    <li>LG 라인업에서 곽빈을 가장 잘 친 두 타자(박해민 52타석 OPS .855, 문보경 47타석 .922)가 1·2번에 몰려 있습니다. 반대로 3번 오스틴(.622)·7번 박동원(.618)은 곽빈에게 약합니다.</li>
+    <li>박해민·문보경 출루 뒤 오스틴 타석이 1회부터 가장 위험한 장면입니다. 오스틴은 곽빈 상대 통산은 약하지만 올해는 9타수 3안타 1홈런이고 시즌 wRC+ 190.1입니다.</li>
+    <li><b>대응</b>: 1·2번 출루 억제가 최우선. 하위 타순(구본혁·2루수)에서는 정면 승부로 투구수를 아껴 6이닝을 확보합니다.</li>
+  </ul>
+
+  <h3>② 4~6회 · 카라스코 강판 지점과 박시원 투입 <span class="pill d">두산 공격</span></h3>
+  <ul>
+    <li>카라스코는 최근 5선발 중 4경기를 5이닝 이하로 마쳤습니다. 두산 상위 타순(조수행·김민석·세베리노, 최근 10경기 출루율 모두 .42 이상)이 세 번째로 돌아오기 전에 내려갈 가능성이 큽니다.</li>
+    <li>LG는 그 자리에 박시원(최근 10⅓이닝 1실점)을 길게 쓸 가능성이 큽니다. 이 구간에서 점수가 안 나면, 두산이 실제로 공략할 수 있는 LG 불펜은 7회 이후로 밀립니다.</li>
+    <li><b>대응</b>: 카라스코가 마운드에 있을 때 투구수를 늘려 5회 이전 강판을 유도하고, 박시원이 나와도 첫 타자부터 출루율 높은 타순이 걸리도록 한 이닝 앞선 대타·대주자 구상을 준비합니다.</li>
+  </ul>
+
+  <h3>③ 6~7회 · 곽빈 교체 시점과 오지환 대타 <span class="pill w">최대 분기점</span></h3>
+  <ul>
+    <li>곽빈은 선발당 평균 약 6이닝입니다. 6~7회에 LG 상위 타순이 세 번째로 돌아오는 시점과 LG 벤치의 오지환 대타(곽빈 상대 47타석 OPS .929, 좌타)가 겹칠 수 있습니다.</li>
+    <li><b>대응</b>: 6회 이후 박해민·문보경·오지환(좌타) 구간에서는 곽빈을 고집하지 않고 타카다(좌, 시즌 3.38)를 붙입니다. 우타 중심 구간(오스틴·문정빈·이재원)이면 김택연을 먼저 씁니다.</li>
+  </ul>
+
+  <h3>④ 7~9회 · LG 좌완 불펜 vs 두산 우타 대타 <span class="pill d">두산 공격</span></h3>
+  <ul>
+    <li>두산 선발 라인업은 좌타 5명(조수행·김민석·안재석·오명진·정수빈)에 양타 1명이라, LG는 케네디·이우찬·김윤식·손주영 등 좌완을 후반에 집중할 것입니다.</li>
+    <li>두산의 우타 대타 카드: <b>김대한</b>(올해 LG 투수 상대 20타석 7안타 2홈런, 이우찬 상대 홈런·김진수 상대 안타), <b>박준순</b>(대타 전용), <b>양석환</b>.</li>
+    <li><b>대응</b>: LG 좌완이 나오는 순간 오명진·정수빈 타석에 우타 대타를 투입합니다. 박준순이 출루하면 즉시 이유찬 대주자. 좌우 투수 상대 스플릿은 확인하지 않아, 이 판단은 상대 기록과 좌우 일반론에 기댄 것입니다.</li>
+  </ul>
+
+  <h3>⑤ 9회와 연장 · 동점 = 두산 탈락 <span class="pill g">LG 유리 규칙</span></h3>
+  <ul>
+    <li>두산은 원정이라 9회초에 공격합니다. 9회초 동점이면 반드시 득점이 필요하고, 연장으로 가도 결국 이겨야만 합니다.</li>
+    <li>LG 마무리는 손주영이 불확실하면 케네디가 유력합니다. 케네디는 최근 9⅓이닝 볼넷 7개라, 9회 두산 타석의 1순위 전략은 <b>초구를 쉽게 치지 않고 볼넷을 기다리는 것</b>입니다.</li>
+    <li>두산 마무리 이영하도 최근 5⅔이닝 볼넷 7개입니다. 주자가 있는 상황이면 김택연이 먼저 막고, 이영하는 주자 없는 이닝 시작에 씁니다.</li>
+    <li>연장에서는 잭로그(연투 가능)·최민석이 롱 카드입니다. 2차전 선발 벤자민은 미출장 지정이 예상되어 1차전에 쓸 수 없습니다.</li>
+  </ul>
+
+  <h2>8. 승리 전략</h2>
+  <div class="grid2">
+    <div class="box">
+      <h4 class="d-col">두산이 이기는 길</h4>
+      <ol>
+        <li><b>곽빈 6이닝 + 1·2번 봉쇄</b>: 곽빈 폼값 2.42는 리그 최상위. 박해민·문보경(곽빈 상대 OPS .855·.922)만 막으면 LG 나머지 타순은 곽빈에게 약합니다.</li>
+        <li><b>카라스코를 5회 이전에 끌어내리기</b>: 최근 5선발 평균 4⅔이닝, rRA9 약 5.3. 투구수 싸움 후 박시원 이후 rRA9 4점대 불펜을 공략합니다.</li>
+        <li><b>후반 좌완에 우타 대타, 마무리에게는 볼넷 기다리기</b>: 김대한·박준순·양석환 대타, 케네디·이영하 모두 최근 볼넷 7개.</li>
+      </ol>
+    </div>
+    <div class="box">
+      <h4 class="s-col">LG가 이기는 길 (경계할 점)</h4>
+      <ol>
+        <li><b>1·2번 출루 후 오스틴</b>: 곽빈 상대 강한 1·2번과 시즌 wRC+ 190의 오스틴 조합이 LG의 가장 확실한 득점 경로입니다.</li>
+        <li><b>박시원 벌크로 중반 지우기</b>: 카라스코 강판 후 박시원이 3이닝 가까이 막으면 두산의 공략 구간이 7~9회로 좁아집니다.</li>
+        <li><b>동점 = 통과 규칙 활용</b>: 리드를 잡지 못해도 동점으로 끌고 가면 됩니다. 두산이 9회초 이후 반드시 득점해야 하는 압박을 받습니다.</li>
+      </ol>
+    </div>
+  </div>
+
+  <h2>9. 경기 전 확인할 것 (v2 갱신 항목)</h2>
+  <ol>
+    <li>공식 와일드카드 엔트리 발표: 박준순·오지환·손주영 포함 여부, 손아섭·류승민·이영빈 포함 여부</li>
+    <li>양 팀 선발 라인업: LG 2루수(천성호/신민재)·좌익수(송찬의/문성주)·우익수(이재원/홍창기), 두산 지명타자(오명진/양석환)</li>
+    <li>LG 마무리 운용(손주영 등판 가능 여부)</li>
+    <li>잠실 날씨</li>
+  </ol>
+
+  <div class="src">
+    <b>데이터 출처</b>: KBO 공식 사이트(선수 등록현황 10/12 기준, 팀 타격·투수 기록 144경기). 스탯티즈(www.statiz.co.kr) 시즌기록실 두산·LG 타격·투구(10/13 조회), 박스스코어 19경기(두산 9/27~10/12, LG 9/30~10/12) 최근 10경기 집계, 곽빈(p_no 13061) 상대별 2026·통산, 카라스코(16668) 상대별 통산·날짜별, 김대한(14170)·류승민(15503) 상대별 2026. 노션 「🍂 2026 가을야구」 곽빈 최근 3선발 기록. 부상·엔트리 메타 정보는 언론 보도(연합뉴스·OSEN·스포츠경향·스포티비뉴스·일간스포츠 등, 10/6~10/13). 계산식은 노션 「경기 승률 분석 지침 (라이브·v4)」 §3·§6·§v4.7.<br>
+    ※ 미확인·추정: 공식 엔트리·선발 라인업(예상), 팀 수비 RAA, 좌우 투수 상대 스플릿, 천성호 2루 수비 가능 여부, 김영우 최근 미기용 사유, 최승용 불펜 구속(10/12 152km/h는 사용자 관찰), 날씨. 두산 최근 10경기 중 10/12는 점검 경기.
+  </div>
+</div>
+</body>
+</html>
